@@ -574,12 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21617d31e39bf43bb9222c1130c9b14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SettingsButton: {fileID: 7195340225351292761}
   SettingsPopUp: {fileID: 1912238028}
-  MusicToggle: {fileID: 6788712134226396294}
-  MusicSlider: {fileID: 467234045886412218}
-  EffectToggle: {fileID: 6788712135052419068}
-  EffectSlider: {fileID: 467234045392751187}
   MusicAudio: {fileID: 901853885}
   EffectAudio: {fileID: 901853886}
 --- !u!4 &901853884
@@ -1169,7 +1164,7 @@ MonoBehaviour:
       - m_Target: {fileID: 901853883}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: UpdateEffectSoundVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1190,7 +1185,7 @@ GameObject:
   - component: {fileID: 467234045392751187}
   m_Layer: 5
   m_Name: EffectSlider
-  m_TagString: Untagged
+  m_TagString: Sound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1399,7 +1394,7 @@ MonoBehaviour:
       - m_Target: {fileID: 901853883}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: UpdateMusicSoundVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1443,7 +1438,7 @@ GameObject:
   - component: {fileID: 467234045886412218}
   m_Layer: 5
   m_Name: MusicSlider
-  m_TagString: Untagged
+  m_TagString: Sound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2182,7 +2177,7 @@ MonoBehaviour:
       - m_Target: {fileID: 901853883}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: UpdateMusicSoundPlay
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2226,7 +2221,7 @@ GameObject:
   - component: {fileID: 6788712134226396294}
   m_Layer: 5
   m_Name: MusicToggle
-  m_TagString: Untagged
+  m_TagString: Sound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2403,7 +2398,7 @@ GameObject:
   - component: {fileID: 6788712135052419068}
   m_Layer: 5
   m_Name: EffectToggle
-  m_TagString: Untagged
+  m_TagString: Sound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2458,7 +2453,7 @@ MonoBehaviour:
       - m_Target: {fileID: 901853883}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: UpdateEffectSoundPlay
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

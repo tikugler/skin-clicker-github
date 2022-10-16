@@ -7,14 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     [Header("Settings")]
-    public GameObject SettingsButton;
     public GameObject SettingsPopUp;
-
-    public Toggle MusicToggle;
-    public Slider MusicSlider;
-
-    public Toggle EffectToggle;
-    public Slider EffectSlider;
 
     [Header("Sounds")]
     public AudioSource MusicAudio;
@@ -26,31 +19,56 @@ public class GameManager : MonoBehaviour
     float effectSoundVolume;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         InitAudios();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
+    /// <summary>
+    /// First, slider and toggle ui elements with tag Sound in Canvas are
+    /// searched, then onValueChange is invoked for each found ones,
+    /// to set the sound level for music and effects.
+    /// This method is called, only when the game starts.
+    /// </summary>
     private void InitAudios()
     {
-        UpdateMusicSoundVolume();
-        UpdateEffectSoundVolume();
-        UpdateMusicSoundPlay();
-        UpdateEffectSoundPlay();
+        GameObject canvas = GameObject.Find("Canvas");
+        foreach (Slider slider in canvas.GetComponentsInChildren<Slider>(true))
+        {
+            if (slider.CompareTag("Sound"))
+            {
+                slider.onValueChanged.Invoke(slider.value);
+            }
+        }
+        foreach (Toggle toggle in canvas.GetComponentsInChildren<Toggle>(true))
+        {
+            if (toggle.CompareTag("Sound"))
+            {
+                toggle.onValueChanged.Invoke(toggle.isOn);
+            }
+        }
     }
 
+    /// <summary>
+    /// opens settings pop-up window
+    /// </summary>
     public void ShowSettingsPopUp()
     {
         SettingsPopUp.SetActive(true);
     }
 
+    /// <summary>
+    /// closes settings pop-up window
+    /// </summary>
     public void CloseSettingsPopUp()
     {
         SettingsPopUp.SetActive(false);
@@ -60,9 +78,9 @@ public class GameManager : MonoBehaviour
     /// if toggle for music in settings pop-up is selected, play music
     /// otherwise stop the music
     /// </summary>
-    public void UpdateMusicSoundPlay()
+    public void UpdateMusicSoundPlay(bool isChecked)
     {
-        if (MusicToggle.isOn)
+        if (isChecked)
         {
             MusicAudio.Play();
         }
@@ -83,12 +101,12 @@ public class GameManager : MonoBehaviour
     /// in the future, it will be used isEffectSoundOn and effectSoundVolume,
     /// if user causes some effects by interacting with game 
     /// </summary>
-    public void UpdateEffectSoundPlay()
+    public void UpdateEffectSoundPlay(bool isChecked)
     {
-        if (EffectToggle.isOn)
+        if (isChecked)
         {
             EffectAudio.Play();
-            effectSoundVolume = EffectSlider.value;
+            isEffectSoundOn = true;
         }
         else
         {
@@ -103,19 +121,18 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// determines the volume of MusicAudio by using Slider in the settings
     /// </summary>
-    public void UpdateMusicSoundVolume()
+    public void UpdateMusicSoundVolume(float newVolume)
     {
-        MusicAudio.volume = MusicSlider.value;
+        MusicAudio.volume = newVolume;
     }
 
     /// <summary>
     /// determines the volume of EffectAudio by using Slider in the settings
     /// </summary>
-    public void UpdateEffectSoundVolume()
+    public void UpdateEffectSoundVolume(float newVolume)
     {
-        EffectAudio.volume = EffectSlider.value;
+        EffectAudio.volume = newVolume;
+        effectSoundVolume = newVolume;
 
-        effectSoundVolume = EffectSlider.value;
-        
     }
 }
