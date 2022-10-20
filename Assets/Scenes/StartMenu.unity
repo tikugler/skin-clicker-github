@@ -3101,7 +3101,7 @@ GameObject:
   - component: {fileID: 8732681171833370489}
   - component: {fileID: 8732681171833370486}
   m_Layer: 5
-  m_Name: SettingsCheckmark
+  m_Name: CloseSettingsPopUpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
