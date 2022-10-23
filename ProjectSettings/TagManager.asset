@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Username
   - Password
+=======
+  - Sound
+>>>>>>> master
   layers:
   - Default
   - TransparentFX
