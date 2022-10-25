@@ -41,7 +41,9 @@ public class LoginManager : MonoBehaviour
             loginPopUp.SetActive(false);
             wrongloginWarning.SetActive(false);
         }
-
-
+    }
+    public void cancleLoginScene()
+    {
+        loginPopUp.SetActive(false);
     }
 }
