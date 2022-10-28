@@ -10,9 +10,13 @@ public class ShopPopUp : MonoBehaviour
 
     public void ShopButtonAction() {
         shopPopUp.SetActive(true);
+        openShopButton.SetActive(false);
+        closeShopButton.SetActive(true);
     }
 
     public void closeShopButtonAction() {
         shopPopUp.SetActive(false);
+        openShopButton.SetActive(true);
+        closeShopButton.SetActive(false);
     }
 }
