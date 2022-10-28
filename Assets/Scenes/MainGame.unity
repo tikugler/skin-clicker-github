@@ -416,7 +416,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143116258}
         m_TargetAssemblyTypeName: ShopPopUp, NewAssembly
-        m_MethodName: closeShopButtonAction
+        m_MethodName: CloseShopButtonAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
