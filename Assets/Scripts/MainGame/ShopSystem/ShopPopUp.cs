@@ -8,7 +8,11 @@ public class ShopPopUp : MonoBehaviour
     public GameObject openShopButton;
     public GameObject closeShopButton;
 
+    //Dummy
+    public ShopManager shopManager;
+
     public void ShopButtonAction() {
+        shopManager.RefreshPanels();
         shopPopUp.SetActive(true);
         openShopButton.SetActive(false);
         closeShopButton.SetActive(true);

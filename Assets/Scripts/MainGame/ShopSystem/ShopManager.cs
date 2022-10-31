@@ -12,24 +12,30 @@ public class ShopManager : MonoBehaviour
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
 
+    //Get credits from dummy
+    public DummyButton dummyButtonObj;
+    [SerializeField] GameObject dummyButton;
+
     void Start() {
-        credit = 2000; //for Testing
+        dummyButtonObj = dummyButton.GetComponent<DummyButton>(); //dummy
         for (int i = 0; i < shopItems.Length; i++) {
             shopPanelsGO[i].SetActive(true);
-            creditUIText.text = "$ " + credit.ToString();
-            RefreshPanels();
         }
+        RefreshPanels();
     }
 
     public void RefreshPanels() {
+        credit = dummyButtonObj.GetCredits(); //dummy
         for (int i = 0; i < shopItems.Length; i++) {
             shopPanels[i].shopItemTitle.text = shopItems[i].title;
             shopPanels[i].shopItemDescription.text = shopItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + shopItems[i].price.ToString();
         }
+        creditUIText.text = "$ " + credit.ToString();
         CheckPurchaseable();
     }
 
+    //Checks for credits >= price of item, if true --> button is clickable.
     public void CheckPurchaseable() {
         for (int i = 0; i < shopItems.Length; i++) {
             if (credit >= shopItems[i].price) {
@@ -44,7 +50,7 @@ public class ShopManager : MonoBehaviour
     public void PurchaseButtonAction(int pos) {
         if (credit >= shopItems[pos].price) {
             credit -= shopItems[pos].price;
-            creditUIText.text = "$ " + credit.ToString();
+            dummyButtonObj.SetCredits(credit); //dummy
             RefreshPanels();
         }
     }
