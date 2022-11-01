@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: TestItem
   description: "Testige Test-Beschreibung f\xFCr Test-Item"
-  price: 997
+  price: 5
