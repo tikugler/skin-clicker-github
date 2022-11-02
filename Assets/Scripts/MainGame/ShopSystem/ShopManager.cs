@@ -14,7 +14,7 @@ public class ShopManager : MonoBehaviour
 
     //Get credits from dummy
     public DummyButton dummyButtonObj;
-    [SerializeField] GameObject dummyButton;
+    public GameObject dummyButton;
 
     void Start()
     {
