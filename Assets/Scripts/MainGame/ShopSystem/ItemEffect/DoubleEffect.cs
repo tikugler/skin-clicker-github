@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DoubleButton : Effect
+class DoubleEffect : ItemEffect
 {
     //Amount of Double/2X Item in player inventory. 
     //public Text itemPrice; 
@@ -17,7 +17,7 @@ public class DoubleButton : Effect
         shopManager.dummyButtonObj.SetMultiplicator(multiplicator);
     }
 
-    public void PurchaseButtonAction() {
+    public new void PurchaseButtonAction() {
         multiplicator *= 2;
         shopManager.dummyButtonObj.SetMultiplicator(multiplicator);
     }

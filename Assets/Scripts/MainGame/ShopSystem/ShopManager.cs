@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    private string id = "double";
     public static int credit;
     public Text creditUIText;
     public ShopItem[] shopItems;
@@ -15,6 +16,7 @@ public class ShopManager : MonoBehaviour
     //Get credits from dummy
     public DummyButton dummyButtonObj;
     public GameObject dummyButton;
+    public ItemEffect[] effects;
 
     void Start()
     {
@@ -62,6 +64,11 @@ public class ShopManager : MonoBehaviour
         {
             credit -= shopItems[pos].price;
             dummyButtonObj.SetCredits(credit); //dummy
+            for (int i = 0; i < effects.Length; i++) {
+                if (effects[i].id.Equals(id)) {
+                    effects[i].PurchaseButtonAction();
+                }
+            }
             RefreshPanels();
         }
     }
