@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemEffect : MonoBehaviour
+public class ItemEffect
 {
     public string id;
-    public void PurchaseButtonAction(){}
+    public virtual void PurchaseButtonAction(){}
 }

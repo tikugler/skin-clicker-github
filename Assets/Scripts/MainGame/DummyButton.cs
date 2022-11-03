@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DummyButton : MonoBehaviour
 {
-    public static int multiplicator = 1;
-    public static int basePoints = 1; //idk warum {get; set;} nicht funktioniert :(
-    public static int credits = 0;
+    public int multiplicator = 1;
+    public int basePoints = 1; //idk warum {get; set;} nicht funktioniert :(
+    public int credits = 0;
    
     void start() {
         multiplicator = 1;
@@ -14,6 +14,7 @@ public class DummyButton : MonoBehaviour
     }
     public void MainButtonAction() {
         credits += basePoints * multiplicator;
+        Debug.Log("Click-Score: " + (basePoints * multiplicator));
     }
 
     public int GetCredits() {
@@ -26,5 +27,6 @@ public class DummyButton : MonoBehaviour
 
     public void SetMultiplicator(int multi) {
         multiplicator = multi;
+        Debug.Log("new Multi: " + multi);
     }
 }

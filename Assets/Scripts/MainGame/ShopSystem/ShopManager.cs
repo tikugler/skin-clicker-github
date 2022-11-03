@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
-    public ItemEffect[] effects;
+    public Dictionary<string, ItemEffect> effects = new Dictionary<string, ItemEffect>();
 
     //Get credits from dummy
     public DummyButton dummyButtonObj;
@@ -20,12 +20,21 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        dummyButtonObj = dummyButton.GetComponent<DummyButton>(); //dummy
+        CreateItems();
+        //dummyButtonObj = dummyButton.GetComponent<DummyButton>(); //dummy
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopPanelsGO[i].SetActive(true);
         }
         RefreshPanels();
+    }
+
+    //Creats and adds ItemEffects to key-value-pair.
+    //The key is ALWAYS the exact class name of a item!
+    public void CreateItems() {
+        var doubleEffect = new DoubleEffect();
+        effects.Add(doubleEffect.id.ToString(), doubleEffect);
+        //Debug.Log("new DoubleEffect ID: " + doubleEffect.id);
     }
 
     public void RefreshPanels()
@@ -62,13 +71,13 @@ public class ShopManager : MonoBehaviour
     {
         if (credit >= shopItems[pos].price)
         {
-            credit -= shopItems[pos].price;
-            dummyButtonObj.SetCredits(credit); //dummy
-            //for (int i = 0; i < effects.Length; i++) {
-            //    if (effects[i].id.Equals(id)) {
-            //        effects[i].PurchaseButtonAction();
-            //    }
-            //}
+            if (effects.ContainsKey(shopItems[pos].id)) {
+                Debug.Log("Effects-Dictionary contains key");
+                Debug.Log("ID Shop Item: " + shopItems[pos].id.ToString());
+                credit -= shopItems[pos].price;
+                dummyButtonObj.SetCredits(credit); //dummy
+                effects[shopItems[pos].id].PurchaseButtonAction();
+            } 
             RefreshPanels();
         }
     }

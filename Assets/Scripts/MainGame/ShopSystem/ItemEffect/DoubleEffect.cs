@@ -8,6 +8,7 @@ class DoubleEffect : ItemEffect
     //Amount of Double/2X Item in player inventory. 
     //public Text itemPrice; 
     //public Text itemAmount; 
+    public new string id = "DoubleEffect";
     public ShopManager shopManager;
     public ShopItem shopItem;
     public Button purchaseButton;
@@ -17,8 +18,9 @@ class DoubleEffect : ItemEffect
         shopManager.dummyButtonObj.SetMultiplicator(multiplicator);
     }
 
-    public new void PurchaseButtonAction() {
+    public override void PurchaseButtonAction() {
         multiplicator *= 2;
-        shopManager.dummyButtonObj.SetMultiplicator(multiplicator);
+        //NullPointer --> dummyButtonObj isn't existing?????
+        //shopManager.dummyButtonObj.multiplicator = multiplicator;
     }
 }
