@@ -1061,6 +1061,7 @@ GameObject:
   - component: {fileID: 901853885}
   - component: {fileID: 901853886}
   - component: {fileID: 901853887}
+  - component: {fileID: 901853888}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1315,6 +1316,26 @@ MonoBehaviour:
   - {fileID: 1954582684}
   - {fileID: 2086146857}
   - {fileID: 1898693995}
+--- !u!114 &901853888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901853882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c91368aec98488eac079f8a2588e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UsernameField: {fileID: 6447004023417330615}
+  PasswordField: {fileID: 6447004022703231921}
+  PasswordConfirmField: {fileID: 1004656527924268014}
+  EmailField: {fileID: 1004656529199554936}
+  CloseRegistrationPanelButton: {fileID: 935968881095188169}
+  SubmitButton: {fileID: 4748765343249542516}
+  InfoText: {fileID: 7282499716448563631}
+  RegistrationPanel: {fileID: 1004656528340750184}
 --- !u!1 &1148527817
 GameObject:
   m_ObjectHideFlags: 0
@@ -3336,7 +3357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 901853888}
         m_TargetAssemblyTypeName: RegistrationManager, Assembly-CSharp
         m_MethodName: CloseRegistrationPanel
         m_Mode: 1
@@ -3598,10 +3619,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 901853888}
         m_TargetAssemblyTypeName: RegistrationManager, Assembly-CSharp
-        m_MethodName: VerifyConfirmPassword
-        m_Mode: 1
+        m_MethodName: ConfirmPasswordOnValueChanged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3657,7 +3678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1004656528340750189
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3940,10 +3961,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 901853888}
         m_TargetAssemblyTypeName: RegistrationManager, Assembly-CSharp
-        m_MethodName: VerifyEmailEndEdit
-        m_Mode: 1
+        m_MethodName: VerifyEmailOnValueChanged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4403,8 +4424,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UserManager, Assembly-CSharp
+      - m_Target: {fileID: 901853888}
+        m_TargetAssemblyTypeName: RegistrationManager, Assembly-CSharp
         m_MethodName: OpenRegistrationPanel
         m_Mode: 1
         m_Arguments:
@@ -4616,19 +4637,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4748765343249542517}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UserManager, Assembly-CSharp
-        m_MethodName: CallRegister
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4748765343249542517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4932,8 +4941,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6447004022703231922}
   m_TextComponent: {fileID: 6447004022398493217}
   m_Placeholder: {fileID: 6447004022194153377}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -4949,10 +4958,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 901853888}
         m_TargetAssemblyTypeName: RegistrationManager, Assembly-CSharp
-        m_MethodName: VerifyPasswordValueChanged
-        m_Mode: 1
+        m_MethodName: VerifyPasswordOnValueChanged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5165,10 +5174,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 901853888}
         m_TargetAssemblyTypeName: RegistrationManager, Assembly-CSharp
-        m_MethodName: VerifyUsernameValueChanged
-        m_Mode: 1
+        m_MethodName: VerifyUsernameOnValueChanged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
