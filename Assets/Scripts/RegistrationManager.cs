@@ -149,4 +149,9 @@ public class RegistrationManager : MonoBehaviour
 
     }
 
+    public void CallSubmitInRegistration()
+    {
+        Debug.Log("Submit...");
+    }
+
 }
