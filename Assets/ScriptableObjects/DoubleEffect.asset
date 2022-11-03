@@ -15,4 +15,4 @@ MonoBehaviour:
   id: DoubleEffect
   title: 2X
   description: Double credits per click
-  price: 20
+  price: 10

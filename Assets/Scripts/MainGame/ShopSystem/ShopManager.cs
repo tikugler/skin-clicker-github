@@ -32,14 +32,16 @@ public class ShopManager : MonoBehaviour
     //Creats and adds ItemEffects to key-value-pair.
     //The key is ALWAYS the exact class name of a item!
     public void CreateItems() {
-        var doubleEffect = new DoubleEffect();
+        var doubleEffect = new DoubleEffect(this);
         effects.Add(doubleEffect.id.ToString(), doubleEffect);
         //Debug.Log("new DoubleEffect ID: " + doubleEffect.id);
     }
 
+    //Refreshes panels --> new values are displayed.
     public void RefreshPanels()
     {
         credit = dummyButtonObj.GetCredits(); //dummy
+        //Goes through every shop item in the array and refreshes title, description and price.
         for (int i = 0; i < shopItems.Length; i++)
         {
             shopPanels[i].shopItemTitle.text = shopItems[i].title;
@@ -66,17 +68,25 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-
+    /*
+    *   Action of purchase button of the UI.
+    *   Calculates new balance/credits and applys effect of the item.
+    *   int pos is position of the button, which is hardcoded in the UI:   
+    *           Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->Items-->ShopItemTemplate-->PurchaseButton
+    */
     public void PurchaseButtonAction(int pos)
     {
+        //If credit >= as price of shopItem on position pos in array.
         if (credit >= shopItems[pos].price)
         {
-            if (effects.ContainsKey(shopItems[pos].id)) {
-                Debug.Log("Effects-Dictionary contains key");
-                Debug.Log("ID Shop Item: " + shopItems[pos].id.ToString());
-                credit -= shopItems[pos].price;
+            //Check, if key (Effect) is in the list.
+            var item = shopItems[pos];
+            if (effects.ContainsKey(item.id)) {
+                credit -= item.price;
                 dummyButtonObj.SetCredits(credit); //dummy
-                effects[shopItems[pos].id].PurchaseButtonAction();
+                //Search for effect id in array with effects that has same id as id of ShopItem.
+                effects[item.id].PurchaseButtonAction();
+                effects[item.id].CalculateNewPrice(item);
             } 
             RefreshPanels();
         }
