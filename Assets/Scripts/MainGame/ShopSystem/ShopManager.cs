@@ -12,11 +12,11 @@ public class ShopManager : MonoBehaviour
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
+    public ItemEffect[] effects;
 
     //Get credits from dummy
     public DummyButton dummyButtonObj;
     public GameObject dummyButton;
-    public ItemEffect[] effects;
 
     void Start()
     {
@@ -64,13 +64,12 @@ public class ShopManager : MonoBehaviour
         {
             credit -= shopItems[pos].price;
             dummyButtonObj.SetCredits(credit); //dummy
-            for (int i = 0; i < effects.Length; i++) {
-                if (effects[i].id.Equals(id)) {
-                    effects[i].PurchaseButtonAction();
-                }
-            }
+            //for (int i = 0; i < effects.Length; i++) {
+            //    if (effects[i].id.Equals(id)) {
+            //        effects[i].PurchaseButtonAction();
+            //    }
+            //}
             RefreshPanels();
         }
     }
-
 }
