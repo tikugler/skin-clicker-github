@@ -25,12 +25,12 @@ public class LoginManager : MonoBehaviour
         
     }
 
-    public void openLoginWindow()
+    public void OpenLoginWindow()
     {
         loginPopUp.SetActive(true);
     }
 
-    public void loginButton() {
+    public void LoginButton() {
         Debug.Log(username.text);
         if(username.text != "1234" || password.text != "1234")
         {
@@ -42,7 +42,7 @@ public class LoginManager : MonoBehaviour
             wrongloginWarning.SetActive(false);
         }
     }
-    public void cancleLoginScene()
+    public void CancelLoginScene()
     {
         loginPopUp.SetActive(false);
     }
