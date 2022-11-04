@@ -47,6 +47,7 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemTitle.text = shopItems[i].title;
             shopPanels[i].shopItemDescription.text = shopItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + shopItems[i].price.ToString();
+            shopPanels[i].shopItemAmount.text = shopItems[i].amount.ToString();
         }
         creditUIText.text = "$ " + credit.ToString();
         CheckPurchaseable();
@@ -87,6 +88,7 @@ public class ShopManager : MonoBehaviour
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 effects[item.id].PurchaseButtonAction();
                 effects[item.id].CalculateNewPrice(item);
+                effects[item.id].CalculateNewAmount(item);
             } 
             RefreshPanels();
         }

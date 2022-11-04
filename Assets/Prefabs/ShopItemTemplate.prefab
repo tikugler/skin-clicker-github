@@ -455,6 +455,7 @@ MonoBehaviour:
   shopItemTitle: {fileID: 7760290790289584183}
   shopItemDescription: {fileID: 7760290790711728328}
   shopItemPrice: {fileID: 7766132732925476583}
+  shopItemAmount: {fileID: 2123968041645720404}
 --- !u!1 &7760290790289584181
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,4 +19,8 @@ public class ItemEffect
     public virtual int CalculateNewPrice(ShopItem shopItem){
         return shopItem.price;
     }
+
+    public virtual int CalculateNewAmount(ShopItem shopItem){
+        return shopItem.amount += 1;
+    }
 }
