@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 public class NewTestScript
 {
-    // This ist just a example test that should pass always.
+    // This is just a example test that should pass always.
     [UnityTest]
     public IEnumerator ExampleTest()
     {
