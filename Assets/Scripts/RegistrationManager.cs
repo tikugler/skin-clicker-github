@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RegistrationManager : MonoBehaviour
@@ -123,8 +125,16 @@ public class RegistrationManager : MonoBehaviour
         isEmailValid = emailRegex.IsMatch(emailInput);
         if (isEmailValid)
         {
-            InfoText.text = "";
-            VerifyAll();
+            if(emailInput.Length > 50)
+            {
+                InfoText.text = "E-Mail darf nicht länger als 50 Zeichen sein";
+                SubmitButton.interactable = false;
+            }
+            else
+            {
+                InfoText.text = "";
+                VerifyAll();
+            }
         }
         else
         {
@@ -152,6 +162,41 @@ public class RegistrationManager : MonoBehaviour
     public void CallSubmitInRegistration()
     {
         Debug.Log("Submit...");
+        SubmitButton.interactable = false;
+        StartCoroutine(CallRegisterWithCoroutine());
+
+
+    }
+
+
+
+    public IEnumerator CallRegisterWithCoroutine()
+    {
+
+        string username = UsernameField.text;
+        string password = PasswordField.text;
+        string email = EmailField.text;
+        CoroutineWithData cd = new CoroutineWithData(this, DatabaseManager.Register(username, password, email));
+        yield return cd.coroutine;
+
+        string result = (cd.result as string);
+
+
+        if (result == "0")
+        {
+
+            PlayerInfo.username = username;
+            PlayerInfo.score = 0;
+
+            SceneManager.LoadScene("StartNewsMenu");
+
+
+        }
+        else
+        {
+            InfoText.text = "Error Code: #" + result;
+            SubmitButton.interactable = true;
+        }
     }
 
 }
