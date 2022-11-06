@@ -8,4 +8,5 @@ public class ShopTemplate : MonoBehaviour
     public Text shopItemTitle;
     public Text shopItemDescription;
     public Text shopItemPrice;
+    public Text shopItemAmount;
 }

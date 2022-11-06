@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77e1c033a0f64bb48aefc30ac27917b6, type: 3}
-  m_Name: shopMenu
+  m_Name: hfhfhf
   m_EditorClassIdentifier: 
+  id: 
   title: 
   description: 
   price: 0

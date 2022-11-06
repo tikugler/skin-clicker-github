@@ -11,7 +11,6 @@ public class ShopPopUp : MonoBehaviour
 
     //Dummy
     public ShopManager shopManager;
-    public GameObject mainButton;
 
     public void ShopButtonAction() {
         shopManager.RefreshPanels(); //dummy
