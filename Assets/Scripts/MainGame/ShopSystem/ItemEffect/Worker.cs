@@ -46,7 +46,8 @@ class Worker : ItemEffect
 
     public override void PurchaseButtonAction() {
         workerAmount++;
-        
+        GameObject.FindGameObjectWithTag("MainButton").GetComponent<AutomatedButtonWorkers>().SetLevel1WorkerCount(workerAmount);
+
 
     }
 

@@ -15,5 +15,5 @@ MonoBehaviour:
   id: Worker
   title: Arbeiter
   description: Ein Arbeiter der dir beim klicken hilft
-  price: 80
-  amount: 3
+  price: 10
+  amount: 0
