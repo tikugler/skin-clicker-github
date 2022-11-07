@@ -44,6 +44,11 @@ public class RegistrationManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// verifies if all inputs are valid.
+    /// If this is true, then Submitbutton is going to be interactable,
+    /// otherwise not
+    /// </summary>
     private void VerifyAll()
     {
         if (!isUsernameValid)
@@ -68,8 +73,8 @@ public class RegistrationManager : MonoBehaviour
         isPasswordValid = passwordRegex.IsMatch(passwordInput);
         if (isPasswordValid)
         {
-            InfoText.text = "";
-            VerifyAll();
+            //InfoText.text = "";
+            CheckPasswordsAreSameAfterTippedOnFirstPassField(passwordInput);
         }
         else
         {
@@ -79,7 +84,7 @@ public class RegistrationManager : MonoBehaviour
     }
 
     /// <summary>
-    /// verifies if player gave a valid username
+    /// verifies if user gave a valid username
     /// valid username must be 5 to 20 characters long
     /// </summary>
     public void VerifyUsernameOnValueChanged(string usernameInput)
@@ -94,6 +99,27 @@ public class RegistrationManager : MonoBehaviour
         else
         {
             InfoText.text = "Benutzername muss zwischen 5-20 Zeichen lang sein";
+            SubmitButton.interactable = false;
+        }
+    }
+
+    /// <summary>
+    /// called after user tipped in the first password field.
+    /// If the given password is valid, it will be compared to the second one
+    /// which confirms whether the user entered the same password twice
+    /// </summary>
+    /// <param name="passwordInput">first input field for password</param>
+    public void CheckPasswordsAreSameAfterTippedOnFirstPassField(string passwordInput)
+    {
+        IsPasswordConfirmed = PasswordConfirmField.text == passwordInput;
+        if (IsPasswordConfirmed)
+        {
+            InfoText.text = "";
+            VerifyAll();
+        }
+        else
+        {
+            InfoText.text = "Passwörter sind nicht identisch";
             SubmitButton.interactable = false;
         }
     }
@@ -164,8 +190,6 @@ public class RegistrationManager : MonoBehaviour
         Debug.Log("Submit...");
         SubmitButton.interactable = false;
         StartCoroutine(CallRegisterWithCoroutine());
-
-
     }
 
 
@@ -184,13 +208,9 @@ public class RegistrationManager : MonoBehaviour
 
         if (result == "0")
         {
-
             PlayerInfo.username = username;
             PlayerInfo.score = 0;
-
             SceneManager.LoadScene("StartNewsMenu");
-
-
         }
         else
         {
