@@ -565,7 +565,6 @@ MonoBehaviour:
   openShopButton: {fileID: 1361342034}
   closeShopButton: {fileID: 274584678}
   shopManager: {fileID: 0}
-  mainButton: {fileID: 0}
 --- !u!114 &277344234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8789323057256476450, guid: 0c21922b95f659b489dd1a10adbba54a, type: 3}
@@ -1470,7 +1469,6 @@ MonoBehaviour:
   openShopButton: {fileID: 1361342034}
   closeShopButton: {fileID: 274584678}
   shopManager: {fileID: 2143116259}
-  mainButton: {fileID: 1788361373}
 --- !u!1 &1484314225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,6 +2467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae090cb7cd392a9459dcc68032047689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplicator: 1
+  basePoints: 1
+  credits: 0
 --- !u!114 &1807967728 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8789323057256476450, guid: 0c21922b95f659b489dd1a10adbba54a, type: 3}
@@ -2837,7 +2838,6 @@ MonoBehaviour:
   openShopButton: {fileID: 1361342034}
   closeShopButton: {fileID: 274584678}
   shopManager: {fileID: 0}
-  mainButton: {fileID: 0}
 --- !u!114 &2143116259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2852,9 +2852,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creditUIText: {fileID: 261335975}
   shopItems:
+  - {fileID: 11400000, guid: 97c2e4a994be89f4d80b6ff462ac62c8, type: 2}
+  - {fileID: 11400000, guid: 625cb77162c685543ad79163c5cc54c8, type: 2}
   - {fileID: 11400000, guid: 2f29a9f867350524399e442ff5baf1f9, type: 2}
   - {fileID: 11400000, guid: af99f144f41e2564abac83ed2683a5ae, type: 2}
-  - {fileID: 11400000, guid: 97c2e4a994be89f4d80b6ff462ac62c8, type: 2}
   shopPanelsGO:
   - {fileID: 561443624}
   - {fileID: 1330274468}
