@@ -34,6 +34,8 @@ public class ShopManager : MonoBehaviour
     public void CreateItems() {
         var doubleEffect = new DoubleEffect(this);
         effects.Add(doubleEffect.id.ToString(), doubleEffect);
+        var worker = new Worker(this);
+        effects.Add(worker.id.ToString(), worker);
         //Debug.Log("new DoubleEffect ID: " + doubleEffect.id);
     }
 

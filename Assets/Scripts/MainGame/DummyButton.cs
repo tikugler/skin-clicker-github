@@ -27,4 +27,9 @@ public class DummyButton : MonoBehaviour
     public void SetMultiplicator(int multi) {
         multiplicator = multi;
     }
+
+    public void IncreaseCreditBy(int value)
+    {
+        credits += value;
+    }
 }
