@@ -29,14 +29,13 @@ public class AutomatedButtonWorkers : MonoBehaviour
 
     private void UpdateLevel1WorkerScorePerSec()
     {
-        level1WorkerScorePerSec = 1 * Level1WorkerCount;
+        level1WorkerScorePerSec = Level1WorkerCount;
     }
 
     IEnumerator UpdateScorePerSecondByWorkers()
     {
         while (true)
         {
-
             yield return new WaitForSeconds(1);
             Debug.Log("level1WorkerScorePerSec: " + level1WorkerScorePerSec);
             gameObject.GetComponent<DummyButton>().IncreaseCreditBy(level1WorkerScorePerSec);

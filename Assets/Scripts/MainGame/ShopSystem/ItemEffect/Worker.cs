@@ -38,17 +38,11 @@ class Worker : ItemEffect
         credits = creditsPerSec;
         shopManager.dummyButtonObj.credits =+credits;
         Debug.Log(credits);
-
-
-
-
     }
 
     public override void PurchaseButtonAction() {
         workerAmount++;
         GameObject.FindGameObjectWithTag("MainButton").GetComponent<AutomatedButtonWorkers>().SetLevel1WorkerCount(workerAmount);
-
-
     }
 
     public override int CalculateNewPrice(ShopItem shopItem)

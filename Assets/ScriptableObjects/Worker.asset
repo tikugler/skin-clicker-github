@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Worker
   title: Arbeiter
-  description: Ein Arbeiter der dir beim klicken hilft
+  description: Ein Arbeiter, der dir beim Klicken hilft
   price: 10
   amount: 0
