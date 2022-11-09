@@ -15,22 +15,11 @@ class Worker : ItemEffect
     private float timer = 0.0f;
     private int credits;
 
-
-
-
-
-
     public Worker(ShopManager manager) : base(manager)
     {
         base.shopManager = manager;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         creditsPerSec = workerAmount * 5;
@@ -40,7 +29,8 @@ class Worker : ItemEffect
         Debug.Log(credits);
     }
 
-    public override void PurchaseButtonAction() {
+    public override void PurchaseButtonAction() 
+    {
         workerAmount++;
         GameObject.FindGameObjectWithTag("MainButton").GetComponent<AutomatedButtonWorkers>().SetLevel1WorkerCount(workerAmount);
     }
@@ -49,7 +39,4 @@ class Worker : ItemEffect
     {
         return shopItem.price *= 2;
     }
-
-
-
 }

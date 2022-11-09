@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AutomatedButtonWorkers : MonoBehaviour
 {
-
     public int Level1WorkerCount;
     private int level1WorkerScorePerSec;
 
@@ -18,7 +17,6 @@ public class AutomatedButtonWorkers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void SetLevel1WorkerCount(int workerCount)
@@ -41,5 +39,4 @@ public class AutomatedButtonWorkers : MonoBehaviour
             gameObject.GetComponent<DummyButton>().IncreaseCreditBy(level1WorkerScorePerSec);
         }
     }
-
 }
