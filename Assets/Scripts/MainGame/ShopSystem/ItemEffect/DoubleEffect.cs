@@ -27,6 +27,4 @@ class DoubleEffect : ItemEffect
     public override int CalculateNewPrice(ShopItem shopItem) {
         return shopItem.price *= 4;
     }
-
-
 }
