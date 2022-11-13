@@ -9,7 +9,7 @@ public class InventoryPopUp : MonoBehaviour
     public GameObject closeinventoryButton;
 
     //Dummy
-    public InventoryManager inventoryManager;
+    public ItemInventoryManager inventoryManager;
  
     public void ShopButtonAction() {
         inventoryManager.RefreshPanels();

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+public class ItemInventoryManager : MonoBehaviour
 {
     public Button[] useButtons;
     public GameObject[] inventoryPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] inventoryPanels; //Reference to scripts
-    public ArrayList items = new ArrayList(ShopManager.effects);
 
     //Dummy
     public ArrayList itemsInInventory = new ArrayList();
