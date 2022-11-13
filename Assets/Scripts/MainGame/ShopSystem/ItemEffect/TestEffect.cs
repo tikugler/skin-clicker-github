@@ -14,6 +14,7 @@ public class TestEffect : ItemEffect
         ShopManager.boughtItems.Add(this);
     }
 
+    //Random color for header to show useButtonEffect.
     public override void EffectOfItem()
     {
         var header = GameObject.Find("Header");

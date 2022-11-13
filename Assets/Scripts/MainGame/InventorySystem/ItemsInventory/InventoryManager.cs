@@ -13,15 +13,17 @@ public class InventoryManager : MonoBehaviour
     //Dummy
     public ArrayList itemsInInventory = new ArrayList();
 
-    void Start() {
+    void Start() 
+    {
         itemsInInventory = ShopManager.boughtItems;
         RefreshPanels();
     }
 
+    //Refreshes panels --> new values are displayed.
     public void RefreshPanels()
     {
         itemsInInventory = ShopManager.boughtItems;
-        //Goes through every shop item in the array and refreshes title, description and price.
+        //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < itemsInInventory.Count; i++)
         {
             inventoryPanelsGO[i].SetActive(true);

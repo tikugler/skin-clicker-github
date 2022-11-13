@@ -11,5 +11,5 @@ public class ShopItem : ScriptableObject
     public string description;
     public int price;
     public int amount;
-    public RawImage icon;
+    public Sprite icon;
 }

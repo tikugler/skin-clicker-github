@@ -16,4 +16,5 @@ MonoBehaviour:
   title: Berkan's Hopes
   description: New empty list :D
   price: 3
-  amount: 0
+  amount: 2
+  icon: {fileID: 21300000, guid: dc95de9f06bdc984999f177fd6b42aed, type: 3}
