@@ -14,6 +14,7 @@ public class ShopManager : MonoBehaviour
     private ContentDistributor contentDistributor;
 
     //Set as many panels active/visible as needed.
+    //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)

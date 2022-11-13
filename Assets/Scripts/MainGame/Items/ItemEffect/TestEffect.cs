@@ -19,6 +19,7 @@ public class TestEffect : ItemEffect
     {
         var header = GameObject.Find("Header");
         header.GetComponent<Image>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        shopItem.amount -= 1;
     }
 
     public override int CalculateNewAmount(){
