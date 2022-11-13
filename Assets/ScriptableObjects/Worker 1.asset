@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e1c033a0f64bb48aefc30ac27917b6, type: 3}
-  m_Name: Worker
+  m_Script: {fileID: 11500000, guid: c26e1cf2374734140b493f8bdab7c9ed, type: 3}
+  m_Name: Worker 1
   m_EditorClassIdentifier: 
   id: Worker
-  title: Arbeiter
-  description: Ein Arbeiter, der dir beim Klicken hilft
-  price: 10
+  title: Worker Level 1
+  description: Clicks automated
+  price: 3
   amount: 0
+  icon: {fileID: 0}

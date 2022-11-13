@@ -23,6 +23,12 @@ public class ShopManager : MonoBehaviour
         RefreshPanels();
     }
 
+    public void RefreshCredits() 
+    {
+        credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
+        creditUIText.text = "$ " + credit.ToString();
+    }
+
     /* 
     *  Refreshes panels --> new values are displayed.
     *  New items in the shop can't be added after Start()
@@ -33,7 +39,7 @@ public class ShopManager : MonoBehaviour
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
         contentDistributor = ContentDistributor.contentDistributor; 
 
-        credit = contentDistributor.mainButton.credits; //dummy
+        RefreshCredits();
         
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
@@ -44,7 +50,6 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
             shopPanels[i].itemIcon = contentDistributor.scriptableObjectItems[i].icon;
         }
-        creditUIText.text = "$ " + credit.ToString();
         CheckPurchaseable();
     }
 

@@ -47,5 +47,8 @@ public class ContentDistributor : MonoBehaviour
 
         var testEffect = new TestEffect();
         itemsDictionary.Add(testEffect.id.ToString(), testEffect);
+
+        var worker = new Worker();
+        itemsDictionary.Add(worker.id.ToString(), worker);
     }
 }

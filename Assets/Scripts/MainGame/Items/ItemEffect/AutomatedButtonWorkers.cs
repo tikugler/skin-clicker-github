@@ -37,6 +37,7 @@ public class AutomatedButtonWorkers : MonoBehaviour
             yield return new WaitForSeconds(1);
             Debug.Log("level1WorkerScorePerSec: " + level1WorkerScorePerSec);
             gameObject.GetComponent<DummyButton>().IncreaseCreditBy(level1WorkerScorePerSec);
+            ContentDistributor.contentDistributor.shopManager.RefreshPanels();
         }
     }
 }

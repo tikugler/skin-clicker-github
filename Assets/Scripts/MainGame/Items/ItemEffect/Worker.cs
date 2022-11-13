@@ -7,7 +7,7 @@ using UnityEngine.UI;
 class Worker : ItemEffect
 {
     public new string id = "Worker";
-    public ShopItem shopItem;
+    public new ItemTemplate shopItem;
     public Button purchaseButton;
     private bool hasUpdated = false;
     private int creditsPerSec;
@@ -15,27 +15,32 @@ class Worker : ItemEffect
     private float timer = 0.0f;
     private int credits;
 
-    public Worker(ShopManager manager) : base(manager)
-    {
-        base.shopManager = manager;
-    }
 
     void Update()
     {
         creditsPerSec = workerAmount * 5;
         
         credits = creditsPerSec;
-        shopManager.dummyButtonObj.credits =+credits;
-        Debug.Log(credits);
+        ContentDistributor.contentDistributor.mainButton.credits += credits;
     }
 
-    public override void PurchaseButtonAction() 
+    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    {
+        this.shopItem = shopItem;
+        EffectOfItem();
+    }
+
+    public override void EffectOfItem()
     {
         workerAmount++;
         GameObject.FindGameObjectWithTag("MainButton").GetComponent<AutomatedButtonWorkers>().SetLevel1WorkerCount(workerAmount);
     }
 
-    public override int CalculateNewPrice(ShopItem shopItem)
+    public override int CalculateNewAmount(){
+        return shopItem.amount += 1;
+    }
+
+    public override int CalculateNewPrice()
     {
         return shopItem.price *= 2;
     }
