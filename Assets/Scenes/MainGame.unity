@@ -7843,9 +7843,10 @@ GameObject:
   - component: {fileID: 1788361376}
   - component: {fileID: 1788361375}
   - component: {fileID: 1788361378}
+  - component: {fileID: 1788361379}
   m_Layer: 5
   m_Name: MainButton
-  m_TagString: Untagged
+  m_TagString: MainButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8113,6 +8114,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c21922b95f659b489dd1a10adbba54a, type: 3}
+--- !u!114 &1788361379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788361373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f45702c5c27bc94f8132970200ed751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level1WorkerCount: 3
+--- !u!114 &1807967728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8789323057256476450, guid: 0c21922b95f659b489dd1a10adbba54a, type: 3}
+  m_PrefabInstance: {fileID: 1990791598}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1823417830 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7760290790008758438, guid: 0c21922b95f659b489dd1a10adbba54a, type: 3}
@@ -10449,6 +10474,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditUIText: {fileID: 261335975}
+  shopItems:
+  - {fileID: 11400000, guid: 97c2e4a994be89f4d80b6ff462ac62c8, type: 2}
+  - {fileID: 11400000, guid: 625cb77162c685543ad79163c5cc54c8, type: 2}
+  - {fileID: 11400000, guid: 2f29a9f867350524399e442ff5baf1f9, type: 2}
+  - {fileID: 11400000, guid: af99f144f41e2564abac83ed2683a5ae, type: 2}
   shopPanelsGO:
   - {fileID: 561443624}
   - {fileID: 1171522921}
