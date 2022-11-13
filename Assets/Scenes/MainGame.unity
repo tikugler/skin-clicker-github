@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c451fe40182574eb8bb23bb410287e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   shopManager: {fileID: 2143116259}
   itemInventoryManager: {fileID: 705824943}
   mainButton: {fileID: 1788361378}
