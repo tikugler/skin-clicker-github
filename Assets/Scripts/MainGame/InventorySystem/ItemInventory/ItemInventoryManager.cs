@@ -20,7 +20,7 @@ public class ItemInventoryManager : MonoBehaviour
     //Refreshes panels --> new values are displayed.
     public void RefreshPanels()
     {
-        itemsInInventory = ShopManager.boughtItems;
+        itemsInInventory = ContentDistributor.contentDistributor.boughtItemsOfPlayer;
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < itemsInInventory.Count; i++)
         {
@@ -38,8 +38,8 @@ public class ItemInventoryManager : MonoBehaviour
         //only woking, if there are no stacks!
         ItemEffect item = (ItemEffect) itemsInInventory[pos];
         item.EffectOfItem();
-        inventoryPanelsGO[ShopManager.boughtItems.Count - 1].SetActive(false);
-        ShopManager.boughtItems.Remove(item);
+        inventoryPanelsGO[ContentDistributor.contentDistributor.boughtItemsOfPlayer.Count - 1].SetActive(false);
+        ContentDistributor.contentDistributor.boughtItemsOfPlayer.Remove(item);
         RefreshPanels();
     }
 

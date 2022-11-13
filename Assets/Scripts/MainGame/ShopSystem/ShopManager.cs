@@ -13,9 +13,6 @@ public class ShopManager : MonoBehaviour
     public Button[] purchaseButtons;
     private ContentDistributor contentDistributor;
 
-    //dummy get List from Player
-    public static ArrayList boughtItems = new ArrayList();
-
     //Set as many panels active/visible as needed.
     void Start()
     {

@@ -10,7 +10,7 @@ public class TestEffect : ItemEffect
 
     public override void PurchaseButtonAction(ItemTemplate shopItem) {
         this.shopItem = shopItem;
-        ShopManager.boughtItems.Add(this);
+        ContentDistributor.contentDistributor.boughtItemsOfPlayer.Add(this);
         CalculateNewAmount();
     }
 

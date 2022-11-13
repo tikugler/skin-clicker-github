@@ -15,8 +15,11 @@ public class ContentDistributor : MonoBehaviour
     public DummyButton mainButton;
     public ItemTemplate[] scriptableObjectItems;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
-    // Start is called before the first frame update
 
+    //Player stuff for demo
+    public ArrayList boughtItemsOfPlayer = new ArrayList();
+
+    // Start is called before the first frame update
     void Start()
     {
         contentDistributor = this;
