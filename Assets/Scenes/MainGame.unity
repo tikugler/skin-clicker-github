@@ -8819,7 +8819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1087, y: -433}
+  m_AnchoredPosition: {x: 920, y: -423}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1924824184
@@ -10454,8 +10454,6 @@ MonoBehaviour:
   - {fileID: 1683143125}
   - {fileID: 305131606}
   - {fileID: 1223296224}
-  dummyButtonObj: {fileID: 1788361378}
-  dummyButton: {fileID: 1788361373}
 --- !u!1001 &4336686544111485881
 PrefabInstance:
   m_ObjectHideFlags: 0
