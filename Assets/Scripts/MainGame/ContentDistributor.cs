@@ -32,10 +32,10 @@ public class ContentDistributor : MonoBehaviour
     //Creats and adds ItemEffects to key-value-pair.
     //The key is ALWAYS the exact class name of a item!
     public void CreateItems() {
-        var doubleEffect = new DoubleEffect(shopManager);
+        var doubleEffect = new DoubleEffect();
         itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);
 
-        var testEffect = new TestEffect(shopManager);
+        var testEffect = new TestEffect();
         itemsDictionary.Add(testEffect.id.ToString(), testEffect);
     }
 }

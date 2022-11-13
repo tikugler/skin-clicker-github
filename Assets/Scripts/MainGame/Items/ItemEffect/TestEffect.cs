@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class TestEffect : ItemEffect
 {
     public new string id = "TestEffect";
-    public TestEffect (ShopManager manager) : base (manager) {
-        base.shopManager = manager;
-    }
+    public new ItemTemplate shopItem;
 
-    public override void PurchaseButtonAction() {
+    public override void PurchaseButtonAction(ItemTemplate shopItem) {
+        this.shopItem = shopItem;
         ShopManager.boughtItems.Add(this);
+        CalculateNewAmount();
     }
 
     //Random color for header to show useButtonEffect.
@@ -19,5 +19,9 @@ public class TestEffect : ItemEffect
     {
         var header = GameObject.Find("Header");
         header.GetComponent<Image>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+    }
+
+    public new int CalculateNewAmount(){
+        return shopItem.amount += 1;
     }
 }

@@ -7,27 +7,33 @@ class DoubleEffect : ItemEffect
 {
     //Amount of Double/2X Item in player inventory. 
     public new string id = "DoubleEffect";
+    public new ItemTemplate shopItem;
     private int multiplicator = 1;
 
 
-    public DoubleEffect (ShopManager manager) : base (manager) {
-        base.shopManager = manager;
-    }
+
     public void Start() {
-        shopManager.dummyButtonObj.SetMultiplicator(multiplicator);
+        ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
     }
 
-    public override void PurchaseButtonAction() {
+    public override void PurchaseButtonAction(ItemTemplate shopItem) {
+        this.shopItem = shopItem;
+        CalculateNewPrice();
+        CalculateNewAmount();
         EffectOfItem();
     }
 
-    public override int CalculateNewPrice(ItemTemplate shopItem) {
+    public override int CalculateNewPrice() {
         return shopItem.price *= 4;
     }
 
     public override void EffectOfItem()
     {
         multiplicator *= 2;
-        shopManager.dummyButtonObj.multiplicator = multiplicator;
+        ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
+    }
+
+    public new int CalculateNewAmount(){
+        return shopItem.amount += 1;
     }
 }

@@ -14,7 +14,6 @@ public class ItemInventoryManager : MonoBehaviour
 
     void Start() 
     {
-        itemsInInventory = ShopManager.boughtItems;
         RefreshPanels();
     }
 

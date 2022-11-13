@@ -20,6 +20,7 @@ public class ShopManager : MonoBehaviour
     //dummy get List from Player
     public static ArrayList boughtItems = new ArrayList();
 
+    //Set as many panels active/visible as needed.
     void Start()
     {
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
@@ -29,13 +30,17 @@ public class ShopManager : MonoBehaviour
         RefreshPanels();
     }
 
-    //Refreshes panels --> new values are displayed.
+    /* 
+    *  Refreshes panels --> new values are displayed.
+    *  New items in the shop can't be added after Start()
+    *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
+    */
     public void RefreshPanels()
     {   
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
         contentDistributor = ContentDistributor.contentDistributor; 
 
-        credit = dummyButtonObj.GetCredits(); //dummy
+        credit = contentDistributor.mainButton.credits; //dummy
         
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
@@ -81,11 +86,9 @@ public class ShopManager : MonoBehaviour
             ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
             if (contentDistributor.itemsDictionary.ContainsKey(item.id)) {
                 credit -= item.price;
-                dummyButtonObj.SetCredits(credit); //dummy
+                contentDistributor.mainButton.SetCredits(credit); //dummy
                 //Search for effect id in array with effects that has same id as id of ShopItem.
-                contentDistributor.itemsDictionary[item.id].PurchaseButtonAction();
-                contentDistributor.itemsDictionary[item.id].CalculateNewPrice(item);
-                contentDistributor.itemsDictionary[item.id].CalculateNewAmount(item);
+                contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.itemsDictionary[item.id].shopItem = contentDistributor.scriptableObjectItems[pos];
             }
             RefreshPanels();
