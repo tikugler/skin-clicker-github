@@ -33,7 +33,7 @@ class DoubleEffect : ItemEffect
         ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
     }
 
-    public new int CalculateNewAmount(){
+    public override int CalculateNewAmount(){
         return shopItem.amount += 1;
     }
 }

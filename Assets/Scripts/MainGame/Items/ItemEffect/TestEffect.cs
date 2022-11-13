@@ -21,7 +21,11 @@ public class TestEffect : ItemEffect
         header.GetComponent<Image>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
-    public new int CalculateNewAmount(){
+    public override int CalculateNewAmount(){
         return shopItem.amount += 1;
+    }
+
+    public override int CalculateNewPrice() {
+        return shopItem.price;
     }
 }

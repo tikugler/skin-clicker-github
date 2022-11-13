@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//This class is used to share objects with other classes.
-//There is only one (static) contentDistributor.
+/*
+*  This class is used to share important objects with other classes.
+*  There is only one (static) contentDistributor.
+*/
 public class ContentDistributor : MonoBehaviour
 {
     public static ContentDistributor contentDistributor;
@@ -22,8 +24,10 @@ public class ContentDistributor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        contentDistributor = this;
-        CreateItems();
+        if (contentDistributor == null) {
+            contentDistributor = this;
+            CreateItems();
+        }
     }
 
     // Update is called once per frame
@@ -32,8 +36,11 @@ public class ContentDistributor : MonoBehaviour
         
     }
 
-    //Creats and adds ItemEffects to key-value-pair.
-    //The key is ALWAYS the exact class name of a item!
+    /* 
+    *  Creats and adds ItemEffects to key-value-pair.
+    *  The key is ALWAYS the exact class name of a item!
+    *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
+    */
     public void CreateItems() {
         var doubleEffect = new DoubleEffect();
         itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);

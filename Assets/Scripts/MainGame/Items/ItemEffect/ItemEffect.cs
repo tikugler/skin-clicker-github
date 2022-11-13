@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ItemEffect is a base class for every effect item.
-public class ItemEffect
+/*
+*  ItemEffect is a base class for every effect item. 
+*  The id of an SubClass of ItemEffect is alsways the ClassName (1:1)!
+*/
+public abstract class ItemEffect
 {
     public string id;
     public int price;
@@ -19,13 +22,9 @@ public class ItemEffect
     }
 
     //Calculates new price, default --> keeps old price.
-    public virtual int CalculateNewPrice(){
-        return shopItem.price;
-    }
+    public abstract int CalculateNewPrice();
 
-    public virtual int CalculateNewAmount(){
-        return shopItem.amount += 1;
-    }
+    public abstract int CalculateNewAmount();
 
-    public virtual void EffectOfItem() {}
+    public abstract void EffectOfItem();
 }
