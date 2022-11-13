@@ -7,7 +7,7 @@ public class ItemEffect
 {
     public string id;
     public int price;
-    public ShopItem shopItem;
+    public ItemTemplate shopItem;
     public ShopManager shopManager;
     public ItemEffect (ShopManager manager) {
         shopManager = manager;
@@ -17,11 +17,11 @@ public class ItemEffect
     public virtual void PurchaseButtonAction(){}
 
     //Calculates new price, default --> keeps old price.
-    public virtual int CalculateNewPrice(ShopItem shopItem){
+    public virtual int CalculateNewPrice(ItemTemplate shopItem){
         return shopItem.price;
     }
 
-    public virtual int CalculateNewAmount(ShopItem shopItem){
+    public virtual int CalculateNewAmount(ItemTemplate shopItem){
         return shopItem.amount += 1;
     }
 

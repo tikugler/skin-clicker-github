@@ -13,7 +13,7 @@ public class ContentDistributor : MonoBehaviour
     public ItemInventoryManager itemInventoryManager;
     //public SkinManager itemInventoryManager;
     public DummyButton mainButton;
-    public ShopItem[] scriptableObjectItems;
+    public ItemTemplate[] scriptableObjectItems;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
     // Start is called before the first frame update
 

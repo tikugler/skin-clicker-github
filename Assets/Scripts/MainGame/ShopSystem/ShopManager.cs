@@ -78,7 +78,7 @@ public class ShopManager : MonoBehaviour
         if (credit >= contentDistributor.scriptableObjectItems[pos].price)
         {
             //Check, if key (Effect) is in the list.
-            ShopItem item = contentDistributor.scriptableObjectItems[pos];
+            ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
             if (contentDistributor.itemsDictionary.ContainsKey(item.id)) {
                 credit -= item.price;
                 dummyButtonObj.SetCredits(credit); //dummy

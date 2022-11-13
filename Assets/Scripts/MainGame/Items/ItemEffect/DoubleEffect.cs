@@ -21,7 +21,7 @@ class DoubleEffect : ItemEffect
         EffectOfItem();
     }
 
-    public override int CalculateNewPrice(ShopItem shopItem) {
+    public override int CalculateNewPrice(ItemTemplate shopItem) {
         return shopItem.price *= 4;
     }
 
