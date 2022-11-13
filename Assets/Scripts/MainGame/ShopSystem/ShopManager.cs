@@ -12,11 +12,14 @@ public class ShopManager : MonoBehaviour
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
-    public Dictionary<string, ItemEffect> effects = new Dictionary<string, ItemEffect>();
+    public static Dictionary<string, ItemEffect> effects = new Dictionary<string, ItemEffect>();
 
     //Get credits from dummy
     public DummyButton dummyButtonObj;
     public GameObject dummyButton;
+
+    //dummy get List from Player
+    public static ArrayList boughtItems = new ArrayList();
 
     void Start()
     {
@@ -34,6 +37,8 @@ public class ShopManager : MonoBehaviour
     public void CreateItems() {
         var doubleEffect = new DoubleEffect(this);
         effects.Add(doubleEffect.id.ToString(), doubleEffect);
+        var testEffect = new TestEffect(this);
+        effects.Add(testEffect.id.ToString(), testEffect);
         //Debug.Log("new DoubleEffect ID: " + doubleEffect.id);
     }
 
@@ -89,7 +94,8 @@ public class ShopManager : MonoBehaviour
                 effects[item.id].PurchaseButtonAction();
                 effects[item.id].CalculateNewPrice(item);
                 effects[item.id].CalculateNewAmount(item);
-            } 
+                effects[item.id].shopItem = shopItems[pos];
+            }
             RefreshPanels();
         }
     }

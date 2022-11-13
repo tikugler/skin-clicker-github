@@ -7,6 +7,7 @@ public class ItemEffect
 {
     public string id;
     public int price;
+    public ShopItem shopItem;
     public ShopManager shopManager;
     public ItemEffect (ShopManager manager) {
         shopManager = manager;
@@ -22,5 +23,9 @@ public class ItemEffect
 
     public virtual int CalculateNewAmount(ShopItem shopItem){
         return shopItem.amount += 1;
+    }
+
+    public virtual void EffectOfItem() {
+
     }
 }

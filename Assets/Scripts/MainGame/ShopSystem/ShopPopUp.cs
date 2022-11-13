@@ -17,7 +17,7 @@ public class ShopPopUp : MonoBehaviour
         //mainButton.SetActive(false); //dummy
 
         shopPopUp.SetActive(true);
-        openShopButton.SetActive(false);
+        //openShopButton.SetActive(false);
         closeShopButton.SetActive(true);
     }
 

@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77e1c033a0f64bb48aefc30ac27917b6, type: 3}
-  m_Name: TestItem
+  m_Name: TestEffect
   m_EditorClassIdentifier: 
-  title: TestItem
-  description: "Testige Test-Beschreibung f\xFCr Test-Item"
-  price: 5
+  id: TestEffect
+  title: Berkan's Hopes
+  description: New empty list :D
+  price: 3
+  amount: 0
