@@ -13,10 +13,6 @@ public class ShopManager : MonoBehaviour
     public Button[] purchaseButtons;
     private ContentDistributor contentDistributor;
 
-    //Get credits from dummy
-    public DummyButton dummyButtonObj;
-    public GameObject dummyButton;
-
     //dummy get List from Player
     public static ArrayList boughtItems = new ArrayList();
 
