@@ -8,7 +8,7 @@ public class DummyButton : MonoBehaviour
     public int basePoints = 1; 
     public int credits = 0;
    
-    void start() 
+    void Start() 
     {
         multiplicator = 1;
         basePoints = 1;
