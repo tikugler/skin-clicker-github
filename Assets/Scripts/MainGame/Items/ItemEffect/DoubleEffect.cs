@@ -12,18 +12,21 @@ class DoubleEffect : ItemEffect
 
 
 
-    public void Start() {
+    public void Start() 
+    {
         ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
     }
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) {
+    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    {
         this.shopItem = shopItem;
         CalculateNewPrice();
         CalculateNewAmount();
         EffectOfItem();
     }
 
-    public override int CalculateNewPrice() {
+    public override int CalculateNewPrice() 
+    {
         return shopItem.price *= 4;
     }
 
@@ -33,7 +36,8 @@ class DoubleEffect : ItemEffect
         ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
     }
 
-    public override int CalculateNewAmount(){
+    public override int CalculateNewAmount()
+    {
         return shopItem.amount += 1;
     }
 }

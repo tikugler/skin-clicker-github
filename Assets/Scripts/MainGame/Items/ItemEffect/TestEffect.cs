@@ -8,7 +8,8 @@ public class TestEffect : ItemEffect
     public new string id = "TestEffect";
     public new ItemTemplate shopItem;
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) {
+    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    {
         this.shopItem = shopItem;
         ContentDistributor.contentDistributor.boughtItemsOfPlayer.Add(this);
         CalculateNewAmount();
@@ -22,11 +23,13 @@ public class TestEffect : ItemEffect
         shopItem.amount -= 1;
     }
 
-    public override int CalculateNewAmount(){
+    public override int CalculateNewAmount()
+    {
         return shopItem.amount += 1;
     }
 
-    public override int CalculateNewPrice() {
+    public override int CalculateNewPrice() 
+    {
         return shopItem.price;
     }
 }

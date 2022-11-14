@@ -30,18 +30,13 @@ public class ContentDistributor : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /* 
     *  Creats and adds ItemEffects to key-value-pair.
     *  The key is ALWAYS the exact class name of a item!
     *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
     */
-    public void CreateItems() {
+    public void CreateItems() 
+    {
         var doubleEffect = new DoubleEffect();
         itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);
 

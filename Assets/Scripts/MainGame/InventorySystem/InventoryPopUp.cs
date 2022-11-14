@@ -11,13 +11,15 @@ public class InventoryPopUp : MonoBehaviour
     //Dummy
     public ItemInventoryManager inventoryManager;
  
-    public void ShopButtonAction() {
+    public void ShopButtonAction() 
+    {
         inventoryManager.RefreshPanels();
         inventoryPopUp.SetActive(true);
         closeinventoryButton.SetActive(true);
     }
 
-    public void CloseShopButtonAction() {
+    public void CloseShopButtonAction() 
+    {
         inventoryPopUp.SetActive(false);
         closeinventoryButton.SetActive(false);
     }

@@ -11,11 +11,11 @@ public abstract class ItemEffect
     public string id;
     public int price;
     public ItemTemplate shopItem;
-    public ShopManager shopManager;
 
 
     //Action for the purchase button in the shop ui of an item.
-    public virtual void PurchaseButtonAction(ItemTemplate shopItem){
+    public virtual void PurchaseButtonAction(ItemTemplate shopItem)
+    {
         this.shopItem = shopItem;
         CalculateNewPrice();
         CalculateNewAmount();

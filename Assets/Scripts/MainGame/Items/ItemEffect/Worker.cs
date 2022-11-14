@@ -27,6 +27,8 @@ class Worker : ItemEffect
     public override void PurchaseButtonAction(ItemTemplate shopItem) 
     {
         this.shopItem = shopItem;
+        CalculateNewAmount();
+        CalculateNewPrice();
         EffectOfItem();
     }
 
@@ -36,7 +38,8 @@ class Worker : ItemEffect
         GameObject.FindGameObjectWithTag("MainButton").GetComponent<AutomatedButtonWorkers>().SetLevel1WorkerCount(workerAmount);
     }
 
-    public override int CalculateNewAmount(){
+    public override int CalculateNewAmount()
+    {
         return shopItem.amount += 1;
     }
 

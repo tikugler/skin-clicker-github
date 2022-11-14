@@ -8,23 +8,29 @@ public class DummyButton : MonoBehaviour
     public int basePoints = 1; 
     public int credits = 0;
    
-    void start() {
+    void start() 
+    {
         multiplicator = 1;
         basePoints = 1;
     }
-    public void MainButtonAction() {
+
+    public void MainButtonAction() 
+    {
         credits += basePoints * multiplicator;
     }
 
-    public int GetCredits() {
+    public int GetCredits() 
+    {
         return credits;
     }
 
-    public void SetCredits(int value) {
+    public void SetCredits(int value) 
+    {
         credits = value;
     }
 
-    public void SetMultiplicator(int multi) {
+    public void SetMultiplicator(int multi) 
+    {
         multiplicator = multi;
     }
 
