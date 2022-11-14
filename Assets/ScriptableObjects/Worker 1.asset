@@ -15,6 +15,6 @@ MonoBehaviour:
   id: Worker
   title: Worker Level 1
   description: Clicks automated
-  price: 3
+  price: 2
   amount: 0
   icon: {fileID: 0}
