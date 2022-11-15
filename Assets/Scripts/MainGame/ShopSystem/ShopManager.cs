@@ -8,59 +8,58 @@ public class ShopManager : MonoBehaviour
     private string id = "double";
     public static int credit;
     public Text creditUIText;
-    public ShopItem[] shopItems;
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
-    public Dictionary<string, ItemEffect> effects = new Dictionary<string, ItemEffect>();
+    private ContentDistributor contentDistributor;
 
-    //Get credits from dummy
-    public DummyButton dummyButtonObj;
-    public GameObject dummyButton;
-
+    //Set as many panels active/visible as needed.
+    //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
-        CreateItems();
-        //dummyButtonObj = dummyButton.GetComponent<DummyButton>(); //dummy
-        for (int i = 0; i < shopItems.Length; i++)
+        for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
             shopPanelsGO[i].SetActive(true);
         }
         RefreshPanels();
     }
 
-    //Creats and adds ItemEffects to key-value-pair.
-    //The key is ALWAYS the exact class name of a item!
-    public void CreateItems() {
-        var doubleEffect = new DoubleEffect(this);
-        effects.Add(doubleEffect.id.ToString(), doubleEffect);
-        var worker = new Worker(this);
-        effects.Add(worker.id.ToString(), worker);
-        //Debug.Log("new DoubleEffect ID: " + doubleEffect.id);
+    public void RefreshCredits() 
+    {
+        credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
+        creditUIText.text = "$ " + credit.ToString();
     }
 
-    //Refreshes panels --> new values are displayed.
+    /* 
+    *  Refreshes panels --> new values are displayed.
+    *  New items in the shop can't be added after Start()
+    *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
+    */
     public void RefreshPanels()
-    {
-        credit = dummyButtonObj.GetCredits(); //dummy
-        //Goes through every shop item in the array and refreshes title, description and price.
-        for (int i = 0; i < shopItems.Length; i++)
+    {   
+        //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
+        contentDistributor = ContentDistributor.contentDistributor; 
+
+        RefreshCredits();
+        
+        //Goes through every shop item in the array and refreshes title, description, icon and price.
+        for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
-            shopPanels[i].shopItemTitle.text = shopItems[i].title;
-            shopPanels[i].shopItemDescription.text = shopItems[i].description;
-            shopPanels[i].shopItemPrice.text = "$ " + shopItems[i].price.ToString();
-            shopPanels[i].shopItemAmount.text = shopItems[i].amount.ToString();
+            shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectItems[i].title;
+            shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
+            shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
+            shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
+            shopPanels[i].itemIcon = contentDistributor.scriptableObjectItems[i].icon;
         }
-        creditUIText.text = "$ " + credit.ToString();
         CheckPurchaseable();
     }
 
     //Checks for credits >= price of item, if true --> button is clickable.
     private void CheckPurchaseable()
     {
-        for (int i = 0; i < shopItems.Length; i++)
+        for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
-            if (credit >= shopItems[i].price)
+            if (credit >= contentDistributor.scriptableObjectItems[i].price)
             {
                 purchaseButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
@@ -80,18 +79,17 @@ public class ShopManager : MonoBehaviour
     public void PurchaseButtonAction(int pos)
     {
         //If credit >= as price of shopItem on position pos in array.
-        if (credit >= shopItems[pos].price)
+        if (credit >= contentDistributor.scriptableObjectItems[pos].price)
         {
             //Check, if key (Effect) is in the list.
-            var item = shopItems[pos];
-            if (effects.ContainsKey(item.id)) {
+            ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
+            if (contentDistributor.itemsDictionary.ContainsKey(item.id)) {
                 credit -= item.price;
-                dummyButtonObj.SetCredits(credit); //dummy
+                contentDistributor.mainButton.SetCredits(credit); //dummy
                 //Search for effect id in array with effects that has same id as id of ShopItem.
-                effects[item.id].PurchaseButtonAction();
-                effects[item.id].CalculateNewPrice(item);
-                effects[item.id].CalculateNewAmount(item);
-            } 
+                contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
+                contentDistributor.itemsDictionary[item.id].shopItem = contentDistributor.scriptableObjectItems[pos];
+            }
             RefreshPanels();
         }
     }
