@@ -1,3 +1,4 @@
+// this is a temporary class
 public static class PlayerInfo
 {
     public static string playerID;
