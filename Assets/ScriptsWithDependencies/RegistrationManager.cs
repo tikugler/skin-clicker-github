@@ -41,7 +41,7 @@ public class RegistrationManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        emailRegex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+        emailRegex = new Regex("^(?!.{51})([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$");
         userRegex = new Regex("^.{3,12}$");
         passwordRegex = new Regex("^.{6,20}$");
     }
