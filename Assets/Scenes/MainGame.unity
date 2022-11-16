@@ -16164,6 +16164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeaderboardPanel: {fileID: 670553617}
+  LeaderboardButton: {fileID: 699554481}
   LeaderboardEntry:
   - {fileID: 1530030156}
   - {fileID: 1386261189}

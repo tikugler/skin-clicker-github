@@ -1,5 +1,6 @@
 public static class PlayerInfo
 {
+    public static string playerID;
     public static string username;
     public static int score;
 

@@ -4,28 +4,26 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
-using static UnityEditor.Progress;
+using UnityEngine.UI;
 
 public class LeaderboardManager : MonoBehaviour
 {
     public GameObject LeaderboardPanel;
+    public GameObject LeaderboardButton;
     public GameObject[] LeaderboardEntry;
     private int firstPlayerPosition;
     private LeaderboardEntryTemplate selectedPlayer;
 
 
-    void Start()
+    private void Awake()
     {
-        LoginUserOnPlayFab();
+        if (!PlayerInfo.LoggedIn)
+            LeaderboardButton.GetComponent<Button>().interactable = false;
     }
-
-
 
     public void OpenLeaderboard()
     {
-        GetLeaderboardAroundPlayer();
-        //GetLeaderboard();
-        
+        GetLeaderboardAroundPlayer();        
     }
 
     public void CloseLeaderboard()
@@ -73,7 +71,10 @@ public class LeaderboardManager : MonoBehaviour
 
         foreach (var item in result.Leaderboard)
         {
-            if (item.DisplayName == "as8")
+            Debug.Log("item.PlayFabId: " + item.PlayFabId);
+            Debug.Log("PlayerInfo.playerID): " + PlayerInfo.playerID);
+
+            if (item.DisplayName == PlayerInfo.username)
             {
                 selectedPlayer = LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>();
                 selectedPlayer.HighlightEntry();
@@ -123,7 +124,10 @@ public class LeaderboardManager : MonoBehaviour
         int i = 0;
         foreach (var item in result.Leaderboard)
         {
-            if (item.DisplayName == "as8")
+            Debug.Log("item.PlayFabId: " + item.PlayFabId);
+            Debug.Log("PlayerInfo.playerID): " + PlayerInfo.playerID);
+
+            if (item.DisplayName == PlayerInfo.playerID)
             {
                 selectedPlayer = LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>();
                 selectedPlayer.HighlightEntry();
@@ -138,19 +142,6 @@ public class LeaderboardManager : MonoBehaviour
         LeaderboardPanel.SetActive(true);
     }
 
-
-    private void LoginUserOnPlayFab()
-    {
-        var request = new LoginWithPlayFabRequest();
-        request.TitleId = PlayFabSettings.TitleId;
-        request.Username = "as8";
-        request.Password = "123456";
-       
-
-        PlayFabClientAPI.LoginWithPlayFab(request, success => Debug.Log("Successful"),
-            error => Debug.Log("Failed"));
-
-    }
 
     public void GetLeaderboardLeftPage()
     {
