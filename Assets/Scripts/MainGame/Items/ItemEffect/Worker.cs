@@ -32,6 +32,7 @@ public class Worker : ItemEffect
         EffectOfItem();
     }
 
+    //Refreshrate is set to "yield return new WaitForSeconds(1);" in AutomatedButtonWorkers, if changed, tests have to change too
     public override void EffectOfItem()
     {
         workerAmount++;
