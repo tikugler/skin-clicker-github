@@ -119,12 +119,10 @@ public class RegistrationManager : MonoBehaviour
         {
             InfoText.text = "";
             VerifyAll();
+            return;
         }
-        else
-        {
-            InfoText.text = "Passwörter sind nicht identisch";
-            SubmitButton.interactable = false;
-        }
+        InfoText.text = "Passwörter sind nicht identisch";
+        SubmitButton.interactable = false;
     }
 
     /// <summary>
@@ -153,17 +151,9 @@ public class RegistrationManager : MonoBehaviour
     {
         isEmailValid = emailRegex.IsMatch(emailInput);
         if (isEmailValid)
-        {
-            if (emailInput.Length > 50)
-            {
-                InfoText.text = "E-Mail darf nicht länger als 50 Zeichen sein";
-                SubmitButton.interactable = false;
-            }
-            else
-            {
-                InfoText.text = "";
-                VerifyAll();
-            }
+        {    
+            InfoText.text = "";
+            VerifyAll();
         }
         else
         {
@@ -192,7 +182,6 @@ public class RegistrationManager : MonoBehaviour
     {
         Debug.Log("Submit...");
         SubmitButton.interactable = false;
-        //StartCoroutine(CallRegisterWithCoroutine());
         RegisterUserOnPlayFab();
     }
 
@@ -209,7 +198,7 @@ public class RegistrationManager : MonoBehaviour
 
     private void OnRegisterFailed(PlayFabError obj)
     {
-        Debug.Log("registration is failed");
+        Debug.Log("registration has failed");
         InfoText.text = "Error: " + obj.Error;
         SubmitButton.interactable = true;
     }
@@ -221,32 +210,4 @@ public class RegistrationManager : MonoBehaviour
         PlayerInfo.score = 0;
         SceneManager.LoadScene("StartNewsMenu");
     }
-
-
-    // this method is deprecated, use RegisterUserOnPlayFab 
-    public IEnumerator CallRegisterWithCoroutine()
-    {
-
-        string username = UsernameField.text;
-        string password = PasswordField.text;
-        string email = EmailField.text;
-        CoroutineWithData cd = new CoroutineWithData(this, DatabaseManager.Register(username, password, email));
-        yield return cd.coroutine;
-
-        string result = (cd.result as string);
-
-
-        if (result == "0")
-        {
-            PlayerInfo.username = username;
-            PlayerInfo.score = 0;
-            SceneManager.LoadScene("StartNewsMenu");
-        }
-        else
-        {
-            InfoText.text = "Error Code: #" + result;
-            SubmitButton.interactable = true;
-        }
-    }
-
 }

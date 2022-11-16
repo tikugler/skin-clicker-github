@@ -13,6 +13,7 @@ using System;
 public class PlayfabUpdateUserData : MonoBehaviour
 {
     DummyButton dummyButton;
+
     // the method SetScoreOnPlayFab is called every 10 seconds
     void Start()
     {

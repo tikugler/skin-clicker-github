@@ -56,7 +56,7 @@ public class LoginManager : MonoBehaviour
 
     private void OnLoginFailed(PlayFabError obj)
     {
-        Debug.Log("login is failed");
+        Debug.Log("login has failed");
         wrongloginWarning.GetComponent<Text>().text = "Error: " + obj.Error;
         wrongloginWarning.SetActive(true);
     }
@@ -73,10 +73,10 @@ public class LoginManager : MonoBehaviour
     {
         var request = new GetPlayerStatisticsRequest();
         request.StatisticNames = new List<string>() { "Credits", "money", "Point" };
-        PlayFabClientAPI.GetPlayerStatistics(request, OnGetStaticsSuccess, error => Debug.LogError(error.GenerateErrorReport()));
+        PlayFabClientAPI.GetPlayerStatistics(request, OnGetStatisticsSuccess, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
-    private void OnGetStaticsSuccess(GetPlayerStatisticsResult obj)
+    private void OnGetStatisticsSuccess(GetPlayerStatisticsResult obj)
     {
         foreach (var stat in obj.Statistics)
         {
@@ -87,36 +87,6 @@ public class LoginManager : MonoBehaviour
                     PlayerInfo.score = stat.Value;
                     break;
             }
-        }
-    }
-
-
-
-    // this method is deprecated, use LoginUserOnPlayFab 
-    public IEnumerator CallLoginWithCoroutine()
-    {
-
-        string enteredUsername = username.text;
-        string enteredPassword = password.text;
-
-        CoroutineWithData cd = new CoroutineWithData(this, DatabaseManager.LoginPlayer(enteredUsername, enteredPassword));
-        yield return cd.coroutine;
-
-        string result = (cd.result as string);
-
-
-        if (result[0] == '0')
-        {
-
-            PlayerInfo.username = enteredUsername;
-            PlayerInfo.score = int.Parse(result.Split('\t')[1]);
-
-            SceneManager.LoadScene("StartNewsMenu");
-        }
-        else
-        {
-            wrongloginWarning.GetComponent<Text>().text = "Error Code: #" + result;
-            wrongloginWarning.SetActive(true);
         }
     }
 }
