@@ -19,7 +19,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
     {
         dummyButton = GameObject.FindGameObjectWithTag("MainButton").GetComponent<DummyButton>();
         dummyButton.SetCredits(PlayerInfo.score);
-        InvokeRepeating("SetScoreOnPlayFab", 10, 10);
+        InvokeRepeating("SetScoreOnPlayFab", 15, 15);
 
     }
 
@@ -45,6 +45,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
     private void OnSetStatsFailed(PlayFabError obj)
     {
         Debug.Log("Stats cannot be updated");
+        Debug.Log(obj.Error);
 
     }
 

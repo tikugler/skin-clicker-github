@@ -42,7 +42,7 @@ public class RegistrationManager : MonoBehaviour
     void Start()
     {
         emailRegex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
-        userRegex = new Regex("^.{3,20}$");
+        userRegex = new Regex("^.{3,12}$");
         passwordRegex = new Regex("^.{6,20}$");
     }
 
@@ -55,7 +55,7 @@ public class RegistrationManager : MonoBehaviour
     private void VerifyAll()
     {
         if (!isUsernameValid)
-            InfoText.text = "Benutzername muss zwischen 5-20 Zeichen lang sein";
+            InfoText.text = "Benutzername muss zwischen 3-12 Zeichen lang sein";
         else if (!isPasswordValid)
             InfoText.text = "Password muss zwischen 6-20 Zeichen lang sein";
         else if (!IsPasswordConfirmed)
@@ -68,7 +68,7 @@ public class RegistrationManager : MonoBehaviour
 
     /// <summary>
     /// verifies if player gave a valid password
-    /// valid passwords must be 5 to 20 characters long
+    /// valid passwords must be 6 to 20 characters long
     /// </summary>
     public void VerifyPasswordOnValueChanged(string passwordInput)
     {
@@ -88,7 +88,7 @@ public class RegistrationManager : MonoBehaviour
 
     /// <summary>
     /// verifies if user gave a valid username
-    /// valid username must be 5 to 20 characters long
+    /// valid username must be 3 to 12 characters long
     /// </summary>
     public void VerifyUsernameOnValueChanged(string usernameInput)
     {
