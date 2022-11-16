@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
-class Worker : ItemEffect
+public class Worker : ItemEffect
 {
     public new string id = "Worker";
     public new ItemTemplate shopItem;
@@ -19,12 +19,12 @@ class Worker : ItemEffect
     void Update()
     {
         creditsPerSec = workerAmount * 5;
-        
+
         credits = creditsPerSec;
         ContentDistributor.contentDistributor.mainButton.credits += credits;
     }
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
         this.shopItem = shopItem;
         CalculateNewAmount();

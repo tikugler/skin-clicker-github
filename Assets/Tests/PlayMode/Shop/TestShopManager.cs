@@ -15,7 +15,7 @@ public class ShopManagerTest
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("MainGame");
     }
 
 

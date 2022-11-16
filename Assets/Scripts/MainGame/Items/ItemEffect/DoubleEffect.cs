@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-class DoubleEffect : ItemEffect
+public class DoubleEffect : ItemEffect
 {
     //Amount of Double/2X Item in player inventory. 
     public new string id = "DoubleEffect";
@@ -12,12 +12,12 @@ class DoubleEffect : ItemEffect
 
 
 
-    public void Start() 
+    public void Start()
     {
         ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
     }
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
         this.shopItem = shopItem;
         CalculateNewPrice();
@@ -25,7 +25,8 @@ class DoubleEffect : ItemEffect
         EffectOfItem();
     }
 
-    public override int CalculateNewPrice() 
+    //Increasment is hardcoded, if changed, also change tests of TestDoubleEffect.
+    public override int CalculateNewPrice()
     {
         return shopItem.price *= 4;
     }
