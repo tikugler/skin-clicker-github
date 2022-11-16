@@ -4,13 +4,14 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using static UnityEditor.Progress;
 
 public class LeaderboardManager : MonoBehaviour
 {
     public GameObject LeaderboardPanel;
     public GameObject[] LeaderboardEntry;
     private int firstPlayerPosition;
-    private int playerCount;
+    private LeaderboardEntryTemplate selectedPlayer;
 
 
     void Start()
@@ -18,16 +19,12 @@ public class LeaderboardManager : MonoBehaviour
         LoginUserOnPlayFab();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void OpenLeaderboard()
     {
-        //GetLeaderboardAroundPlayer();
-        GetLeaderboard();
+        GetLeaderboardAroundPlayer();
+        //GetLeaderboard();
         
     }
 
@@ -53,8 +50,8 @@ public class LeaderboardManager : MonoBehaviour
         request.StatisticName = "Credits";
         request.MaxResultsCount = 10;
         request.StartPosition = startPosition;
-        request.AuthenticationContext = new PlayFabAuthenticationContext();
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardSuccess, error => Debug.Log(error));
+        
         
     }
 
@@ -62,24 +59,45 @@ public class LeaderboardManager : MonoBehaviour
 
     private void OnLeaderboardSuccess(GetLeaderboardResult result)
     {
+
         int i = 0;
+
+        if(result.Leaderboard.Count == 0)
+        {
+            firstPlayerPosition -= 10;
+            return;
+        }
+
+        if(selectedPlayer != null)
+            selectedPlayer.RemoveHighlighting();
+
         foreach (var item in result.Leaderboard)
         {
+            if (item.DisplayName == "as8")
+            {
+                selectedPlayer = LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>();
+                selectedPlayer.HighlightEntry();
+            }
+
             LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>().
                 SetTexts((item.Position + 1).ToString(), item.DisplayName, item.StatValue.ToString());
+
             if (i == 0)
             {
                 firstPlayerPosition = item.Position;
             }
-            //Debug.Log(item.Position + " - " + item.DisplayName + " - " + item.StatValue);
             i++;
-
         }
 
+        while (i < 10)
+        {
+            LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>().
+                SetTexts("", "", "");
+            i++;
+        }
         LeaderboardPanel.SetActive(true);
 
 
-        //Debug.Log(result.Leaderboard.ToArray().GetValue(0).Position);
     }
 
 
@@ -99,24 +117,25 @@ public class LeaderboardManager : MonoBehaviour
     private void OnLeaderboardAroundPlayerSuccess(GetLeaderboardAroundPlayerResult result)
     {
 
+        if (selectedPlayer != null)
+            selectedPlayer.RemoveHighlighting();
+
         int i = 0;
-        Debug.Log(result.CustomData);
-        Debug.Log(result.Request);
-        Debug.Log(result.Leaderboard.Count);
-        Debug.Log(result.Leaderboard.Capacity);
         foreach (var item in result.Leaderboard)
         {
+            if (item.DisplayName == "as8")
+            {
+                selectedPlayer = LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>();
+                selectedPlayer.HighlightEntry();
+            }
+
             LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>().
                 SetTexts((item.Position + 1).ToString(), item.DisplayName, item.StatValue.ToString());
-            //Debug.Log(item.Position + " - " + item.DisplayName + " - " + item.StatValue);
             i++;
 
         }
 
         LeaderboardPanel.SetActive(true);
-
-
-        //Debug.Log(result.Leaderboard.ToArray().GetValue(0).Position);
     }
 
 
@@ -126,14 +145,10 @@ public class LeaderboardManager : MonoBehaviour
         request.TitleId = PlayFabSettings.TitleId;
         request.Username = "as8";
         request.Password = "123456";
+       
 
         PlayFabClientAPI.LoginWithPlayFab(request, success => Debug.Log("Successful"),
             error => Debug.Log("Failed"));
-
-        
-
-        //var segmentRequest = new GetPlayerSegmentsRequest ;
-
 
     }
 
@@ -149,8 +164,7 @@ public class LeaderboardManager : MonoBehaviour
     public void GetLeaderboardRightPage()
     {
         firstPlayerPosition += 10;
-        //if (firstPlayerPosition < 0)
-            //firstPlayerPosition = 0;
+       
         GetLeaderboard(firstPlayerPosition);
 
     }
