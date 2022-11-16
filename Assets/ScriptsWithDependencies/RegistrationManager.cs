@@ -191,6 +191,7 @@ public class RegistrationManager : MonoBehaviour
         request.TitleId = PlayFabSettings.TitleId;
         request.Email = EmailField.text;
         request.Username = UsernameField.text;
+        request.DisplayName = UsernameField.text;
         request.Password = PasswordField.text;
 
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailed);
