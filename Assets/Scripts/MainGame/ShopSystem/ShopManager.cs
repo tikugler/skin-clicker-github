@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    private string id = "double";
     public static int credit;
     public Text creditUIText;
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
@@ -24,7 +23,7 @@ public class ShopManager : MonoBehaviour
         RefreshPanels();
     }
 
-    public void RefreshCredits() 
+    private void RefreshCredits()
     {
         credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
         creditUIText.text = "$ " + credit.ToString();
@@ -36,12 +35,12 @@ public class ShopManager : MonoBehaviour
     *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
     */
     public void RefreshPanels()
-    {   
+    {
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
-        contentDistributor = ContentDistributor.contentDistributor; 
+        contentDistributor = ContentDistributor.contentDistributor;
 
         RefreshCredits();
-        
+
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
@@ -83,7 +82,8 @@ public class ShopManager : MonoBehaviour
         {
             //Check, if key (Effect) is in the list.
             ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
-            if (contentDistributor.itemsDictionary.ContainsKey(item.id)) {
+            if (contentDistributor.itemsDictionary.ContainsKey(item.id))
+            {
                 credit -= item.price;
                 contentDistributor.mainButton.SetCredits(credit); //dummy
                 //Search for effect id in array with effects that has same id as id of ShopItem.
