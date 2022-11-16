@@ -77,7 +77,7 @@ public class RegistrationManager : MonoBehaviour
         if (isPasswordValid)
         {
             //InfoText.text = "";
-            CheckPasswordsAreSameAfterTippedOnFirstPassField(passwordInput);
+            CheckPasswordsAreSameAfterTypingOnFirstPassField(passwordInput);
         }
         else
         {
@@ -112,7 +112,7 @@ public class RegistrationManager : MonoBehaviour
     /// which confirms whether the user entered the same password twice
     /// </summary>
     /// <param name="passwordInput">first input field for password</param>
-    public void CheckPasswordsAreSameAfterTippedOnFirstPassField(string passwordInput)
+    public void CheckPasswordsAreSameAfterTypingOnFirstPassField(string passwordInput)
     {
         IsPasswordConfirmed = PasswordConfirmField.text == passwordInput;
         if (IsPasswordConfirmed)
