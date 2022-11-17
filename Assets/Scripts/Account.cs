@@ -11,9 +11,9 @@ public static class Account
     public static List<string> skinList;
     public static Dictionary<string, int> upgradeList;  //Maybe enum instead of string soon
     public static string activeSkin;
-    public static bool LoggedIn { get { return accoundId != null; } }
+    public static bool LoggedIn { get { return accountId != null; } }
 
-    // Skin objekt? hat id, wert, image, boolean ausgewählt 
+    // Skin objekt? hat id, wert, image, boolean ausgewï¿½hlt 
     // account objekt serializable?
 
     //If the Player logs in, the saved data gets dragged frrom the database.
