@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using TMPro;
 
 public class LoginManager : MonoBehaviour
 {
@@ -79,6 +80,8 @@ public class LoginManager : MonoBehaviour
         Debug.Log("login is successful");
         LoadUserStatistics();
         PlayerInfo.username = username.text;
+        var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
+        loggedInUser.text = username.text;
         PlayerInfo.playerID = obj.PlayFabId;
         SceneManager.LoadScene("StartNewsMenu");
     }
