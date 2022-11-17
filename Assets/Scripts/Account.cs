@@ -13,22 +13,17 @@ public static class Account
     public static string activeSkin;
     public static bool LoggedIn { get { return accoundId != null; } }
 
-    private Account()
-    {
-
-    }
-
     // Skin objekt? hat id, wert, image, boolean ausgewählt 
     // account objekt serializable?
 
     //If the Player logs in, the saved data gets dragged frrom the database.
-    public void OnClickGetAccountData()
+    public static void OnClickGetAccountData()
     {
 
     }
 
     //If the player exits the game the data gets saved to the database.
-    public void OnClickSaveAccountData()
+    public static void OnClickSaveAccountData()
     {
 
     }
