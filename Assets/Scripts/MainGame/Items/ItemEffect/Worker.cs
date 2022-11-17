@@ -47,4 +47,9 @@ class Worker : ItemEffect
     {
         return shopItem.price *= 2;
     }
+
+    public int GetWorkerAmount() 
+    {
+        return workerAmount;
+    }
 }
