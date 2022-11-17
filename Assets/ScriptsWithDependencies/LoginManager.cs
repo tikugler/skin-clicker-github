@@ -43,6 +43,9 @@ public class LoginManager : MonoBehaviour
         loginPopUp.SetActive(false);
     }
 
+    /// <summary>
+    /// makes a login request by using given inputs
+    /// </summary>
     private void LoginUserOnPlayFab()
     {
         var request = new LoginWithPlayFabRequest();
@@ -54,6 +57,10 @@ public class LoginManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// called if login-request has failed
+    /// </summary>
+    /// <param name="obj"></param>
     private void OnLoginFailed(PlayFabError obj)
     {
         Debug.Log("login has failed");
@@ -61,21 +68,37 @@ public class LoginManager : MonoBehaviour
         wrongloginWarning.SetActive(true);
     }
 
+
+    /// <summary>
+    /// called if LoginWithPlayFab returns a success message
+    /// sets username, PlayerId and loads UserStatistics
+    /// </summary>
+    /// <param name="obj"></param>
     private void OnLoginSuccess(LoginResult obj)
     {
         Debug.Log("login is successful");
-        LoadUserInfo();
+        LoadUserStatistics();
         PlayerInfo.username = username.text;
+        PlayerInfo.playerID = obj.PlayFabId;
         SceneManager.LoadScene("StartNewsMenu");
     }
 
-    private void LoadUserInfo()
+    /// <summary>
+    /// a method to load the user statictics such as credits or upgrades from DB
+    /// </summary>
+    private void LoadUserStatistics()
     {
         var request = new GetPlayerStatisticsRequest();
-        request.StatisticNames = new List<string>() { "Credits", "money", "Point" };
+        request.StatisticNames = new List<string>() { "Credits" };
         PlayFabClientAPI.GetPlayerStatistics(request, OnGetStatisticsSuccess, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
+
+    /// <summary>
+    ///called If GetPlayerStatistics returns a success message 
+    /// updates statistics in Player class regarding to saved ones
+    /// </summary>
+    /// <param name="obj">positive response with statistics</param>
     private void OnGetStatisticsSuccess(GetPlayerStatisticsResult obj)
     {
         foreach (var stat in obj.Statistics)

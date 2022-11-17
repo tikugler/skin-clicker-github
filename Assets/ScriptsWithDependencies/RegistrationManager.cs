@@ -26,13 +26,13 @@ public class RegistrationManager : MonoBehaviour
     [Header("Panel")]
     public GameObject RegistrationPanel;
 
-
-
+    // flags to control if inputs are valid
     private bool isUsernameValid = false;
     private bool isPasswordValid = false;
     private bool isEmailValid = false;
     private bool IsPasswordConfirmed = false;
 
+    // regex for username, password and email
     private Regex userRegex, passwordRegex, emailRegex;
 
 
@@ -162,6 +162,7 @@ public class RegistrationManager : MonoBehaviour
         }
     }
 
+    // closes registraion panel and delete user inputs in fields of panel
     public void CloseRegistrationPanel()
     {
         RegistrationPanel.SetActive(false);
@@ -172,12 +173,16 @@ public class RegistrationManager : MonoBehaviour
         InfoText.text = "";
     }
 
+    // opens registration panel
+    // is called when user clicks Button "Anmelden"
     public void OpenRegistrationPanel()
     {
         RegistrationPanel.SetActive(true);
 
     }
 
+    // is called if Submit button in Registration panel is clicked
+    // makes submit button interactable until user gets a response from Playfab
     public void CallSubmitInRegistration()
     {
         Debug.Log("Submit...");
@@ -185,17 +190,21 @@ public class RegistrationManager : MonoBehaviour
         RegisterUserOnPlayFab();
     }
 
+    // send a request to register user regarding given inputs
     private void RegisterUserOnPlayFab()
     {
         var request = new RegisterPlayFabUserRequest();
         request.TitleId = PlayFabSettings.TitleId;
         request.Email = EmailField.text;
         request.Username = UsernameField.text;
+        request.DisplayName = UsernameField.text;
         request.Password = PasswordField.text;
 
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailed);
     }
 
+    // is called if registration has failed
+    // Error message is shown by InfoText
     private void OnRegisterFailed(PlayFabError obj)
     {
         Debug.Log("registration has failed");
@@ -203,10 +212,14 @@ public class RegistrationManager : MonoBehaviour
         SubmitButton.interactable = true;
     }
 
+    // is called if user successfully registered
+    // username and playerID is set according to responce
+    // score is set to 0
     private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
     {
         Debug.Log("registration is successful");
         PlayerInfo.username = obj.Username;
+        PlayerInfo.playerID = obj.PlayFabId;
         PlayerInfo.score = 0;
         SceneManager.LoadScene("StartNewsMenu");
     }
