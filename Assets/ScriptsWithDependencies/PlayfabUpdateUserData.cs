@@ -14,16 +14,18 @@ public class PlayfabUpdateUserData : MonoBehaviour
 {
     DummyButton dummyButton;
 
-    // the method SetScoreOnPlayFab is called every 10 seconds
+    // the method SetScoreOnPlayFab is called every 15 seconds
     void Start()
     {
-        dummyButton = GameObject.FindGameObjectWithTag("MainButton").GetComponent<DummyButton>();
-        dummyButton.SetCredits(PlayerInfo.score);
-        InvokeRepeating("SetScoreOnPlayFab", 15, 15);
-
+        if (PlayerInfo.LoggedIn)
+        {
+            dummyButton = GameObject.FindGameObjectWithTag("MainButton").GetComponent<DummyButton>();
+            dummyButton.SetCredits(PlayerInfo.score);
+            InvokeRepeating("SetScoreOnPlayFab", 15, 15);
+        }  
     }
 
-    // updates score in DB
+    // updates credits in DB
     public void SetScoreOnPlayFab()
     {
         int credits = dummyButton.GetCredits();

@@ -13,7 +13,7 @@ public static class Account
     public static string activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
 
-    // Skin objekt? hat id, wert, image, boolean ausgewählt 
+    // Skin objekt? hat id, wert, image, boolean ausgewï¿½hlt 
     // account objekt serializable?
 
     //If the Player logs in, the saved data gets dragged frrom the database.
