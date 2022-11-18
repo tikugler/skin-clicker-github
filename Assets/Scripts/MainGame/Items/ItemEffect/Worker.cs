@@ -40,7 +40,10 @@ class Worker : ItemEffect
 
     public override int CalculateNewAmount()
     {
-        return shopItem.amount += 1;
+        shopItem.amount += 1;
+        int newAmount = shopItem.amount;
+        GameObject.Find("multipleworker").GetComponent<VisualFeedBackWorker>().MultipleWorker(newAmount);
+        return newAmount; 
     }
 
     public override int CalculateNewPrice()
