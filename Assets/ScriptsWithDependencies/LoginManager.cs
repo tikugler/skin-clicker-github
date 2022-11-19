@@ -78,11 +78,10 @@ public class LoginManager : MonoBehaviour
     private void OnLoginSuccess(LoginResult obj)
     {
         Debug.Log("login is successful");
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, username.text);
         LoadUserStatistics();
-        Account.accountName = username.text;
         var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
         loggedInUser.text = username.text;
-        Account.accountId = obj.PlayFabId;
         SceneManager.LoadScene("StartNewsMenu");
     }
 
@@ -98,21 +97,13 @@ public class LoginManager : MonoBehaviour
 
 
     /// <summary>
-    ///called If GetPlayerStatistics returns a success message 
+    /// called If GetPlayerStatistics returns a success message 
     /// updates statistics in Player class regarding to saved ones
     /// </summary>
     /// <param name="obj">positive response with statistics</param>
     private void OnGetStatisticsSuccess(GetPlayerStatisticsResult obj)
     {
-        foreach (var stat in obj.Statistics)
-        {
-            print("Statistic: " + stat.StatisticName + ", Wert: " + stat.Value);
-            switch (stat.StatisticName)
-            {
-                case "Credits":
-                    Account.points = stat.Value;
-                    break;
-            }
-        }
+        Account.SetStatistics(obj.Statistics);
+        
     }
 }
