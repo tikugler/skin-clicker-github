@@ -2,8 +2,7 @@
     "name": "NewAssembly",
     "rootNamespace": "",
     "references": [
-        "PlayFab",
-        "TestMeshPro"
+        "PlayFab"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
