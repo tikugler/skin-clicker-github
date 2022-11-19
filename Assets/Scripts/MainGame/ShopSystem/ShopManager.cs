@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
 
     public void RefreshCredits() 
     {
-        credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
+        credit = Account.credits; //dummy
         creditUIText.text = "$ " + credit.ToString();
     }
 

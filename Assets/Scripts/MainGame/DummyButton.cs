@@ -6,7 +6,6 @@ public class DummyButton : MonoBehaviour
 {
     public int multiplicator = 1;
     public int basePoints = 1; 
-    public int credits = 0;
    
     void Start() 
     {
@@ -16,17 +15,18 @@ public class DummyButton : MonoBehaviour
 
     public void MainButtonAction() 
     {
-        credits += basePoints * multiplicator;
+        Account.credits += basePoints * multiplicator;
     }
 
     public int GetCredits() 
     {
-        return credits;
+        return Account.credits;
     }
 
     public void SetCredits(int value) 
     {
-        credits = value;
+        Account.credits = value;
+
     }
 
     public void SetMultiplicator(int multi) 
@@ -36,6 +36,6 @@ public class DummyButton : MonoBehaviour
 
     public void IncreaseCreditBy(int value)
     {
-        credits += value;
+        Account.credits += value;
     }
 }

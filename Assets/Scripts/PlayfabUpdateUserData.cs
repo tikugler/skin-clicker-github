@@ -20,7 +20,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
         if (Account.LoggedIn)
         {
             dummyButton = GameObject.FindGameObjectWithTag("MainButton").GetComponent<DummyButton>();
-            dummyButton.SetCredits(((int)Account.points));
+            dummyButton.SetCredits(Account.credits);
             InvokeRepeating("SetScoreOnPlayFab", 15, 15);
         }  
     }
@@ -28,12 +28,26 @@ public class PlayfabUpdateUserData : MonoBehaviour
     // updates credits in DB
     public void SetScoreOnPlayFab()
     {
-        int credits = dummyButton.GetCredits();
+        int credits = Account.credits;
         Debug.Log("credits: " + credits);
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
         var stat = new StatisticUpdate { StatisticName = "Credits", Value = credits };
         request.Statistics.Add(stat);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
+
+
+    public void SetUpgradeAmountOnPlayFab(string upgradeName, int upgradeAmount)
+    {
+        int credits = Account.credits;
+        Debug.Log("credits: " + credits);
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+        var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
+        var statUpgrade = new StatisticUpdate { StatisticName = upgradeName, Value = upgradeAmount };
+        request.Statistics.Add(statCredits);
+        request.Statistics.Add(statUpgrade);
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 

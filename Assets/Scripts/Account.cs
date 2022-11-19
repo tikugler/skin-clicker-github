@@ -7,7 +7,7 @@ public static class Account
 {
     public static string accountId;
     public static string accountName;
-    public static long points;
+    public static int credits;
     public static long inGameCurrency;
     public static List<string> skinList;
     public static Dictionary<string, int> upgradeList;  //Maybe enum instead of string soon
@@ -38,6 +38,7 @@ public static class Account
     {
         accountId = playFabId;
         accountName = username;
+
     }
 
 
@@ -54,7 +55,7 @@ public static class Account
             switch (stat.StatisticName)
             {
                 case "Credits":
-                    Account.points = stat.Value;
+                    Account.credits = stat.Value;
                     break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);

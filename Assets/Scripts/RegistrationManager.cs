@@ -220,7 +220,7 @@ public class RegistrationManager : MonoBehaviour
         Debug.Log("registration is successful");
         Account.accountName = obj.Username;
         Account.accountId = obj.PlayFabId;
-        Account.points = 0;
+        Account.credits = 0;
         SceneManager.LoadScene("StartNewsMenu");
     }
 }
