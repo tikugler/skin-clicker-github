@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 public static class Account
@@ -26,5 +27,39 @@ public static class Account
     public static void OnClickSaveAccountData()
     {
 
+    }
+
+    /// <summary>
+    /// this method sets the accountId, accountName
+    /// </summary>
+    /// <param name="playFabId">accountId</param>
+    /// <param name="username">accountName</param>
+    public static void SetPlayFabIdAndUserName(string playFabId, string username)
+    {
+        accountId = playFabId;
+        accountName = username;
+    }
+
+
+    /// <summary>
+    /// this method sets the statistics such as credits und upgrades
+    /// </summary>
+    /// <param name="statistics">credits number of performed upgrade for each one</param>
+    public static void SetStatistics(List<StatisticValue> statistics)
+    {
+
+        foreach (var stat in statistics)
+        {
+            Debug.Log("Statistic: " + stat.StatisticName + ", Wert: " + stat.Value);
+            switch (stat.StatisticName)
+            {
+                case "Credits":
+                    Account.points = stat.Value;
+                    break;
+                default:
+                    upgradeList.Add(stat.StatisticName, stat.Value);
+                    break;
+            }
+        }
     }
 }
