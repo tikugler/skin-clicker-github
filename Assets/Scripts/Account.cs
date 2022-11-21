@@ -10,7 +10,7 @@ public static class Account
     public static int credits;
     public static long inGameCurrency;
     public static List<string> skinList;
-    public static Dictionary<string, int> upgradeList;  //Maybe enum instead of string soon
+    public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
     public static string activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
 
@@ -45,7 +45,7 @@ public static class Account
     /// <summary>
     /// this method sets the statistics such as credits und upgrades
     /// </summary>
-    /// <param name="statistics">credits number of performed upgrade for each one</param>
+    /// <param name="statistics">credits or number of performed upgrade</param>
     public static void SetStatistics(List<StatisticValue> statistics)
     {
 
@@ -61,6 +61,11 @@ public static class Account
                     upgradeList.Add(stat.StatisticName, stat.Value);
                     break;
             }
+        }
+
+        foreach(string item in upgradeList.Keys)
+        {
+            Debug.Log(item + ": " + upgradeList[item]);
         }
     }
 }

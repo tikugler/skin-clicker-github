@@ -12,18 +12,16 @@ using System;
 /// </summary>
 public class PlayfabUpdateUserData : MonoBehaviour
 {
-    DummyButton dummyButton;
 
     // the method SetScoreOnPlayFab is called every 15 seconds
     void Start()
     {
         if (Account.LoggedIn)
         {
-            dummyButton = GameObject.FindGameObjectWithTag("MainButton").GetComponent<DummyButton>();
-            dummyButton.SetCredits(Account.credits);
             InvokeRepeating("SetScoreOnPlayFab", 15, 15);
         }  
     }
+
 
     // updates credits in DB
     public void SetScoreOnPlayFab()
@@ -38,8 +36,17 @@ public class PlayfabUpdateUserData : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// this method is called when user performs upgrade in shop.
+    /// it updates remained credits and performed upgrade for selected item in PlayFab
+    /// </summary>
+    /// <param name="upgradeName">name of selected upgrade</param>
+    /// <param name="upgradeAmount">number of performed upgrade for selected item</param>
     public void SetUpgradeAmountOnPlayFab(string upgradeName, int upgradeAmount)
     {
+        if (!Account.LoggedIn)
+            return;
+
         int credits = Account.credits;
         Debug.Log("credits: " + credits);
         var request = new UpdatePlayerStatisticsRequest();
@@ -51,19 +58,18 @@ public class PlayfabUpdateUserData : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
+
     // is called when UpdatePlayerStatistics succeed
-    private void OnSetStatsSuccessful(UpdatePlayerStatisticsResult obj)
+    private static void OnSetStatsSuccessful(UpdatePlayerStatisticsResult obj)
     {
         Debug.Log("Stats are successfully updated");
     }
 
     // is called when UpdatePlayerStatistics fails
-    private void OnSetStatsFailed(PlayFabError obj)
+    private static void OnSetStatsFailed(PlayFabError obj)
     {
         Debug.Log("Stats cannot be updated");
         Debug.Log(obj.Error);
 
     }
-
-
 }

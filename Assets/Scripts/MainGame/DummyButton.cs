@@ -9,8 +9,8 @@ public class DummyButton : MonoBehaviour
    
     void Start() 
     {
-        multiplicator = 1;
-        basePoints = 1;
+        //multiplicator = 1;
+        //basePoints = 1;
     }
 
     public void MainButtonAction() 

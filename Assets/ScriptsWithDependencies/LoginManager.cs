@@ -91,7 +91,7 @@ public class LoginManager : MonoBehaviour
     private void LoadUserStatistics()
     {
         var request = new GetPlayerStatisticsRequest();
-        request.StatisticNames = new List<string>() { "Credits" };
+        //request.StatisticNames = new List<string>() { "Credits" };
         PlayFabClientAPI.GetPlayerStatistics(request, OnGetStatisticsSuccess, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
