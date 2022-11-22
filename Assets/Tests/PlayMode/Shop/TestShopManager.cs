@@ -112,10 +112,15 @@ public class ShopManagerTest
             FindObjectInParent(canvasGameObject, "ShopPanel");
         ShopManager manager = shopPanel.GetComponent<ShopManager>();
         OpenShopPopUpWithButton();
+
+        //Problems with creating of itemtemplate --> Test crashes
+        CreateItemTemplateForTesting();
         //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
 
+        Debug.Log("Size of new SO-List before adding: " + scriptableObjectItemsTest.Length);
         scriptableObjectItemsTest[0] = itemTemplate1;
         distributor.scriptableObjectItems = scriptableObjectItemsTest;
+        Debug.Log("Size of new SO-List after adding: " + scriptableObjectItemsTest.Length);
 
         int counterForActivePanels = 0;
         manager.RefreshPanels();
