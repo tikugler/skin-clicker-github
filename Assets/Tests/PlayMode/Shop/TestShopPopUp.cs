@@ -2,24 +2,81 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 public class TestShopPopUp
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void TestShopPopUpSimplePasses()
+    private GameObject canvasGameObject;
+
+
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        // Use the Assert class to test conditions
+        SceneManager.LoadScene("MainGame");
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator TestShopPopUpWithEnumeratorPasses()
+
+    [UnitySetUp]
+    public IEnumerator Setup()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
+        yield return null; //Wait till next update
+        canvasGameObject = GameObject.Find("Canvas");
+
+        GameObject contentDistributor = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ContentDistributor");
+    }
+
+
+    private void OpenShopPopUpWithButton()
+    {
+        Button shopButton = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopButton").
+            GetComponent<Button>();
+        shopButton.onClick.Invoke();
+    }
+
+    [UnityTest]
+    public IEnumerator ShopPopUpIsNotActiveWhenTheSceneLoaded()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
         yield return null;
+        canvasGameObject = GameObject.Find("Canvas");
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        yield return null;
+        Assert.AreEqual(false, shopPanel.activeSelf);
+    }
+
+    [UnityTest]
+    public IEnumerator ShopPopUpOpensPopUpWindow()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        shopPanel.SetActive(false);
+        Button shopButton = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopButton").
+            GetComponent<Button>();
+        Assert.AreEqual(false, shopPanel.activeSelf);
+        shopButton.onClick.Invoke();
+        yield return null;
+        Assert.AreEqual(true, shopPanel.activeSelf);
+    }
+
+    [UnityTest]
+    public IEnumerator CloseButtonActionOfShopPopUp()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        OpenShopPopUpWithButton();
+        Assert.AreEqual(true, shopPanel.activeSelf);
+
+        Button closeButton = GameObject.Find("ShopCloseButton").GetComponent<Button>();
+        closeButton.onClick.Invoke();
+
+        yield return null;
+        Assert.AreEqual(false, shopPanel.activeSelf);
     }
 }

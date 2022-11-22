@@ -61,48 +61,6 @@ public class ShopManagerTest
         shopButton.onClick.Invoke();
     }
 
-    [UnityTest]
-    public IEnumerator ShopPopUpIsNotActiveWhenTheSceneLoaded()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-        yield return null;
-        canvasGameObject = GameObject.Find("Canvas");
-        GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
-        yield return null;
-        Assert.AreEqual(false, shopPanel.activeSelf);
-    }
-
-    [UnityTest]
-    public IEnumerator ShopPopUpOpensPopUpWindow()
-    {
-        GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
-        shopPanel.SetActive(false);
-        Button shopButton = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopButton").
-            GetComponent<Button>();
-        Assert.AreEqual(false, shopPanel.activeSelf);
-        shopButton.onClick.Invoke();
-        yield return null;
-        Assert.AreEqual(true, shopPanel.activeSelf);
-    }
-
-    [UnityTest]
-    public IEnumerator CloseButtonActionOfShopPopUp()
-    {
-        GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
-        OpenShopPopUpWithButton();
-        Assert.AreEqual(true, shopPanel.activeSelf);
-
-        Button closeButton = GameObject.Find("ShopCloseButton").GetComponent<Button>();
-        closeButton.onClick.Invoke();
-
-        yield return null;
-        Assert.AreEqual(false, shopPanel.activeSelf);
-    }
 
     //Tests if panels are correctly active. Empty list can't be tested (scriptableObjectItemsTest)
     [UnityTest]
