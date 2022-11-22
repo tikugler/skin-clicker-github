@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -10,6 +11,9 @@ public class ShopManagerTest
 {
     private GameObject canvasGameObject;
     private ContentDistributor distributor;
+
+    public ItemTemplate[] scriptableObjectItemsTest;
+    private ItemTemplate itemTemplate1;
 
 
     [OneTimeSetUp]
@@ -28,6 +32,25 @@ public class ShopManagerTest
         GameObject contentDistributor = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "ContentDistributor");
         distributor = contentDistributor.GetComponentInParent<ContentDistributor>();
+
+        CreateItemTemplateForTesting();
+    }
+
+    private void CreateItemTemplateForTesting()
+    {
+        //Create new testItem and add to scriptableObjectItemsTest
+        string description = "Test description";
+        string id = "DoubleEffect";
+        string title = "TestItemV1";
+        int price = 333;
+
+        itemTemplate1 = ScriptableObject.CreateInstance("ItemTemplate") as ItemTemplate;
+        itemTemplate1.amount = 0;
+        itemTemplate1.description = description;
+        itemTemplate1.icon = null;
+        itemTemplate1.id = id;
+        itemTemplate1.price = price;
+        itemTemplate1.title = title;
     }
 
     private void OpenShopPopUpWithButton()
@@ -81,21 +104,35 @@ public class ShopManagerTest
         Assert.AreEqual(false, shopPanel.activeSelf);
     }
 
+    //Tests if panels are correctly active. Empty list can't be tested (scriptableObjectItemsTest)
     [UnityTest]
     public IEnumerator ShowActivePanelsInItemsInShop()
     {
         GameObject shopPanel = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
         OpenShopPopUpWithButton();
+        //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
 
-        distributor.itemsDictionary.Clear();
-        yield return null;
-        Assert.Equals(distributor.itemsDictionary, 0);
-        //Check if Active Panels = 0
+        scriptableObjectItemsTest[0] = itemTemplate1;
+        distributor.scriptableObjectItems = scriptableObjectItemsTest;
 
-        distributor.CreateItems();
+        int counterForActivePanels = 0;
+        manager.RefreshPanels();
         yield return null;
-        //Check if distributor.itemsDictionary size is same as active;
+
+        //Check if Active Panels = 1
+        Assert.AreEqual(distributor.scriptableObjectItems.Length, 1);
+        for (int i = 0; i < manager.shopPanelsGO.Length; i++)
+        {
+            if (manager.shopPanelsGO[i].activeSelf == true)
+            {
+                counterForActivePanels += 1;
+            }
+        }
+        yield return null;
+        Debug.Log("Active Panels should be 0 : " + counterForActivePanels + " || " + "0");
+        Assert.AreEqual(counterForActivePanels, 0);
     }
 
     [UnityTest]
@@ -106,7 +143,7 @@ public class ShopManagerTest
         OpenShopPopUpWithButton();
 
         distributor.itemsDictionary.Clear();
-        Assert.Equals(distributor.itemsDictionary, 0);
+        Assert.AreEqual(distributor.itemsDictionary, 0);
         //Check if Active Panels = 0
 
         distributor.CreateItems();

@@ -58,9 +58,9 @@ public class TestWorkerEffect : MonoBehaviour
     }
 
     [UnityTest]
-    public IEnumerator TestDoubleEffectPurchaseButtonAction()
+    public IEnumerator TestAutomatedWorkerPurchaseButtonAction()
     {
-        int startPrice = 10;
+        int startPrice = 5;
         int startAmount = 0;
         ItemTemplate item = new ItemTemplate();
         item.amount = startAmount;
@@ -70,22 +70,67 @@ public class TestWorkerEffect : MonoBehaviour
         item.price = startPrice;
         item.title = workerId;
 
-        DoubleEffect effect = new DoubleEffect();
+        Worker effect = new Worker();
         Assert.AreEqual(startAmount, item.amount);
         Assert.AreEqual(startPrice, item.price);
         yield return null;
 
-        startPrice *= 4;
+        //Hardcoded values in Worker Class 
+        startPrice *= 2;
         startAmount += 1;
         effect.PurchaseButtonAction(item);
         Assert.AreEqual(startAmount, item.amount);
         Assert.AreEqual(startPrice, item.price);
         yield return null;
 
-        startPrice *= 4;
+        startPrice *= 2;
         startAmount += 1;
         effect.PurchaseButtonAction(item);
         Assert.AreEqual(startAmount, item.amount);
         Assert.AreEqual(startPrice, item.price);
+    }
+
+    [UnityTest]
+    public IEnumerator TestEffectOfWorker()
+    {
+        DummyButton button = mainButton.GetComponent<DummyButton>();
+        button.multiplicator = 1;
+        button.credits = 0;
+        yield return null;
+
+        Worker effect = new Worker();
+        Assert.AreNotEqual(button.credits, 1);
+        effect.EffectOfItem();
+        yield return new WaitForSeconds(1);
+
+        Assert.AreEqual(button.credits, 1);
+        yield return new WaitForSeconds(1);
+
+        Assert.AreEqual(button.credits, 2);
+    }
+
+    [UnityTest]
+    public IEnumerator TestTwoWorkers()
+    {
+        DummyButton button = mainButton.GetComponent<DummyButton>();
+        button.multiplicator = 1;
+        button.credits = 0;
+        yield return null;
+
+        Worker effect = new Worker();
+        Assert.AreNotEqual(button.credits, 1);
+        effect.EffectOfItem();
+        effect.EffectOfItem();
+
+        Assert.AreNotEqual(button.credits, 1);
+        yield return new WaitForSeconds(1);
+
+        Assert.AreEqual(button.credits, 2);
+        yield return new WaitForSeconds(1);
+
+        Assert.AreEqual(button.credits, 4);
+
+        yield return new WaitForSeconds(3);
+        Assert.AreEqual(button.credits, 10);
     }
 }

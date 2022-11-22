@@ -44,6 +44,7 @@ public class Worker : ItemEffect
         return shopItem.amount += 1;
     }
 
+    //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
         return shopItem.price *= 2;
