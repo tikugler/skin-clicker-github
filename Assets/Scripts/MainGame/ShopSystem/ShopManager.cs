@@ -43,6 +43,12 @@ public class ShopManager : MonoBehaviour
 
         RefreshCredits();
 
+        //Sets panels unused panels inactive and starts with the last panel in the list.
+        int indexShopPanels = shopPanelsGO.Length - 1;
+        for (int i = 0; i < (shopPanelsGO.Length - contentDistributor.scriptableObjectItems.Length); i++) {
+            shopPanelsGO[indexShopPanels - i].SetActive(false);
+        }
+
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {

@@ -28,7 +28,7 @@ public class ShopManagerTest
     private int price2 = 4;
     private Sprite icon2 = null;
 
-private ItemTemplate itemTemplate3;
+    private ItemTemplate itemTemplate3;
     private string id3 = "Worker";
     private string title3 = "Deutsche Bahn";
     private string description3 = "Guess who's late";
@@ -148,26 +148,25 @@ private ItemTemplate itemTemplate3;
     *   Dont forget to refresh panels...
     */
     [UnityTest]
-    public IEnumerator ShowActivePanelsInItemsInShop()
+    public IEnumerator ShowOneItemInShop()
     {
         GameObject shopPanel = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "ShopPanel");
         ShopManager manager = shopPanel.GetComponent<ShopManager>();
         OpenShopPopUpWithButton();
 
-        //Problems with creating of itemtemplate --> Test crashes
         CreateItemTemplateForTesting();
-        Debug.Log("Till here, everything is working...");
         yield return null;
         //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
 
-        Debug.Log("Size of new SO-List before adding: " + scriptableObjectItemsTestOneItem.Length);
-        Debug.Log("Dead");
         distributor.scriptableObjectItems = scriptableObjectItemsTestOneItem;
-        Debug.Log("Size of new SO-List after adding: " + scriptableObjectItemsTestOneItem.Length);
+        Debug.Log("Liste Items: "+ distributor.scriptableObjectItems.Length);
         int counterForActivePanels = 0;
+        Debug.Log("Liste Items nach refresh: "+ distributor.scriptableObjectItems.Length);
+        yield return null;
         manager.RefreshPanels();
         yield return null;
+        Debug.Log("Liste Items nach yield: "+ distributor.scriptableObjectItems.Length);
 
         //Check if Active Panels = 1
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 1);
@@ -178,9 +177,12 @@ private ItemTemplate itemTemplate3;
                 counterForActivePanels += 1;
             }
         }
+        Debug.Log("Active Panels: " + counterForActivePanels);
         yield return null;
-        Debug.Log("Active Panels should be 0 : " + counterForActivePanels + " || " + "0");
-        //Assert.AreEqual(counterForActivePanels, 0);
+        Debug.Log("Name of Dist.List: " + distributor.scriptableObjectItems);
+        Debug.Log("Name of OneItem.List: " + scriptableObjectItemsTestOneItem);
+        Debug.Log("Active Panels should be 0 : " + counterForActivePanels + " || " + distributor.scriptableObjectItems.Length);
+        Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
     }
 
     [UnityTest]
