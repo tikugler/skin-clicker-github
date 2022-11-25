@@ -63,9 +63,35 @@ public static class Account
             }
         }
 
-        foreach(string item in upgradeList.Keys)
+        foreach (string item in upgradeList.Keys)
         {
             Debug.Log(item + ": " + upgradeList[item]);
         }
     }
+
+
+    public static void SetUserLoginPlayerPrefs(string username, string password)
+    {
+        PlayerPrefs.SetString("username", username);
+        PlayerPrefs.SetString("password", password);
+    }
+
+    public static string GetUsernamePlayerPrefs(string username, string password)
+    {
+        return PlayerPrefs.GetString("username");
+    }
+
+    public static string GetPasswordPlayerPrefs(string username, string password)
+    {
+        return PlayerPrefs.GetString("password");
+    }
+
+    public static bool GetIfThereIsSavedUserLoginInfoPlayerPrefs()
+    {
+        return PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password");
+    }
+
 }
+
+    //PlayerPrefs.SetString("username", username);
+    //    PlayerPrefs.SetString("password", password);
