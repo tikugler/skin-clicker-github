@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class Account
 {
+    public static string guestCustomID; // only for guests
     public static string accountId;
     public static string accountName;
     public static int credits;
@@ -74,6 +75,8 @@ public static class Account
     {
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("password", password);
+        CleanGuestCustomIdPlayerPrefs();
+
     }
 
     public static string GetUsernamePlayerPrefs()
@@ -91,7 +94,31 @@ public static class Account
         return PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password");
     }
 
-}
+    private static void CleanUserLoginPlayerPrefs()
+    {
+        PlayerPrefs.DeleteKey("username");
+        PlayerPrefs.DeleteKey("password");
+    }
 
-    //PlayerPrefs.SetString("username", username);
-    //    PlayerPrefs.SetString("password", password);
+    public static void SetGuestCustomIdPlayerPrefs(string guestCustomID)
+    {
+        PlayerPrefs.SetString("guestCustomID", guestCustomID);
+        CleanUserLoginPlayerPrefs();
+
+    }
+
+    public static string GetGuestCustomIdPlayerPrefs()
+    {
+        return PlayerPrefs.GetString("guestCustomID");
+    }
+
+    public static bool GetIfThereIsSavedGuestCustomIdPlayerPrefs()
+    {
+        return PlayerPrefs.HasKey("guestCustomID");
+    }
+
+    private static void CleanGuestCustomIdPlayerPrefs()
+    {
+        PlayerPrefs.DeleteKey("guestCustomID");
+    }
+}

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using PlayFab;
+using PlayFab.ClientModels;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using PlayFab;
-using PlayFab.ClientModels;
-using System;
-using TMPro;
 
 public class LoginManager : MonoBehaviour
 {
@@ -16,17 +14,18 @@ public class LoginManager : MonoBehaviour
     public GameObject wrongloginWarning;
 
     /// <summary>
-    /// if User login info is saved in playerPrefs,
+    /// if User login info is saved in PlayerPrefs,
     /// it is loaded
     /// </summary>
     private void Awake()
     {
-        if (Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
-        {
 
+        if (Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
             LoginUserOnPlayFab(Account.GetUsernamePlayerPrefs(),
                 Account.GetPasswordPlayerPrefs());
-        }
+
+        else if (Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
+            LoginWithGuestCustomID(Account.GetGuestCustomIdPlayerPrefs());
     }
 
     // Start is called before the first frame update
@@ -81,6 +80,7 @@ public class LoginManager : MonoBehaviour
     private void OnLoginFailed(PlayFabError obj)
     {
         Debug.Log("login has failed");
+        Debug.Log(obj.Error);
         wrongloginWarning.GetComponent<Text>().text = "Error: " + obj.Error;
         wrongloginWarning.SetActive(true);
     }
@@ -93,6 +93,7 @@ public class LoginManager : MonoBehaviour
     /// <param name="obj"></param>
     private void OnLoginSuccess(LoginResult obj)
     {
+        Debug.Log(obj.ToJson());
         Debug.Log("login is successful");
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, username.text);
         if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
@@ -123,5 +124,44 @@ public class LoginManager : MonoBehaviour
     {
         Account.SetStatistics(obj.Statistics);
         
+    }
+
+
+    /// <summary>
+    /// called when user click on "Als Gast Spielen" Button
+    /// user is created as guast in Playfab
+    /// </summary>
+    public void CallPlayAsGuest()
+    {
+        Account.guestCustomID = DateTime.Now.ToString("yyyyMMddHHmmssffff") + SystemInfo.deviceUniqueIdentifier;
+        var request = new LoginWithCustomIDRequest { CustomId = Account.guestCustomID, CreateAccount = true };
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessAsGuest, error => Debug.Log(error.Error));
+
+
+    }
+
+
+    /// <summary>
+    /// user loggs in as guest with the given questCustomID
+    /// </summary>
+    /// <param name="questCustomID">unique guest id</param>
+    private void LoginWithGuestCustomID(string questCustomID)
+    {
+        var request = new LoginWithCustomIDRequest { CustomId = questCustomID, CreateAccount = false };
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessAsGuest, error => Debug.Log(error.Error));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj">success result</param>
+    private void OnLoginSuccessAsGuest(LoginResult obj)
+    {
+
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, "Guest");
+        if (!Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
+            Account.SetGuestCustomIdPlayerPrefs(Account.guestCustomID);
+        LoadUserStatistics();
+        SceneManager.LoadScene("StartNewsMenu");
     }
 }
