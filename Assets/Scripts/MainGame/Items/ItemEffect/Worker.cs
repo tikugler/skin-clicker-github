@@ -21,7 +21,7 @@ class Worker : ItemEffect
         creditsPerSec = workerAmount * 5;
         
         credits = creditsPerSec;
-        ContentDistributor.contentDistributor.mainButton.credits += credits;
+        Account.credits += credits;
     }
 
     public override void PurchaseButtonAction(ItemTemplate shopItem) 

@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
 
     public void RefreshCredits() 
     {
-        credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
+        credit = Account.credits; //dummy
         creditUIText.text = "$ " + credit.ToString();
     }
 
@@ -88,7 +88,10 @@ public class ShopManager : MonoBehaviour
                 contentDistributor.mainButton.SetCredits(credit); //dummy
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
-                contentDistributor.itemsDictionary[item.id].shopItem = contentDistributor.scriptableObjectItems[pos];
+                contentDistributor.itemsDictionary[item.id].shopItem = item;
+                // update amount of selected update in PlayFab
+                GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
+                    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
             }
             RefreshPanels();
         }
