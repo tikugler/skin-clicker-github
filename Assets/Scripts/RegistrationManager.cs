@@ -221,6 +221,8 @@ public class RegistrationManager : MonoBehaviour
         Account.accountName = obj.Username;
         Account.accountId = obj.PlayFabId;
         Account.credits = 0;
+        Account.SetPlayFabIdAndUserName(Account.accountName, PasswordField.text);
         SceneManager.LoadScene("StartNewsMenu");
+
     }
 }
