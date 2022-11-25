@@ -16,7 +16,6 @@ public class ShopManager : MonoBehaviour
     //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
-
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
             shopPanelsGO[i].SetActive(true);
@@ -47,11 +46,13 @@ public class ShopManager : MonoBehaviour
         int indexShopPanels = shopPanelsGO.Length - 1;
         for (int i = 0; i < (shopPanelsGO.Length - contentDistributor.scriptableObjectItems.Length); i++) {
             shopPanelsGO[indexShopPanels - i].SetActive(false);
+            //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
         }
 
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
+            shopPanelsGO[i].SetActive(true);
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectItems[i].title;
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();

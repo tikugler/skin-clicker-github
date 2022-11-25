@@ -58,7 +58,7 @@ public class ShopManagerTest
 
 
     [OneTimeSetUp]
-    public void OneTimeSetUp()
+    public void Before()
     {
         SceneManager.LoadScene("MainGame");
     }
@@ -231,14 +231,15 @@ public class ShopManagerTest
 
         distributor.scriptableObjectItems = scriptableObjectItemsTestFiveItems;
         int counterForActivePanels = 0;
-        yield return null;
         manager.RefreshPanels();
         yield return null;
 
         //Check if Active Panels = 1
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 5);
+        int panelsCounter = 0;
         for (int i = 0; i < manager.shopPanelsGO.Length; i++)
         {
+            panelsCounter++;
             if (manager.shopPanelsGO[i].activeSelf == true)
             {
                 counterForActivePanels += 1;
@@ -246,7 +247,8 @@ public class ShopManagerTest
         }
 
         yield return null;
-        Debug.Log("Anzahl Items in List: " + scriptableObjectItemsTestFiveItems.Length);
+        //Debug.Log("Anzahl Panels 21/ " + panelsCounter);
+        //Debug.Log("Anzahl Items in List: " + scriptableObjectItemsTestFiveItems.Length + "  ||  Anzahl Counter: " + counterForActivePanels);
         Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
         CloseShopPopUpWithButton();
     }
