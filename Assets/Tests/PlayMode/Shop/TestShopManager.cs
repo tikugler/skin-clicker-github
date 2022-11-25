@@ -135,10 +135,17 @@ public class ShopManagerTest
 
     private void OpenShopPopUpWithButton()
     {
-        Button shopButton = FindObjectHelper.
+        Button shopOpenButton = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "ShopButton").
             GetComponent<Button>();
-        shopButton.onClick.Invoke();
+        shopOpenButton.onClick.Invoke();
+    }
+
+    private void CloseShopPopUpWithButton() {
+        Button shopCloseButton = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopCloseButton").
+            GetComponent<Button>();
+        shopCloseButton.onClick.Invoke();
     }
 
 
@@ -155,18 +162,14 @@ public class ShopManagerTest
         ShopManager manager = shopPanel.GetComponent<ShopManager>();
         OpenShopPopUpWithButton();
 
-        CreateItemTemplateForTesting();
         yield return null;
         //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
 
         distributor.scriptableObjectItems = scriptableObjectItemsTestOneItem;
-        Debug.Log("Liste Items: "+ distributor.scriptableObjectItems.Length);
         int counterForActivePanels = 0;
-        Debug.Log("Liste Items nach refresh: "+ distributor.scriptableObjectItems.Length);
         yield return null;
         manager.RefreshPanels();
         yield return null;
-        Debug.Log("Liste Items nach yield: "+ distributor.scriptableObjectItems.Length);
 
         //Check if Active Panels = 1
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 1);
@@ -177,12 +180,75 @@ public class ShopManagerTest
                 counterForActivePanels += 1;
             }
         }
-        Debug.Log("Active Panels: " + counterForActivePanels);
+
         yield return null;
-        Debug.Log("Name of Dist.List: " + distributor.scriptableObjectItems);
-        Debug.Log("Name of OneItem.List: " + scriptableObjectItemsTestOneItem);
-        Debug.Log("Active Panels should be 0 : " + counterForActivePanels + " || " + distributor.scriptableObjectItems.Length);
         Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
+        CloseShopPopUpWithButton();
+    }
+
+    [UnityTest]
+    public IEnumerator ShowTwoItemInShop()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
+        OpenShopPopUpWithButton();
+
+        yield return null;
+        //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
+
+        distributor.scriptableObjectItems = scriptableObjectItemsTestTwoItems;
+        int counterForActivePanels = 0;
+        yield return null;
+        manager.RefreshPanels();
+        yield return null;
+
+        //Check if Active Panels = 1
+        Assert.AreEqual(distributor.scriptableObjectItems.Length, 2);
+        for (int i = 0; i < manager.shopPanelsGO.Length; i++)
+        {
+            if (manager.shopPanelsGO[i].activeSelf == true)
+            {
+                counterForActivePanels += 1;
+            }
+        }
+
+        yield return null;
+        Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
+        CloseShopPopUpWithButton();
+    }
+
+    [UnityTest]
+    public IEnumerator ShowFiveItemInShop()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
+        OpenShopPopUpWithButton();
+
+        yield return null;
+        //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
+
+        distributor.scriptableObjectItems = scriptableObjectItemsTestFiveItems;
+        int counterForActivePanels = 0;
+        yield return null;
+        manager.RefreshPanels();
+        yield return null;
+
+        //Check if Active Panels = 1
+        Assert.AreEqual(distributor.scriptableObjectItems.Length, 5);
+        for (int i = 0; i < manager.shopPanelsGO.Length; i++)
+        {
+            if (manager.shopPanelsGO[i].activeSelf == true)
+            {
+                counterForActivePanels += 1;
+            }
+        }
+
+        yield return null;
+        Debug.Log("Anzahl Items in List: " + scriptableObjectItemsTestFiveItems.Length);
+        Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
+        CloseShopPopUpWithButton();
     }
 
     [UnityTest]
