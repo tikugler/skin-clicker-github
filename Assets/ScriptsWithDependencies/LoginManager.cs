@@ -15,6 +15,16 @@ public class LoginManager : MonoBehaviour
     public InputField password;
     public GameObject wrongloginWarning;
 
+    /// <summary>
+    /// if User login info is saved in playerPrefs,
+    /// it is loaded
+    /// </summary>
+    private void Awake()
+    {
+        if(Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
+            LoginUserOnPlayFab();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +89,8 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("login is successful");
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, username.text);
+        if (Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
+            Account.SetUserLoginPlayerPrefs(username.text, password.text);
         LoadUserStatistics();
         var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
         loggedInUser.text = username.text;
