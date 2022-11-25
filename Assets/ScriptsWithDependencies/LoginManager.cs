@@ -21,8 +21,12 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if(Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
-            LoginUserOnPlayFab();
+        if (Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
+        {
+
+            LoginUserOnPlayFab(Account.GetUsernamePlayerPrefs(),
+                Account.GetPasswordPlayerPrefs());
+        }
     }
 
     // Start is called before the first frame update
@@ -45,7 +49,9 @@ public class LoginManager : MonoBehaviour
     public void LoginButton()
     {
         //StartCoroutine(CallLoginWithCoroutine());
-        LoginUserOnPlayFab();
+        string usernameText = username.text;
+        string passwordText = password.text;
+        LoginUserOnPlayFab(usernameText, passwordText);
 
     }
 
@@ -57,12 +63,12 @@ public class LoginManager : MonoBehaviour
     /// <summary>
     /// makes a login request by using given inputs
     /// </summary>
-    private void LoginUserOnPlayFab()
+    private void LoginUserOnPlayFab(string usernameText, string passwordText)
     {
         var request = new LoginWithPlayFabRequest();
         request.TitleId = PlayFabSettings.TitleId;
-        request.Username = username.text;
-        request.Password = password.text;
+        request.Username = usernameText;
+        request.Password = passwordText;
 
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailed);
     }
@@ -89,7 +95,7 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("login is successful");
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, username.text);
-        if (Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
+        if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
             Account.SetUserLoginPlayerPrefs(username.text, password.text);
         LoadUserStatistics();
         var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();

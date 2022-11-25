@@ -76,12 +76,12 @@ public static class Account
         PlayerPrefs.SetString("password", password);
     }
 
-    public static string GetUsernamePlayerPrefs(string username, string password)
+    public static string GetUsernamePlayerPrefs()
     {
         return PlayerPrefs.GetString("username");
     }
 
-    public static string GetPasswordPlayerPrefs(string username, string password)
+    public static string GetPasswordPlayerPrefs()
     {
         return PlayerPrefs.GetString("password");
     }
