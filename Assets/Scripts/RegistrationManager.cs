@@ -218,10 +218,9 @@ public class RegistrationManager : MonoBehaviour
     private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
     {
         Debug.Log("registration is successful");
-        Account.accountName = obj.Username;
-        Account.accountId = obj.PlayFabId;
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
         Account.credits = 0;
-        Account.SetPlayFabIdAndUserName(Account.accountName, PasswordField.text);
+        Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
         SceneManager.LoadScene("StartNewsMenu");
 
     }
