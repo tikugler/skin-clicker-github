@@ -203,7 +203,7 @@ public class ShopManagerTest
         manager.RefreshPanels();
         yield return null;
 
-        //Check if Active Panels = 1
+        //Check if Active Panels = 2
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 2);
         for (int i = 0; i < manager.shopPanelsGO.Length; i++)
         {
@@ -234,7 +234,7 @@ public class ShopManagerTest
         manager.RefreshPanels();
         yield return null;
 
-        //Check if Active Panels = 1
+        //Check if Active Panels = 5
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 5);
         int panelsCounter = 0;
         for (int i = 0; i < manager.shopPanelsGO.Length; i++)
@@ -253,24 +253,139 @@ public class ShopManagerTest
         CloseShopPopUpWithButton();
     }
 
+    /*
+     * Gets string/text from shopitem and checks if given text matches with original template string.
+     * Tried to compare/get ShopTemplate it self from GO but didnt work, so just compare strings.
+    */
     [UnityTest]
-    public IEnumerator ShowScriptableObjectItemsInShop()
+    public IEnumerator TestForTextInShopTemplateOneItem()
     {
         GameObject shopPanel = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
         OpenShopPopUpWithButton();
 
-        distributor.itemsDictionary.Clear();
-        Assert.AreEqual(distributor.itemsDictionary, 0);
-        //Check if Active Panels = 0
-
-        distributor.CreateItems();
-        //Check if distributor.itemsDictionary size is same as active;
-
-        // How do I get the Text of a ShopTemplate????
-        // Prefab shopButton = FindObjectHelper.
-        //     FindObjectInParent(shopPanel, "ShopItemTemplate").
-        //     GetComponent<Button>();
         yield return null;
+
+        distributor.scriptableObjectItems = scriptableObjectItemsTestOneItem;
+        manager.RefreshPanels();
+        yield return null;
+
+        GameObject shopItemGO = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate");
+        var shopItemTemplate1 = shopItemGO.GetComponent<ShopTemplate>();
+
+        
+        Assert.AreEqual(shopItemTemplate1.shopItemTitle.text, itemTemplate1.title);
+        Assert.AreEqual(shopItemTemplate1.shopItemDescription.text, itemTemplate1.description);
+        Assert.AreEqual(shopItemTemplate1.shopItemPrice.text, "$ " + itemTemplate1.price.ToString());
+        Assert.AreEqual(shopItemTemplate1.shopItemAmount.text, amount1.ToString());
+        //Assert.AreEqual(shopItemTemplate1.shopItemicon.text, itemTemplate1.icon);
+
+        CloseShopPopUpWithButton();
+    }
+
+    [UnityTest]
+    public IEnumerator TestForTextInShopTemplateTwoItems()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
+
+        distributor.scriptableObjectItems = scriptableObjectItemsTestTwoItems;
+        manager.RefreshPanels();
+        yield return null;
+        OpenShopPopUpWithButton();
+        yield return null;
+
+        GameObject shopItemGO = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate");
+        var shopItemTemplate1 = shopItemGO.GetComponent<ShopTemplate>();
+
+        GameObject shopItemGO2 = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate (1)");
+        var shopItemTemplate2 = shopItemGO2.GetComponent<ShopTemplate>();
+
+        Assert.AreEqual(shopItemTemplate1.shopItemTitle.text, itemTemplate1.title);
+        Assert.AreEqual(shopItemTemplate1.shopItemDescription.text, itemTemplate1.description);
+        Assert.AreEqual(shopItemTemplate1.shopItemPrice.text, "$ " + itemTemplate1.price.ToString());
+        Assert.AreEqual(shopItemTemplate1.shopItemAmount.text, itemTemplate1.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate1.shopItemicon.text, itemTemplate1.icon);
+
+        Assert.AreEqual(shopItemTemplate2.shopItemTitle.text, itemTemplate2.title);
+        Assert.AreEqual(shopItemTemplate2.shopItemDescription.text, itemTemplate2.description);
+        Assert.AreEqual(shopItemTemplate2.shopItemPrice.text, "$ " + itemTemplate2.price.ToString());
+        Assert.AreEqual(shopItemTemplate2.shopItemAmount.text, itemTemplate2.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate2.shopItemicon.text, itemTemplate2.icon);
+
+        CloseShopPopUpWithButton();
+    }
+
+    
+    [UnityTest]
+    public IEnumerator TestForTextInShopTemplateFiveItems()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
+        OpenShopPopUpWithButton();
+
+        yield return null;
+
+        distributor.scriptableObjectItems = scriptableObjectItemsTestFiveItems;
+        manager.RefreshPanels();
+        yield return null;
+
+        GameObject shopItemGO = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate");
+        var shopItemTemplate1 = shopItemGO.GetComponent<ShopTemplate>();
+
+        GameObject shopItemGO2 = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate (1)");
+        var shopItemTemplate2 = shopItemGO2.GetComponent<ShopTemplate>();
+
+        GameObject shopItemGO3 = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate (2)");
+        var shopItemTemplate3 = shopItemGO3.GetComponent<ShopTemplate>();
+
+        GameObject shopItemGO4 = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate (3)");
+        var shopItemTemplate4 = shopItemGO4.GetComponent<ShopTemplate>();
+
+        GameObject shopItemGO5 = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate (4)");
+        var shopItemTemplate5 = shopItemGO5.GetComponent<ShopTemplate>();
+
+        Assert.AreEqual(shopItemTemplate1.shopItemTitle.text, itemTemplate1.title);
+        Assert.AreEqual(shopItemTemplate1.shopItemDescription.text, itemTemplate1.description);
+        Assert.AreEqual(shopItemTemplate1.shopItemPrice.text, "$ " + itemTemplate1.price.ToString());
+        Assert.AreEqual(shopItemTemplate1.shopItemAmount.text, itemTemplate1.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate1.shopItemicon.text, itemTemplate1.icon);
+
+        Assert.AreEqual(shopItemTemplate2.shopItemTitle.text, itemTemplate2.title);
+        Assert.AreEqual(shopItemTemplate2.shopItemDescription.text, itemTemplate2.description);
+        Assert.AreEqual(shopItemTemplate2.shopItemPrice.text, "$ " + itemTemplate2.price.ToString());
+        Assert.AreEqual(shopItemTemplate2.shopItemAmount.text, itemTemplate2.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate2.shopItemicon.text, itemTemplate2.icon);
+
+        Assert.AreEqual(shopItemTemplate3.shopItemTitle.text, itemTemplate3.title);
+        Assert.AreEqual(shopItemTemplate3.shopItemDescription.text, itemTemplate3.description);
+        Assert.AreEqual(shopItemTemplate3.shopItemPrice.text, "$ " + itemTemplate3.price.ToString());
+        Assert.AreEqual(shopItemTemplate3.shopItemAmount.text, itemTemplate3.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate3.shopItemicon.text, itemTemplate3.icon);
+
+        Assert.AreEqual(shopItemTemplate4.shopItemTitle.text, itemTemplate4.title);
+        Assert.AreEqual(shopItemTemplate4.shopItemDescription.text, itemTemplate4.description);
+        Assert.AreEqual(shopItemTemplate4.shopItemPrice.text, "$ " + itemTemplate4.price.ToString());
+        Assert.AreEqual(shopItemTemplate4.shopItemAmount.text, itemTemplate4.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate4.shopItemicon.text, itemTemplate4.icon);
+
+        Assert.AreEqual(shopItemTemplate5.shopItemTitle.text, itemTemplate5.title);
+        Assert.AreEqual(shopItemTemplate5.shopItemDescription.text, itemTemplate5.description);
+        Assert.AreEqual(shopItemTemplate5.shopItemPrice.text, "$ " + itemTemplate5.price.ToString());
+        Assert.AreEqual(shopItemTemplate5.shopItemAmount.text, itemTemplate5.amount.ToString());
+        //Assert.AreEqual(shopItemTemplate5.shopItemicon.text, itemTemplate5.icon);
+
+        CloseShopPopUpWithButton();
     }
 }

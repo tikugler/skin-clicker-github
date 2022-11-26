@@ -24,6 +24,7 @@ public class ShopManager : MonoBehaviour
         RefreshPanels();
     }
 
+    //If change "$ " + also change tests.
     private void RefreshCredits()
     {
         credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
