@@ -8766,7 +8766,7 @@ GameObject:
   - component: {fileID: 1212867536}
   m_Layer: 0
   m_Name: PlayfabUpdateUserData
-  m_TagString: Untagged
+  m_TagString: PlayFabUpdate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13170,7 +13170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplicator: 1
   basePoints: 1
-  credits: 0
 --- !u!114 &1788361379
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class LeaderboardManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (!PlayerInfo.LoggedIn)
+        if (!Account.LoggedIn)
             LeaderboardButton.GetComponent<Button>().interactable = false;
     }
 
@@ -91,7 +91,7 @@ public class LeaderboardManager : MonoBehaviour
             selectedPlayer.RemoveHighlighting();
         foreach (var item in result.Leaderboard)
         {
-            if (item.PlayFabId == PlayerInfo.playerID)
+            if (item.PlayFabId == Account.accountId)
             {
                 selectedPlayer = LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>();
                 selectedPlayer.HighlightEntry();
@@ -148,7 +148,7 @@ public class LeaderboardManager : MonoBehaviour
         foreach (var item in result.Leaderboard)
         {
 
-            if (item.PlayFabId == PlayerInfo.playerID)
+            if (item.PlayFabId == Account.accountId)
             {
                 selectedPlayer = LeaderboardEntry[i].GetComponent<LeaderboardEntryTemplate>();
                 selectedPlayer.HighlightEntry();

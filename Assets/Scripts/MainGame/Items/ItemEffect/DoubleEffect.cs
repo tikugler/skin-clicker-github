@@ -8,7 +8,7 @@ public class DoubleEffect : ItemEffect
     //Amount of Double/2X Item in player inventory. 
     public new string id = "DoubleEffect";
     public new ItemTemplate shopItem;
-    private int multiplicator = 1;
+    public int multiplicator = 1;
 
 
 
@@ -19,6 +19,7 @@ public class DoubleEffect : ItemEffect
 
     public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
+
         this.shopItem = shopItem;
         CalculateNewPrice();
         CalculateNewAmount();

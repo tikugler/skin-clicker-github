@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayFab.ClientModels;
+using PlayFab.MultiplayerModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,14 +23,19 @@ public class ContentDistributor : MonoBehaviour
     //Player stuff for demo
     public ArrayList boughtItemsOfPlayer = new ArrayList();
 
-    // Start is called before the first frame update
-    void Start()
+
+    // make sure that SetUpgrade is called before ShopManager.RefreshPanels
+    // Awake is called before the application starts.
+    private void Awake()
     {
-        if (contentDistributor == null) {
+        if (contentDistributor == null)
+        {
             contentDistributor = this;
             CreateItems();
+            SetUpgrades();
         }
     }
+
 
     /* 
     *  Creats and adds ItemEffects to key-value-pair.
@@ -45,5 +52,28 @@ public class ContentDistributor : MonoBehaviour
 
         var worker = new Worker();
         itemsDictionary.Add(worker.id.ToString(), worker);
+    }
+
+
+    /// <summary>
+    /// sets the number of performed upgrade for each item according to Account.upgradeList
+    /// </summary>
+    private void SetUpgrades()
+    {
+
+        foreach(ItemTemplate item in scriptableObjectItems)
+        {
+            item.amount = 0; // the amount at the beginning must be 0
+            item.price = item.startPrice;  // the price is equal to startPrice (initial price) if the amount is 0
+            // performedUpgrade is 0 if item does not exists in upgradeList,
+            // otherwise, the value in the upgradeList for related key
+            Account.upgradeList.TryGetValue(item.id, out int performedUpgrade); 
+            for(int i = 0; i < performedUpgrade; i++)
+            {
+                // PurchaseButtonAction is called performedUpgrade times for related item without reducing credits
+                itemsDictionary[item.id].PurchaseButtonAction(item);
+            }
+            itemsDictionary[item.id].shopItem = item;
+        }
     }
 }
