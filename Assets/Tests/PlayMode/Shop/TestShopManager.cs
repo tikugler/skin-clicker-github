@@ -292,6 +292,7 @@ public class ShopManagerTest
      * Gets string/text from shopitem and checks if given text matches with original template string.
      * Tried to compare/get ShopTemplate it self from GO but didnt work, so just compare strings.
      * No need to test scriptableObjectItemsTestNoItem --> item is invisible
+     * "$ " + itemTemplate price is hardcoded like in ShopMamanger's RefreshCredits().
     */
     [UnityTest]
     public IEnumerator TestForTextInShopTemplateOneItem()
