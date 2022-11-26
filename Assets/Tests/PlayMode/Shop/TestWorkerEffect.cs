@@ -42,18 +42,18 @@ public class TestWorkerEffect : MonoBehaviour
         DummyButton button = mainButton.GetComponent<DummyButton>();
         button.multiplicator = 1;
         button.basePoints = 1;
-        button.credits = demoCredits;
+        Account.credits = demoCredits;
         yield return null;
 
-        Assert.AreEqual(button.credits, demoCredits);
+        Assert.AreEqual(Account.credits, demoCredits);
         Worker worker = new Worker();
         worker.EffectOfItem();
         yield return new WaitForSeconds(1);
 
-        Assert.AreEqual(button.credits, 1);
+        Assert.AreEqual(Account.credits, 1);
         yield return new WaitForSeconds(1);
 
-        Assert.AreEqual(button.credits, 2);
+        Assert.AreEqual(Account.credits, 2);
 
     }
 
@@ -95,18 +95,18 @@ public class TestWorkerEffect : MonoBehaviour
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
         button.multiplicator = 1;
-        button.credits = 0;
+        Account.credits = 0;
         yield return null;
 
         Worker effect = new Worker();
-        Assert.AreNotEqual(button.credits, 1);
+        Assert.AreNotEqual(Account.credits, 1);
         effect.EffectOfItem();
         yield return new WaitForSeconds(1);
 
-        Assert.AreEqual(button.credits, 1);
+        Assert.AreEqual(Account.credits, 1);
         yield return new WaitForSeconds(1);
 
-        Assert.AreEqual(button.credits, 2);
+        Assert.AreEqual(Account.credits, 2);
     }
 
     [UnityTest]
@@ -114,23 +114,23 @@ public class TestWorkerEffect : MonoBehaviour
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
         button.multiplicator = 1;
-        button.credits = 0;
+        Account.credits = 0;
         yield return null;
 
         Worker effect = new Worker();
-        Assert.AreNotEqual(button.credits, 1);
+        Assert.AreNotEqual(Account.credits, 1);
         effect.EffectOfItem();
         effect.EffectOfItem();
 
-        Assert.AreNotEqual(button.credits, 1);
+        Assert.AreNotEqual(Account.credits, 1);
         yield return new WaitForSeconds(1);
 
-        Assert.AreEqual(button.credits, 2);
+        Assert.AreEqual(Account.credits, 2);
         yield return new WaitForSeconds(1);
 
-        Assert.AreEqual(button.credits, 4);
+        Assert.AreEqual(Account.credits, 4);
 
         yield return new WaitForSeconds(3);
-        Assert.AreEqual(button.credits, 10);
+        Assert.AreEqual(Account.credits, 10);
     }
 }
