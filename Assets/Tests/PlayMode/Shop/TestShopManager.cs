@@ -52,6 +52,7 @@ public class ShopManagerTest
     private int price5 = 0;
     private Sprite icon5 = null;
 
+    public ItemTemplate[] scriptableObjectItemsTestNoItem = new ItemTemplate[0];
     public ItemTemplate[] scriptableObjectItemsTestOneItem = new ItemTemplate[1];
     public ItemTemplate[] scriptableObjectItemsTestTwoItems = new ItemTemplate[2];
     public ItemTemplate[] scriptableObjectItemsTestFiveItems = new ItemTemplate[5];
@@ -154,6 +155,40 @@ public class ShopManagerTest
     *   For every test with diffrent size, there has to be a new Array (fix size & fully filled means no empty spot).
     *   Dont forget to refresh panels...
     */
+
+    [UnityTest]
+    public IEnumerator ShowNoItemInShop()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        ShopManager manager = shopPanel.GetComponent<ShopManager>();
+        OpenShopPopUpWithButton();
+
+        yield return null;
+        //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
+
+        distributor.scriptableObjectItems = scriptableObjectItemsTestNoItem;
+        int counterForActivePanels = 0;
+        yield return null;
+        manager.RefreshPanels();
+        yield return null;
+
+        //Check if Active Panels = 1
+        Assert.AreEqual(distributor.scriptableObjectItems.Length, 0);
+        for (int i = 0; i < manager.shopPanelsGO.Length; i++)
+        {
+            if (manager.shopPanelsGO[i].activeSelf == true)
+            {
+                counterForActivePanels += 1;
+            }
+        }
+
+        yield return null;
+        Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
+        CloseShopPopUpWithButton();
+    }
+       
+
     [UnityTest]
     public IEnumerator ShowOneItemInShop()
     {
@@ -256,6 +291,7 @@ public class ShopManagerTest
     /*
      * Gets string/text from shopitem and checks if given text matches with original template string.
      * Tried to compare/get ShopTemplate it self from GO but didnt work, so just compare strings.
+     * No need to test scriptableObjectItemsTestNoItem --> item is invisible
     */
     [UnityTest]
     public IEnumerator TestForTextInShopTemplateOneItem()
