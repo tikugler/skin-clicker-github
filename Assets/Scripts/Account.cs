@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class Account
 {
@@ -120,5 +121,13 @@ public static class Account
     private static void CleanGuestCustomIdPlayerPrefs()
     {
         PlayerPrefs.DeleteKey("guestCustomID");
+    }
+
+    public static void LogOutUser()
+    {
+        CleanGuestCustomIdPlayerPrefs();
+        CleanUserLoginPlayerPrefs();
+        upgradeList = new Dictionary<string, int>();
+        credits = 0;
     }
 }
