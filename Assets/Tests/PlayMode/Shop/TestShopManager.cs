@@ -13,7 +13,7 @@ public class ShopManagerTest
     private ContentDistributor distributor;
 
     private ItemTemplate itemTemplate1;
-    private string id1 = "DoubleEffect";
+    private string id1 = ItemNames.DoubleEffect;
     private string title1 = "Double Effect 1";
     private string description1 = "Test description double effect 1";
     private int amount1 = 0;
@@ -21,7 +21,7 @@ public class ShopManagerTest
     private Sprite icon1 = null;
 
     private ItemTemplate itemTemplate2;
-    private string id2 = "Worker";
+    private string id2 = ItemNames.Worker;
     private string title2 = "Worker 1";
     private string description2 = "Test description Worker 1";
     private int amount2 = 0;
@@ -29,15 +29,15 @@ public class ShopManagerTest
     private Sprite icon2 = null;
 
     private ItemTemplate itemTemplate3;
-    private string id3 = "Worker";
+    private string id3 = ItemNames.Worker;
     private string title3 = "Deutsche Bahn";
     private string description3 = "Guess who's late";
     private int amount3 = 3;
     private int price3 = 90;
     private Sprite icon3 = null;
 
-    private ItemTemplate itemTemplate4 ;
-    private string id4 = "DoubleEffect";
+    private ItemTemplate itemTemplate4;
+    private string id4 = ItemNames.DoubleEffect;
     private string title4 = "rng text";
     private string description4 = "Too tired for a creative text";
     private int amount4 = 7;
@@ -45,7 +45,7 @@ public class ShopManagerTest
     private Sprite icon4 = null;
 
     private ItemTemplate itemTemplate5;
-    private string id5 = "DoubleEffect";
+    private string id5 = ItemNames.DoubleEffect;
     private string title5 = "Free Item";
     private string description5 = "Free and useless effect ;)";
     private int amount5 = 78;
@@ -142,7 +142,8 @@ public class ShopManagerTest
         shopOpenButton.onClick.Invoke();
     }
 
-    private void CloseShopPopUpWithButton() {
+    private void CloseShopPopUpWithButton()
+    {
         Button shopCloseButton = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "ShopCloseButton").
             GetComponent<Button>();
@@ -187,7 +188,7 @@ public class ShopManagerTest
         Assert.AreEqual(counterForActivePanels, distributor.scriptableObjectItems.Length);
         CloseShopPopUpWithButton();
     }
-       
+
 
     [UnityTest]
     public IEnumerator ShowOneItemInShop()
@@ -312,7 +313,7 @@ public class ShopManagerTest
             FindObjectInParent(canvasGameObject, "ShopItemTemplate");
         var shopItemTemplate1 = shopItemGO.GetComponent<ShopTemplate>();
 
-        
+
         Assert.AreEqual(shopItemTemplate1.shopItemTitle.text, itemTemplate1.title);
         Assert.AreEqual(shopItemTemplate1.shopItemDescription.text, itemTemplate1.description);
         Assert.AreEqual(shopItemTemplate1.shopItemPrice.text, "$ " + itemTemplate1.price.ToString());
@@ -358,7 +359,7 @@ public class ShopManagerTest
         CloseShopPopUpWithButton();
     }
 
-    
+
     [UnityTest]
     public IEnumerator TestForTextInShopTemplateFiveItems()
     {

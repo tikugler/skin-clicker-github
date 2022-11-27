@@ -11,7 +11,7 @@ using UnityEngine.UI;
  */
 public static class SkinName
 {
-    public static readonly string DoubleEffect = "DoubleEffect";
-    public static readonly string Worker = "Worker";
-    public static readonly string TestEffect = "TestEffect";
+    //public static readonly string DoubleEffect = "DoubleEffect";
+    //public static readonly string Worker = "Worker";
+    //public static readonly string TestEffect = "TestEffect";
 }
