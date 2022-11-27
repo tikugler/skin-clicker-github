@@ -12,7 +12,7 @@ public class LogoutManager : MonoBehaviour
     void Start()
     {
         if (!Account.LoggedIn)
-            logoutButton.interactable = false;
+            gameObject.GetComponent<Button>().interactable = false;
             
     }
 
