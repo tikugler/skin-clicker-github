@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Worker : ItemEffect
 {
-    public new string id = "Worker";
+    public new string id = ItemNames.Worker;
     public new ItemTemplate shopItem;
     public Button purchaseButton;
     private bool hasUpdated = false;
