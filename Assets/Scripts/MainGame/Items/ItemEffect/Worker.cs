@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
-class Worker : ItemEffect
+public class Worker : ItemEffect
 {
     public new string id = "Worker";
     public new ItemTemplate shopItem;
@@ -19,12 +19,12 @@ class Worker : ItemEffect
     void Update()
     {
         creditsPerSec = workerAmount * 5;
-        
+
         credits = creditsPerSec;
         Account.credits += credits;
     }
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
         this.shopItem = shopItem;
         CalculateNewAmount();
@@ -32,6 +32,7 @@ class Worker : ItemEffect
         EffectOfItem();
     }
 
+    //Refreshrate is set to "yield return new WaitForSeconds(1);" in AutomatedButtonWorkers, if changed, tests have to change too
     public override void EffectOfItem()
     {
         workerAmount++;
@@ -43,6 +44,7 @@ class Worker : ItemEffect
         return shopItem.amount += 1;
     }
 
+    //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
         return shopItem.price *= 2;
