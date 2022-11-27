@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
 
     public void RefreshCredits() 
     {
-        credit = Account.credits; //dummy
+        credit = Account.credits;
         creditUIText.text = "$ " + credit.ToString();
     }
 
@@ -85,7 +85,7 @@ public class ShopManager : MonoBehaviour
             ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
             if (contentDistributor.itemsDictionary.ContainsKey(item.id)) {
                 credit -= item.price;
-                contentDistributor.mainButton.SetCredits(credit); //dummy
+                Account.credits = credit; 
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.itemsDictionary[item.id].shopItem = item;
