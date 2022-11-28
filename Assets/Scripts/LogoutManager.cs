@@ -6,20 +6,12 @@ using UnityEngine.UI;
 
 public class LogoutManager : MonoBehaviour
 {
-    Button logoutButton;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (!Account.LoggedIn)
-            logoutButton.interactable = false;
-            
-    }
+            gameObject.GetComponent<Button>().interactable = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void CallLogOut()
