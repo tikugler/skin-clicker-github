@@ -11,7 +11,7 @@ public class LogoutManager : MonoBehaviour
     {
         if (!Account.LoggedIn)
             gameObject.GetComponent<Button>().interactable = false;
-            
+
     }
 
     public void CallLogOut()
