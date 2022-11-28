@@ -11,7 +11,7 @@ public class Test : MonoBehaviour
     private GameObject canvasGameObject;
     private ContentDistributor distributor;
     private Button mainButton;
-    public string doubleId = "DoubleEffect";
+    public string doubleId = ItemNames.DoubleEffect;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()

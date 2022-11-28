@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DoubleEffect : ItemEffect
 {
     //Amount of Double/2X Item in player inventory. 
-    public new string id = "DoubleEffect";
+    public new string id = ItemNames.DoubleEffect;
     public new ItemTemplate shopItem;
     public int multiplicator = 1;
 

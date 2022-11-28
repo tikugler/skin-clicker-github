@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TestEffect : ItemEffect
 {
-    public new string id = "TestEffect";
+    public new string id = ItemNames.TestEffect;
     public new ItemTemplate shopItem;
 
     public override void PurchaseButtonAction(ItemTemplate shopItem) 

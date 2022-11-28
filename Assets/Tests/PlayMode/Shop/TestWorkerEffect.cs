@@ -11,7 +11,7 @@ public class TestWorkerEffect : MonoBehaviour
     private GameObject canvasGameObject;
     private ContentDistributor distributor;
     private Button mainButton;
-    public string workerId = "Worker";
+    public string workerId = ItemNames.Worker;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
