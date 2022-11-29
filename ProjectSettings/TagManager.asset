@@ -8,7 +8,6 @@ TagManager:
   - Sound
   - Password
   - Username
-  - pickaxe
   layers:
   - Default
   - TransparentFX
