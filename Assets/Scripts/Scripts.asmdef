@@ -2,7 +2,8 @@
     "name": "NewAssembly",
     "rootNamespace": "",
     "references": [
-        "PlayFab"
+        "PlayFab",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
