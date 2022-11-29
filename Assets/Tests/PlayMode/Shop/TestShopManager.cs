@@ -79,6 +79,15 @@ public class ShopManagerTest
         CreateItemTemplateForTesting();
     }
 
+    private void SetupForPurchase()
+    {
+        GameObject shopPanel = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopPanel");
+        manager = shopPanel.GetComponent<ShopManager>();
+        OpenShopPopUpWithButton();
+
+    }
+
     private void CreateItemTemplateForTesting()
     {
         //Create new testItem and add to scriptableObjectItemsTest
@@ -214,19 +223,13 @@ public class ShopManagerTest
     [UnityTest]
     public IEnumerator ShowTwoItemInShop()
     {
-        GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
-        ShopManager manager = shopPanel.GetComponent<ShopManager>();
-        OpenShopPopUpWithButton();
+        distributor.scriptableObjectItems = scriptableObjectItemsTestTwoItems;
+        SetupForPurchase();
 
         yield return null;
         //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
 
-        distributor.scriptableObjectItems = scriptableObjectItemsTestTwoItems;
         int counterForActivePanels = 0;
-        yield return null;
-        manager.RefreshPanels();
-        yield return null;
 
         //Check if Active Panels = 2
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 2);
@@ -246,18 +249,13 @@ public class ShopManagerTest
     [UnityTest]
     public IEnumerator ShowFiveItemInShop()
     {
-        GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
-        ShopManager manager = shopPanel.GetComponent<ShopManager>();
-        OpenShopPopUpWithButton();
+        distributor.scriptableObjectItems = scriptableObjectItemsTestFiveItems;
+        SetupForPurchase();
 
         yield return null;
         //Array.Clear(distributor.scriptableObjectItems, 0, distributor.scriptableObjectItems.Length);
 
-        distributor.scriptableObjectItems = scriptableObjectItemsTestFiveItems;
         int counterForActivePanels = 0;
-        manager.RefreshPanels();
-        yield return null;
 
         //Check if Active Panels = 5
         Assert.AreEqual(distributor.scriptableObjectItems.Length, 5);
@@ -481,9 +479,6 @@ public class ShopManagerTest
         yield return null;
 
         int newCredits = oldCredits - (oldPrice1 + oldPrice2);
-        Debug.Log("oldCredtis " + oldCredits);;
-        Debug.Log("newCredtis " + newCredits);
-        Debug.Log("Cost " + (oldPrice1 + oldPrice2));
         Assert.AreEqual(Account.credits, newCredits);
 
         Assert.AreEqual(shopItemTemplate1.shopItemTitle.text, itemTemplate1.title);
@@ -559,7 +554,7 @@ public class ShopManagerTest
     [UnityTest]
     public IEnumerator TryToBuyItemWithMoreCreditsThanPrice()
     {
-        Account.credits = itemTemplate1.price;
+        Account.credits = itemTemplate1.price * 2;
         distributor.scriptableObjectItems = scriptableObjectItemsTestOneItem;
         SetupForPurchase();
 
@@ -577,16 +572,41 @@ public class ShopManagerTest
         manager.RefreshPanels();
         Assert.IsTrue(shopItemButton1.interactable);
         shopItemButton1.onClick.Invoke();
-        Assert.AreEqual(Account.credits, 0);
+        Assert.AreEqual(Account.credits, oldCredits/2);
 
         CloseShopPopUpWithButton();
     }
 
-    private void SetupForPurchase() {
-        GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
-        manager = shopPanel.GetComponent<ShopManager>();
-        OpenShopPopUpWithButton();
+    [UnityTest]
+    public IEnumerator RefreshCreditsTest()
+    {
+        Account.credits = itemTemplate1.price;
+        distributor.scriptableObjectItems = scriptableObjectItemsTestOneItem;
+        SetupForPurchase();
 
+        yield return null;
+
+        manager.RefreshPanels();
+        yield return null;
+
+        GameObject shopItemGO = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "ShopItemTemplate");
+        var shopItemTemplate1 = shopItemGO.GetComponent<ShopTemplate>();
+        GameObject shopItemButtonGO1 = FindObjectHelper.
+            FindObjectInParent(shopItemGO, "PurchaseButton");
+        var shopItemButton1 = shopItemButtonGO1.GetComponent<Button>();
+        GameObject shopCreditGO = FindObjectHelper.
+            FindObjectInParent(canvasGameObject, "CreditUIText");
+        var shopCreditText = shopCreditGO.GetComponent<Text>();
+
+        manager.RefreshPanels();
+        Assert.AreEqual("$ " + Account.credits.ToString(), shopCreditText.text.ToString());
+
+        yield return null;
+
+        shopItemButton1.onClick.Invoke();
+        Assert.AreEqual("$ 0", shopCreditText.text.ToString());
+
+        CloseShopPopUpWithButton();
     }
 }
