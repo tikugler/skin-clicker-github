@@ -2,12 +2,7 @@
 name: Test project
 
 on: 
-  push:
-    branches:
-      - master
-# on: 
-#   workflow_dispatch: {}
-
+  workflow_dispatch: {}
 jobs:
   testAllModes:
     name: Test in ${{ matrix.testMode }}
