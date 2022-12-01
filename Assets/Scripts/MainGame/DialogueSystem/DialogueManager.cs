@@ -5,22 +5,28 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-
 	public TextMeshProUGUI nameText;
 	public TextMeshProUGUI dialogueText;
 
+	private DialogueSelector dialogueSelector;
 	public Animator animator;
 
 	private Queue<string> sentences;
 
+	private bool dialogueEnded;
+
     // Use this for initialization
     void Start()
 	{
+		dialogueEnded = false;
 		sentences = new Queue<string>();
+		dialogueSelector = GetComponent<DialogueSelector>();
+		dialogueSelector.enabled = true;
 	}
 
 	public void StartDialogue(Dialogue dialogue)
 	{
+		dialogueEnded = false;
 		animator.transform.gameObject.SetActive(true);
 		animator.SetBool("IsOpen", true);
 		
@@ -44,7 +50,7 @@ public class DialogueManager : MonoBehaviour
 		}
 
 		string sentence = sentences.Dequeue();
-		Debug.Log(sentence);
+
 		StopAllCoroutines();
 		StartCoroutine(TypeSentence(sentence));
 	}
@@ -62,6 +68,11 @@ public class DialogueManager : MonoBehaviour
 	void EndDialogue()
 	{
 		animator.SetBool("IsOpen", false);
+		dialogueEnded = true;
 	}
 
+	public bool HasDialogueEnded()
+    {
+		return dialogueEnded;
+    }
 }
