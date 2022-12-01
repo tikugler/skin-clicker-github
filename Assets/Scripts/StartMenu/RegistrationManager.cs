@@ -26,6 +26,7 @@ public class RegistrationManager : MonoBehaviour
     [Header("Panel")]
     public GameObject RegistrationPanel;
 
+    public static bool isRegisteringTutorial = false;
     // flags to control if inputs are valid
     private bool isUsernameValid = false;
     private bool isPasswordValid = false;
@@ -187,11 +188,16 @@ public class RegistrationManager : MonoBehaviour
     {
         Debug.Log("Submit...");
         SubmitButton.interactable = false;
-        RegisterUserOnPlayFab();
+        if (isRegisteringTutorial)
+        {
+            RegisterUserOnPlayFab(true);
+            return;
+        }
+        RegisterUserOnPlayFab(false);
     }
 
     // send a request to register user regarding given inputs
-    private void RegisterUserOnPlayFab()
+    private void RegisterUserOnPlayFab(bool tutorial)
     {
         var request = new RegisterPlayFabUserRequest();
         request.TitleId = PlayFabSettings.TitleId;
@@ -199,7 +205,12 @@ public class RegistrationManager : MonoBehaviour
         request.Username = UsernameField.text;
         request.DisplayName = UsernameField.text;
         request.Password = PasswordField.text;
-
+        if (tutorial)
+        {
+            PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccessTutorial, OnRegisterFailed);
+            isRegisteringTutorial = false;
+            return;
+        }
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailed);
     }
 
@@ -222,6 +233,17 @@ public class RegistrationManager : MonoBehaviour
         Account.credits = 0;
         Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
         SceneManager.LoadScene("StartNewsMenu");
+    }
 
+    private void OnRegisterSuccessTutorial(RegisterPlayFabUserResult obj)
+    {
+        Debug.Log("registration is successful");
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
+        Account.credits += 1000;
+        Account.realMoney += 50;
+        Debug.Log(Account.credits);
+        Debug.Log(Account.realMoney);
+        Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
+        CloseRegistrationPanel();
     }
 }

@@ -8,6 +8,7 @@ public static class Account
     public static string accountId;
     public static string accountName;
     public static int points;
+    public static int realMoney;
     public static int credits;
     public static long inGameCurrency;
     public static List<string> skinList;

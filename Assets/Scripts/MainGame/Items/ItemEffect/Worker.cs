@@ -15,6 +15,8 @@ public class Worker : ItemEffect
     private float timer = 0.0f;
     private int credits;
 
+    public static int workerAmountWorkaround = 0;
+
 
     void Update()
     {
@@ -27,6 +29,7 @@ public class Worker : ItemEffect
     public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
         this.shopItem = shopItem;
+        workerAmountWorkaround++;
         CalculateNewAmount();
         CalculateNewPrice();
         EffectOfItem();

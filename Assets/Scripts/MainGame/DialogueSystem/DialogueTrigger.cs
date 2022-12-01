@@ -5,9 +5,19 @@ public class DialogueTrigger : MonoBehaviour
 
 	public Dialogue dialogue;
 
-	public void TriggerDialogue()
+	private DialogueManager dialogueManager;
+
+    void Start()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+    public void TriggerDialogue()
 	{
-		FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+		dialogueManager.StartDialogue(dialogue);
 	}
 
+    public bool HasDialogueEnded()
+    {
+        return dialogueManager.HasDialogueEnded();
+    }
 }
