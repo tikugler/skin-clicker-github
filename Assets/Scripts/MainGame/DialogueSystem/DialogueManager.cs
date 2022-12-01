@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-
 	public TextMeshProUGUI nameText;
 	public TextMeshProUGUI dialogueText;
 
+	private DialogueSelector dialogueSelector;
 	public Animator animator;
 
 	private Queue<string> sentences;
@@ -17,6 +17,8 @@ public class DialogueManager : MonoBehaviour
     void Start()
 	{
 		sentences = new Queue<string>();
+		dialogueSelector = GetComponent<DialogueSelector>();
+		dialogueSelector.enabled = true;
 	}
 
 	public void StartDialogue(Dialogue dialogue)
@@ -44,7 +46,7 @@ public class DialogueManager : MonoBehaviour
 		}
 
 		string sentence = sentences.Dequeue();
-		Debug.Log(sentence);
+
 		StopAllCoroutines();
 		StartCoroutine(TypeSentence(sentence));
 	}
