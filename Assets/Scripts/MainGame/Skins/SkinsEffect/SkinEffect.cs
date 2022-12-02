@@ -21,8 +21,8 @@ public abstract class SkinEffect
     }
 
     //Applies effect of skin to game.
-    public abstract void EffectOfItem();
+    public abstract void EffectOfSkin();
 
     //Uses/Equips skin --> setter for current skin.
-    public abstract void UseSkin();
+    public abstract void EquipSkin();
 }
