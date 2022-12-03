@@ -68,6 +68,11 @@ public class LoginManager : MonoBehaviour
         request.TitleId = PlayFabSettings.TitleId;
         request.Username = usernameText;
         request.Password = passwordText;
+        request.InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+        {
+            //GetUserAccountInfo = true,
+            GetPlayerProfile = true
+        };
 
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailed);
     }
@@ -95,7 +100,8 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log(obj.ToJson());
         Debug.Log("login is successful");
-        Account.SetPlayFabIdAndUserName(obj.PlayFabId, username.text);
+        
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, obj.InfoResultPayload.PlayerProfile.DisplayName);
         if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
             Account.SetUserLoginPlayerPrefs(username.text, password.text);
         LoadUserStatistics();

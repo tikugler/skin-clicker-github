@@ -100,6 +100,7 @@ public static class Account
 
     public static bool GetIfThereIsSavedUserLoginInfoPlayerPrefs()
     {
+        Debug.Log("PlayerPrefs username: " + PlayerPrefs.GetString("username"));
         return PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password");
     }
 
