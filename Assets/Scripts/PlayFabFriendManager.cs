@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
-
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,13 +15,31 @@ public class PlayFabFriendManager : MonoBehaviour
 
     [SerializeField] Transform friendScrollView;
     public GameObject uiFriendPrefab;
-    List<FriendInfo> myFriendsInScrollView = new List<FriendInfo>();
+
+    Dictionary<FriendInfo, UIFriend> myFriendsInScrollView = new Dictionary<FriendInfo, UIFriend>();
     [SerializeField] Button friendToggleButton;
+
+    public static Action<string[]> OnFriendsAddToPhoton = delegate{ };
+    public static Action<string[]> OnFriendsRemoveFromPhoton = delegate { };
+
+
 
 
     private void Awake()
     {
+
+        
+
         UIFriend.OnRemoveFriend += RemoveFriend;
+
+        if (!Account.LoggedIn || Account.accountName.Equals("Guest"))
+        {
+            friendToggleButton.interactable = false;
+            friendPanel.SetActive(false);
+            return;
+        }
+
+
     }
 
     private void OnDestroy()
@@ -31,22 +49,17 @@ public class PlayFabFriendManager : MonoBehaviour
 
     private void Start()
     {
-        if (!Account.LoggedIn)
-        {
-            friendToggleButton.interactable = false;
-            friendPanel.SetActive(false);
-            return;
-        }
-
-        GetFriends();
+        
+        if(friendToggleButton.interactable)
+            GetFriends();
     }
-    void DisplayFriends(List<FriendInfo> friendsCache)
+    void DisplayFriends()
     {
-        foreach (FriendInfo f in friendsCache)
+        foreach (FriendInfo f in Account.friendsList)
         {
             bool isFound = false;
 
-            foreach (FriendInfo g in myFriendsInScrollView)
+            foreach (FriendInfo g in myFriendsInScrollView.Keys)
             {
                 if (f.FriendPlayFabId == g.FriendPlayFabId)
                 {
@@ -56,6 +69,13 @@ public class PlayFabFriendManager : MonoBehaviour
             }
 
 
+            //I'm working on making it possible to see if your friend is online now.
+            //    If he is online you can send a private message to this person
+
+
+            //Ich arbeite daran, es möglich zu machen, zu sehen, ob Ihr Freund jetzt online ist.
+            //    Wenn er online ist, können Sie dieser Person eine private Nachricht senden
+
 
             if (!isFound)
             {
@@ -63,15 +83,15 @@ public class PlayFabFriendManager : MonoBehaviour
                 UIFriend uifriend = listing.GetComponent<UIFriend>();
                 
                 uifriend.Initialize(f);
+                myFriendsInScrollView.Add(f, uifriend);
 
             }
 
 
         }
-        myFriendsInScrollView = friendsCache;
+        //myFriendsInScrollView = Account.friendsList;
     }
 
-   
 
 
     IEnumerator WaitForFriend()
@@ -108,7 +128,7 @@ public class PlayFabFriendManager : MonoBehaviour
         }, result => {
             //_friends = result.Friends;
             Account.friendsList = result.Friends;
-            DisplayFriends(Account.friendsList); // triggers your UI
+            DisplayFriends(); // triggers your UI
         }, DisplayPlayFabError);
     }
 
@@ -135,7 +155,7 @@ public class PlayFabFriendManager : MonoBehaviour
         // Execute request and update friends when we are done
         PlayFabClientAPI.AddFriend(request, result => {
             Debug.Log("Friend added successfully!");
-
+            OnFriendsAddToPhoton?.Invoke(new string[] { friendId });
             GetFriends();
         }, DisplayPlayFabError);
     }
@@ -150,7 +170,11 @@ public class PlayFabFriendManager : MonoBehaviour
             FriendPlayFabId = friendInfo.FriendPlayFabId
         }, result => {
             //_friends.Remove(friendInfo);
-            Account.friendsList.Remove(friendInfo);
+            //Account.friendsList.Remove(friendInfo);
+            //myFriendsInScrollView.Remove(friendInfo);
+            Debug.Log("Account.friendsList.Remove(friendInfo): " + Account.friendsList.Remove(friendInfo));
+            Debug.Log("myFriendsInScrollView.Remove(friendInfo): " + myFriendsInScrollView.Remove(friendInfo));
+            OnFriendsRemoveFromPhoton?.Invoke(new string[] { friendInfo.TitleDisplayName });
             Destroy(uiFriend);
         }, DisplayPlayFabError);
     }
@@ -161,14 +185,14 @@ public class PlayFabFriendManager : MonoBehaviour
     private string friendSearch;
     [SerializeField] GameObject friendPanel;
 
-    public void InputFriendUserName(string friendUserName)
+    public void InputFriendUserName(string friendDisplayName)
     {
-        friendSearch = friendUserName;
+        friendSearch = friendDisplayName;
     }
 
     public void SubmitFriendRequest()
     {
-        AddFriend(FriendIdType.Username, friendSearch);
+        AddFriend(FriendIdType.DisplayName, friendSearch);
     }
 
     public void ToggleFriendPanel()

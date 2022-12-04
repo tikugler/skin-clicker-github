@@ -28,11 +28,15 @@ public class UIFriend : MonoBehaviour
     private void Awake()
     {
         //PhotonChatFriendController.OnStatusUpdated += HandleStatusUpdated;
-        //deleteFriendButton.onClick.AddListener += 
+        //deleteFriendButton.onClick.AddListener +=
+        PhotonChatManager.OnFriendStatusUpdate += HandleStatusUpdated;
+
     }
     private void OnDestroy()
     {
         //PhotonChatFriendController.OnStatusUpdated -= HandleStatusUpdated;
+        PhotonChatManager.OnFriendStatusUpdate -= HandleStatusUpdated;
+
     }
 
     private void OnEnable()
@@ -51,11 +55,12 @@ public class UIFriend : MonoBehaviour
     //public void Initialize(string friendName)
     public void Initialize(FriendInfo f)
     {
+        this.friendName = f.TitleDisplayName;
+        this.friendInfo = f;
         //friendManager = playFabFriendManager;
         Debug.Log($"{friendName} is added");
         //this.friendName = friendName;
-        this.friendName = f.Username;
-        this.friendInfo = f;
+        
 
         SetupUI();
         OnGetCurrentStatus?.Invoke(friendName);
@@ -63,14 +68,14 @@ public class UIFriend : MonoBehaviour
     }
 
 
-    //private void HandleStatusUpdated(PhotonStatus status)
-    //{
-    //    if (string.Compare(friendName, status.PlayerName) == 0)
-    //    {
-    //        Debug.Log($"Updating status in UI for {status.PlayerName} to status {status.Status}");
-    //        SetStatus(status.Status);
-    //    }
-    //}
+    private void HandleStatusUpdated(string playerName, int status)
+    {
+        if (string.Compare(friendName, playerName) == 0)
+        {
+            Debug.Log($"Updating status in UI for {playerName} to status {status}");
+            SetStatus(status);
+        }
+    }
 
     private void SetupUI()
     {
@@ -83,7 +88,6 @@ public class UIFriend : MonoBehaviour
         {
             onlineImage.color = onlineColor;
             isOnline = true;
-            OnGetRoomStatus?.Invoke();
         }
         else
         {
