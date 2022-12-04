@@ -18,6 +18,17 @@ public class PlayFabFriendManager : MonoBehaviour
     List<FriendInfo> myFriendsInScrollView = new List<FriendInfo>();
     [SerializeField] Button friendToggleButton;
 
+
+    private void Awake()
+    {
+        UIFriend.OnRemoveFriend += RemoveFriend;
+    }
+
+    private void OnDestroy()
+    {
+        UIFriend.OnRemoveFriend -= RemoveFriend;
+    }
+
     private void Start()
     {
         if (!Account.LoggedIn)
@@ -50,7 +61,8 @@ public class PlayFabFriendManager : MonoBehaviour
             {
                 GameObject listing = Instantiate(uiFriendPrefab, friendScrollView);
                 UIFriend uifriend = listing.GetComponent<UIFriend>();
-                uifriend.Initialize(f.TitleDisplayName);
+                
+                uifriend.Initialize(f);
 
             }
 
@@ -59,6 +71,7 @@ public class PlayFabFriendManager : MonoBehaviour
         myFriendsInScrollView = friendsCache;
     }
 
+   
 
 
     IEnumerator WaitForFriend()
@@ -130,7 +143,7 @@ public class PlayFabFriendManager : MonoBehaviour
 
     // unlike AddFriend, RemoveFriend only takes a PlayFab ID
     // you can get this from the FriendInfo object under FriendPlayFabId
-    void RemoveFriend(FriendInfo friendInfo)
+    void RemoveFriend(FriendInfo friendInfo, GameObject uiFriend)
     {
         PlayFabClientAPI.RemoveFriend(new RemoveFriendRequest
         {
@@ -138,6 +151,7 @@ public class PlayFabFriendManager : MonoBehaviour
         }, result => {
             //_friends.Remove(friendInfo);
             Account.friendsList.Remove(friendInfo);
+            Destroy(uiFriend);
         }, DisplayPlayFabError);
     }
 

@@ -334,8 +334,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 8916507993519987258}
+        m_TargetAssemblyTypeName: UIFriend, NewAssembly
         m_MethodName: RemoveFriend
         m_Mode: 1
         m_Arguments:
@@ -641,6 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91ebafce1a314819997d37cfdcf4ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deleteFriendButton: {fileID: 0}
   friendNameText: {fileID: 7681164579588158366}
   friendName: 
   isOnline: 0
