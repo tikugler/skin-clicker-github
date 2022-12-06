@@ -45,7 +45,8 @@ public class ShopManager : MonoBehaviour
 
         //Sets panels unused panels inactive and starts with the last panel in the list.
         int indexShopPanels = shopPanelsGO.Length - 1;
-        for (int i = 0; i < (shopPanelsGO.Length - contentDistributor.scriptableObjectItems.Length); i++) {
+        for (int i = 0; i < (shopPanelsGO.Length - contentDistributor.scriptableObjectItems.Length); i++)
+        {
             shopPanelsGO[indexShopPanels - i].SetActive(false);
             //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
         }
@@ -58,7 +59,7 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
-            shopPanels[i].itemIcon = contentDistributor.scriptableObjectItems[i].icon;
+            shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
         }
         CheckPurchaseable();
     }
@@ -95,7 +96,7 @@ public class ShopManager : MonoBehaviour
             if (contentDistributor.itemsDictionary.ContainsKey(item.id))
             {
                 credit -= item.price;
-                Account.credits = credit; 
+                Account.credits = credit;
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.itemsDictionary[item.id].shopItem = item;

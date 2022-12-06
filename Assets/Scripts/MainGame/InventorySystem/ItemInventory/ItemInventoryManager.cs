@@ -12,7 +12,7 @@ public class ItemInventoryManager : MonoBehaviour
     //Dummy
     public ArrayList itemsInInventory = new ArrayList();
 
-    void Start() 
+    void Start()
     {
         RefreshPanels();
     }
@@ -25,18 +25,18 @@ public class ItemInventoryManager : MonoBehaviour
         for (int i = 0; i < itemsInInventory.Count; i++)
         {
             inventoryPanelsGO[i].SetActive(true);
-            ItemEffect item = (ItemEffect) itemsInInventory[i];
+            ItemEffect item = (ItemEffect)itemsInInventory[i];
             inventoryPanels[i].shopItemAmount.text = item.shopItem.amount.ToString();
-            inventoryPanels[i].itemIcon = item.shopItem.icon;
+            inventoryPanels[i].shopItemIcon = item.shopItem.icon;
             inventoryPanels[i].shopItemDescription.text = item.shopItem.description;
             inventoryPanels[i].shopItemTitle.text = item.shopItem.title;
         }
     }
 
-        public void UseButtonAction(int pos)
+    public void UseButtonAction(int pos)
     {
         //only woking, if there are no stacks!
-        ItemEffect item = (ItemEffect) itemsInInventory[pos];
+        ItemEffect item = (ItemEffect)itemsInInventory[pos];
         item.EffectOfItem();
         inventoryPanelsGO[ContentDistributor.contentDistributor.boughtItemsOfPlayer.Count - 1].SetActive(false);
         ContentDistributor.contentDistributor.boughtItemsOfPlayer.Remove(item);
