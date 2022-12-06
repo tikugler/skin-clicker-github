@@ -18,32 +18,24 @@ public class UIFriend : MonoBehaviour
     [SerializeField] private Color offlineColor = new Color(209, 209, 209);
 
     public static Action<FriendInfo, GameObject> OnRemoveFriend = delegate { };
-    public static Action<string> OnInviteFriend = delegate { };
-    public static Action<string> OnGetCurrentStatus = delegate { };
-    public static Action OnGetRoomStatus = delegate { };
 
     private FriendInfo friendInfo;
     public static PlayFabFriendManager friendManager;
 
     private void Awake()
     {
-        //PhotonChatFriendController.OnStatusUpdated += HandleStatusUpdated;
-        //deleteFriendButton.onClick.AddListener +=
-        PhotonChatManager.OnFriendStatusUpdate += HandleStatusUpdated;
+       
 
     }
     private void OnDestroy()
     {
-        //PhotonChatFriendController.OnStatusUpdated -= HandleStatusUpdated;
-        PhotonChatManager.OnFriendStatusUpdate -= HandleStatusUpdated;
-
+        Debug.Log($"{friendName} is destroyed");
     }
 
     private void OnEnable()
     {
         if (string.IsNullOrEmpty(friendName)) return;
-        OnGetCurrentStatus?.Invoke(friendName);
-        OnGetRoomStatus?.Invoke();
+        //OnGetCurrentStatus?.Invoke(friendName);
     }
 
     //public void Initialize(FriendInfo friend)
@@ -55,6 +47,7 @@ public class UIFriend : MonoBehaviour
     //public void Initialize(string friendName)
     public void Initialize(FriendInfo f)
     {
+        PhotonChatManager.OnFriendStatusUpdate += HandleStatusUpdated;
         this.friendName = f.TitleDisplayName;
         this.friendInfo = f;
         //friendManager = playFabFriendManager;
@@ -63,13 +56,13 @@ public class UIFriend : MonoBehaviour
         
 
         SetupUI();
-        OnGetCurrentStatus?.Invoke(friendName);
-        OnGetRoomStatus?.Invoke();
+        //OnGetCurrentStatus?.Invoke(friendName);
     }
 
 
     private void HandleStatusUpdated(string playerName, int status)
     {
+        Debug.Log($"---- friendName: {friendName}, playerName: {playerName}");
         if (string.Compare(friendName, playerName) == 0)
         {
             Debug.Log($"Updating status in UI for {playerName} to status {status}");

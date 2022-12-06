@@ -22,6 +22,7 @@ public class PlayFabFriendManager : MonoBehaviour
     public static Action<string[]> OnFriendsAddToPhoton = delegate{ };
     public static Action<string[]> OnFriendsRemoveFromPhoton = delegate { };
 
+    bool isFirstRun = true;
 
 
 
@@ -36,7 +37,13 @@ public class PlayFabFriendManager : MonoBehaviour
         {
             friendToggleButton.interactable = false;
             friendPanel.SetActive(false);
+      
             return;
+        }
+        else
+        {
+            isFirstRun = true;
+            GetFriends();
         }
 
 
@@ -50,8 +57,8 @@ public class PlayFabFriendManager : MonoBehaviour
     private void Start()
     {
         
-        if(friendToggleButton.interactable)
-            GetFriends();
+        //if(friendToggleButton.interactable)
+            //GetFriends();
     }
     void DisplayFriends()
     {
@@ -85,11 +92,16 @@ public class PlayFabFriendManager : MonoBehaviour
                 uifriend.Initialize(f);
                 myFriendsInScrollView.Add(f, uifriend);
 
+                if(!isFirstRun)
+                    OnFriendsAddToPhoton?.Invoke(new string[] { f.TitleDisplayName });
+
+
             }
 
 
         }
         //myFriendsInScrollView = Account.friendsList;
+        isFirstRun = false;
     }
 
 
@@ -152,10 +164,9 @@ public class PlayFabFriendManager : MonoBehaviour
                 request.FriendTitleDisplayName = friendId;
                 break;
         }
-        // Execute request and update friends when we are done
+        
         PlayFabClientAPI.AddFriend(request, result => {
             Debug.Log("Friend added successfully!");
-            OnFriendsAddToPhoton?.Invoke(new string[] { friendId });
             GetFriends();
         }, DisplayPlayFabError);
     }
@@ -174,6 +185,7 @@ public class PlayFabFriendManager : MonoBehaviour
             //myFriendsInScrollView.Remove(friendInfo);
             Debug.Log("Account.friendsList.Remove(friendInfo): " + Account.friendsList.Remove(friendInfo));
             Debug.Log("myFriendsInScrollView.Remove(friendInfo): " + myFriendsInScrollView.Remove(friendInfo));
+            
             OnFriendsRemoveFromPhoton?.Invoke(new string[] { friendInfo.TitleDisplayName });
             Destroy(uiFriend);
         }, DisplayPlayFabError);

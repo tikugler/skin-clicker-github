@@ -20,6 +20,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     [SerializeField] string username; //= Account.accountName;
     [SerializeField] TMP_Dropdown messageReceiverDropDown;
 
+    
     //public static Action <FriendInfo, int> OnFriendStatusUpdate = delegate { };
 
     public static Action<string, int> OnFriendStatusUpdate = delegate { };
@@ -30,7 +31,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         isConnected = true;
         chatClient = new ChatClient(this);
-        Debug.Log("---- You chat username: " + Account.accountName);
+        Debug.Log("---- You chat username: " + Account.accountName.ToLower());
         //chatClient.Connect("2156777f-aabb-4176-a2a2-e55b553b8289", "1.0.0", new AuthenticationValues(Account.accountName));
         chatClient.ConnectAndSetStatus("2156777f-aabb-4176-a2a2-e55b553b8289", "1.0.0", new AuthenticationValues(Account.accountName));
 
@@ -103,6 +104,11 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         Debug.Log($"user: {user}, status: {status}, got message: {gotMessage}, message: {message}");
         FriendInfo friendInfo = findFriendInfoByUsername(user);
         OnFriendStatusUpdate?.Invoke(user, status);
+
+        if(status == 0)
+            RemoveItemFromChatDropDown(user);
+        else if(status == 2)
+            AddItemToChatDropDown(user);
     }
 
     public void OnSubscribed(string[] channels, bool[] results)
@@ -110,25 +116,15 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         //Debug.Log(chatClient.UserId);
 
         Debug.Log("You successfully subscribed to the chat");
-        StartCoroutine(PrintFriends());
+
         //FindPhotonFriends();
 
 
         //throw new System.NotImplementedException();
     }
 
-    public IEnumerator PrintFriends()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(2);
-
-            Debug.Log(Account.friendsList.Count);
-            Debug.Log(Account.friendsList.Select(f => f.TitleDisplayName).ToArray());
-        }
-        
-
-    }
+    
+    
     public void OnUnsubscribed(string[] channels)
     {
         throw new System.NotImplementedException();
@@ -157,6 +153,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public TMP_InputField chatField;
     [SerializeField] TMP_Text chatDisplay;
 
+    [SerializeField] string selectedReceiverToSendMessage;
+
 
     private void Awake()
     {
@@ -176,17 +174,27 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         PlayFabFriendManager.OnFriendsAddToPhoton += AddPhotonChatFriend;
         PlayFabFriendManager.OnFriendsRemoveFromPhoton += RemovePhotonChatFriend;
 
-
+        messageReceiverDropDown.onValueChanged.AddListener(delegate {
+            DropdownItemSelected(messageReceiverDropDown);});
 
 
 
 
     }
 
+    void DropdownItemSelected(TMP_Dropdown dropdown)
+    {
+        int index = dropdown.value;
+
+        Debug.Log(dropdown.options[index].text);
+        selectedReceiverToSendMessage = dropdown.options[index].text;
+    }
+
     private void OnDestroy()
     {
         PlayFabFriendManager.OnFriendsAddToPhoton -= AddPhotonChatFriend;
         PlayFabFriendManager.OnFriendsRemoveFromPhoton -= RemovePhotonChatFriend;
+        messageReceiverDropDown.onValueChanged.RemoveAllListeners();
     }
 
     private void Start()
@@ -195,7 +203,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         Debug.Log("Account name is: " + username);
         Debug.Log(Account.accountId);
         Debug.Log(Account.credits);
-        
+
+        messageReceiverDropDown.onValueChanged.Invoke(messageReceiverDropDown.value);
+
+
 
 
     }
@@ -221,7 +232,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void SubmitPublicChatOnClick()
     {
-        if(privateReceiver == "")
+        if(selectedReceiverToSendMessage.Equals("Global"))
         {
             Debug.Log("called public submit chat");
             chatClient.PublishMessage("RegionChannel", currentChat);
@@ -250,9 +261,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void SubmitPrivateChatOnClick()
     {
-        if (privateReceiver != "")
+        if (!selectedReceiverToSendMessage.Equals("Global"))
         {
-            chatClient.SendPrivateMessage(privateReceiver, currentChat);
+            Debug.Log("called private submit chat");
+            chatClient.SendPrivateMessage(selectedReceiverToSendMessage, currentChat);
             chatField.text = "";
             currentChat = "";
         }
@@ -263,12 +275,16 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void CallOpenChat()
     {
+        chatOpenerButton.gameObject.SetActive(false);
         chatPanel.SetActive(true);
     }
 
     public void CloseChatPanel()
     {
+
         chatPanel.SetActive(false);
+        chatOpenerButton.gameObject.SetActive(true);
+
     }
 
 
@@ -313,10 +329,11 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             chatClient.AddFriends(friendsToAdd);
             Debug.Log("Friend count: " + Account.friendsList.Count);
 
-            foreach (string friendDisplayName in friendsToAdd)
-            {
-                AddItemToChatDropDown(friendDisplayName);
-            }
+            //foreach (string friendDisplayName in friendsToAdd)
+            //{
+            //    Debug.Log("added friend name: " + friendDisplayName);
+            //    AddItemToChatDropDown(friendDisplayName);
+            //}
 
         }
     }
@@ -333,6 +350,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
             foreach (string friendDisplayName in friendsToRemove)
             {
+                Debug.Log("removed friend name: " + friendDisplayName);
+
                 RemoveItemFromChatDropDown(friendDisplayName);
             }
 
@@ -356,5 +375,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
                 break;
             }
         }
+        
     }
+
+    
 }
