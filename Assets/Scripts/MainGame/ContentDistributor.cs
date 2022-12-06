@@ -23,6 +23,7 @@ public class ContentDistributor : MonoBehaviour
 
     //Player stuff for demo
     public ArrayList boughtItemsOfPlayer = new ArrayList();
+    public ArrayList boughtSkinsOfPlayer = new ArrayList();
 
 
     // make sure that SetUpgrade is called before ShopManager.RefreshPanels

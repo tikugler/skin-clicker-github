@@ -7,12 +7,12 @@ public class SkinInventoryManager : MonoBehaviour
 {
     public Button[] useButtons;
     public GameObject[] inventoryPanelsGO; //GO means GameObject, has reference to GameObjects
-    public SkinTemplate[] inventoryPanels; //Reference to scripts
+    public ShopTemplate[] inventoryPanels; //Reference to scripts
 
     //Dummy
     public ArrayList skinsInInventory = new ArrayList();
 
-    void Start() 
+    void Start()
     {
         RefreshPanels();
     }
@@ -20,26 +20,26 @@ public class SkinInventoryManager : MonoBehaviour
     //Refreshes panels --> new values are displayed.
     public void RefreshPanels()
     {
-        skinsInInventory = ContentDistributor.contentDistributor.boughtItemsOfPlayer;
+        skinsInInventory = ContentDistributor.contentDistributor.boughtSkinsOfPlayer;
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < skinsInInventory.Count; i++)
         {
             inventoryPanelsGO[i].SetActive(true);
-            ItemEffect item = (ItemEffect) skinsInInventory[i];
-           // inventoryPanels[i].shopItemAmount.text = item.shopItem.amount.ToString();
-           // inventoryPanels[i].itemIcon = item.shopItem.icon;
-           // inventoryPanels[i].shopItemDescription.text = item.shopItem.description;
-           // inventoryPanels[i].shopItemTitle.text = item.shopItem.title;
+            SkinEffect item = (SkinEffect)skinsInInventory[i];
+            //inventoryPanels[i].shopItemAmount.text = item.shopItem.amount.ToString();
+            inventoryPanels[i].shopItemIcon = item.skinTemplate.icon;
+            inventoryPanels[i].shopItemDescription.text = item.skinTemplate.description;
+            inventoryPanels[i].shopItemTitle.text = item.skinTemplate.title;
+            inventoryPanels[i].rarity = item.skinTemplate.rarity;
         }
     }
 
-        public void UseButtonAction(int pos)
+    public void UseButtonAction(int pos)
     {
         //only woking, if there are no stacks!
-        ItemEffect item = (ItemEffect) skinsInInventory[pos];
-        item.EffectOfItem();
-        inventoryPanelsGO[ContentDistributor.contentDistributor.boughtItemsOfPlayer.Count - 1].SetActive(false);
-        ContentDistributor.contentDistributor.boughtItemsOfPlayer.Remove(item);
+        SkinEffect item = (SkinEffect)skinsInInventory[pos];
+        item.EffectOfSkin();
+        //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()
         RefreshPanels();
     }
 }
