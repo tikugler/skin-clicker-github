@@ -457,7 +457,6 @@ MonoBehaviour:
   shopItemPrice: {fileID: 7766132732925476583}
   shopItemAmount: {fileID: 2123968041645720404}
   itemIcon: {fileID: 0}
-  iconV2: {fileID: 0}
 --- !u!1 &7760290790289584181
 GameObject:
   m_ObjectHideFlags: 0

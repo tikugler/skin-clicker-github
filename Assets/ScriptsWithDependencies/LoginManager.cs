@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using PlayFab;
+using PlayFab.ClientModels;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using PlayFab;
-using PlayFab.ClientModels;
-using System;
-using TMPro;
 
 public class LoginManager : MonoBehaviour
 {
@@ -14,6 +12,21 @@ public class LoginManager : MonoBehaviour
     public InputField username;
     public InputField password;
     public GameObject wrongloginWarning;
+
+    /// <summary>
+    /// if User login info is saved in PlayerPrefs,
+    /// it is loaded
+    /// </summary>
+    private void Awake()
+    {
+
+        if (Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
+            LoginUserOnPlayFab(Account.GetUsernamePlayerPrefs(),
+                Account.GetPasswordPlayerPrefs());
+
+        else if (Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
+            LoginWithGuestCustomID(Account.GetGuestCustomIdPlayerPrefs());
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +48,9 @@ public class LoginManager : MonoBehaviour
     public void LoginButton()
     {
         //StartCoroutine(CallLoginWithCoroutine());
-        LoginUserOnPlayFab();
+        string usernameText = username.text;
+        string passwordText = password.text;
+        LoginUserOnPlayFab(usernameText, passwordText);
 
     }
 
@@ -47,12 +62,17 @@ public class LoginManager : MonoBehaviour
     /// <summary>
     /// makes a login request by using given inputs
     /// </summary>
-    private void LoginUserOnPlayFab()
+    private void LoginUserOnPlayFab(string usernameText, string passwordText)
     {
         var request = new LoginWithPlayFabRequest();
         request.TitleId = PlayFabSettings.TitleId;
-        request.Username = username.text;
-        request.Password = password.text;
+        request.Username = usernameText;
+        request.Password = passwordText;
+        request.InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+        {
+            //GetUserAccountInfo = true,
+            GetPlayerProfile = true
+        };
 
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailed);
     }
@@ -65,6 +85,7 @@ public class LoginManager : MonoBehaviour
     private void OnLoginFailed(PlayFabError obj)
     {
         Debug.Log("login has failed");
+        Debug.Log(obj.Error);
         wrongloginWarning.GetComponent<Text>().text = "Error: " + obj.Error;
         wrongloginWarning.SetActive(true);
     }
@@ -77,12 +98,15 @@ public class LoginManager : MonoBehaviour
     /// <param name="obj"></param>
     private void OnLoginSuccess(LoginResult obj)
     {
+        Debug.Log(obj.ToJson());
         Debug.Log("login is successful");
+        
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, obj.InfoResultPayload.PlayerProfile.DisplayName);
+        if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
+            Account.SetUserLoginPlayerPrefs(username.text, password.text);
         LoadUserStatistics();
-        PlayerInfo.username = username.text;
         var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
         loggedInUser.text = username.text;
-        PlayerInfo.playerID = obj.PlayFabId;
         SceneManager.LoadScene("StartNewsMenu");
     }
 
@@ -92,27 +116,58 @@ public class LoginManager : MonoBehaviour
     private void LoadUserStatistics()
     {
         var request = new GetPlayerStatisticsRequest();
-        request.StatisticNames = new List<string>() { "Credits" };
+        //request.StatisticNames = new List<string>() { "Credits" };
         PlayFabClientAPI.GetPlayerStatistics(request, OnGetStatisticsSuccess, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
 
     /// <summary>
-    ///called If GetPlayerStatistics returns a success message 
+    /// called If GetPlayerStatistics returns a success message 
     /// updates statistics in Player class regarding to saved ones
     /// </summary>
     /// <param name="obj">positive response with statistics</param>
     private void OnGetStatisticsSuccess(GetPlayerStatisticsResult obj)
     {
-        foreach (var stat in obj.Statistics)
-        {
-            print("Statistic: " + stat.StatisticName + ", Wert: " + stat.Value);
-            switch (stat.StatisticName)
-            {
-                case "Credits":
-                    PlayerInfo.score = stat.Value;
-                    break;
-            }
-        }
+        Account.SetStatistics(obj.Statistics);
+        
+    }
+
+
+    /// <summary>
+    /// called when user click on "Als Gast Spielen" Button
+    /// user is created as guast in Playfab
+    /// </summary>
+    public void CallPlayAsGuest()
+    {
+        Account.guestCustomID = DateTime.Now.ToString("yyyyMMddHHmmssffff") + SystemInfo.deviceUniqueIdentifier;
+        var request = new LoginWithCustomIDRequest { CustomId = Account.guestCustomID, CreateAccount = true };
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessAsGuest, error => Debug.Log(error.Error));
+
+
+    }
+
+
+    /// <summary>
+    /// user loggs in as guest with the given questCustomID
+    /// </summary>
+    /// <param name="questCustomID">unique guest id</param>
+    private void LoginWithGuestCustomID(string questCustomID)
+    {
+        var request = new LoginWithCustomIDRequest { CustomId = questCustomID, CreateAccount = false };
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessAsGuest, error => Debug.Log(error.Error));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj">success result</param>
+    private void OnLoginSuccessAsGuest(LoginResult obj)
+    {
+
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, "Guest");
+        if (!Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
+            Account.SetGuestCustomIdPlayerPrefs(Account.guestCustomID);
+        LoadUserStatistics();
+        SceneManager.LoadScene("StartNewsMenu");
     }
 }
