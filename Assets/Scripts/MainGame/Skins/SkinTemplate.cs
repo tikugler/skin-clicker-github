@@ -8,10 +8,11 @@ public class SkinTemplate : ScriptableObject
     public string id;
     public string title;
     public string description;
-    
+    public string rarity;
+
     [HideInInspector]
     public int price;
     //public int amount;
-    public Sprite icon;
+    public Sprite icon; //mb like a thumbnail
     public Sprite fullPicture;
 }
