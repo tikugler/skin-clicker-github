@@ -19,6 +19,7 @@ public class ContentDistributor : MonoBehaviour
     public DummyButton mainButton;
     public ItemTemplate[] scriptableObjectItems;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
+    public Dictionary<string, SkinEffect> skinsDictionary = new Dictionary<string, SkinEffect>();
 
     //Player stuff for demo
     public ArrayList boughtItemsOfPlayer = new ArrayList();
@@ -32,6 +33,7 @@ public class ContentDistributor : MonoBehaviour
         {
             contentDistributor = this;
             CreateItems();
+            CreateSkins();
             SetUpgrades();
         }
     }
@@ -42,7 +44,7 @@ public class ContentDistributor : MonoBehaviour
     *  The key is ALWAYS the exact class name of a item!
     *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
     */
-    public void CreateItems() 
+    public void CreateItems()
     {
         var doubleEffect = new DoubleEffect();
         itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);
@@ -54,6 +56,15 @@ public class ContentDistributor : MonoBehaviour
         itemsDictionary.Add(worker.id.ToString(), worker);
     }
 
+    /* 
+    *  Creats and adds ItemEffects to key-value-pair.
+    *  The key is ALWAYS the exact class name of a item!
+    *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
+    */
+    public void CreateSkins()
+    {
+
+    }
 
     /// <summary>
     /// sets the number of performed upgrade for each item according to Account.upgradeList
@@ -61,14 +72,14 @@ public class ContentDistributor : MonoBehaviour
     private void SetUpgrades()
     {
 
-        foreach(ItemTemplate item in scriptableObjectItems)
+        foreach (ItemTemplate item in scriptableObjectItems)
         {
             item.amount = 0; // the amount at the beginning must be 0
             item.price = item.startPrice;  // the price is equal to startPrice (initial price) if the amount is 0
             // performedUpgrade is 0 if item does not exists in upgradeList,
             // otherwise, the value in the upgradeList for related key
-            Account.upgradeList.TryGetValue(item.id, out int performedUpgrade); 
-            for(int i = 0; i < performedUpgrade; i++)
+            Account.upgradeList.TryGetValue(item.id, out int performedUpgrade);
+            for (int i = 0; i < performedUpgrade; i++)
             {
                 // PurchaseButtonAction is called performedUpgrade times for related item without reducing credits
                 itemsDictionary[item.id].PurchaseButtonAction(item);

@@ -2,7 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkinTemplate : MonoBehaviour
+[CreateAssetMenu(fileName = "skinItem", menuName = "ScriptableObjects/New Skin Item", order = 1)]
+public class SkinTemplate : ScriptableObject
 {
-    // not defined
+    public string id;
+    public string title;
+    public string description;
+    public string rarity;
+
+    [HideInInspector]
+    public int price;
+    //public int amount;
+    public Sprite icon; //mb like a thumbnail
+    public Sprite fullPicture;
 }
