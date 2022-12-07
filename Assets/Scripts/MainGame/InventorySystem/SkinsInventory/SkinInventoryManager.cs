@@ -10,8 +10,6 @@ public class SkinInventoryManager : MonoBehaviour
     public ShopTemplate[] inventoryPanels; //Reference to scripts
     public ContentDistributor contentDistributor;
 
-    //Dummy
-    public ArrayList skinsInInventory = new ArrayList();
 
     void Start()
     {
@@ -30,12 +28,11 @@ public class SkinInventoryManager : MonoBehaviour
             //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
         }
 
-        skinsInInventory = ContentDistributor.contentDistributor.boughtSkinsOfPlayer;
         //Goes through every shop item in the array and refreshes title, description, icon and price.
-        for (int i = 0; i < skinsInInventory.Count; i++)
+        for (int i = 0; i < Account.skinList.Count; i++)
         {
             inventoryPanelsGO[i].SetActive(true);
-            SkinEffect item = (SkinEffect)skinsInInventory[i];
+            SkinEffect item = (SkinEffect)Account.skinList[i];
             //inventoryPanels[i].shopItemAmount.text = item.shopItem.amount.ToString();
             inventoryPanels[i].shopItemIcon = item.skinTemplate.icon;
             inventoryPanels[i].shopItemDescription.text = item.skinTemplate.description;
@@ -47,8 +44,8 @@ public class SkinInventoryManager : MonoBehaviour
     public void UseButtonAction(int pos)
     {
         //only woking, if there are no stacks!
-        SkinEffect item = (SkinEffect)skinsInInventory[pos];
-        item.EffectOfSkin();
+        SkinEffect item = (SkinEffect)Account.skinList[pos];
+        item.EquipSkin();
         //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()
         RefreshPanels();
     }

@@ -6,7 +6,7 @@ public class DummyButton : MonoBehaviour
     public int basePoints = 1;
     public int skinMultiplicator = 1;
     public float criticalMultiplicator = 1;
-    public float criticalChance = 0.1f;
+    public static float criticalChance = 0f;
 
 
     public void MainButtonAction()
@@ -28,7 +28,7 @@ public class DummyButton : MonoBehaviour
 
     public void WorkerAction(int worker)
     {
-        Account.credits += basePoints * multiplicator * worker;
+        Account.credits += basePoints * skinMultiplicator * worker;
     }
 
 

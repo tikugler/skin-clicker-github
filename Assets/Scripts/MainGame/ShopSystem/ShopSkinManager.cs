@@ -70,7 +70,7 @@ public class ShopSkinManager : MonoBehaviour
     {
         for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
         {
-            if (credit >= contentDistributor.scriptableObjectSkins[i].price)
+            if (Account.credits >= contentDistributor.scriptableObjectSkins[i].price)
             {
                 purchaseButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
