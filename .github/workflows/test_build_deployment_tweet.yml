@@ -1,4 +1,4 @@
-name: Build, Deployment
+name: Test, Build, Deployment, Tweet
 on: 
   push:
     branches:
