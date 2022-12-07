@@ -60,6 +60,7 @@ public class ShopSkinManager : MonoBehaviour
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectSkins[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectSkins[i].icon;
+            shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
         }
         CheckPurchaseable();
     }

@@ -8,6 +8,7 @@ public class ItemInventoryManager : MonoBehaviour
     public Button[] useButtons;
     public GameObject[] inventoryPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] inventoryPanels; //Reference to scripts
+    public ContentDistributor contentDistributor;
 
     //Dummy
     public ArrayList itemsInInventory = new ArrayList();
@@ -20,6 +21,15 @@ public class ItemInventoryManager : MonoBehaviour
     //Refreshes panels --> new values are displayed.
     public void RefreshPanels()
     {
+        contentDistributor = ContentDistributor.contentDistributor;
+        //Sets panels unused panels inactive and starts with the last panel in the list.
+        int indexInventoryPanels = inventoryPanelsGO.Length - 1;
+        for (int i = 0; i < (inventoryPanelsGO.Length - contentDistributor.scriptableObjectItems.Length); i++)
+        {
+            inventoryPanelsGO[indexInventoryPanels - i].SetActive(false);
+            //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
+        }
+
         itemsInInventory = ContentDistributor.contentDistributor.boughtItemsOfPlayer;
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < itemsInInventory.Count; i++)
