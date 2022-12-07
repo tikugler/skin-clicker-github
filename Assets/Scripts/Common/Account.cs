@@ -1,20 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public static class Account
 {
     public static string guestCustomID; // only for guests
     public static string accountId;
     public static string accountName;
+    public static int points;
+    public static int realMoney;
     public static int credits;
     public static long inGameCurrency;
     public static List<string> skinList;
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
     public static string activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
+    public static List<FriendInfo> friendsList = new List<FriendInfo>();
 
     // Skin objekt? hat id, wert, image, boolean ausgew�hlt 
     // account objekt serializable?
@@ -79,7 +80,15 @@ public static class Account
         CleanGuestCustomIdPlayerPrefs();
 
     }
+    public static bool IsNewPlayer()
+    {
+        return PlayerPrefs.GetInt("newPlayer", 1) == 0 ? false : true;
+    }
 
+    public static void SetNewPlayer(int value)
+    {
+        PlayerPrefs.SetInt("newPlayer", value);
+    }
     public static string GetUsernamePlayerPrefs()
     {
         return PlayerPrefs.GetString("username");
@@ -92,6 +101,7 @@ public static class Account
 
     public static bool GetIfThereIsSavedUserLoginInfoPlayerPrefs()
     {
+        Debug.Log("PlayerPrefs username: " + PlayerPrefs.GetString("username"));
         return PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password");
     }
 
@@ -129,5 +139,6 @@ public static class Account
         CleanUserLoginPlayerPrefs();
         upgradeList = new Dictionary<string, int>();
         credits = 0;
+        points = 0;
     }
 }

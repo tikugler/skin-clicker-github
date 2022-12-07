@@ -1,0 +1,47 @@
+name: Whatsapp Notification
+
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  notify-team:
+    runs-on: ubuntu-latest
+    steps:
+      - name: whatsapp-notify-berkan
+        uses: kaviadigdarshan/whatsapp-actions@main
+        continue-on-error: true
+        env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.BERKAN }}
+      - name: whatsapp-notify-janick
+        uses: kaviadigdarshan/whatsapp-actions@main
+        continue-on-error: true
+        env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.JANICK }}
+      - name: whatsapp-notify-patrick
+        uses: kaviadigdarshan/whatsapp-actions@main
+        continue-on-error: true
+        env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.PATRICK }}
+      - name: whatsapp-notify-timo
+        uses: kaviadigdarshan/whatsapp-actions@main
+        continue-on-error: true
+        env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.TIMO }}
+      - name: whatsapp-notify-yusuf
+        uses: kaviadigdarshan/whatsapp-actions@main
+        continue-on-error: true
+        env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.YUSUF }}

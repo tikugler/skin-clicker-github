@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "PlayFab",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "PhotonChat"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1666,6 +1666,7 @@ TextureImporter:
       GUI_10: 21300020
       GUI_52: 21300090
       GUI_31: 21300062
+<<<<<<< HEAD
       GUI_58: 21300102
       GUI_60: 21300106
       GUI_28: 21300056
@@ -1701,6 +1702,8 @@ TextureImporter:
       GUI_25: 21300050
       GUI_18: 21300036
       GUI_64: 21300114
+=======
+>>>>>>> master
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
