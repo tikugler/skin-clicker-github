@@ -400,7 +400,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 111.6557, y: -0.8684}
-  m_SizeDelta: {x: 225, y: 400}
+  m_SizeDelta: {x: 300, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7760290790008758440
 CanvasRenderer:
@@ -456,7 +456,9 @@ MonoBehaviour:
   shopItemDescription: {fileID: 7760290790711728328}
   shopItemPrice: {fileID: 7766132732925476583}
   shopItemAmount: {fileID: 2123968041645720404}
-  itemIcon: {fileID: 0}
+  rarity: {fileID: 0}
+  shopItemIcon: {fileID: 0}
+  fullPicture: {fileID: 0}
 --- !u!1 &7760290790289584181
 GameObject:
   m_ObjectHideFlags: 0
