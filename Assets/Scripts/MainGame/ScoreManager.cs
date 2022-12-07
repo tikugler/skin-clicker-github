@@ -14,7 +14,6 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         RefreshCredits();
     }
 
@@ -26,7 +25,6 @@ public class ScoreManager : MonoBehaviour
 
     private void RefreshCredits()
     {
-        
         credit = Account.credits;
         creditUIText.text = "$ " + credit.ToString();
     }
