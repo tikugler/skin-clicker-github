@@ -64,7 +64,14 @@ public class ContentDistributor : MonoBehaviour
     */
     public void CreateSkins()
     {
-
+        var testSkin = new TestSkin();
+        testSkin.id = SkinNames.TestEffect;
+        testSkin.price = 10;
+        testSkin.skinMultiplicator = 2;
+        testSkin.skinCrit = 5;
+        testSkin.bought = false;
+        skinsDictionary.Add(testSkin.id.ToString(), testSkin);
+        boughtSkinsOfPlayer.Add(testSkin);
     }
 
     /// <summary>
@@ -77,8 +84,8 @@ public class ContentDistributor : MonoBehaviour
         {
             item.amount = 0; // the amount at the beginning must be 0
             item.price = item.startPrice;  // the price is equal to startPrice (initial price) if the amount is 0
-            // performedUpgrade is 0 if item does not exists in upgradeList,
-            // otherwise, the value in the upgradeList for related key
+                                           // performedUpgrade is 0 if item does not exists in upgradeList,
+                                           // otherwise, the value in the upgradeList for related key
             Account.upgradeList.TryGetValue(item.id, out int performedUpgrade);
             for (int i = 0; i < performedUpgrade; i++)
             {

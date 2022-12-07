@@ -12,7 +12,7 @@ public class InventorySwitch : MonoBehaviour
 
     void Start()
     {
-        //ItemsButtonAction();
+        ItemsButtonAction();
     }
 
     public void SkinsButtonAction()

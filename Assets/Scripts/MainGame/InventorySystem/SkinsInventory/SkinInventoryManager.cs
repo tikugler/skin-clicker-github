@@ -29,6 +29,7 @@ public class SkinInventoryManager : MonoBehaviour
             //inventoryPanels[i].shopItemAmount.text = item.shopItem.amount.ToString();
             inventoryPanels[i].shopItemIcon = item.skinTemplate.icon;
             inventoryPanels[i].shopItemDescription.text = item.skinTemplate.description;
+            inventoryPanels[i].shopItemDescription.text = "Random Shit";
             inventoryPanels[i].shopItemTitle.text = item.skinTemplate.title;
             inventoryPanels[i].rarity = item.skinTemplate.rarity;
         }
