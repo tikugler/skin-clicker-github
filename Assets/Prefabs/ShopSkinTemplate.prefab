@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 1286528085559383653}
   - component: {fileID: 1286528085559383652}
   - component: {fileID: 8638837782197000164}
+  - component: {fileID: 4715334230402425130}
   m_Layer: 5
   m_Name: ShopSkinTemplate
   m_TagString: Untagged
@@ -415,6 +416,25 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &4715334230402425130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286528085559383650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f125eaba4e313049998ba1dc310f1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopItemTitle: {fileID: 3954835194283587203}
+  shopItemDescription: {fileID: 3145154825499969253}
+  shopItemPrice: {fileID: 6975670505513725302}
+  shopItemAmount: {fileID: 0}
+  rarity: {fileID: 8463690133700616744}
+  shopItemIcon: {fileID: 0}
+  fullPicture: {fileID: 0}
 --- !u!1 &4109448024320718815
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +527,7 @@ GameObject:
   - component: {fileID: 9174642470478877581}
   - component: {fileID: 6975670505513725302}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

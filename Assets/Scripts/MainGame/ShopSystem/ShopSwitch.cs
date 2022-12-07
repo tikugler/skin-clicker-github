@@ -17,6 +17,7 @@ public class ShopSwitch : MonoBehaviour
 
     public void SkinsButtonAction()
     {
+        ContentDistributor.contentDistributor.shopSkinManager.RefreshPanels();
         itemsShop.SetActive(false);
         skinsShop.SetActive(true);
         itemsButton.GetComponent<Image>().color = Color.white;
@@ -25,6 +26,7 @@ public class ShopSwitch : MonoBehaviour
 
     public void ItemsButtonAction()
     {
+        ContentDistributor.contentDistributor.shopManager.RefreshPanels();
         itemsShop.SetActive(true);
         skinsShop.SetActive(false);
         skinsButton.GetComponent<Image>().color = Color.white;

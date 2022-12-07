@@ -9,7 +9,7 @@ public class ShopTemplate : MonoBehaviour
     public Text shopItemDescription;
     public Text shopItemPrice;
     public Text shopItemAmount;
+    public Text rarity;
     public Sprite shopItemIcon;
     public Sprite fullPicture;
-    public string rarity;
 }

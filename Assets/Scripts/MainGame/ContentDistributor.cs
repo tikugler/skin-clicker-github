@@ -14,10 +14,12 @@ public class ContentDistributor : MonoBehaviour
     public static ContentDistributor contentDistributor;
     public string id;
     public ShopManager shopManager;
+    public ShopSkinManager shopSkinManager;
     public ItemInventoryManager itemInventoryManager;
     //public SkinManager itemInventoryManager;
     public DummyButton mainButton;
     public ItemTemplate[] scriptableObjectItems;
+    public SkinTemplate[] scriptableObjectSkins;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
     public Dictionary<string, SkinEffect> skinsDictionary = new Dictionary<string, SkinEffect>();
 
@@ -70,8 +72,22 @@ public class ContentDistributor : MonoBehaviour
         testSkin.skinMultiplicator = 2;
         testSkin.skinCrit = 5;
         testSkin.bought = false;
+        testSkin.rarity = Rarities.Legendary;
         skinsDictionary.Add(testSkin.id.ToString(), testSkin);
         boughtSkinsOfPlayer.Add(testSkin);
+
+        SkinTemplate testSkinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
+
+        testSkinTemplate.id = testSkin.id;
+        testSkinTemplate.title = testSkin.id;
+        testSkinTemplate.description = "Fancy Description";
+        testSkinTemplate.rarity = testSkin.rarity;
+        testSkinTemplate.price = testSkin.price;
+        testSkinTemplate.icon = null; //mb like a thumbnail
+        testSkinTemplate.fullPicture = null;
+
+        testSkin.skinTemplate = testSkinTemplate;
+        scriptableObjectSkins[0] = testSkinTemplate;
     }
 
     /// <summary>

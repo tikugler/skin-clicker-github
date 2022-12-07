@@ -13,6 +13,7 @@ public abstract class SkinEffect
     public int skinMultiplicator;
     public int skinCrit;
     public bool bought;
+    public string rarity;
     public SkinTemplate skinTemplate;
 
 
