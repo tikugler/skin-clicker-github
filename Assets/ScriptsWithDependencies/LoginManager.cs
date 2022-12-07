@@ -139,6 +139,7 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public void CallPlayAsGuest()
     {
+        PlayerPrefs.DeleteAll();
         Account.guestCustomID = DateTime.Now.ToString("yyyyMMddHHmmssffff") + SystemInfo.deviceUniqueIdentifier;
         var request = new LoginWithCustomIDRequest { CustomId = Account.guestCustomID, CreateAccount = true };
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessAsGuest, error => Debug.Log(error.Error));
@@ -163,7 +164,7 @@ public class LoginManager : MonoBehaviour
     /// <param name="obj">success result</param>
     private void OnLoginSuccessAsGuest(LoginResult obj)
     {
-
+        
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, "Guest");
         if (!Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
             Account.SetGuestCustomIdPlayerPrefs(Account.guestCustomID);

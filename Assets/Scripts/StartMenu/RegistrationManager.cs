@@ -208,7 +208,7 @@ public class RegistrationManager : MonoBehaviour
         if (tutorial)
         {
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccessTutorial, OnRegisterFailed);
-            isRegisteringTutorial = false;
+            
             return;
         }
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailed);
@@ -237,6 +237,7 @@ public class RegistrationManager : MonoBehaviour
 
     private void OnRegisterSuccessTutorial(RegisterPlayFabUserResult obj)
     {
+        isRegisteringTutorial = false;
         Debug.Log("registration is successful");
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
         Account.credits += 1000;
