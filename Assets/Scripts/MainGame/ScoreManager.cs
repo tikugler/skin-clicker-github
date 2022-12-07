@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        creditUIText = GameObject.Find("CreditUIText").GetComponent<Text>();
         RefreshCredits();
     }
 
