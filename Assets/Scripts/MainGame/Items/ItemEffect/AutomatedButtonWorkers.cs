@@ -24,7 +24,6 @@ public class AutomatedButtonWorkers : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("While");
             yield return new WaitForSeconds(1);
             ContentDistributor.contentDistributor.mainButton.WorkerAction(level1WorkerScorePerSec);
             ContentDistributor.contentDistributor.shopManager.RefreshPanels();

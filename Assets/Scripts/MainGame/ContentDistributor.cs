@@ -87,6 +87,7 @@ public class ContentDistributor : MonoBehaviour
         testSkinTemplate.fullPicture = null;
 
         testSkin.skinTemplate = testSkinTemplate;
+        scriptableObjectSkins = new SkinTemplate[1];
         scriptableObjectSkins[0] = testSkinTemplate;
     }
 

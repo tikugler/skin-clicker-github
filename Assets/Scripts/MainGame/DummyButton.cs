@@ -29,7 +29,6 @@ public class DummyButton : MonoBehaviour
     public void WorkerAction(int worker)
     {
         Account.credits += basePoints * multiplicator * worker;
-        Debug.Log("WokerMainButton");
     }
 
 
