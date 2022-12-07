@@ -35,7 +35,7 @@ public class AutomatedButtonWorkers : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1);
-            Account.credits += level1WorkerScorePerSec;
+            ContentDistributor.contentDistributor.mainButton.WorkerAction();
             ContentDistributor.contentDistributor.shopManager.RefreshPanels();
         }
     }

@@ -10,6 +10,8 @@ public abstract class SkinEffect
 {
     public string id;
     public int price;
+    public int skinMultiplicator;
+    public int skinCrit;
     public bool bought;
     public SkinTemplate skinTemplate;
 

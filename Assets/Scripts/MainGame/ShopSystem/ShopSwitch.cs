@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySwitch : MonoBehaviour
+public class ShopSwitch : MonoBehaviour
 {
-    public GameObject skinsInventory;
-    public GameObject itemsIntentory;
+    public GameObject skinsShop;
+    public GameObject itemsShop;
     public GameObject skinsButton;
     public GameObject itemsButton;
 
     void Start()
     {
-        //ItemsButtonAction();
+        ItemsButtonAction();
     }
 
     public void SkinsButtonAction()
     {
-        itemsIntentory.SetActive(false);
-        skinsInventory.SetActive(true);
+        itemsShop.SetActive(false);
+        skinsShop.SetActive(true);
         itemsButton.GetComponent<Image>().color = Color.white;
         skinsButton.GetComponent<Image>().color = Color.red;
     }
 
     public void ItemsButtonAction()
     {
-        skinsInventory.SetActive(false);
-        itemsIntentory.SetActive(true);
+        itemsShop.SetActive(true);
+        skinsShop.SetActive(false);
         skinsButton.GetComponent<Image>().color = Color.white;
         itemsButton.GetComponent<Image>().color = Color.red;
     }
