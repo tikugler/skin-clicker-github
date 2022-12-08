@@ -8,6 +8,7 @@ public class TestSkin : SkinEffect
     public float criticalChance = 0.3f;
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)
     {
+        Debug.Log("Purchase " + skinTemplate.id);
         this.skinTemplate = skinTemplate;
         ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Add(this);
     }
