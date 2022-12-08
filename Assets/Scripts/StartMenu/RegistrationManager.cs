@@ -208,7 +208,7 @@ public class RegistrationManager : MonoBehaviour
         if (tutorial)
         {
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccessTutorial, OnRegisterFailed);
-            isRegisteringTutorial = false;
+            
             return;
         }
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailed);
@@ -237,6 +237,7 @@ public class RegistrationManager : MonoBehaviour
 
     private void OnRegisterSuccessTutorial(RegisterPlayFabUserResult obj)
     {
+        isRegisteringTutorial = false;
         Debug.Log("registration is successful");
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
         Account.credits += 1000;
@@ -244,6 +245,8 @@ public class RegistrationManager : MonoBehaviour
         Debug.Log(Account.credits);
         Debug.Log(Account.realMoney);
         Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
-        CloseRegistrationPanel();
+        //CloseRegistrationPanel();
+        SceneManager.LoadScene("MainGame");
+
     }
 }
