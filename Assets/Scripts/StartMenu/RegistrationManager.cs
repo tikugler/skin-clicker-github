@@ -245,6 +245,8 @@ public class RegistrationManager : MonoBehaviour
         Debug.Log(Account.credits);
         Debug.Log(Account.realMoney);
         Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
-        CloseRegistrationPanel();
+        //CloseRegistrationPanel();
+        SceneManager.LoadScene("MainGame");
+
     }
 }
