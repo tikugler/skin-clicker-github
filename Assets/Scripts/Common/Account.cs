@@ -141,4 +141,16 @@ public static class Account
         credits = 0;
         points = 0;
     }
+
+    public static bool IsSkinInInventory(string id)
+    {
+        foreach (SkinEffect skin in Account.skinList)
+        {
+            if (skin.id.ToString().Equals(id))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -10,18 +10,16 @@ public abstract class SkinEffect
 {
     public string id;
     public int price;
-    public int skinMultiplicator;
-    public int skinCrit;
-    public bool bought;
+    public bool bought = false;
     public string rarity;
+    public int multiplicatorOfSkin = 1;
+    public float criticalChance = 0;
+    public float criticalMultiplicator = 1;
     public SkinTemplate skinTemplate;
 
 
     //Action for the purchase button in the shop ui of an item.
-    public virtual void PurchaseButtonAction(SkinTemplate skinTemplate)
-    {
-        this.skinTemplate = skinTemplate;
-    }
+    public abstract void PurchaseButtonAction(SkinTemplate skinTemplate);
 
     //Applies effect of skin to game.
     public abstract void EffectOfSkin();

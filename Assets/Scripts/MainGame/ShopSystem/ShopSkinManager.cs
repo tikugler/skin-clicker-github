@@ -70,7 +70,7 @@ public class ShopSkinManager : MonoBehaviour
     {
         for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
         {
-            if (Account.credits >= contentDistributor.scriptableObjectSkins[i].price)
+            if ((Account.credits >= contentDistributor.scriptableObjectSkins[i].price)) // && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
                 purchaseButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
@@ -89,21 +89,27 @@ public class ShopSkinManager : MonoBehaviour
     */
     public void PurchaseButtonAction(int pos)
     {
+        Debug.Log("PurchaseButton Action of Pos " + pos);
         //If credit >= as price of shopItem on position pos in array.
         if (credit >= contentDistributor.scriptableObjectSkins[pos].price)
         {
+            Debug.Log("IF 1/2");
             //Check, if key (Effect) is in the list.
             SkinTemplate item = contentDistributor.scriptableObjectSkins[pos];
-            if (contentDistributor.itemsDictionary.ContainsKey(item.id))
+            if (contentDistributor.skinsDictionary.ContainsKey(item.id))
             {
+                Debug.Log("IF 2/2");
                 credit -= item.price;
                 Account.credits = credit;
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.skinsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.skinsDictionary[item.id].skinTemplate = item;
+
+
+
                 // update amount of selected update in PlayFab
-                GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
-                    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
+                //GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
+                //    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
             }
             RefreshPanels();
         }

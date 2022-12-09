@@ -22,7 +22,7 @@ public class SkinInventoryManager : MonoBehaviour
         contentDistributor = ContentDistributor.contentDistributor;
         //Sets panels unused panels inactive and starts with the last panel in the list.
         int indexInventoryPanels = inventoryPanelsGO.Length - 1;
-        for (int i = 0; i < (inventoryPanelsGO.Length - contentDistributor.scriptableObjectSkins.Length); i++)
+        for (int i = 0; i < (inventoryPanelsGO.Length - Account.skinList.Count); i++)
         {
             inventoryPanelsGO[indexInventoryPanels - i].SetActive(false);
             //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
@@ -43,6 +43,7 @@ public class SkinInventoryManager : MonoBehaviour
 
     public void UseButtonAction(int pos)
     {
+        Debug.Log("UseButtonAction Action of Pos " + pos);
         //only woking, if there are no stacks!
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();

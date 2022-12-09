@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class TestSkin : SkinEffect
 {
-    public new int skinMultiplicator = 2;
-    public float criticalChance = 0.3f;
+    public new string id = SkinNames.TestEffect;
+    public new int price = 10;
+    public new bool bought = false;
+    public new string rarity = Rarities.Legendary;
+    public new int multiplicatorOfSkin = 5;
+    public new float criticalChance = 0.2f;
+    public new float criticalMultiplicator = 10;
+
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)
     {
-        Debug.Log("Purchase " + skinTemplate.id);
         this.skinTemplate = skinTemplate;
-        ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Add(this);
+        Account.skinList.Add(this);
     }
 
     public override void EffectOfSkin()
     {
-        ContentDistributor.contentDistributor.mainButton.skinMultiplicator = skinMultiplicator;
+        ContentDistributor.contentDistributor.mainButton.multiplicatorOfSkin = multiplicatorOfSkin;
         DummyButton.criticalChance = criticalChance;
+        DummyButton.criticalMultiplicator = criticalMultiplicator;
     }
 
     public override void EquipSkin()

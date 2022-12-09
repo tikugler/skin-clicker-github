@@ -12,4 +12,5 @@ using UnityEngine.UI;
 public static class SkinNames
 {
     public static readonly string TestEffect = "TestSkin";
+    public static readonly string TestEffectTwo = "TestSkinTwo";
 }

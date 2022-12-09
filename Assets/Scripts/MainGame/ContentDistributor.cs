@@ -67,12 +67,6 @@ public class ContentDistributor : MonoBehaviour
     public void CreateSkins()
     {
         var testSkin = new TestSkin();
-        testSkin.id = SkinNames.TestEffect;
-        testSkin.price = 10;
-        testSkin.skinMultiplicator = 2;
-        testSkin.skinCrit = 5;
-        testSkin.bought = false;
-        testSkin.rarity = Rarities.Legendary;
         skinsDictionary.Add(testSkin.id.ToString(), testSkin);
         boughtSkinsOfPlayer.Add(testSkin);
 
@@ -89,6 +83,9 @@ public class ContentDistributor : MonoBehaviour
         testSkin.skinTemplate = testSkinTemplate;
         scriptableObjectSkins = new SkinTemplate[1];
         scriptableObjectSkins[0] = testSkinTemplate;
+
+
+        skinsDictionary.Add(testSkin.id.ToString(), testSkin);
     }
 
     /// <summary>
