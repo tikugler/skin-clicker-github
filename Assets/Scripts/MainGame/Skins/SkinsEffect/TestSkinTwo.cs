@@ -7,13 +7,15 @@ using UnityEngine.UI;
 public class TestSkinTwo : SkinEffect
 {
 
-    public new string id = SkinNames.TestEffectTwo;
-    public new int price = 4000;
-    public new bool bought = false;
-    public new string rarity = Rarities.Rare;
-    public new int multiplicatorOfSkin = 20;
-    public new float criticalChance = 0.02f;
-    public new float criticalMultiplicator = 90;
+    //public new string id = SkinNames.TestEffectTwo;
+    public override string id { get; set; } = SkinNames.TestEffectTwo;
+    public override int price { get; set; } = 4000;
+    public override bool bought { get; set; } = false;
+    public override string rarity { get; set; } = Rarities.Rare;
+    public override int multiplicatorOfSkin { get; set; } = 20;
+    public override float criticalChance { get; set; } = 0.02f;
+    public override float criticalMultiplicator { get; set; } = 90;
+    public override SkinTemplate skinTemplate { get; set; }
     private GameObject mainButton;
 
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)

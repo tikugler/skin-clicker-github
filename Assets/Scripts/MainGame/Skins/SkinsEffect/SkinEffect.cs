@@ -8,14 +8,14 @@ using UnityEngine;
 */
 public abstract class SkinEffect
 {
-    public string id;
-    public int price;
-    public bool bought = false;
-    public string rarity;
-    public int multiplicatorOfSkin = 1;
-    public float criticalChance = 0;
-    public float criticalMultiplicator = 1;
-    public SkinTemplate skinTemplate;
+    public abstract string id { get; set; }
+    public abstract int price { get; set; }
+    public abstract bool bought { get; set; }
+    public abstract string rarity { get; set; }
+    public abstract int multiplicatorOfSkin { get; set; }
+    public abstract float criticalChance { get; set; }
+    public abstract float criticalMultiplicator { get; set; }
+    public abstract SkinTemplate skinTemplate { get; set; }
 
 
     //Action for the purchase button in the shop ui of an item.

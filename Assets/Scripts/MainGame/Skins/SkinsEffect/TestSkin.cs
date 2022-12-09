@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class TestSkin : SkinEffect
 {
-    public new string id = SkinNames.TestEffect;
-    public new int price = 10;
-    public new bool bought = false;
-    public new string rarity = Rarities.Legendary;
-    public new int multiplicatorOfSkin = 5;
-    public new float criticalChance = 0.2f;
-    public new float criticalMultiplicator = 10;
+    public override string id { get; set; } = SkinNames.TestEffect;
+    public override int price { get; set; } = 10;
+    public override bool bought { get; set; } = false;
+    public override string rarity { get; set; } = Rarities.Legendary;
+    public override int multiplicatorOfSkin { get; set; } = 5;
+    public override float criticalChance { get; set; } = 0.2f;
+    public override float criticalMultiplicator { get; set; } = 10;
+    public override SkinTemplate skinTemplate { get; set; }
 
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)
     {

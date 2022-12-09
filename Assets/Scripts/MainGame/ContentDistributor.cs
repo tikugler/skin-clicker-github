@@ -25,7 +25,6 @@ public class ContentDistributor : MonoBehaviour
 
     //Player stuff for demo
     public ArrayList boughtItemsOfPlayer = new ArrayList();
-    public ArrayList boughtSkinsOfPlayer = new ArrayList();
 
 
     // make sure that SetUpgrade is called before ShopManager.RefreshPanels
@@ -67,25 +66,25 @@ public class ContentDistributor : MonoBehaviour
     public void CreateSkins()
     {
         var testSkin = new TestSkin();
+        var testSkinTemplate = CreateSkinTemplate(testSkin);
         skinsDictionary.Add(testSkin.id.ToString(), testSkin);
-        boughtSkinsOfPlayer.Add(testSkin);
-
-        SkinTemplate testSkinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
-
-        testSkinTemplate.id = testSkin.id;
-        testSkinTemplate.title = testSkin.id;
         testSkinTemplate.description = "Fancy Description";
-        testSkinTemplate.rarity = testSkin.rarity;
-        testSkinTemplate.price = testSkin.price;
-        testSkinTemplate.icon = null; //mb like a thumbnail
-        testSkinTemplate.fullPicture = null;
 
-        testSkin.skinTemplate = testSkinTemplate;
         scriptableObjectSkins = new SkinTemplate[1];
         scriptableObjectSkins[0] = testSkinTemplate;
+    }
 
+    private SkinTemplate CreateSkinTemplate(SkinEffect skin) {
+        SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
+        skinTemplate.id = skin.id;
+        skinTemplate.title = skin.id;
+        skinTemplate.rarity = skin.rarity;
+        skinTemplate.price = skin.price;
+        skinTemplate.icon = null; //mb like a thumbnail
+        skinTemplate.fullPicture = null;
+        skin.skinTemplate = skinTemplate;
 
-        skinsDictionary.Add(testSkin.id.ToString(), testSkin);
+        return skinTemplate;
     }
 
     /// <summary>
