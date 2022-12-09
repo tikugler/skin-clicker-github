@@ -43,7 +43,6 @@ public class SkinInventoryManager : MonoBehaviour
 
     public void UseButtonAction(int pos)
     {
-        Debug.Log("UseButtonAction Action of Pos " + pos);
         //only woking, if there are no stacks!
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();
