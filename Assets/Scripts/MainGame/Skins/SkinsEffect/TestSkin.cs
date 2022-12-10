@@ -6,6 +6,7 @@ public class TestSkin : SkinEffect
 {
     public override string id { get; set; } = SkinNames.TestEffect;
     public override int price { get; set; } = 10;
+    public override string description { get; set; } = "TestSkin with good buffs";
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Legendary;
     public override int multiplicatorOfSkin { get; set; } = 5;

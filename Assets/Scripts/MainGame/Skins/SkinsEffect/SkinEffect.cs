@@ -10,6 +10,7 @@ public abstract class SkinEffect
 {
     public abstract string id { get; set; }
     public abstract int price { get; set; }
+    public abstract string description { get; set; }
     public abstract bool bought { get; set; }
     public abstract string rarity { get; set; }
     public abstract int multiplicatorOfSkin { get; set; }

@@ -9,7 +9,8 @@ public class TestSkinTwo : SkinEffect
 
     //public new string id = SkinNames.TestEffectTwo;
     public override string id { get; set; } = SkinNames.TestEffectTwo;
-    public override int price { get; set; } = 4000;
+    public override int price { get; set; } = 4;
+    public override string description { get; set; } = "TestSkinTwo with extra random effects";
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Rare;
     public override int multiplicatorOfSkin { get; set; } = 20;
@@ -22,6 +23,7 @@ public class TestSkinTwo : SkinEffect
     {
         this.skinTemplate = skinTemplate;
         Account.skinList.Add(this);
+        bought = true;
     }
 
     public override void EffectOfSkin()
@@ -33,22 +35,13 @@ public class TestSkinTwo : SkinEffect
         GameObject canvasGameObject = GameObject.Find("Canvas");
         mainButton = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "MainButton");
-        Waiter();
+        mainButton.GetComponent<Image>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
     public override void EquipSkin()
     {
         Account.activeSkin = this;
         EffectOfSkin();
-    }
-
-    IEnumerator Waiter()
-    {
-        while (Account.activeSkin == this)
-        {
-            yield return new WaitForSeconds(1);
-            mainButton.GetComponent<Image>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        }
     }
 }
 

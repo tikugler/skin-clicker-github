@@ -70,7 +70,7 @@ public class ShopSkinManager : MonoBehaviour
     {
         for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
         {
-            if ((Account.credits >= contentDistributor.scriptableObjectSkins[i].price)) // && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
+            if ((Account.credits >= contentDistributor.scriptableObjectSkins[i].price) && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
                 purchaseButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
@@ -81,6 +81,7 @@ public class ShopSkinManager : MonoBehaviour
             }
         }
     }
+    
     /*
     *   Action of purchase button of the UI.
     *   Calculates new balance/credits and applys effect of the item.
@@ -108,7 +109,7 @@ public class ShopSkinManager : MonoBehaviour
                 //GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
                 //    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
             }
-            RefreshPanels();
         }
+        RefreshPanels();
     }
 }

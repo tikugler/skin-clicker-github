@@ -16,7 +16,7 @@ public class ContentDistributor : MonoBehaviour
     public ShopManager shopManager;
     public ShopSkinManager shopSkinManager;
     public ItemInventoryManager itemInventoryManager;
-    //public SkinManager itemInventoryManager;
+    public SkinInventoryManager skinInventoryManager;
     public DummyButton mainButton;
     public ItemTemplate[] scriptableObjectItems;
     public SkinTemplate[] scriptableObjectSkins;
@@ -68,10 +68,15 @@ public class ContentDistributor : MonoBehaviour
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
         skinsDictionary.Add(testSkin.id.ToString(), testSkin);
-        testSkinTemplate.description = "Fancy Description";
 
-        scriptableObjectSkins = new SkinTemplate[1];
+
+        var testSkinTwo = new TestSkinTwo();
+        var testSkinTemplate2 = CreateSkinTemplate(testSkinTwo);
+        skinsDictionary.Add(testSkinTwo.id.ToString(), testSkinTwo);
+
+        scriptableObjectSkins = new SkinTemplate[2];
         scriptableObjectSkins[0] = testSkinTemplate;
+        scriptableObjectSkins[1] = testSkinTemplate2;
     }
 
     private SkinTemplate CreateSkinTemplate(SkinEffect skin) {
