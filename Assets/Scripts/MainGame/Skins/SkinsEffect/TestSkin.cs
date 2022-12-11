@@ -12,6 +12,7 @@ public class TestSkin : SkinEffect
     public override int multiplicatorOfSkin { get; set; } = 5;
     public override float criticalChance { get; set; } = 0.2f;
     public override float criticalMultiplicator { get; set; } = 10;
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("OurBoiii");
     public override SkinTemplate skinTemplate { get; set; }
 
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)

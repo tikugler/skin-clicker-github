@@ -16,6 +16,7 @@ public abstract class SkinEffect
     public abstract int multiplicatorOfSkin { get; set; }
     public abstract float criticalChance { get; set; }
     public abstract float criticalMultiplicator { get; set; }
+    public abstract Sprite icon { get; set; }
     public abstract SkinTemplate skinTemplate { get; set; }
 
 
