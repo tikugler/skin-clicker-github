@@ -84,6 +84,7 @@ public class ContentDistributor : MonoBehaviour
         SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
         skinTemplate.id = skin.id;
         skinTemplate.title = skin.id;
+        skinTemplate.description = skin.description;
         skinTemplate.rarity = skin.rarity;
         skinTemplate.price = skin.price;
         skinTemplate.icon = skin.icon;

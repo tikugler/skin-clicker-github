@@ -7,15 +7,17 @@ using UnityEngine.UI;
 public class TestSkinTwo : SkinEffect
 {
 
-    //public new string id = SkinNames.TestEffectTwo;
+    public static int skinMulti = 20;
+    public static float critChance = 0.02f;
+    public static int critMulti = 90;
     public override string id { get; set; } = SkinNames.TestEffectTwo;
     public override int price { get; set; } = 4;
-    public override string description { get; set; } = "TestSkinTwo with extra random effects";
+    public override string description { get; set; } = "Low Crit-Chance, high reward, random color, much wow\nSkin Multiplicator: " + skinMulti + "\nCritical Chance: " + critChance + "\nCritical Multiplicator: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Rare;
-    public override int multiplicatorOfSkin { get; set; } = 20;
-    public override float criticalChance { get; set; } = 0.02f;
-    public override float criticalMultiplicator { get; set; } = 90;
+    public override int multiplicatorOfSkin { get; set; } = skinMulti;
+    public override float criticalChance { get; set; } = critChance;
+    public override float criticalMultiplicator { get; set; } = critMulti;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("BerkanF.Nur");
     public override SkinTemplate skinTemplate { get; set; }
     private GameObject mainButton;
