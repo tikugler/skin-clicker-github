@@ -60,7 +60,15 @@ public class ShopSkinManager : MonoBehaviour
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectSkins[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectSkins[i].icon;
-            shopPanelsGO[i].GetComponentInChildren<Image>().sprite = shopPanels[i].shopItemIcon;
+            if (shopPanels[i].shopItemIcon != null)
+            {
+                Debug.Log("Icon Name: " + shopPanels[i].shopItemIcon.name);
+                GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
+                test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
+                //test.GetComponent<SpriteRenderer>().sprite = shopPanels[i].shopItemIcon;
+            }
+            //test.sprite = shopPanels[i].shopItemIcon;
+            //Debug.Log("Icon Name: " + shopPanels[i].shopItemIcon.name);
             shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
         }
         CheckPurchaseable();
@@ -82,7 +90,7 @@ public class ShopSkinManager : MonoBehaviour
             }
         }
     }
-    
+
     /*
     *   Action of purchase button of the UI.
     *   Calculates new balance/credits and applys effect of the item.

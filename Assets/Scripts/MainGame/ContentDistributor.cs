@@ -79,13 +79,14 @@ public class ContentDistributor : MonoBehaviour
         scriptableObjectSkins[1] = testSkinTemplate2;
     }
 
-    private SkinTemplate CreateSkinTemplate(SkinEffect skin) {
+    private SkinTemplate CreateSkinTemplate(SkinEffect skin)
+    {
         SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
         skinTemplate.id = skin.id;
         skinTemplate.title = skin.id;
         skinTemplate.rarity = skin.rarity;
         skinTemplate.price = skin.price;
-        skinTemplate.icon = null; //mb like a thumbnail
+        skinTemplate.icon = skin.icon;
         skinTemplate.fullPicture = null;
         skin.skinTemplate = skinTemplate;
 

@@ -16,7 +16,7 @@ public class TestSkinTwo : SkinEffect
     public override int multiplicatorOfSkin { get; set; } = 20;
     public override float criticalChance { get; set; } = 0.02f;
     public override float criticalMultiplicator { get; set; } = 90;
-    public override Sprite icon { get; set; } = Resources.Load<Sprite>("OurBoiii");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("BerkanF.Nur");
     public override SkinTemplate skinTemplate { get; set; }
     private GameObject mainButton;
 
