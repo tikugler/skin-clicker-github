@@ -41,6 +41,7 @@ public class TestSkinTwo : SkinEffect
 
     public override void EquipSkin()
     {
+        ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
         Account.activeSkin = this;
         EffectOfSkin();
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DummyButton : MonoBehaviour
 {
@@ -32,5 +33,14 @@ public class DummyButton : MonoBehaviour
     public void SetMultiplicator(int multi)
     {
         multiplicator = multi;
+    }
+
+    public void SetSkin(Sprite skin)
+    {
+        this.GetComponentInChildren<Text>().text = "";
+        this.GetComponent<Image>().color = Color.white;
+        this.GetComponent<Image>().sprite = skin;
+        //this.GetComponent<RectTransform>().localScale = new Vector3(1920 / (skin.rect.width / 16), 1080 / (skin.rect.height / 9), 0);
+        this.GetComponent<RectTransform>().localScale = new Vector3(1, 2.4f, 1);
     }
 }

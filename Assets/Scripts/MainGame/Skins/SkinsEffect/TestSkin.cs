@@ -32,5 +32,6 @@ public class TestSkin : SkinEffect
     {
         Account.activeSkin = this;
         EffectOfSkin();
+        ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
     }
 }
