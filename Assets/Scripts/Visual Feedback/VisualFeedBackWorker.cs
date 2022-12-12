@@ -19,7 +19,7 @@ public class VisualFeedBackWorker : MonoBehaviour
         {
             pickaxePrefab = Resources.Load("pickaxePrefab") as GameObject;
             pickaxe = GameObject.Instantiate(pickaxePrefab);
-            pickaxe.transform.parent = GameObject.Find("pickaxescroll").transform;
+            pickaxe.transform.parent = GameObject.Find("FeedbackWorker").transform;
             Debug.Log("5 Worker bought" + workerCount);
         }
         
