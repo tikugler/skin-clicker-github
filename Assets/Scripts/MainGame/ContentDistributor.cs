@@ -49,13 +49,21 @@ public class ContentDistributor : MonoBehaviour
     public void CreateItems()
     {
         var doubleEffect = new DoubleEffect();
+        var doubleEffectTemplate = CreateItemTemplate(doubleEffect);
         itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);
 
         var testEffect = new TestEffect();
+        var testEffectTemplate = CreateItemTemplate(testEffect);
         itemsDictionary.Add(testEffect.id.ToString(), testEffect);
 
         var worker = new Worker();
+        var workerTemplate = CreateItemTemplate(worker);
         itemsDictionary.Add(worker.id.ToString(), worker);
+
+        scriptableObjectItems = new ItemTemplate[3];
+        scriptableObjectItems[0] = doubleEffectTemplate;
+        scriptableObjectItems[1] = testEffectTemplate;
+        scriptableObjectItems[2] = workerTemplate;
     }
 
     /* 
@@ -92,6 +100,20 @@ public class ContentDistributor : MonoBehaviour
         skin.skinTemplate = skinTemplate;
 
         return skinTemplate;
+    }
+
+        private ItemTemplate CreateItemTemplate(ItemEffect item)
+    {
+        ItemTemplate itemTemplate = ItemTemplate.CreateInstance<ItemTemplate>();
+        itemTemplate.id = item.id;
+        itemTemplate.title = item.id;
+        itemTemplate.description = item.description;
+        itemTemplate.rarity = item.rarity;
+        itemTemplate.price = item.price;
+        itemTemplate.icon = item.icon;
+        item.shopItem = itemTemplate;
+
+        return itemTemplate;
     }
 
     /// <summary>

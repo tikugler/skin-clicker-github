@@ -60,16 +60,13 @@ public class ShopSkinManager : MonoBehaviour
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectSkins[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectSkins[i].icon;
+            shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
+            
             if (shopPanels[i].shopItemIcon != null)
             {
-                Debug.Log("Icon Name: " + shopPanels[i].shopItemIcon.name);
                 GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
                 test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
-                //test.GetComponent<SpriteRenderer>().sprite = shopPanels[i].shopItemIcon;
             }
-            //test.sprite = shopPanels[i].shopItemIcon;
-            //Debug.Log("Icon Name: " + shopPanels[i].shopItemIcon.name);
-            shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
         }
         CheckPurchaseable();
     }

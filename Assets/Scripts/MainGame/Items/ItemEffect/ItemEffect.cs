@@ -8,18 +8,16 @@ using UnityEngine;
 */
 public abstract class ItemEffect
 {
-    public string id;
-    public int price;
-    public ItemTemplate shopItem;
+    public abstract string id { get; set; }
+    public abstract int price { get; set; }
+    public abstract string description { get; set; }
+    public abstract string rarity { get; set; }
+    public abstract Sprite icon { get; set; }
+    public abstract ItemTemplate shopItem { get; set; }
 
 
     //Action for the purchase button in the shop ui of an item.
-    public virtual void PurchaseButtonAction(ItemTemplate shopItem)
-    {
-        this.shopItem = shopItem;
-        CalculateNewPrice();
-        CalculateNewAmount();
-    }
+    public abstract void PurchaseButtonAction(ItemTemplate shopItem);
 
     //Calculates new price, default --> keeps old price.
     public abstract int CalculateNewPrice();

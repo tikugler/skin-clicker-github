@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 public class Worker : ItemEffect
 {
-    public new string id = ItemNames.Worker;
-    public new ItemTemplate shopItem;
+    public override string id { get; set; } = ItemNames.Worker;
+    public override int price { get; set; } = 1;
+    public override string description { get; set; } = "Automated button clicker.\n1 click per secound.";
+    public override string rarity { get; set; } = Rarities.Common;
+    public override Sprite icon { get; set; }
+    public override ItemTemplate shopItem { get; set; }
     public Button purchaseButton;
     private bool hasUpdated = false;
     private int creditsPerSec;

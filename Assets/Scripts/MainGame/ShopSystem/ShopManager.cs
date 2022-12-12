@@ -60,6 +60,12 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
+
+            if (shopPanels[i].shopItemIcon != null)
+            {
+                GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
+                test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
+            }
         }
         CheckPurchaseable();
     }
