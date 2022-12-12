@@ -17,12 +17,12 @@ public class VisualFeedBackWorker : MonoBehaviour
     {
         if ((workerCount % 5) == 0)
         {
+            GameObject canvasGameObject = GameObject.Find("Canvas");
+            GameObject feedbackWorker = FindObjectHelper.
+                FindObjectInParent(canvasGameObject, "FeedbackWorker");
             pickaxePrefab = Resources.Load("pickaxePrefab") as GameObject;
-            pickaxe = GameObject.Instantiate(pickaxePrefab);
-            pickaxe.transform.parent = GameObject.Find("FeedbackWorker").transform;
-            Debug.Log("5 Worker bought" + workerCount);
+            pickaxe = Instantiate<GameObject>(pickaxePrefab, feedbackWorker.transform);
         }
-        
-        }
+    }
 }
 
