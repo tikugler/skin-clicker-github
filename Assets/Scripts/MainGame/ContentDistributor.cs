@@ -43,10 +43,9 @@ public class ContentDistributor : MonoBehaviour
 
     /* 
     *  Creats and adds ItemEffects to key-value-pair.
-    *  The key is ALWAYS the exact class name of a item!
-    *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
+    *  Adds ItemEffect to template.
     */
-    public void CreateItems()
+    private void CreateItems()
     {
         var doubleEffect = new DoubleEffect();
         var doubleEffectTemplate = CreateItemTemplate(doubleEffect);
@@ -67,11 +66,10 @@ public class ContentDistributor : MonoBehaviour
     }
 
     /* 
-    *  Creats and adds ItemEffects to key-value-pair.
-    *  The key is ALWAYS the exact class name of a item!
-    *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
+    *  Creats and adds SkinEffects to key-value-pair.
+    *  Adds SkinEffect to template.
     */
-    public void CreateSkins()
+    private void CreateSkins()
     {
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
@@ -87,6 +85,9 @@ public class ContentDistributor : MonoBehaviour
         scriptableObjectSkins[1] = testSkinTemplate2;
     }
 
+    /* 
+    *  Creates new SkinTemplate and fills fields with item values.
+    */
     private SkinTemplate CreateSkinTemplate(SkinEffect skin)
     {
         SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
@@ -102,7 +103,10 @@ public class ContentDistributor : MonoBehaviour
         return skinTemplate;
     }
 
-        private ItemTemplate CreateItemTemplate(ItemEffect item)
+    /* 
+    *  Creates new ItemTemplate and fills fields with item values.
+    */
+    private ItemTemplate CreateItemTemplate(ItemEffect item)
     {
         ItemTemplate itemTemplate = ItemTemplate.CreateInstance<ItemTemplate>();
         itemTemplate.id = item.id;

@@ -70,6 +70,10 @@ public class SkinInventoryManager : MonoBehaviour
         }
     }
 
+    /*
+    *   Action for the use button in the skin inventory.
+    *   pos is a hardcoded param in unity --> InventoryPanel --> Skins --> (...) --> ShopSkinTemplate --> stats --> PurchaseButton
+    */
     public void UseButtonAction(int pos)
     {
         //only woking, if there are no stacks!

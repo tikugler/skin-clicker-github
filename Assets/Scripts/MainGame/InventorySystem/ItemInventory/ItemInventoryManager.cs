@@ -48,6 +48,10 @@ public class ItemInventoryManager : MonoBehaviour
         }
     }
 
+    /*
+    *   Action for the use button in the inventory.
+    *   pos is a hardcoded param in unity --> InventoryPanel --> Items --> (...) --> InventoryItem --> (...) --> UseButton
+    */
     public void UseButtonAction(int pos)
     {
         //only woking, if there are no stacks!

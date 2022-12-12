@@ -34,8 +34,6 @@ public class ShopSkinManager : MonoBehaviour
 
     /* 
     *  Refreshes panels --> new values are displayed.
-    *  New items in the shop can't be added after Start()
-    *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
     */
     public void RefreshPanels()
     {
@@ -52,7 +50,7 @@ public class ShopSkinManager : MonoBehaviour
             //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
         }
 
-        //Goes through every shop item in the array and refreshes title, description, icon and price.
+        //Goes through every shop skin in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
         {
             shopPanelsGO[i].SetActive(true);
@@ -61,7 +59,7 @@ public class ShopSkinManager : MonoBehaviour
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectSkins[i].icon;
             shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
-            
+
             if (shopPanels[i].shopItemIcon != null)
             {
                 GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
@@ -90,9 +88,9 @@ public class ShopSkinManager : MonoBehaviour
 
     /*
     *   Action of purchase button of the UI.
-    *   Calculates new balance/credits and applys effect of the item.
+    *   Calculates new balance/credits and applys effect of the skin.
     *   int pos is position of the button, which is hardcoded in the UI:   
-    *           Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->Items-->ShopItemTemplate-->PurchaseButton
+    *           Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->skins-->ShopSkinTemplate-->PurchaseButton
     */
     public void PurchaseButtonAction(int pos)
     {

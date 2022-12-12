@@ -16,11 +16,6 @@ public class ShopManager : MonoBehaviour
     //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
-        for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
-        {
-            shopPanelsGO[i].SetActive(true);
-        }
-
         RefreshPanels();
     }
 
@@ -32,9 +27,7 @@ public class ShopManager : MonoBehaviour
     }
 
     /* 
-    *  Refreshes panels --> new values are displayed.
     *  New items in the shop can't be added after Start()
-    *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
     */
     public void RefreshPanels()
     {
