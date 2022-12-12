@@ -43,27 +43,33 @@ public class ContentDistributor : MonoBehaviour
 
     /* 
     *  Creats and adds ItemEffects to key-value-pair.
-    *  The key is ALWAYS the exact class name of a item!
-    *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
+    *  Adds ItemEffect to template.
     */
-    public void CreateItems()
+    private void CreateItems()
     {
         var doubleEffect = new DoubleEffect();
+        var doubleEffectTemplate = CreateItemTemplate(doubleEffect);
         itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);
 
         var testEffect = new TestEffect();
+        var testEffectTemplate = CreateItemTemplate(testEffect);
         itemsDictionary.Add(testEffect.id.ToString(), testEffect);
 
         var worker = new Worker();
+        var workerTemplate = CreateItemTemplate(worker);
         itemsDictionary.Add(worker.id.ToString(), worker);
+
+        scriptableObjectItems = new ItemTemplate[3];
+        scriptableObjectItems[0] = doubleEffectTemplate;
+        scriptableObjectItems[1] = testEffectTemplate;
+        scriptableObjectItems[2] = workerTemplate;
     }
 
     /* 
-    *  Creats and adds ItemEffects to key-value-pair.
-    *  The key is ALWAYS the exact class name of a item!
-    *  Mb creat per stackable item an Array/Stack? --> Would solve stack problem
+    *  Creats and adds SkinEffects to key-value-pair.
+    *  Adds SkinEffect to template.
     */
-    public void CreateSkins()
+    private void CreateSkins()
     {
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
@@ -79,6 +85,9 @@ public class ContentDistributor : MonoBehaviour
         scriptableObjectSkins[1] = testSkinTemplate2;
     }
 
+    /* 
+    *  Creates new SkinTemplate and fills fields with item values.
+    */
     private SkinTemplate CreateSkinTemplate(SkinEffect skin)
     {
         SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
@@ -87,6 +96,7 @@ public class ContentDistributor : MonoBehaviour
         skinTemplate.description = skin.description;
         skinTemplate.rarity = skin.rarity;
         skinTemplate.price = skin.price;
+        skinTemplate.startPrice = skin.price;
         skinTemplate.icon = skin.icon;
         skinTemplate.fullPicture = null;
         skin.skinTemplate = skinTemplate;
@@ -94,12 +104,29 @@ public class ContentDistributor : MonoBehaviour
         return skinTemplate;
     }
 
+    /* 
+    *  Creates new ItemTemplate and fills fields with item values.
+    */
+    private ItemTemplate CreateItemTemplate(ItemEffect item)
+    {
+        ItemTemplate itemTemplate = ItemTemplate.CreateInstance<ItemTemplate>();
+        itemTemplate.id = item.id;
+        itemTemplate.title = item.id;
+        itemTemplate.description = item.description;
+        itemTemplate.rarity = item.rarity;
+        itemTemplate.price = item.price;
+        itemTemplate.startPrice = item.price;
+        itemTemplate.icon = item.icon;
+        item.shopItem = itemTemplate;
+
+        return itemTemplate;
+    }
+
     /// <summary>
     /// sets the number of performed upgrade for each item according to Account.upgradeList
     /// </summary>
     private void SetUpgrades()
     {
-
         foreach (ItemTemplate item in scriptableObjectItems)
         {
             item.amount = 0; // the amount at the beginning must be 0

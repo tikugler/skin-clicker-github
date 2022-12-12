@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class TestEffect : ItemEffect
 {
-    public new string id = ItemNames.TestEffect;
-    public new ItemTemplate shopItem;
+    public override string id { get; set; } = ItemNames.TestEffect;
+    public override int price { get; set; } = 0;
+    public override string description { get; set; } = "Berkan's hopes and dreams.\nQuiet empty but exists <3";
+    public override string rarity { get; set; } = Rarities.Common;
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("Maggi");
+    public override ItemTemplate shopItem { get; set; }
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
         this.shopItem = shopItem;
+        shopItem.price = price;
         ContentDistributor.contentDistributor.boughtItemsOfPlayer.Add(this);
         CalculateNewAmount();
     }
@@ -28,7 +33,7 @@ public class TestEffect : ItemEffect
         return shopItem.amount += 1;
     }
 
-    public override int CalculateNewPrice() 
+    public override int CalculateNewPrice()
     {
         return shopItem.price;
     }

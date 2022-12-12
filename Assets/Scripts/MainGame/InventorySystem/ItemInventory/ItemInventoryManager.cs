@@ -40,9 +40,19 @@ public class ItemInventoryManager : MonoBehaviour
             inventoryPanels[i].shopItemIcon = item.shopItem.icon;
             inventoryPanels[i].shopItemDescription.text = item.shopItem.description;
             inventoryPanels[i].shopItemTitle.text = item.shopItem.title;
+
+            if (inventoryPanels[i].shopItemIcon != null)
+            {
+                GameObject test = FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Image");
+                test.GetComponentInChildren<Image>().sprite = inventoryPanels[i].shopItemIcon;
+            }
         }
     }
 
+    /*
+    *   Action for the use button in the inventory.
+    *   pos is a hardcoded param in unity --> InventoryPanel --> Items --> (...) --> InventoryItem --> (...) --> UseButton
+    */
     public void UseButtonAction(int pos)
     {
         //only woking, if there are no stacks!
@@ -50,6 +60,8 @@ public class ItemInventoryManager : MonoBehaviour
         item.EffectOfItem();
         inventoryPanelsGO[ContentDistributor.contentDistributor.boughtItemsOfPlayer.Count - 1].SetActive(false);
         ContentDistributor.contentDistributor.boughtItemsOfPlayer.Remove(item);
+        GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
+                    item.ToString(), contentDistributor.itemsDictionary[item.ToString()].shopItem.amount);
         RefreshPanels();
     }
 

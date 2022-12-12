@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class Worker : ItemEffect
 {
-    public new string id = ItemNames.Worker;
-    public new ItemTemplate shopItem;
-    public Button purchaseButton;
-    private bool hasUpdated = false;
+    public override string id { get; set; } = ItemNames.Worker;
+    public override int price { get; set; } = 1;
+    public override string description { get; set; } = "Automated button clicker.\n1 click per secound.";
+    public override string rarity { get; set; } = Rarities.Common;
+    public override Sprite icon { get; set; }
+    public override ItemTemplate shopItem { get; set; }
     private int creditsPerSec;
     private int workerAmount = 0;
-    private float timer = 0.0f;
     private int credits;
 
     public static int workerAmountWorkaround = 0;
-
 
     void Update()
     {
@@ -50,6 +50,9 @@ public class Worker : ItemEffect
     //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
+        Debug.Log("Worker Price(Template): " + shopItem.price);
+        Debug.Log("Worker Price: " + price);
+
         return shopItem.price *= 2;
     }
 }

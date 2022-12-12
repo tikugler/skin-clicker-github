@@ -57,7 +57,8 @@ public class Test : MonoBehaviour
     [UnityTest]
     public IEnumerator TestDoubleEffectPurchaseButtonAction()
     {
-        int startPrice = 10;
+        DoubleEffect effect = new DoubleEffect();
+        int startPrice = effect.price;
         int startAmount = 0;
         ItemTemplate item = new ItemTemplate();
         item.amount = startAmount;
@@ -67,7 +68,6 @@ public class Test : MonoBehaviour
         item.price = startPrice;
         item.title = doubleId;
 
-        DoubleEffect effect = new DoubleEffect();
         Assert.AreEqual(startAmount, item.amount);
         Assert.AreEqual(startPrice, item.price);
         yield return null;

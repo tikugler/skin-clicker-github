@@ -16,11 +16,6 @@ public class ShopManager : MonoBehaviour
     //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
-        for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
-        {
-            shopPanelsGO[i].SetActive(true);
-        }
-
         RefreshPanels();
     }
 
@@ -32,9 +27,7 @@ public class ShopManager : MonoBehaviour
     }
 
     /* 
-    *  Refreshes panels --> new values are displayed.
     *  New items in the shop can't be added after Start()
-    *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
     */
     public void RefreshPanels()
     {
@@ -58,8 +51,15 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectItems[i].title;
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
+            //Debug.Log("Item Name:" + contentDistributor.scriptableObjectItems[i].id + " || Item Price: " + contentDistributor.scriptableObjectItems[i].price.ToString());
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
+
+            if (shopPanels[i].shopItemIcon != null)
+            {
+                GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
+                test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
+            }
         }
         CheckPurchaseable();
     }
