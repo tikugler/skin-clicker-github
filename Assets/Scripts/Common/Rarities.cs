@@ -1,4 +1,4 @@
-public static class SkinRarity
+public static class Rarities
 {
     public static readonly string Common = "Common";
     public static readonly string Uncommon = "Uncommon";

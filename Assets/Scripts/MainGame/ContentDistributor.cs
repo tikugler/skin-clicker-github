@@ -14,10 +14,12 @@ public class ContentDistributor : MonoBehaviour
     public static ContentDistributor contentDistributor;
     public string id;
     public ShopManager shopManager;
+    public ShopSkinManager shopSkinManager;
     public ItemInventoryManager itemInventoryManager;
-    //public SkinManager itemInventoryManager;
+    public SkinInventoryManager skinInventoryManager;
     public DummyButton mainButton;
     public ItemTemplate[] scriptableObjectItems;
+    public SkinTemplate[] scriptableObjectSkins;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
     public Dictionary<string, SkinEffect> skinsDictionary = new Dictionary<string, SkinEffect>();
 
@@ -63,7 +65,33 @@ public class ContentDistributor : MonoBehaviour
     */
     public void CreateSkins()
     {
+        var testSkin = new TestSkin();
+        var testSkinTemplate = CreateSkinTemplate(testSkin);
+        skinsDictionary.Add(testSkin.id.ToString(), testSkin);
 
+
+        var testSkinTwo = new TestSkinTwo();
+        var testSkinTemplate2 = CreateSkinTemplate(testSkinTwo);
+        skinsDictionary.Add(testSkinTwo.id.ToString(), testSkinTwo);
+
+        scriptableObjectSkins = new SkinTemplate[2];
+        scriptableObjectSkins[0] = testSkinTemplate;
+        scriptableObjectSkins[1] = testSkinTemplate2;
+    }
+
+    private SkinTemplate CreateSkinTemplate(SkinEffect skin)
+    {
+        SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
+        skinTemplate.id = skin.id;
+        skinTemplate.title = skin.id;
+        skinTemplate.description = skin.description;
+        skinTemplate.rarity = skin.rarity;
+        skinTemplate.price = skin.price;
+        skinTemplate.icon = skin.icon;
+        skinTemplate.fullPicture = null;
+        skin.skinTemplate = skinTemplate;
+
+        return skinTemplate;
     }
 
     /// <summary>
@@ -76,8 +104,8 @@ public class ContentDistributor : MonoBehaviour
         {
             item.amount = 0; // the amount at the beginning must be 0
             item.price = item.startPrice;  // the price is equal to startPrice (initial price) if the amount is 0
-            // performedUpgrade is 0 if item does not exists in upgradeList,
-            // otherwise, the value in the upgradeList for related key
+                                           // performedUpgrade is 0 if item does not exists in upgradeList,
+                                           // otherwise, the value in the upgradeList for related key
             Account.upgradeList.TryGetValue(item.id, out int performedUpgrade);
             for (int i = 0; i < performedUpgrade; i++)
             {

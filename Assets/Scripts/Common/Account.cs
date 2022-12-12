@@ -11,9 +11,9 @@ public static class Account
     public static int realMoney;
     public static int credits;
     public static long inGameCurrency;
-    public static List<string> skinList;
+    public static List<SkinEffect> skinList = new List<SkinEffect>();
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
-    public static string activeSkin;
+    public static SkinEffect activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
 
@@ -140,5 +140,17 @@ public static class Account
         upgradeList = new Dictionary<string, int>();
         credits = 0;
         points = 0;
+    }
+
+    public static bool IsSkinInInventory(string id)
+    {
+        foreach (SkinEffect skin in Account.skinList)
+        {
+            if (skin.id.ToString().Equals(id))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
