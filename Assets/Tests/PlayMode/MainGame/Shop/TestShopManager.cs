@@ -82,7 +82,7 @@ public class ShopManagerTest
     private void SetupForPurchase()
     {
         GameObject shopPanel = FindObjectHelper.
-            FindObjectInParent(canvasGameObject, "ShopPanel");
+            FindObjectInParent(canvasGameObject, "Items");
         manager = shopPanel.GetComponent<ShopManager>();
         OpenShopPopUpWithButton();
 
@@ -434,7 +434,7 @@ public class ShopManagerTest
     [UnityTest]
     public IEnumerator BuySomethingInShopAndCheckIfItemsAndCreditsAreChanging()
     {
-        Account.credits = ((itemTemplate1.price + itemTemplate2.price)*10);
+        Account.credits = ((itemTemplate1.price + itemTemplate2.price) * 10);
         distributor.scriptableObjectItems = scriptableObjectItemsTestTwoItems;
         SetupForPurchase();
 
@@ -489,7 +489,7 @@ public class ShopManagerTest
 
         Assert.AreEqual(shopItemTemplate2.shopItemTitle.text, itemTemplate2.title);
         Assert.AreEqual(shopItemTemplate2.shopItemDescription.text, itemTemplate2.description);
-        Assert.AreNotEqual(shopItemTemplate2.shopItemPrice,  oldPrice2);
+        Assert.AreNotEqual(shopItemTemplate2.shopItemPrice, oldPrice2);
         Assert.AreNotEqual(shopItemTemplate2.shopItemAmount, oldAmount2);
         //Assert.AreEqual(shopItemTemplate2.shopItemicon.text, itemTemplate2.icon);
 
@@ -572,7 +572,7 @@ public class ShopManagerTest
         manager.RefreshPanels();
         Assert.IsTrue(shopItemButton1.interactable);
         shopItemButton1.onClick.Invoke();
-        Assert.AreEqual(Account.credits, oldCredits/2);
+        Assert.AreEqual(Account.credits, oldCredits / 2);
 
         CloseShopPopUpWithButton();
     }
