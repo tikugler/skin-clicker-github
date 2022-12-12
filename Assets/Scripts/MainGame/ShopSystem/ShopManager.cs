@@ -51,6 +51,7 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectItems[i].title;
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
+            //Debug.Log("Item Name:" + contentDistributor.scriptableObjectItems[i].id + " || Item Price: " + contentDistributor.scriptableObjectItems[i].price.ToString());
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
 

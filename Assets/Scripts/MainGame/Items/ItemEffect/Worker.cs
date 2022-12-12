@@ -12,19 +12,11 @@ public class Worker : ItemEffect
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; }
     public override ItemTemplate shopItem { get; set; }
-    public Button purchaseButton;
-    private bool hasUpdated = false;
     private int creditsPerSec;
     private int workerAmount = 0;
-    private float timer = 0.0f;
     private int credits;
 
     public static int workerAmountWorkaround = 0;
-
-    public void Start()
-    {
-        shopItem.price = price;
-    }
 
     void Update()
     {
@@ -58,6 +50,9 @@ public class Worker : ItemEffect
     //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
+        Debug.Log("Worker Price(Template): " + shopItem.price);
+        Debug.Log("Worker Price: " + price);
+
         return shopItem.price *= 2;
     }
 }

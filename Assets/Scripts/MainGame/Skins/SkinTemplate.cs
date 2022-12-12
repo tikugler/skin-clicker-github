@@ -13,6 +13,7 @@ public class SkinTemplate : ScriptableObject
     [HideInInspector]
     public int price;
     //public int amount;
+    public int startPrice;
     public Sprite icon; //mb like a thumbnail
     public Sprite fullPicture;
 }

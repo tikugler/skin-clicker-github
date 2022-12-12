@@ -34,17 +34,16 @@ public class SkinInventoryManager : MonoBehaviour
             inventoryPanelsGO[i].SetActive(true);
             SkinEffect item = (SkinEffect)Account.skinList[i];
             //inventoryPanels[i].shopItemAmount.text = item.shopItem.amount.ToString();
-            inventoryPanels[i].shopItemIcon = item.skinTemplate.icon;
-            if (inventoryPanels[i].shopItemIcon != null)
-            {
-                Debug.Log("Icon Name: " + inventoryPanels[i].shopItemIcon.name);
-                GameObject test = FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Image");
-                test.GetComponent<Image>().sprite = inventoryPanels[i].shopItemIcon;
-                //test.GetComponent<SpriteRenderer>().sprite = shopPanels[i].shopItemIcon;
-            }
             inventoryPanels[i].shopItemDescription.text = item.skinTemplate.description;
             inventoryPanels[i].shopItemTitle.text = item.skinTemplate.title;
             inventoryPanels[i].rarity.text = item.skinTemplate.rarity;
+            inventoryPanels[i].shopItemIcon = item.skinTemplate.icon;
+
+            if (inventoryPanels[i].shopItemIcon != null)
+            {
+                GameObject test = FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Image");
+                test.GetComponent<Image>().sprite = inventoryPanels[i].shopItemIcon;
+            }
         }
         CheckSkinAlreadyInUse();
     }

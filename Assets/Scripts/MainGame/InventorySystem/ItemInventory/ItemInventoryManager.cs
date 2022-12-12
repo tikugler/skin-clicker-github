@@ -40,6 +40,7 @@ public class ItemInventoryManager : MonoBehaviour
             inventoryPanels[i].shopItemIcon = item.shopItem.icon;
             inventoryPanels[i].shopItemDescription.text = item.shopItem.description;
             inventoryPanels[i].shopItemTitle.text = item.shopItem.title;
+
             if (inventoryPanels[i].shopItemIcon != null)
             {
                 GameObject test = FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Image");

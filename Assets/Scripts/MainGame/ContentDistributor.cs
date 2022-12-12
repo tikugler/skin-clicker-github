@@ -96,6 +96,7 @@ public class ContentDistributor : MonoBehaviour
         skinTemplate.description = skin.description;
         skinTemplate.rarity = skin.rarity;
         skinTemplate.price = skin.price;
+        skinTemplate.startPrice = skin.price;
         skinTemplate.icon = skin.icon;
         skinTemplate.fullPicture = null;
         skin.skinTemplate = skinTemplate;
@@ -114,6 +115,7 @@ public class ContentDistributor : MonoBehaviour
         itemTemplate.description = item.description;
         itemTemplate.rarity = item.rarity;
         itemTemplate.price = item.price;
+        itemTemplate.startPrice = item.price;
         itemTemplate.icon = item.icon;
         item.shopItem = itemTemplate;
 
@@ -125,7 +127,6 @@ public class ContentDistributor : MonoBehaviour
     /// </summary>
     private void SetUpgrades()
     {
-
         foreach (ItemTemplate item in scriptableObjectItems)
         {
             item.amount = 0; // the amount at the beginning must be 0
