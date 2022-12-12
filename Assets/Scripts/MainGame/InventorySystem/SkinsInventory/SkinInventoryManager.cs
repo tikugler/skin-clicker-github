@@ -46,6 +46,28 @@ public class SkinInventoryManager : MonoBehaviour
             inventoryPanels[i].shopItemTitle.text = item.skinTemplate.title;
             inventoryPanels[i].rarity.text = item.skinTemplate.rarity;
         }
+        CheckSkinAlreadyInUse();
+    }
+
+    //Checks for credits >= price of item, if true --> button is clickable.
+    private void CheckSkinAlreadyInUse()
+    {
+        for (int i = 0; i < Account.skinList.Count; i++)
+        {
+            if (Account.activeSkin == null)
+            {
+                useButtons[i].interactable = true;
+                //mb some effects like backlighting for an active button
+            }
+            else if (!Account.skinList[i].id.Equals(Account.activeSkin.id))
+            {
+                useButtons[i].interactable = true;
+            }
+            else
+            {
+                useButtons[i].interactable = false;
+            }
+        }
     }
 
     public void UseButtonAction(int pos)

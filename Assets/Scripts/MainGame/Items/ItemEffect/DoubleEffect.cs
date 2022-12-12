@@ -10,7 +10,7 @@ public class DoubleEffect : ItemEffect
     public override int price { get; set; } = 2;
     public override string description { get; set; } = "Doubles score and credits.\nItem is stackable.";
     public override string rarity { get; set; } = Rarities.Common;
-    public override Sprite icon { get; set; }= Resources.Load<Sprite>("2X");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("2X");
     public override ItemTemplate shopItem { get; set; }
     public int multiplicator = 1;
 
@@ -19,11 +19,11 @@ public class DoubleEffect : ItemEffect
     public void Start()
     {
         ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
+        shopItem.price = price;
     }
 
     public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
-
         this.shopItem = shopItem;
         CalculateNewPrice();
         CalculateNewAmount();

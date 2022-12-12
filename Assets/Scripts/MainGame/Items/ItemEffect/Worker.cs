@@ -21,6 +21,10 @@ public class Worker : ItemEffect
 
     public static int workerAmountWorkaround = 0;
 
+    public void Start()
+    {
+        shopItem.price = price;
+    }
 
     void Update()
     {

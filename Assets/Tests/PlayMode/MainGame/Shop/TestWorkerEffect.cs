@@ -60,7 +60,8 @@ public class TestWorkerEffect : MonoBehaviour
     [UnityTest]
     public IEnumerator TestAutomatedWorkerPurchaseButtonAction()
     {
-        int startPrice = 5;
+        Worker effect = new Worker();
+        int startPrice = effect.price;
         int startAmount = 0;
         ItemTemplate item = new ItemTemplate();
         item.amount = startAmount;
@@ -70,7 +71,6 @@ public class TestWorkerEffect : MonoBehaviour
         item.price = startPrice;
         item.title = workerId;
 
-        Worker effect = new Worker();
         Assert.AreEqual(startAmount, item.amount);
         Assert.AreEqual(startPrice, item.price);
         yield return null;
