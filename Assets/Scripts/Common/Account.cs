@@ -7,6 +7,7 @@ public static class Account
     public static string guestCustomID; // only for guests
     public static string accountId;
     public static string accountName;
+    public static int selectedPictureId = 0;
     public static int points;
     public static int realMoney;
     public static int credits;
