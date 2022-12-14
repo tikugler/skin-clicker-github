@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -8,6 +9,7 @@ public static class Account
     public static string accountId;
     public static string accountName;
     public static int selectedPictureId = 0;
+    public static int daysLoggedInARow = 1;
     public static int points;
     public static int realMoney;
     public static int credits;
@@ -18,6 +20,7 @@ public static class Account
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
 
+    public static DateTime lastReward = DateTime.Today;
     // Skin objekt? hat id, wert, image, boolean ausgew�hlt 
     // account objekt serializable?
 
@@ -60,6 +63,9 @@ public static class Account
             {
                 case "Credits":
                     Account.credits = stat.Value;
+                    break;
+                case "LoggedInDaysInARow":
+                    Account.daysLoggedInARow = stat.Value;
                     break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
