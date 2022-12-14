@@ -15,8 +15,14 @@ MonoBehaviour:
   id: Worker
   title: Worker Level 1
   description: Clicks automated
+<<<<<<< HEAD:Assets/ScriptableObjects/Worker 1.asset
+  price: 0
+||||||| a8366d9:Assets/ScriptableObjects/Worker 1.asset
+  price: 2
+=======
   startPrice: 1
   price: 1
+>>>>>>> master:Assets/ScriptableObjects/ShopItems/ItemEffects/Worker 1.asset
   amount: 0
   multiplyPriceBy: 2
   icon: {fileID: 0}

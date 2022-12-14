@@ -44,7 +44,10 @@ public class Worker : ItemEffect
 
     public override int CalculateNewAmount()
     {
-        return shopItem.amount += 1;
+        shopItem.amount += 1;
+        int newAmount = shopItem.amount;
+        GameObject.Find("multipleworker").GetComponent<VisualFeedBackWorker>().MultipleWorker(newAmount);
+        return newAmount; 
     }
 
     //Hardcoded value, if changed --> tests have to change too
@@ -54,5 +57,10 @@ public class Worker : ItemEffect
         Debug.Log("Worker Price: " + price);
 
         return shopItem.price *= 2;
+    }
+
+    public int GetWorkerAmount() 
+    {
+        return workerAmount;
     }
 }
