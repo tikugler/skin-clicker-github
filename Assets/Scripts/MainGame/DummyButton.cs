@@ -1,41 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DummyButton : MonoBehaviour
 {
     public int multiplicator = 1;
-    public int basePoints = 1; 
-    public int credits = 0;
-   
-    void Start() 
+    public int basePoints = 1;
+    public int multiplicatorOfSkin = 1;
+    public static float criticalMultiplicator = 1;
+    public static float criticalChance = 0f;
+
+
+    public void MainButtonAction()
     {
-        multiplicator = 1;
-        basePoints = 1;
+        float randValue = Random.value;
+        if (randValue > (1.0f - criticalChance))
+        {
+            Account.credits += (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+        }
+        else
+        {
+            Account.credits += basePoints * multiplicator * multiplicatorOfSkin;
+        }
+
     }
 
-    public void MainButtonAction() 
+    public void WorkerAction(int worker)
     {
-        credits += basePoints * multiplicator;
+        Account.credits += basePoints * multiplicatorOfSkin * worker;
     }
 
-    public int GetCredits() 
-    {
-        return credits;
-    }
 
-    public void SetCredits(int value) 
-    {
-        credits = value;
-    }
-
-    public void SetMultiplicator(int multi) 
+    public void SetMultiplicator(int multi)
     {
         multiplicator = multi;
     }
 
-    public void IncreaseCreditBy(int value)
+    public void SetSkin(Sprite skin)
     {
-        credits += value;
+        this.GetComponentInChildren<Text>().text = "";
+        this.GetComponent<Image>().color = Color.white;
+        this.GetComponent<Image>().sprite = skin;
+        //this.GetComponent<RectTransform>().localScale = new Vector3(1920 / (skin.rect.width / 16), 1080 / (skin.rect.height / 9), 0);
+        this.GetComponent<RectTransform>().localScale = new Vector3(1, 2.4f, 1);
     }
 }

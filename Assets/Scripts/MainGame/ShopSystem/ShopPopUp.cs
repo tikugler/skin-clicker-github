@@ -14,6 +14,7 @@ public class ShopPopUp : MonoBehaviour
 
     public void ShopButtonAction() {
         shopManager.RefreshPanels();
+        ContentDistributor.contentDistributor.shopSkinManager.RefreshPanels();
         shopPopUp.SetActive(true);
         closeShopButton.SetActive(true);
     }

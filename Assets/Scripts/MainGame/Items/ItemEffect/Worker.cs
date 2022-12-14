@@ -4,34 +4,38 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
-class Worker : ItemEffect
+public class Worker : ItemEffect
 {
-    public new string id = "Worker";
-    public new ItemTemplate shopItem;
-    public Button purchaseButton;
-    private bool hasUpdated = false;
+    public override string id { get; set; } = ItemNames.Worker;
+    public override int price { get; set; } = 1;
+    public override string description { get; set; } = "Automated button clicker.\n1 click per secound.";
+    public override string rarity { get; set; } = Rarities.Common;
+    public override Sprite icon { get; set; }
+    public override ItemTemplate shopItem { get; set; }
     private int creditsPerSec;
     private int workerAmount = 0;
-    private float timer = 0.0f;
     private int credits;
 
+    public static int workerAmountWorkaround = 0;
 
     void Update()
     {
         creditsPerSec = workerAmount * 5;
-        
+
         credits = creditsPerSec;
-        ContentDistributor.contentDistributor.mainButton.credits += credits;
+        Account.credits += credits;
     }
 
-    public override void PurchaseButtonAction(ItemTemplate shopItem) 
+    public override void PurchaseButtonAction(ItemTemplate shopItem)
     {
         this.shopItem = shopItem;
+        workerAmountWorkaround++;
         CalculateNewAmount();
         CalculateNewPrice();
         EffectOfItem();
     }
 
+    //Refreshrate is set to "yield return new WaitForSeconds(1);" in AutomatedButtonWorkers, if changed, tests have to change too
     public override void EffectOfItem()
     {
         workerAmount++;
@@ -46,8 +50,12 @@ class Worker : ItemEffect
         return newAmount; 
     }
 
+    //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
+        Debug.Log("Worker Price(Template): " + shopItem.price);
+        Debug.Log("Worker Price: " + price);
+
         return shopItem.price *= 2;
     }
 

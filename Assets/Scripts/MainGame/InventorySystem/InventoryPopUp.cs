@@ -14,6 +14,7 @@ public class InventoryPopUp : MonoBehaviour
     public void ShopButtonAction() 
     {
         inventoryManager.RefreshPanels();
+        ContentDistributor.contentDistributor.skinInventoryManager.RefreshPanels();
         inventoryPopUp.SetActive(true);
         closeinventoryButton.SetActive(true);
     }

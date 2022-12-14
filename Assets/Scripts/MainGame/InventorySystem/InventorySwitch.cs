@@ -10,12 +10,12 @@ public class InventorySwitch : MonoBehaviour
     public GameObject skinsButton;
     public GameObject itemsButton;
 
-    void Start() 
+    void Start()
     {
         ItemsButtonAction();
     }
 
-    public void SkinsButtonAction() 
+    public void SkinsButtonAction()
     {
         itemsIntentory.SetActive(false);
         skinsInventory.SetActive(true);
@@ -23,7 +23,7 @@ public class InventorySwitch : MonoBehaviour
         skinsButton.GetComponent<Image>().color = Color.red;
     }
 
-    public void ItemsButtonAction() 
+    public void ItemsButtonAction()
     {
         skinsInventory.SetActive(false);
         itemsIntentory.SetActive(true);

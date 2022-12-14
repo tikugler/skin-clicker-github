@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    private string id = "double";
     public static int credit;
     public Text creditUIText;
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
@@ -17,39 +16,50 @@ public class ShopManager : MonoBehaviour
     //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
-        for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
-        {
-            shopPanelsGO[i].SetActive(true);
-        }
         RefreshPanels();
     }
 
-    public void RefreshCredits() 
+    //If change "$ " + also change tests.
+    private void RefreshCredits()
     {
-        credit = ContentDistributor.contentDistributor.mainButton.credits; //dummy
+        credit = Account.credits;
         creditUIText.text = "$ " + credit.ToString();
     }
 
     /* 
-    *  Refreshes panels --> new values are displayed.
     *  New items in the shop can't be added after Start()
-    *  --> if needed in furture, take a look at ItemInventoryManager's RefreshPanels()
     */
     public void RefreshPanels()
-    {   
+    {
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
-        contentDistributor = ContentDistributor.contentDistributor; 
+        contentDistributor = ContentDistributor.contentDistributor;
 
         RefreshCredits();
-        
+
+        //Sets panels unused panels inactive and starts with the last panel in the list.
+        int indexShopPanels = shopPanelsGO.Length - 1;
+        for (int i = 0; i < (shopPanelsGO.Length - contentDistributor.scriptableObjectItems.Length); i++)
+        {
+            shopPanelsGO[indexShopPanels - i].SetActive(false);
+            //Debug.Log("Index : " + (indexShopPanels - i) + "/" + (shopPanelsGO.Length -1));
+        }
+
         //Goes through every shop item in the array and refreshes title, description, icon and price.
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
+            shopPanelsGO[i].SetActive(true);
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectItems[i].title;
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
+            //Debug.Log("Item Name:" + contentDistributor.scriptableObjectItems[i].id + " || Item Price: " + contentDistributor.scriptableObjectItems[i].price.ToString());
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
-            shopPanels[i].itemIcon = contentDistributor.scriptableObjectItems[i].icon;
+            shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
+
+            if (shopPanels[i].shopItemIcon != null)
+            {
+                GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
+                test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
+            }
         }
         CheckPurchaseable();
     }
@@ -83,12 +93,16 @@ public class ShopManager : MonoBehaviour
         {
             //Check, if key (Effect) is in the list.
             ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
-            if (contentDistributor.itemsDictionary.ContainsKey(item.id)) {
+            if (contentDistributor.itemsDictionary.ContainsKey(item.id))
+            {
                 credit -= item.price;
-                contentDistributor.mainButton.SetCredits(credit); //dummy
+                Account.credits = credit;
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
-                contentDistributor.itemsDictionary[item.id].shopItem = contentDistributor.scriptableObjectItems[pos];
+                contentDistributor.itemsDictionary[item.id].shopItem = item;
+                // update amount of selected update in PlayFab
+                GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
+                    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
             }
             RefreshPanels();
         }
