@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class DailyRewards : MonoBehaviour
 {
-    private int daysLoggedIn = 1;
+    private int daysLoggedIn;
     private DateTime lastReward;
-    private int realMoneyReward = 0;
-    private int ingameMoneyReward = 0;
+    private int realMoneyReward;
+    private int ingameMoneyReward;
 
     public GameObject dailyRewardPopup;
     public Text dailyText;
@@ -38,20 +38,22 @@ public class DailyRewards : MonoBehaviour
             OpenPopUp(rewards);
             dailyText.text = "Your Daily Login Reward Day " + daysLoggedIn;
             daysLoggedIn++;
+            // Update Account last Reward time
+            // Update Account logged in days in a row
+            Account.daysLoggedInARow = daysLoggedIn;
+            Account.lastReward = DateTime.Now;
+            PlayfabUpdateUserData.SetLastRewardDate();
         }
-        // Update Account last Reward time
-        // Update Account logged in days in a row
-        Account.daysLoggedInARow = daysLoggedIn;
-        Account.lastReward = DateTime.Now;
-        PlayfabUpdateUserData.SetLastRewardDate(DateTime.Now, daysLoggedIn);
+
     }
 
-    public void CloseProfile()
+    public void ClosePopup()
     {
         //Update rewards after closing reward window
         dailyRewardPopup.SetActive(false);
-        Account.inGameCurrency += ingameMoneyReward;
+        Account.credits += ingameMoneyReward;
         Account.realMoney += realMoneyReward;
+        PlayfabUpdateUserData.SetMoneyAmount();
     }
     private void OpenPopUp(Dictionary<string, int> rewards)
     {
