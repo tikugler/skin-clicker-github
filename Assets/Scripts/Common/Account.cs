@@ -20,8 +20,8 @@ public static class Account
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
 
-    public static DateTime lastReward = DateTime.Today;
-    // Skin objekt? hat id, wert, image, boolean ausgew�hlt 
+    public static DateTime lastReward = DateTime.MinValue;
+    // Skin objekt? hat id, wert, image, boolean ausgewaehlt 
     // account objekt serializable?
 
     //If the Player logs in, the saved data gets dragged frrom the database.
@@ -67,6 +67,9 @@ public static class Account
                 case "LoggedInDaysInARow":
                     Account.daysLoggedInARow = stat.Value;
                     break;
+                case "LastRewardDate":
+                    Account.lastReward = DateTimeConverter.UnixTimeStampToDateTime(stat.Value);
+                    break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
                     break;
@@ -78,7 +81,6 @@ public static class Account
             Debug.Log(item + ": " + upgradeList[item]);
         }
     }
-
 
     public static void SetUserLoginPlayerPrefs(string username, string password)
     {
