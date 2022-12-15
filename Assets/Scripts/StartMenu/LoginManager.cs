@@ -107,7 +107,6 @@ public class LoginManager : MonoBehaviour
         LoadUserStatistics();
         var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
         loggedInUser.text = username.text;
-        SceneManager.LoadScene("StartNewsMenu");
     }
 
     /// <summary>
@@ -169,6 +168,5 @@ public class LoginManager : MonoBehaviour
         if (!Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
             Account.SetGuestCustomIdPlayerPrefs(Account.guestCustomID);
         LoadUserStatistics();
-        SceneManager.LoadScene("StartNewsMenu");
     }
 }
