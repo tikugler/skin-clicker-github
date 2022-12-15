@@ -18,7 +18,6 @@ public class CollectOfflineCreditsManager : MonoBehaviour
 
     public static void StartCollectOfflineCreditsManagerStatic()
     {
-        Debug.Log("*****************StartCollectOfflineCreditsManagerStatic");
         Debug.Log("Worker.creditsPerSec"+  Worker.workerAmount);
         Debug.Log("Account.LeavingGameTimestamp: " + Account.LeavingGameTimestamp);
         if (Account.LoggedIn && Worker.workerAmount != 0 && Account.LeavingGameTimestamp != 0)
@@ -43,15 +42,13 @@ public class CollectOfflineCreditsManager : MonoBehaviour
 
     public void CalculatePassedSeconds()
     {
-        Debug.Log("**********************CalculatePassedSeconds");
 
         passedSeconds = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds - Account.LeavingGameTimestamp;
-        passedSecondsText.text = passedSeconds.ToString() + " Sekunde";
+        passedSecondsText.text = passedSeconds.ToString() + " Sekunden";
     }
 
     public void CalculateCollectedCredits()
     {
-        Debug.Log("*********************CalculateCollectedCredits");
 
         collectedCredits = passedSeconds * Worker.workerAmount;
         collectedCreditsText.text = collectedCredits.ToString() + " Berkan Coin";
@@ -59,7 +56,6 @@ public class CollectOfflineCreditsManager : MonoBehaviour
 
     public void CloseCollectOfflinePanel()
     {
-        Debug.Log("CloseCollectOfflinePanel");
       
         Account.credits += collectedCredits;
         isUserTakingOfflineCollection = false;

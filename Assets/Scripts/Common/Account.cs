@@ -57,7 +57,7 @@ public static class Account
 
         foreach (var stat in statistics)
         {
-            Debug.Log("Statistic: " + stat.StatisticName + ", Wert: " + stat.Value);
+            //Debug.Log("Statistic: " + stat.StatisticName + ", Wert: " + stat.Value);
             switch (stat.StatisticName)
             {
                 case "Credits":
@@ -72,10 +72,10 @@ public static class Account
             }
         }
 
-        foreach (string item in upgradeList.Keys)
-        {
-            Debug.Log(item + ": " + upgradeList[item]);
-        }
+        //foreach (string item in upgradeList.Keys)
+        //{
+        //    Debug.Log(item + ": " + upgradeList[item]);
+        //}
 
         SceneManager.LoadScene("StartNewsMenu");
 
