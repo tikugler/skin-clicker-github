@@ -27,9 +27,6 @@ public class VisualFeedbackDouble : MonoBehaviour
             ScoreLabel.fontStyle = FontStyle.Normal;
         
         }
-        Debug.Log("****************************");
-        Debug.Log(colors.Length);
-        Debug.Log(amount);
     }
     }
 
