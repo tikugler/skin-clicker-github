@@ -232,7 +232,7 @@ public class RegistrationManager : MonoBehaviour
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
         Account.credits = 0;
         Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
-        SceneManager.LoadScene("StartNewsMenu");
+        SceneManager.LoadScene("MainGame");
     }
 
     private void OnRegisterSuccessTutorial(RegisterPlayFabUserResult obj)

@@ -77,7 +77,7 @@ public static class Account
         //    Debug.Log(item + ": " + upgradeList[item]);
         //}
 
-        SceneManager.LoadScene("StartNewsMenu");
+        SceneManager.LoadScene("MainGame");
 
     }
 
