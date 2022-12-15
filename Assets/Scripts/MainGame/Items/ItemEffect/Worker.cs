@@ -12,8 +12,8 @@ public class Worker : ItemEffect
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; }
     public override ItemTemplate shopItem { get; set; }
-    private int creditsPerSec;
-    private int workerAmount = 0;
+    public int creditsPerSec;
+    public static int workerAmount = 0;
     private int credits;
 
     public static int workerAmountWorkaround = 0;
