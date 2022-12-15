@@ -141,5 +141,7 @@ public class ContentDistributor : MonoBehaviour
             }
             itemsDictionary[item.id].shopItem = item;
         }
+
+        CollectOfflineCreditsManager.StartCollectOfflineCreditsManagerStatic();
     }
 }
