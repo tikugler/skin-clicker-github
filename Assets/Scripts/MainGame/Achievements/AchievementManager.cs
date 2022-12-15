@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// If you want to create a new Achievement, first define the achievement with "CreateAchievement" in the Start Method.
+// Then define the Achievement Condition in the Update-Method
 public class AchievementManager : MonoBehaviour
 {
     public GameObject achievementPanel;
