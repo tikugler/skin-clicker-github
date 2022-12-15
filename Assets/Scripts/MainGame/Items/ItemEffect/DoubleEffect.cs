@@ -44,6 +44,12 @@ public class DoubleEffect : ItemEffect
 
     public override int CalculateNewAmount()
     {
-        return shopItem.amount += 1;
+        shopItem.amount += 1;
+        int newAmount = shopItem.amount;
+        GameObject.Find("multipledouble")
+          .GetComponent<VisualFeedbackDouble>()
+          .ChangeColorOfCreditLabelAfterBuyingMultipleDoubles(newAmount);
+        Debug.Log(newAmount);
+        return newAmount;
     }
 }

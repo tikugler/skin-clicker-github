@@ -89,7 +89,6 @@ public class DummyButton : MonoBehaviour
         { 
         yield return new WaitForSeconds(0.01f);
         visualClickObject.transform.position = new Vector3(visualClickObject.transform.position.x, visualClickObject.transform.position.y, 0);
-        
         }
         visualClickObject.SetActive(false) ;
     }
