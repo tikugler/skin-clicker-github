@@ -30,15 +30,25 @@ public class AchievementManager : MonoBehaviour
     {
         achievementPanel.SetActive(true);
         CreateAchievement("AchievementTable", "Earn 10 Points !", "You earned 10 Points !", 1);
+        CreateAchievement("AchievementTable", "Earn 50 Points !", "You earned 50 Points !", 1);
+        CreateAchievement("AchievementTable", "Earn 100 Points !", "You earned 100 Points !", 1);
         achievementPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Account.credits >= 10)
+        if(Account.credits == 10)
         {
             EarnAchievement("Earn 10 Points !");
+        }
+        if (Account.credits == 50)
+        {
+            EarnAchievement("Earn 50 Points !");
+        }
+        if (Account.credits == 100)
+        {
+            EarnAchievement("Earn 100 Points !");
         }
     }
 
