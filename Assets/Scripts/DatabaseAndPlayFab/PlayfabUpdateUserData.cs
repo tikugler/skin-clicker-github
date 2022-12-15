@@ -14,12 +14,12 @@ public class PlayfabUpdateUserData : MonoBehaviour
 {
 
     // the method SetScoreOnPlayFab is called every 15 seconds
-    void Start()
+    public void StartSetScoreOnPlayFabRepeating()
     {
         if (Account.LoggedIn)
         {
-            InvokeRepeating("SetScoreOnPlayFab", 15, 15);
-        }  
+            InvokeRepeating("SetScoreOnPlayFab", 0, 15);
+        }
     }
 
 
@@ -30,8 +30,12 @@ public class PlayfabUpdateUserData : MonoBehaviour
         Debug.Log("credits: " + credits);
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
-        var stat = new StatisticUpdate { StatisticName = "Credits", Value = credits };
-        request.Statistics.Add(stat);
+        var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
+        int leavingGameTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+        var statLeavingTime = new StatisticUpdate { StatisticName = "LeavingGameTime", Value = leavingGameTime };
+        request.Statistics.Add(statCredits);
+        request.Statistics.Add(statLeavingTime);
+
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
@@ -57,6 +61,8 @@ public class PlayfabUpdateUserData : MonoBehaviour
         request.Statistics.Add(statUpgrade);
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
+
+    
 
 
     // is called when UpdatePlayerStatistics succeed
