@@ -48,7 +48,7 @@ public class DoubleEffect : ItemEffect
         int newAmount = shopItem.amount;
         GameObject.Find("multipledouble")
           .GetComponent<VisualFeedbackDouble>()
-          .ChangeColorOfCreditLabelAfterBuyingMultipleDoubles(newAmount);
+          .ChangeCreditLabelAfterBuyingMultipleDoubles(newAmount);
         Debug.Log(newAmount);
         return newAmount;
     }
