@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class Account
 {
@@ -11,6 +12,7 @@ public static class Account
     public static int points;
     public static int realMoney;
     public static int credits;
+    public static int LeavingGameTimestamp;
     public static long inGameCurrency;
     public static List<SkinEffect> skinList = new List<SkinEffect>();
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
@@ -61,6 +63,9 @@ public static class Account
                 case "Credits":
                     Account.credits = stat.Value;
                     break;
+                case "LeavingGameTime":
+                    Account.LeavingGameTimestamp = stat.Value;
+                    break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
                     break;
@@ -71,6 +76,9 @@ public static class Account
         {
             Debug.Log(item + ": " + upgradeList[item]);
         }
+
+        SceneManager.LoadScene("StartNewsMenu");
+
     }
 
 
@@ -139,6 +147,7 @@ public static class Account
         CleanGuestCustomIdPlayerPrefs();
         CleanUserLoginPlayerPrefs();
         upgradeList = new Dictionary<string, int>();
+        LeavingGameTimestamp = 0;
         credits = 0;
         points = 0;
     }
