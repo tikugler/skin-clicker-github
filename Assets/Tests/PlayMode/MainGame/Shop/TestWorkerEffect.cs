@@ -33,6 +33,7 @@ public class TestWorkerEffect : MonoBehaviour
         GameObject mainButton = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "MainButton");
         this.mainButton = mainButton.GetComponent<Button>();
+        Worker.workerAmount = 0; // this variable changed to static and needs to be set to zero before every test
     }
 
     [UnityTest]
