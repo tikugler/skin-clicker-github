@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class AchievementManager : MonoBehaviour
 {
-
+    public GameObject achievementPanel;
     public GameObject achievementPrefab;
     public Sprite[] sprites;
     public GameObject visualAchievement;
     public Dictionary<string, Achievement> achievements = new Dictionary<string, Achievement>();
-    public Sprite unlockedSprite;
     private static AchievementManager instance;
     public static AchievementManager Instance
     {
-
         get 
         { 
             if(instance == null)
@@ -23,24 +21,19 @@ public class AchievementManager : MonoBehaviour
             }
             return AchievementManager.instance; 
         }
-       
     }
 
-    
-    
     // Start is called before the first frame update
     void Start()
     {
+        achievementPanel.SetActive(true);
         CreateAchievement("AchievementTable", "Earn 10 Points !", "You earned 10 Points !", 1);
+        achievementPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    EarnAchievement("Press W");
-        //}
         if(Account.credits >= 10)
         {
             EarnAchievement("Earn 10 Points !");
@@ -52,22 +45,22 @@ public class AchievementManager : MonoBehaviour
         if (achievements[title].EarnAchievement())
         {
             GameObject achievement = (GameObject)Instantiate(visualAchievement);
+            visualAchievement.GetComponent<Image>().color = new Color32(255, 225, 64, 255);
             SetAchievementInfo("EarnCanvas", achievement, title);
-
             StartCoroutine(HideAchievement(achievement));
         }
     }
 
     public IEnumerator HideAchievement(GameObject achievement)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         Destroy(achievement);
     }
 
     public void CreateAchievement(string parent, string title, string description, int spriteIndex)
     {
         GameObject achievementGO = (GameObject)Instantiate(achievementPrefab);
-        Achievement newAchievement = new Achievement(name, description, spriteIndex, achievementGO);
+        Achievement newAchievement = new Achievement(title, description, spriteIndex, achievementGO); //oder name?
         achievements.Add(title, newAchievement);
         SetAchievementInfo(parent, achievementGO, title);
     }
@@ -76,8 +69,8 @@ public class AchievementManager : MonoBehaviour
     {
         achievement.transform.SetParent(GameObject.Find(parent).transform);
         achievement.transform.localScale = new Vector3(1, 1, 1);
-        achievement.transform.GetChild(0).GetComponent<Text>().text = title;
-        achievement.transform.GetChild(2).GetComponent<Text>().text = achievements[title].Description;
-        achievement.transform.GetChild(1).GetComponent<Image>().sprite = sprites[achievements[title].SpriteIndex];
+        achievement.transform.GetChild(1).GetComponent<Text>().text = title;
+        achievement.transform.GetChild(3).GetComponent<Text>().text = achievements[title].Description;
+        achievement.transform.GetChild(2).GetComponent<Image>().sprite = sprites[achievements[title].SpriteIndex];
     }
 }

@@ -44,7 +44,7 @@ public class Achievement
     {
         if (!unlocked)
         {
-            //achievementRef.GetComponent<Image>().sprite = AchievementManager.Instance.unlockedSprite;
+            achievementRef.transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 225, 64, 255);
             unlocked = true;
             return true;
         }
