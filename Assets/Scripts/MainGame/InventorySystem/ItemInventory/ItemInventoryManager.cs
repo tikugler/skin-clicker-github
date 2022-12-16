@@ -60,8 +60,7 @@ public class ItemInventoryManager : MonoBehaviour
         item.EffectOfItem();
         inventoryPanelsGO[ContentDistributor.contentDistributor.boughtItemsOfPlayer.Count - 1].SetActive(false);
         ContentDistributor.contentDistributor.boughtItemsOfPlayer.Remove(item);
-        GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
-                    item.ToString(), contentDistributor.itemsDictionary[item.ToString()].shopItem.amount);
+        PlayfabUpdateUserData.SetUpgradeAmountOnPlayFab(item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
         RefreshPanels();
     }
 

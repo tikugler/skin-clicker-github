@@ -24,7 +24,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
 
 
     // updates credits in DB
-    public void SetScoreOnPlayFab()
+    private void SetScoreOnPlayFab()
     {
         int credits = Account.credits;
         Debug.Log("credits: " + credits);
@@ -46,7 +46,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
     /// </summary>
     /// <param name="upgradeName">name of selected upgrade</param>
     /// <param name="upgradeAmount">number of performed upgrade for selected item</param>
-    public void SetUpgradeAmountOnPlayFab(string upgradeName, int upgradeAmount)
+    public static void SetUpgradeAmountOnPlayFab(string upgradeName, int upgradeAmount)
     {
         if (!Account.LoggedIn)
             return;

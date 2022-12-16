@@ -101,8 +101,7 @@ public class ShopManager : MonoBehaviour
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.itemsDictionary[item.id].shopItem = item;
                 // update amount of selected update in PlayFab
-                GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
-                    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
+                PlayfabUpdateUserData.SetUpgradeAmountOnPlayFab(item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
             }
             RefreshPanels();
         }
