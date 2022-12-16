@@ -27,7 +27,6 @@ public class PlayfabUpdateUserData : MonoBehaviour
     private void SetScoreOnPlayFab()
     {
         int credits = Account.credits;
-        Debug.Log("credits: " + credits);
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
         var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
@@ -52,13 +51,32 @@ public class PlayfabUpdateUserData : MonoBehaviour
             return;
 
         int credits = Account.credits;
-        Debug.Log("credits: " + credits);
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
         var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
         var statUpgrade = new StatisticUpdate { StatisticName = upgradeName, Value = upgradeAmount };
         request.Statistics.Add(statCredits);
         request.Statistics.Add(statUpgrade);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
+
+    /// <summary>
+    /// in Playfab, statistics consist of key and value
+    /// key is the SKIN_ + SKIN_ID (SKIN_ is the prefix to distinguish the skin from items)
+    /// As a default value, the number 1 is given (does not point out the amount of skin, because the skin can only be bought once)
+    /// </summary>
+    /// <param name="skinName">Id of skin</param>
+    public static void AddSkinAsStatisticOnPlayFab(string skinName)
+    {
+        if (!Account.LoggedIn)
+            return;
+
+        int credits = Account.credits;
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+        var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
+        var statSkin = new StatisticUpdate { StatisticName = "SKIN_" + skinName, Value = 1 };
+        request.Statistics.Add(statSkin);
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
