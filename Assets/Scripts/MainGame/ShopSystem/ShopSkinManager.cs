@@ -107,11 +107,8 @@ public class ShopSkinManager : MonoBehaviour
                 contentDistributor.skinsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.skinsDictionary[item.id].skinTemplate = item;
 
-
-
-                // update amount of selected update in PlayFab
-                //GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
-                //    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
+                // adds skin in PlayFab
+                PlayfabUpdateUserData.AddSkinAsStatisticOnPlayFab(item.id);
             }
         }
         RefreshPanels();
