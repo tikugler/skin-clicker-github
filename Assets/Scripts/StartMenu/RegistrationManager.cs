@@ -229,7 +229,7 @@ public class RegistrationManager : MonoBehaviour
     private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
     {
         Debug.Log("registration is successful");
-        Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text, true);
         Account.credits = 0;
         Account.SetUserLoginPlayerPrefs(UsernameField.text, PasswordField.text);
         SceneManager.LoadScene("MainGame");
@@ -239,7 +239,7 @@ public class RegistrationManager : MonoBehaviour
     {
         isRegisteringTutorial = false;
         Debug.Log("registration is successful");
-        Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text);
+        Account.SetPlayFabIdAndUserName(obj.PlayFabId, UsernameField.text, true);
         Account.credits += 1000;
         Account.realMoney += 50;
         Debug.Log(Account.credits);
