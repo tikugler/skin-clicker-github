@@ -16,6 +16,8 @@ public static class Account
     public static int LeavingGameTimestamp;
     public static long inGameCurrency;
     public static List<SkinEffect> skinList = new List<SkinEffect>();
+    public static List<string> skinIdList = new List<string>();
+
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
     public static SkinEffect activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
@@ -89,6 +91,9 @@ public static class Account
                     break;
                 case "SelectedPictureId":
                     Account.selectedPictureId = stat.Value;
+                    break;
+                case string skin when skin.StartsWith("SKIN_"):
+                    AddSkinIdIfValid(skin, stat.Value);
                     break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
@@ -181,6 +186,22 @@ public static class Account
         points = 0;
     }
 
+    /// <summary>
+    /// add the skinId into skinIdList
+    /// In Playfab, each statistic has a key (string) and a value (int)
+    /// After purchase, skin is saved with the key SKIN_ (prefix) + SKIN_ID and the value 1
+    /// </summary>
+    /// <param name="skin">this is always (prefix to distinguish) SKIN_ + SKIN_ID</param>
+    /// <param name="value">valid if saved value in Playfab is 1 for corresponding skin</param>
+    private static void AddSkinIdIfValid(string skin, int value)
+    {
+        if(value == 1)
+        {
+            string skinId = skin.Substring(5);
+            skinIdList.Add(skinId);
+            Debug.Log($"---> {skinId} ");
+        }  
+    }
     public static bool IsSkinInInventory(string id)
     {
         foreach (SkinEffect skin in Account.skinList)
