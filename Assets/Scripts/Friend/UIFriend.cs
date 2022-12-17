@@ -51,7 +51,7 @@ public class UIFriend : MonoBehaviour
         this.friendName = f.TitleDisplayName;
         this.friendInfo = f;
         //friendManager = playFabFriendManager;
-        Debug.Log($"{friendName} is added");
+        //Debug.Log($"{friendName} is added");
         //this.friendName = friendName;
         
 

@@ -98,7 +98,7 @@ public class LoginManager : MonoBehaviour
     /// <param name="obj"></param>
     private void OnLoginSuccess(LoginResult obj)
     {
-        Debug.Log("login is successful");
+        //Debug.Log("login is successful");
         
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, obj.InfoResultPayload.PlayerProfile.DisplayName);
         if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
