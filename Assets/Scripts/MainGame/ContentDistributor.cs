@@ -157,6 +157,10 @@ public class ContentDistributor : MonoBehaviour
         {
             if (Account.IsSkinIdInSkinIdList(skin.id)){
                 skinsDictionary[skin.id].PurchaseButtonAction(skin);
+                if (Account.activeSkinId.Equals(skin.id))
+                {
+                    skinsDictionary[skin.id].EquipSkin();
+                }
             }
         }
     }

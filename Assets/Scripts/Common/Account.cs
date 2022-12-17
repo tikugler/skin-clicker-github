@@ -17,9 +17,13 @@ public static class Account
     public static long inGameCurrency;
     public static List<SkinEffect> skinList = new List<SkinEffect>();
     public static List<string> skinIdList = new List<string>();
-
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
-    public static SkinEffect activeSkin;
+    public static string activeSkinId;
+    private static SkinEffect activeSkin;
+    public static SkinEffect ActiveSkin {
+        get { return activeSkin; }
+        set { activeSkin = value; PlayfabUpdateUserData.UpdateSelectedSkinOnPlayFab(); }
+    }
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
 
@@ -93,7 +97,7 @@ public static class Account
                     Account.selectedPictureId = stat.Value;
                     break;
                 case string skin when skin.StartsWith("SKIN_"):
-                    AddSkinIdIfValid(skin, stat.Value);
+                    AddSkinId(skin, stat.Value);
                     break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
@@ -177,10 +181,15 @@ public static class Account
         CleanGuestCustomIdPlayerPrefs();
         CleanUserLoginPlayerPrefs();
         ChangeAccountNameText?.Invoke("No user logged in");
-        ChangeProfilPicture?.Invoke(0);
+        selectedPictureId = 0;
+        ChangeProfilPicture?.Invoke(selectedPictureId);
         accountId = null;
         accountName = null;
         upgradeList = new Dictionary<string, int>();
+        friendsList = new List<FriendInfo>();
+        activeSkin = null;
+        skinIdList = new List<string>();
+        skinList = new List<SkinEffect>();
         LeavingGameTimestamp = 0;
         credits = 0;
         points = 0;
@@ -189,18 +198,28 @@ public static class Account
     /// <summary>
     /// add the skinId into skinIdList
     /// In Playfab, each statistic has a key (string) and a value (int)
-    /// After purchase, skin is saved with the key SKIN_ (prefix) + SKIN_ID and the value 1
+    /// After purchase, skin is saved with the key SKIN_ (prefix) + SKIN_ID and the state 1.
+    /// The state of active skin is 2
     /// </summary>
     /// <param name="skin">this is always (prefix to distinguish) SKIN_ + SKIN_ID</param>
-    /// <param name="value">valid if saved value in Playfab is 1 for corresponding skin</param>
-    private static void AddSkinIdIfValid(string skin, int value)
+    /// <param name="state">
+    /// state 1 => purchased skin
+    /// state 2 => purchased and active skin
+    /// </param>
+    private static void AddSkinId(string skin, int state)
     {
-        if(value == 1)
+        string skinId = skin.Substring(5);
+
+        if (state == 1)
         {
-            string skinId = skin.Substring(5);
             skinIdList.Add(skinId);
-            Debug.Log($"---> {skinId} ");
-        }  
+        }
+        else if(state == 2)
+        {
+            skinIdList.Add(skinId);
+            activeSkinId = skinId;
+            
+        }
     }
 
     // checks if the given id in the skinIdList which consists saved skinId of related player on PlayFab

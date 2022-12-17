@@ -63,7 +63,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
     /// <summary>
     /// in Playfab, statistics consist of key and value
     /// key is the SKIN_ + SKIN_ID (SKIN_ is the prefix to distinguish the skin from items)
-    /// As a default value, the number 1 is given (does not point out the amount of skin, because the skin can only be bought once)
+    /// As a default value, the number 1 is given (points out that skin is bought but not active)
     /// </summary>
     /// <param name="skinName">Id of skin</param>
     public static void AddSkinAsStatisticOnPlayFab(string skinName)
@@ -77,6 +77,41 @@ public class PlayfabUpdateUserData : MonoBehaviour
         var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
         var statSkin = new StatisticUpdate { StatisticName = "SKIN_" + skinName, Value = 1 };
         request.Statistics.Add(statSkin);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
+
+    // <summary>
+    /// in Playfab, statistics consist of key and value
+    /// key is the SKIN_ + SKIN_ID (SKIN_ is the prefix to distinguish the skin from items)
+    /// State 1 => skin is bought
+    /// State 2 => skin is bought and active
+    /// </summary>
+    /// <param name="skinName">Id of skin</param>
+    public static void UpdateSelectedSkinOnPlayFab()
+    {
+        if (!Account.LoggedIn || Account.ActiveSkin== null)
+            return;
+
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+
+        foreach (string skinId in Account.skinIdList)
+        {
+            int state;
+
+            if (Account.ActiveSkin.id.Equals(skinId))
+            {
+                state = 2;
+            }
+            else
+            {
+                state = 1;
+            }
+
+            var statSkin = new StatisticUpdate { StatisticName = "SKIN_" + skinId, Value = state };
+            request.Statistics.Add(statSkin);
+        }
+        
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
