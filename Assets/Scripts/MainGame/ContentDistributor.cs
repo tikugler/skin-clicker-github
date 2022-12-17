@@ -27,7 +27,7 @@ public class ContentDistributor : MonoBehaviour
     public ArrayList boughtItemsOfPlayer = new ArrayList();
 
 
-    // make sure that SetUpgrade is called before ShopManager.RefreshPanels
+    // make sure that SetUpgrade and LoadPurchasedSkins is called before ShopManager.RefreshPanels
     // Awake is called before the application starts.
     private void Awake()
     {
@@ -36,7 +36,10 @@ public class ContentDistributor : MonoBehaviour
             contentDistributor = this;
             CreateItems();
             CreateSkins();
-            SetUpgrades();
+            SetUpgrades(); // sets number of performed upgrade / bought item previously
+            LoadPurchasedSkins();
+            CollectOfflineCreditsManager.StartCollectOfflineCreditsManagerStatic();
+
         }
     }
 
@@ -142,6 +145,19 @@ public class ContentDistributor : MonoBehaviour
             itemsDictionary[item.id].shopItem = item;
         }
 
-        CollectOfflineCreditsManager.StartCollectOfflineCreditsManagerStatic();
+    }
+
+    /// <summary>
+    /// loads all of the skins which user bougtht
+    /// previously
+    /// </summary>
+    private void LoadPurchasedSkins()
+    {
+        foreach (SkinTemplate skin in scriptableObjectSkins)
+        {
+            if (Account.IsSkinIdInSkinIdList(skin.id)){
+                skinsDictionary[skin.id].PurchaseButtonAction(skin);
+            }
+        }
     }
 }

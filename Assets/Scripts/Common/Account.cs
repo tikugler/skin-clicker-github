@@ -202,6 +202,20 @@ public static class Account
             Debug.Log($"---> {skinId} ");
         }  
     }
+
+    // checks if the given id in the skinIdList which consists saved skinId of related player on PlayFab
+    public static bool IsSkinIdInSkinIdList(string id)
+    {
+        foreach (string skin in Account.skinIdList)
+        {
+            if (skin.Equals(id))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static bool IsSkinInInventory(string id)
     {
         foreach (SkinEffect skin in Account.skinList)
