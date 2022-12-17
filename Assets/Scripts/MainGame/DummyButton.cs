@@ -77,7 +77,7 @@ public class DummyButton : MonoBehaviour
     public void VisualizeButtonClick() {
         
         visualClickObject.SetActive(false);
-        visualClickObject.transform.position = new Vector3(1150f, 580f, 0);
+        visualClickObject.transform.position = new Vector3(Random.Range(800f ,1300f + 1), Random.Range(500f,650f + 1), 0);
         visualClickObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(Fly());
@@ -88,7 +88,7 @@ public class DummyButton : MonoBehaviour
         for (int i = 0; i <= 19; i++) 
         { 
         yield return new WaitForSeconds(0.01f);
-        visualClickObject.transform.position = new Vector3(visualClickObject.transform.position.x, visualClickObject.transform.position.y, 0);
+        visualClickObject.transform.position = new Vector3(visualClickObject.transform.position.x, visualClickObject.transform.position.y + 2, 0);
         }
         visualClickObject.SetActive(false) ;
     }
