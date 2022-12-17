@@ -4253,7 +4253,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3028264594599539322}
+      - m_Target: {fileID: 901853889}
         m_TargetAssemblyTypeName: LoginManager, NewAssembly
         m_MethodName: LoginButton
         m_Mode: 1
@@ -4298,7 +4298,6 @@ GameObject:
   - component: {fileID: 3028264594599539323}
   - component: {fileID: 3028264594599539316}
   - component: {fileID: 3028264594599539317}
-  - component: {fileID: 3028264594599539322}
   m_Layer: 5
   m_Name: LoginButton
   m_TagString: Untagged
@@ -4306,22 +4305,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3028264594599539322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3028264594599539319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4196701d1f152b4099130a1ed967a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loginPopUp: {fileID: 3028264594264765300}
-  username: {fileID: 3028264594594252604}
-  password: {fileID: 3028264593991543320}
-  wrongloginWarning: {fileID: 3028264594240950923}
 --- !u!222 &3028264594599539323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4486,22 +4469,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3028264595090147125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3101561693986777046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4196701d1f152b4099130a1ed967a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loginPopUp: {fileID: 3028264594264765300}
-  username: {fileID: 3028264594594252604}
-  password: {fileID: 3028264593991543320}
-  wrongloginWarning: {fileID: 3028264594240950923}
 --- !u!224 &3028264595228967912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4904,7 +4871,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3028264595090147125}
+      - m_Target: {fileID: 901853889}
         m_TargetAssemblyTypeName: LoginManager, NewAssembly
         m_MethodName: CancelLoginScene
         m_Mode: 1
@@ -4949,7 +4916,6 @@ GameObject:
   - component: {fileID: 3101561693986776618}
   - component: {fileID: 3101561693986776619}
   - component: {fileID: 3101561693986777044}
-  - component: {fileID: 3028264595090147125}
   m_Layer: 5
   m_Name: CancleButton
   m_TagString: Untagged
