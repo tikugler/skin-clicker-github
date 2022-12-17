@@ -24,12 +24,15 @@ public class UIFriend : MonoBehaviour
 
     private void Awake()
     {
-       
+        gameObject.GetComponent<Button>().onClick.AddListener(FriendEntryClicked);
+
 
     }
     private void OnDestroy()
     {
-        Debug.Log($"{friendName} is destroyed");
+        //Debug.Log($"{friendName} is destroyed");
+        gameObject.GetComponent<Button>().onClick.RemoveListener(FriendEntryClicked);
+
     }
 
     private void OnEnable()
@@ -95,5 +98,10 @@ public class UIFriend : MonoBehaviour
         OnRemoveFriend?.Invoke(friendInfo, gameObject);
     }
 
+
+    private  void FriendEntryClicked()
+    {
+        Debug.Log($"You clicked on {friendName}");
+    }
 
 }
