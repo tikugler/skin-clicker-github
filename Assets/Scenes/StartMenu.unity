@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 203450606}
   - component: {fileID: 203450605}
   - component: {fileID: 203450604}
-  - component: {fileID: 203450603}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -174,22 +173,6 @@ RectTransform:
   m_AnchoredPosition: {x: 159.15883, y: 125.59392}
   m_SizeDelta: {x: 40.7176, y: 39.4122}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &203450603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203450601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4196701d1f152b4099130a1ed967a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loginPopUp: {fileID: 457386266}
-  username: {fileID: 0}
-  password: {fileID: 0}
-  wrongloginWarning: {fileID: 0}
 --- !u!114 &203450604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,7 +998,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 124.100006, y: -27.699997}
+  m_AnchoredPosition: {x: 124.1001, y: -27.699951}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677020404
@@ -1926,7 +1909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 24.099976, y: -25.799988}
+  m_AnchoredPosition: {x: 24.100098, y: -25.800049}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139822307
