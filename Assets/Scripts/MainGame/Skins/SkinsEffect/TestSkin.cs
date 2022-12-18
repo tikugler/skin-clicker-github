@@ -33,7 +33,7 @@ public class TestSkin : SkinEffect
 
     public override void EquipSkin()
     {
-        Account.activeSkin = this;
+        Account.ActiveSkin = this;
         EffectOfSkin();
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
     }

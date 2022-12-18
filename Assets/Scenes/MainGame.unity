@@ -11916,7 +11916,6 @@ MonoBehaviour:
   closeNewsPanelButton: {fileID: 6772263905109789516}
   newsBodyText: {fileID: 7554336089138583560}
   newsTitleText: {fileID: 7554336089629814685}
-  lastUpdatedUTC: {fileID: 7554336089419434103}
   newsPanel: {fileID: 6698982758200133253}
 --- !u!1 &1064350541 stripped
 GameObject:
