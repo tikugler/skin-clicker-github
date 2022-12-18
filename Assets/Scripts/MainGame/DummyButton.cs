@@ -80,7 +80,7 @@ public class DummyButton : MonoBehaviour
 
     public void VisualizeButtonClick() {
         visualClickObject.SetActive(false);
-        visualClickObject.transform.position = new Vector3(Random.Range(Screen.width / 2 * 0.95f,Screen.width /2 * 1.35f), Random.Range(Screen.height / 2 * 0.85f,Screen.height / 2 * 1.18f), 0);
+        visualClickObject.transform.position = new Vector3(Random.Range(Screen.width / 2 * 0.95f,Screen.width /2 * 1.3f), Random.Range(Screen.height / 2 * 0.8f,Screen.height / 2 * 1.18f), 0);
         visualClickObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(Fly());
