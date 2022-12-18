@@ -28,7 +28,9 @@ public class DummyButton : MonoBehaviour
         {
 
             int pointsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            clicktext.color = Color.red;
             clicktext.text = "+" + pointsWithCrit;
+            
         }
         else
         { 
@@ -37,6 +39,8 @@ public class DummyButton : MonoBehaviour
 
         }
     }
+
+
 
     public void MainButtonAction()
     {
@@ -75,13 +79,12 @@ public class DummyButton : MonoBehaviour
     }
 
     public void VisualizeButtonClick() {
-        
         visualClickObject.SetActive(false);
-        visualClickObject.transform.position = new Vector3(Random.Range(800f ,1300f + 1), Random.Range(500f,650f + 1), 0);
+        visualClickObject.transform.position = new Vector3(Random.Range(Screen.width / 2 * 0.9f,Screen.width /2 * 1.4f), Random.Range(Screen.height / 2 * 0.9f,Screen.height / 2 * 1.15f), 0);
         visualClickObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(Fly());
-
+        
     }
 
     IEnumerator Fly() {
