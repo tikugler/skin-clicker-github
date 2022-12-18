@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public static class Account
 {
@@ -18,11 +19,11 @@ public static class Account
     public static List<SkinEffect> skinList = new List<SkinEffect>();
     public static List<string> skinIdList = new List<string>();
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
-    public static string activeSkinId;
+    public static string activeSkinId ="";
     private static SkinEffect activeSkin;
     public static SkinEffect ActiveSkin {
         get { return activeSkin; }
-        set { activeSkin = value; PlayfabUpdateUserData.UpdateSelectedSkinOnPlayFab(); }
+        set { activeSkin = value; activeSkinId = value.id;  PlayfabUpdateUserData.UpdateSelectedSkinOnPlayFab(); }
     }
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
@@ -245,5 +246,20 @@ public static class Account
             }
         }
         return false;
+    }
+
+    public static void SetPurchasedItemCount(string upgradeName, int upgradeAmount)
+    {
+        upgradeList[upgradeName] = upgradeAmount;
+        PlayfabUpdateUserData.SetUpgradeAmountOnPlayFab(upgradeName, upgradeAmount);
+    }
+
+    public static void AddSkin(string skinId)
+    {
+        if (!skinIdList.Contains(skinId))
+        {
+            skinIdList.Add(skinId);
+            PlayfabUpdateUserData.AddSkinAsStatisticOnPlayFab(skinId);
+        }
     }
 }
