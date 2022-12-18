@@ -1,24 +1,77 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UserImageManager : MonoBehaviour
 {
     public GameObject profilePicturePopup;
-    public Image userImage;
+    public Button userImage;
+    public TextMeshProUGUI userNameText;
     public Sprite[] allProfilePictures;
     public List<GameObject> createdGameObjects;
+    public Button closePicturePopUpButton;
 
+    private static UserImageManager instance;
+
+
+
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            Account.ChangeProfilPicture += ChangeProfilImageById;
+            Account.ChangeAccountNameText += ChangeUserNameText;
+
+            userImage.onClick.AddListener(OpenImagePopup);
+            closePicturePopUpButton.onClick.AddListener(CloseProfile);
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(instance == this)
+        {
+            Account.ChangeProfilPicture += ChangeProfilImageById;
+            Account.ChangeAccountNameText -= ChangeUserNameText;
+
+            userImage.onClick.RemoveListener(OpenImagePopup);
+            closePicturePopUpButton.onClick.RemoveListener(CloseProfile);
+        }
+    }
+
+    //private void OnEnable()
+    //{
+        
+
+    //}
+
+    //private void OnDisable()
+    //{
+        
+
+
+    //}
     void Start()
     {
         createdGameObjects = new List<GameObject>();
-        userImage.sprite = Resources.Load<Sprite>("ProfilePicture/" + Account.selectedPictureId);
+        userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + Account.selectedPictureId);
     }
     public void OpenImagePopup()
     {
-        profilePicturePopup.SetActive(true);
+        if (!Account.LoggedIn)
+            return;
         AddImages();
+        profilePicturePopup.SetActive(true);
     }
 
     public void CloseProfile()
@@ -72,11 +125,24 @@ public class UserImageManager : MonoBehaviour
 
     public void OnButtonClicked(Button button)
     {
+
         var id = button.transform.name;
         Debug.Log("Selected Id = " + id);
-        userImage.sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
+        userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
         Account.selectedPictureId = Convert.ToInt32(id);
         //TODO: Update Database here to save the selected picture ID?
+        PlayfabUpdateUserData.UpdateStatisticOnPlayFab("SelectedPictureId", Account.selectedPictureId);
+    }
+
+    public void ChangeProfilImageById(int id)
+    {
+        userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
+        Account.selectedPictureId = Convert.ToInt32(id);
+    }
+
+    public void ChangeUserNameText(string newUserName)
+    {
+        userNameText.text = newUserName;
     }
 
 }

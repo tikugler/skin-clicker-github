@@ -71,7 +71,7 @@ public class LoginManager : MonoBehaviour
         request.InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
         {
             //GetUserAccountInfo = true,
-            GetPlayerProfile = true
+            GetPlayerProfile = true,
         };
 
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailed);
@@ -104,8 +104,8 @@ public class LoginManager : MonoBehaviour
         if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
             Account.SetUserLoginPlayerPrefs(username.text, password.text);
         LoadUserStatistics();
-        var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
-        loggedInUser.text = username.text;
+        //var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
+        //loggedInUser.text = username.text;
     }
 
     /// <summary>

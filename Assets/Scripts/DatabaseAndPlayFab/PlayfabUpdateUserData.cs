@@ -62,7 +62,37 @@ public class PlayfabUpdateUserData : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
-    
+    public static void UpdateStatisticOnPlayFab(string statisticName, int statisticValue)
+    {
+        if (!Account.LoggedIn)
+            return;
+
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+        var statUpgrade = new StatisticUpdate { StatisticName = statisticName, Value = statisticValue };
+        request.Statistics.Add(statUpgrade);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
+
+
+
+
+    public static void UpdateStatisticOnPlayFab(Dictionary<string, int> statistics)
+    {
+        if (!Account.LoggedIn)
+            return;
+
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+        foreach(KeyValuePair<string, int> entry in statistics)
+        {
+            var statUpgrade = new StatisticUpdate { StatisticName = entry.Key, Value = entry.Value };
+            request.Statistics.Add(statUpgrade);
+
+        }
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
+
 
 
     // is called when UpdatePlayerStatistics succeed

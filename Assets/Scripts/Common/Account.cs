@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -19,6 +20,12 @@ public static class Account
     public static SkinEffect activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
+
+
+    public static Action<int> ChangeProfilPicture = delegate { };
+    public static Action<string> ChangeAccountNameText = delegate { };
+
+
 
     // Skin objekt? hat id, wert, image, boolean ausgew�hlt 
     // account objekt serializable?
@@ -44,7 +51,21 @@ public static class Account
     {
         accountId = playFabId;
         accountName = username;
+    }
 
+    /// <summary>
+    /// this method sets the accountId, accountName
+    /// </summary>
+    /// <param name="playFabId">accountId</param>
+    /// <param name="username">accountName</param>
+    /// <param name="updateUserNameText">determines if the username text at the left upper corner is updated</param>
+    public static void SetPlayFabIdAndUserName(string playFabId, string username, bool updateUserNameText)
+    {
+        accountId = playFabId;
+        accountName = username;
+
+        if(updateUserNameText)
+            ChangeAccountNameText?.Invoke(username);
     }
 
 
@@ -66,6 +87,9 @@ public static class Account
                 case "LeavingGameTime":
                     Account.LeavingGameTimestamp = stat.Value;
                     break;
+                case "SelectedPictureId":
+                    Account.selectedPictureId = stat.Value;
+                    break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
                     break;
@@ -76,8 +100,9 @@ public static class Account
         //{
         //    Debug.Log(item + ": " + upgradeList[item]);
         //}
-
-        SceneManager.LoadScene("StartNewsMenu");
+        ChangeProfilPicture?.Invoke(selectedPictureId);
+        ChangeAccountNameText?.Invoke(accountName);
+        SceneManager.LoadScene("MainGame");
 
     }
 
@@ -146,6 +171,10 @@ public static class Account
     {
         CleanGuestCustomIdPlayerPrefs();
         CleanUserLoginPlayerPrefs();
+        ChangeAccountNameText?.Invoke("No user logged in");
+        ChangeProfilPicture?.Invoke(0);
+        accountId = null;
+        accountName = null;
         upgradeList = new Dictionary<string, int>();
         LeavingGameTimestamp = 0;
         credits = 0;
