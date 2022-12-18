@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
@@ -27,6 +28,10 @@ public class ContentDistributor : MonoBehaviour
     public ArrayList boughtItemsOfPlayer = new ArrayList();
 
 
+    public static Action<ItemTemplate[]> AddItemsToProfilInfo = delegate { };
+    public static Action<SkinTemplate[]> AddSkinsToProfilInfo = delegate { };
+
+
     // make sure that SetUpgrade and LoadPurchasedSkins is called before ShopManager.RefreshPanels
     // Awake is called before the application starts.
     private void Awake()
@@ -36,10 +41,19 @@ public class ContentDistributor : MonoBehaviour
             contentDistributor = this;
             CreateItems();
             CreateSkins();
+            AddItemsAndSkinsToProfileInfoPanel();
             SetUpgrades(); // sets number of performed upgrade / bought item previously
             LoadPurchasedSkins();
             CollectOfflineCreditsManager.StartCollectOfflineCreditsManagerStatic();
+        }
+    }
 
+    private void AddItemsAndSkinsToProfileInfoPanel()
+    {
+        if (!UserInfoManager.isUserInfoPanelFilled)
+        {
+            AddItemsToProfilInfo?.Invoke(scriptableObjectItems);
+            AddSkinsToProfilInfo?.Invoke(scriptableObjectSkins);
         }
     }
 
@@ -66,6 +80,7 @@ public class ContentDistributor : MonoBehaviour
         scriptableObjectItems[0] = doubleEffectTemplate;
         scriptableObjectItems[1] = testEffectTemplate;
         scriptableObjectItems[2] = workerTemplate;
+
     }
 
     /* 
@@ -86,6 +101,7 @@ public class ContentDistributor : MonoBehaviour
         scriptableObjectSkins = new SkinTemplate[2];
         scriptableObjectSkins[0] = testSkinTemplate;
         scriptableObjectSkins[1] = testSkinTemplate2;
+
     }
 
     /* 
