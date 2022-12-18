@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UserImageManager : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class UserImageManager : MonoBehaviour
 
     private static UserImageManager instance;
 
-
+    public static Action<int, string, int, int, Dictionary<string, int>, List<string>, string> OpenPlayerInfoPanelAction = delegate { };
+    public static Action<int> ChangeImageInUserInfoManagerAction = delegate { };
 
 
     private void Awake()
@@ -26,10 +28,11 @@ public class UserImageManager : MonoBehaviour
             Account.ChangeProfilPicture += ChangeProfilImageById;
             Account.ChangeAccountNameText += ChangeUserNameText;
 
-            userImage.onClick.AddListener(OpenImagePopup);
+            //userImage.onClick.AddListener(OpenImagePopup);
+            userImage.onClick.AddListener(OpenPlayerInfoPanel);
             closePicturePopUpButton.onClick.AddListener(CloseProfile);
             DontDestroyOnLoad(gameObject);
-
+            UserInfoManager.OpenPlayerImagesPanelForSelectionAction += OpenImagePopup;
         }
         else
         {
@@ -37,15 +40,23 @@ public class UserImageManager : MonoBehaviour
         }
     }
 
+    private void OpenPlayerInfoPanel()
+    {
+        OpenPlayerInfoPanelAction?.Invoke(Account.selectedPictureId, Account.accountName, 0, Account.credits, Account.upgradeList, Account.skinIdList, Account.activeSkinId);
+    }
+
     private void OnDestroy()
     {
         if(instance == this)
         {
-            Account.ChangeProfilPicture += ChangeProfilImageById;
+            Account.ChangeProfilPicture -= ChangeProfilImageById;
             Account.ChangeAccountNameText -= ChangeUserNameText;
 
-            userImage.onClick.RemoveListener(OpenImagePopup);
+            //userImage.onClick.RemoveListener(OpenImagePopup);
+            userImage.onClick.RemoveListener(OpenPlayerInfoPanel);
             closePicturePopUpButton.onClick.RemoveListener(CloseProfile);
+            UserInfoManager.OpenPlayerImagesPanelForSelectionAction -= OpenImagePopup;
+
         }
     }
 
@@ -130,14 +141,15 @@ public class UserImageManager : MonoBehaviour
         Debug.Log("Selected Id = " + id);
         userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
         Account.selectedPictureId = Convert.ToInt32(id);
+        ChangeImageInUserInfoManagerAction?.Invoke(Account.selectedPictureId);
         //TODO: Update Database here to save the selected picture ID?
         PlayfabUpdateUserData.UpdateStatisticOnPlayFab("SelectedPictureId", Account.selectedPictureId);
     }
 
     public void ChangeProfilImageById(int id)
     {
-        userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
         Account.selectedPictureId = Convert.ToInt32(id);
+        userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
     }
 
     public void ChangeUserNameText(string newUserName)
