@@ -12,7 +12,7 @@ public class DoubleEffect : ItemEffect
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("2X");
     public override ItemTemplate shopItem { get; set; }
-    public int multiplicator = 2;
+    public int multiplier = 2;
 
 
 
@@ -37,7 +37,7 @@ public class DoubleEffect : ItemEffect
 
     public override void EffectOfItem()
     {
-        ContentDistributor.contentDistributor.mainButton.MultiplyMultiplicator(multiplicator);
+        ContentDistributor.contentDistributor.mainButton.MultiplyMultiplier(multiplier);
     }
 
     public override int CalculateNewAmount()
@@ -47,7 +47,6 @@ public class DoubleEffect : ItemEffect
         GameObject.Find("multipledouble")
           .GetComponent<VisualFeedbackDouble>()
           .ChangeCreditLabelAfterBuyingMultipleDoubles(newAmount);
-        Debug.Log(newAmount);
         return newAmount;
     }
 }

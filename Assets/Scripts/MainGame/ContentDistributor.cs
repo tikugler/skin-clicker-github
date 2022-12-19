@@ -66,20 +66,21 @@ public class ContentDistributor : MonoBehaviour
     {
         var doubleEffect = new DoubleEffect();
         var doubleEffectTemplate = CreateItemTemplate(doubleEffect);
-        itemsDictionary.Add(doubleEffect.id.ToString(), doubleEffect);
 
         var testEffect = new TestEffect();
         var testEffectTemplate = CreateItemTemplate(testEffect);
-        itemsDictionary.Add(testEffect.id.ToString(), testEffect);
 
         var worker = new Worker();
         var workerTemplate = CreateItemTemplate(worker);
-        itemsDictionary.Add(worker.id.ToString(), worker);
 
-        scriptableObjectItems = new ItemTemplate[3];
+        var criticalHit = new CriticalHitEffect();
+        var criticalHitTemplate = CreateItemTemplate(criticalHit);
+
+        scriptableObjectItems = new ItemTemplate[4];
         scriptableObjectItems[0] = doubleEffectTemplate;
         scriptableObjectItems[1] = testEffectTemplate;
         scriptableObjectItems[2] = workerTemplate;
+        scriptableObjectItems[3] = criticalHitTemplate;
 
     }
 
@@ -91,12 +92,9 @@ public class ContentDistributor : MonoBehaviour
     {
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
-        skinsDictionary.Add(testSkin.id.ToString(), testSkin);
-
 
         var testSkinTwo = new TestSkinTwo();
         var testSkinTemplate2 = CreateSkinTemplate(testSkinTwo);
-        skinsDictionary.Add(testSkinTwo.id.ToString(), testSkinTwo);
 
         scriptableObjectSkins = new SkinTemplate[2];
         scriptableObjectSkins[0] = testSkinTemplate;
@@ -120,6 +118,8 @@ public class ContentDistributor : MonoBehaviour
         skinTemplate.fullPicture = null;
         skin.skinTemplate = skinTemplate;
 
+        skinsDictionary.Add(skin.id.ToString(), skin);
+
         return skinTemplate;
     }
 
@@ -137,6 +137,8 @@ public class ContentDistributor : MonoBehaviour
         itemTemplate.startPrice = item.price;
         itemTemplate.icon = item.icon;
         item.shopItem = itemTemplate;
+
+        itemsDictionary.Add(item.id.ToString(), item);
 
         return itemTemplate;
     }
@@ -171,7 +173,8 @@ public class ContentDistributor : MonoBehaviour
     {
         foreach (SkinTemplate skin in scriptableObjectSkins)
         {
-            if (Account.IsSkinIdInSkinIdList(skin.id)){
+            if (Account.IsSkinIdInSkinIdList(skin.id))
+            {
                 skinsDictionary[skin.id].PurchaseButtonAction(skin);
                 if (Account.activeSkinId.Equals(skin.id))
                 {

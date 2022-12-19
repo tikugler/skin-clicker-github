@@ -9,12 +9,12 @@ public class TestSkin : SkinEffect
     public static int critMulti = 10;
     public override string id { get; set; } = SkinNames.TestEffect;
     public override int price { get; set; } = 10;
-    public override string description { get; set; } = "TestSkin with good buffs!\nSkin Multiplicator: " + skinMulti + "\nCritical Chance: " + critChance + "\nCritical Multiplicator: " + critMulti;
+    public override string description { get; set; } = "TestSkin with good buffs!\nSkin Multiplier: " + skinMulti + "\nCritical Chance: " + critChance + "\nCritical Multiplier: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Legendary;
-    public override int multiplicatorOfSkin { get; set; } = skinMulti;
+    public override int multiplierOfSkin { get; set; } = skinMulti;
     public override float criticalChance { get; set; } = critChance;
-    public override float criticalMultiplicator { get; set; } = critMulti;
+    public override float criticalMultiplier { get; set; } = critMulti;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("OurBoiii");
     public override SkinTemplate skinTemplate { get; set; }
 
@@ -26,9 +26,9 @@ public class TestSkin : SkinEffect
 
     public override void EffectOfSkin()
     {
-        ContentDistributor.contentDistributor.mainButton.multiplicatorOfSkin = multiplicatorOfSkin;
-        DummyButton.criticalChance = criticalChance;
-        DummyButton.criticalMultiplicator = criticalMultiplicator;
+        ContentDistributor.contentDistributor.mainButton.multiplicatorOfSkin = multiplierOfSkin;
+        ContentDistributor.contentDistributor.mainButton.AddCriticalChance(criticalChance);
+        ContentDistributor.contentDistributor.mainButton.MultiplyCriticalMultiplier(criticalMultiplier);
     }
 
     public override void EquipSkin()

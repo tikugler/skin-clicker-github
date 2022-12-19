@@ -9,7 +9,7 @@ public class DummyButton : MonoBehaviour
     public int multiplicator = 1;
     public int basePoints = 1;
     public int multiplicatorOfSkin = 1;
-    public static float criticalMultiplicator = 1;
+    public static float criticalMultiplier = 1.5f;
     public static float criticalChance = 0f;
 
     public GameObject visualClickObject;
@@ -26,7 +26,7 @@ public class DummyButton : MonoBehaviour
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
-            int creditsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            int creditsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplier);
             Account.credits += creditsWithCrit;
             VisualizeButtonClick();
             clicktext.color = Color.red;
@@ -49,9 +49,19 @@ public class DummyButton : MonoBehaviour
     }
 
 
-    public void MultiplyMultiplicator(int multi)
+    public void MultiplyMultiplier(int multi)
     {
         multiplicator *= multi;
+    }
+
+    public void AddCriticalChance(float chance)
+    {
+        criticalChance += chance;
+    }
+
+    public void MultiplyCriticalMultiplier(float critMulti)
+    {
+        criticalMultiplier *= critMulti;
     }
 
     public void SetSkin(Sprite skin)
