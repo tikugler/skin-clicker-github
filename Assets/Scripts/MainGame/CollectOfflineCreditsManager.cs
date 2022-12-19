@@ -18,8 +18,8 @@ public class CollectOfflineCreditsManager : MonoBehaviour
 
     public static void StartCollectOfflineCreditsManagerStatic()
     {
-        Debug.Log("Worker.creditsPerSec"+  Worker.workerAmount);
-        Debug.Log("Account.LeavingGameTimestamp: " + Account.LeavingGameTimestamp);
+        //Debug.Log("Worker.creditsPerSec"+  Worker.workerAmount);
+        //Debug.Log("Account.LeavingGameTimestamp: " + Account.LeavingGameTimestamp);
         if (Account.LoggedIn && Worker.workerAmount != 0 && Account.LeavingGameTimestamp != 0)
             GameObject.Find("CollectOfflineCreditsArea").GetComponent<CollectOfflineCreditsManager>().StartCollectOfflineCreditsManager();
         else

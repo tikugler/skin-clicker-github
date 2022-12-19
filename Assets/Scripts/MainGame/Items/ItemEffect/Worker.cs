@@ -53,8 +53,8 @@ public class Worker : ItemEffect
     //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
-        Debug.Log("Worker Price(Template): " + shopItem.price);
-        Debug.Log("Worker Price: " + price);
+        //Debug.Log("Worker Price(Template): " + shopItem.price);
+        //Debug.Log("Worker Price: " + price);
 
         return shopItem.price *= 2;
     }
