@@ -21,35 +21,24 @@ public class DummyButton : MonoBehaviour
         visualClickObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        float randValue = Random.value;
-        if (randValue > (1.0f - criticalChance))
-        {
-
-            int pointsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
-            clicktext.text = "+" + pointsWithCrit;
-        }
-        else
-        { 
-            int pointsWithoutCrit = basePoints * multiplicator * multiplicatorOfSkin;
-            clicktext.text = "+" + pointsWithoutCrit;
-
-        }
-    }
-
     public void MainButtonAction()
     {
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
-            Account.credits += (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            int creditsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            Account.credits += creditsWithCrit;
             VisualizeButtonClick();
+            clicktext.color = Color.red;
+            clicktext.text = "+" + creditsWithCrit;
         }
         else
         {
-            Account.credits += basePoints * multiplicator * multiplicatorOfSkin;
+            int creditsWithoutCrit = basePoints * multiplicator * multiplicatorOfSkin;
+            Account.credits += creditsWithoutCrit;
             VisualizeButtonClick();
+            clicktext.color = Color.black;
+            clicktext.text = "+" + creditsWithoutCrit;
         }
         
     }
@@ -75,20 +64,20 @@ public class DummyButton : MonoBehaviour
     }
 
     public void VisualizeButtonClick() {
-        
         visualClickObject.SetActive(false);
-        visualClickObject.transform.position = new Vector3(1150f, 580f, 0);
+        visualClickObject.transform.position = 
+            new Vector3(Random.Range(Screen.width / 2 * 0.95f,Screen.width /2 * 1.3f), Random.Range(Screen.height / 2 * 0.8f,Screen.height / 2 * 1.18f), 0);
         visualClickObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(Fly());
-
     }
 
+    // Numbers are flying for 19 pixels upwards
     IEnumerator Fly() {
         for (int i = 0; i <= 19; i++) 
         { 
         yield return new WaitForSeconds(0.01f);
-        visualClickObject.transform.position = new Vector3(visualClickObject.transform.position.x, visualClickObject.transform.position.y, 0);
+        visualClickObject.transform.position = new Vector3(visualClickObject.transform.position.x, visualClickObject.transform.position.y + 2, 0);
         }
         visualClickObject.SetActive(false) ;
     }
