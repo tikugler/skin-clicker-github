@@ -40,8 +40,6 @@ public class DummyButton : MonoBehaviour
         }
     }
 
-
-
     public void MainButtonAction()
     {
         float randValue = Random.value;
@@ -80,13 +78,14 @@ public class DummyButton : MonoBehaviour
 
     public void VisualizeButtonClick() {
         visualClickObject.SetActive(false);
-        visualClickObject.transform.position = new Vector3(Random.Range(Screen.width / 2 * 0.95f,Screen.width /2 * 1.3f), Random.Range(Screen.height / 2 * 0.8f,Screen.height / 2 * 1.18f), 0);
+        visualClickObject.transform.position = 
+            new Vector3(Random.Range(Screen.width / 2 * 0.95f,Screen.width /2 * 1.3f), Random.Range(Screen.height / 2 * 0.8f,Screen.height / 2 * 1.18f), 0);
         visualClickObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(Fly());
-        
     }
 
+    // Numbers are flying for 19 pixels upwards
     IEnumerator Fly() {
         for (int i = 0; i <= 19; i++) 
         { 
