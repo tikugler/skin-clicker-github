@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
 
 public static class Account
 {
