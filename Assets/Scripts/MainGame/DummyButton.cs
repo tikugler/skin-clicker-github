@@ -37,6 +37,7 @@ public class DummyButton : MonoBehaviour
             int creditsWithoutCrit = basePoints * multiplicator * multiplicatorOfSkin;
             Account.credits += creditsWithoutCrit;
             VisualizeButtonClick();
+            clicktext.color = Color.black;
             clicktext.text = "+" + creditsWithoutCrit;
         }
         
