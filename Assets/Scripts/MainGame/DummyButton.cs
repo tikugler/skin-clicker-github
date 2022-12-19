@@ -21,37 +21,23 @@ public class DummyButton : MonoBehaviour
         visualClickObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        float randValue = Random.value;
-        if (randValue > (1.0f - criticalChance))
-        {
-
-            int pointsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
-            clicktext.color = Color.red;
-            clicktext.text = "+" + pointsWithCrit;
-            
-        }
-        else
-        { 
-            int pointsWithoutCrit = basePoints * multiplicator * multiplicatorOfSkin;
-            clicktext.text = "+" + pointsWithoutCrit;
-
-        }
-    }
-
     public void MainButtonAction()
     {
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
-            Account.credits += (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            int creditsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            Account.credits += creditsWithCrit;
             VisualizeButtonClick();
+            clicktext.color = Color.red;
+            clicktext.text = "+" + creditsWithCrit;
         }
         else
         {
-            Account.credits += basePoints * multiplicator * multiplicatorOfSkin;
+            int creditsWithoutCrit = basePoints * multiplicator * multiplicatorOfSkin;
+            Account.credits += creditsWithoutCrit;
             VisualizeButtonClick();
+            clicktext.text = "+" + creditsWithoutCrit;
         }
         
     }
