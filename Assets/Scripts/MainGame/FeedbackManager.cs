@@ -11,6 +11,7 @@ public class FeedbackManager : MonoBehaviour
 {
     public GameObject feedbackPanel;
     public GameObject feedbackField;
+
     public void OpenFeedbackpanel()
     {
         feedbackPanel.SetActive(true);
@@ -22,6 +23,7 @@ public class FeedbackManager : MonoBehaviour
 
     public void SendFeedbackToDatabase() {
         string text = feedbackField.GetComponent<TMP_InputField>().text;
+
         // Set up the request object
         WriteClientPlayerEventRequest request = new WriteClientPlayerEventRequest();
         request.EventName = "Feedback";
@@ -36,7 +38,6 @@ public class FeedbackManager : MonoBehaviour
         }, error => {
             Debug.LogError("Error sending feedback to developers: " + error.GenerateErrorReport());
         });
-
         CloseFeedbackpanel();
 
     }
