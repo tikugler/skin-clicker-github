@@ -3,31 +3,31 @@ using PlayFab;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class FeedbackManager : MonoBehaviour
+
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject feedbackPanel;
+    public GameObject feedbackField;
+    public void OpenFeedbackpanel()
     {
-        
+        feedbackPanel.SetActive(true);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void CloseFeedbackpanel()
     {
-        
+        feedbackPanel.SetActive(false);
     }
-
-
 
     public void SendFeedbackToDatabase() {
-        string feedback = "Das ist wieder mal ein Test";
+        string text = feedbackField.GetComponent<TMP_InputField>().text;
         // Set up the request object
         WriteClientPlayerEventRequest request = new WriteClientPlayerEventRequest();
         request.EventName = "Feedback";
         request.Body = new Dictionary<string, object>
 {
-    {"Feedback", feedback}
+    {"Feedback", text},
 };
 
         // Send the request to PlayFab
@@ -37,7 +37,7 @@ public class FeedbackManager : MonoBehaviour
             Debug.LogError("Error sending feedback to developers: " + error.GenerateErrorReport());
         });
 
-
+        CloseFeedbackpanel();
 
     }
 }
