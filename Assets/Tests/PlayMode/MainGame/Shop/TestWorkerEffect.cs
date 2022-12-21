@@ -41,7 +41,7 @@ public class TestWorkerEffect : MonoBehaviour
     {
         int demoCredits = 0;
         DummyButton button = mainButton.GetComponent<DummyButton>();
-        button.multiplicator = 1;
+        button.multiplier = 1;
         button.basePoints = 1;
         Account.credits = demoCredits;
         yield return null;
@@ -95,7 +95,7 @@ public class TestWorkerEffect : MonoBehaviour
     public IEnumerator TestEffectOfWorker()
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
-        button.multiplicator = 1;
+        button.multiplier = 1;
         Account.credits = 0;
         yield return null;
 
@@ -114,7 +114,7 @@ public class TestWorkerEffect : MonoBehaviour
     public IEnumerator TestTwoWorkers()
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
-        button.multiplicator = 1;
+        button.multiplier = 1;
         Account.credits = 0;
         yield return null;
 

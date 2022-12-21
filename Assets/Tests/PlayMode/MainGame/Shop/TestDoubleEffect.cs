@@ -39,18 +39,18 @@ public class Test : MonoBehaviour
     public IEnumerator TestDoubleEffect()
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
-        button.multiplicator = 1;
+        button.multiplier = 1;
         yield return null;
 
         DoubleEffect effect = new DoubleEffect();
         effect.EffectOfItem();
         yield return null;
 
-        Assert.AreEqual(button.multiplicator, 2);
+        Assert.AreEqual(button.multiplier, 2);
         yield return null;
 
         effect.EffectOfItem();
-        Assert.AreEqual(button.multiplicator, 4);
+        Assert.AreEqual(button.multiplier, 4);
 
     }
 
