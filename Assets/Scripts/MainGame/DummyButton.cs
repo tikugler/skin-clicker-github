@@ -12,6 +12,7 @@ public class DummyButton : MonoBehaviour
 
     public void MainButtonAction()
     {
+
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
@@ -21,12 +22,14 @@ public class DummyButton : MonoBehaviour
         {
             Account.credits += basePoints * multiplicator * multiplicatorOfSkin;
         }
+        AchievementManager.Instance.CheckForAchievements();
 
     }
 
     public void WorkerAction(int worker)
     {
         Account.credits += basePoints * multiplicatorOfSkin * worker;
+        AchievementManager.Instance.CheckForAchievements();
     }
 
 

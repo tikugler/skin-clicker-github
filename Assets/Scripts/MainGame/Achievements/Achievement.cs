@@ -30,6 +30,11 @@ public class Achievement
         set { spriteIndex = value; }
     }
     private GameObject achievementRef;
+    public GameObject AchievementRef
+    {
+        get { return achievementRef; }
+        set { achievementRef = value; }
+    }
 
     public Achievement(string name, string description, int spriteIndex, GameObject achievementRef)
     {
@@ -45,9 +50,15 @@ public class Achievement
         if (!unlocked)
         {
             achievementRef.transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 225, 64, 255);
-            unlocked = true;
+            SaveAchievement();
             return true;
         }
         return false;
+    }
+
+    public void SaveAchievement()
+    {
+        unlocked = true;
+        Account.earnedAchievements.Add(this.name);
     }
 }

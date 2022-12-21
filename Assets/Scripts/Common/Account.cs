@@ -16,6 +16,7 @@ public static class Account
     public static SkinEffect activeSkin;
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
+    public static List<string> earnedAchievements = new List<string>();
 
     // Skin objekt? hat id, wert, image, boolean ausgew�hlt 
     // account objekt serializable?

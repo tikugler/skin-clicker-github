@@ -28,33 +28,44 @@ public class AchievementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Account.earnedAchievements.Add("Earn 100 Points !");
         achievementPanel.SetActive(true);
-        CreateAchievement("AchievementTable", "Earn 10 Points !", "You earned 10 Points !", 1);
-        CreateAchievement("AchievementTable", "Earn 50 Points !", "You earned 50 Points !", 1);
-        CreateAchievement("AchievementTable", "Earn 100 Points !", "You earned 100 Points !", 1);
+        //Account.earnedAchievements.Add("Earn 10 Points !");
+        CreateAchievement("AchievementTable", AchievementIdentifier.Achieve10Points, AchievementIdentifier.Achieve10PointsDes, 1);
+        CreateAchievement("AchievementTable", AchievementIdentifier.Achieve30Points, AchievementIdentifier.Achieve30PointsDes, 1);
+        CreateAchievement("AchievementTable", AchievementIdentifier.Achieve50Points, AchievementIdentifier.Achieve50PointsDes, 1);
+        CreateAchievement("AchievementTable", AchievementIdentifier.Achieve5600Points, AchievementIdentifier.Achieve5600PointsDes, 1);
         achievementPanel.SetActive(false);
+        RefreshEarnedAchievements();
     }
 
     // Update is called once per frame
-    void Update()
+    public void CheckForAchievements()
     {
-        if(Account.credits == 10)
+        if (Account.credits >= 10)
         {
-            EarnAchievement("Earn 10 Points !");
+            EarnAchievement(AchievementIdentifier.Achieve10Points);
         }
-        if (Account.credits == 50)
+        if (Account.credits >= 30)
         {
-            EarnAchievement("Earn 50 Points !");
+            EarnAchievement(AchievementIdentifier.Achieve30Points);
         }
-        if (Account.credits == 100)
+        if (Account.credits >= 50)
         {
-            EarnAchievement("Earn 100 Points !");
+            EarnAchievement(AchievementIdentifier.Achieve50Points);
+        }
+        if (Account.credits >= 5600 && Account.credits <= 5700) {
+            EarnAchievement(AchievementIdentifier.Achieve5600Points);
         }
     }
 
     public void EarnAchievement(string title)
     {
-        if (achievements[title].EarnAchievement())
+        //if (Account.earnedAchievements.Contains(title))
+        //{
+        //    return;
+        //}
+        if (!Account.earnedAchievements.Contains(title) && achievements[title].EarnAchievement())
         {
             GameObject achievement = (GameObject)Instantiate(visualAchievement);
             visualAchievement.GetComponent<Image>().color = new Color32(255, 225, 64, 255);
@@ -72,6 +83,10 @@ public class AchievementManager : MonoBehaviour
     public void CreateAchievement(string parent, string title, string description, int spriteIndex)
     {
         GameObject achievementGO = (GameObject)Instantiate(achievementPrefab);
+        //if (Account.earnedAchievements.Contains(title))
+        //{
+        //    achievementGO.GetComponent<Image>().color = new Color32(255, 225, 64, 255);
+        //}
         Achievement newAchievement = new Achievement(title, description, spriteIndex, achievementGO); //oder name?
         achievements.Add(title, newAchievement);
         SetAchievementInfo(parent, achievementGO, title);
@@ -84,5 +99,16 @@ public class AchievementManager : MonoBehaviour
         achievement.transform.GetChild(1).GetComponent<Text>().text = title;
         achievement.transform.GetChild(3).GetComponent<Text>().text = achievements[title].Description;
         achievement.transform.GetChild(2).GetComponent<Image>().sprite = sprites[achievements[title].SpriteIndex];
+    }
+
+    public void RefreshEarnedAchievements()
+    {
+        foreach (string achievement in achievements.Keys)
+        {
+            if (Account.earnedAchievements.Contains(achievement))
+            {
+                achievements[achievement].AchievementRef.transform.GetChild(0).GetComponent<Image>().color = new Color32(255, 225, 64, 255);
+            }
+        }
     }
 }
