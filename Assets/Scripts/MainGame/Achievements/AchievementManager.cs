@@ -28,9 +28,7 @@ public class AchievementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Account.earnedAchievements.Add("Earn 100 Points !");
         achievementPanel.SetActive(true);
-        //Account.earnedAchievements.Add("Earn 10 Points !");
         CreateAchievement("AchievementTable", AchievementIdentifier.Achieve10Points, AchievementIdentifier.Achieve10PointsDes, 1);
         CreateAchievement("AchievementTable", AchievementIdentifier.Achieve30Points, AchievementIdentifier.Achieve30PointsDes, 1);
         CreateAchievement("AchievementTable", AchievementIdentifier.Achieve50Points, AchievementIdentifier.Achieve50PointsDes, 1);
@@ -39,7 +37,7 @@ public class AchievementManager : MonoBehaviour
         RefreshEarnedAchievements();
     }
 
-    // Update is called once per frame
+    // Is called once per Click and once per Autoclick
     public void CheckForAchievements()
     {
         if (Account.credits >= 10)
@@ -54,7 +52,7 @@ public class AchievementManager : MonoBehaviour
         {
             EarnAchievement(AchievementIdentifier.Achieve50Points);
         }
-        if (Account.credits >= 5600 && Account.credits <= 5700) {
+        if (Account.credits >= 5600) {
             EarnAchievement(AchievementIdentifier.Achieve5600Points);
         }
     }
