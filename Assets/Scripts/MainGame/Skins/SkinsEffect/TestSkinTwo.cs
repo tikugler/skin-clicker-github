@@ -31,7 +31,7 @@ public class TestSkinTwo : SkinEffect
 
     public override void EffectOfSkin()
     {
-        ContentDistributor.contentDistributor.mainButton.multiplicatorOfSkin = multiplierOfSkin;
+        ContentDistributor.contentDistributor.mainButton.SetSkinMultiplier(skinMulti);
         ContentDistributor.contentDistributor.mainButton.AddCriticalChance(criticalChance);
         ContentDistributor.contentDistributor.mainButton.MultiplyCriticalMultiplier(criticalMultiplier);
 
@@ -46,6 +46,14 @@ public class TestSkinTwo : SkinEffect
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
         Account.ActiveSkin = this;
         EffectOfSkin();
+    }
+
+    public override void UnequipSkin()
+    {
+        Account.ActiveSkin = null;
+        ContentDistributor.contentDistributor.mainButton.RemoveSkinMultiplier();
+        ContentDistributor.contentDistributor.mainButton.RemoveCriticalChance(criticalChance);
+        ContentDistributor.contentDistributor.mainButton.RemoveCriticalMultiplier(criticalMultiplier);
     }
 }
 
