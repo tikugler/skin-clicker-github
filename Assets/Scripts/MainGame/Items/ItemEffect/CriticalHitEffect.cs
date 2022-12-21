@@ -25,7 +25,7 @@ public class CriticalHitEffect : ItemEffect
     //Increasment is hardcoded, if changed, also change tests of TestDoubleEffect.
     public override int CalculateNewPrice()
     {
-        return price * 2;
+        return shopItem.price *= 10;
     }
 
     public override void EffectOfItem()
