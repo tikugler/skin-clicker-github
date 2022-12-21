@@ -50,7 +50,6 @@ public class TestSkinTwo : SkinEffect
 
     public override void UnequipSkin()
     {
-        Account.ActiveSkin = null;
         ContentDistributor.contentDistributor.mainButton.RemoveSkinMultiplier();
         ContentDistributor.contentDistributor.mainButton.RemoveCriticalChance(criticalChance);
         ContentDistributor.contentDistributor.mainButton.RemoveCriticalMultiplier(criticalMultiplier);
