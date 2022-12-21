@@ -10,6 +10,7 @@ public class FeedbackManager : MonoBehaviour
 
 {
     public GameObject feedbackPanel;
+    public GameObject feedbackTitle;
     public GameObject feedbackField;
 
     public void OpenFeedbackpanel()
@@ -22,23 +23,32 @@ public class FeedbackManager : MonoBehaviour
     }
 
     public void SendFeedbackToDatabase() {
-        string text = feedbackField.GetComponent<TMP_InputField>().text;
+        string titleText = feedbackTitle.GetComponent<TMP_InputField>().text;
+        string feedbackText = feedbackField.GetComponent<TMP_InputField>().text;
+        
 
         // Set up the request object
         WriteClientPlayerEventRequest request = new WriteClientPlayerEventRequest();
         request.EventName = "Feedback";
         request.Body = new Dictionary<string, object>
 {
-    {"Feedback", text},
+    {"Betreff" , titleText},
+    {"Inhalt", feedbackText},
+    
 };
 
         // Send the request to PlayFab
         PlayFabClientAPI.WritePlayerEvent(request, result => {
             Debug.Log("Feedback sent to developers!");
+            feedbackTitle.GetComponent<TMP_InputField>().text = "";
+            feedbackField.GetComponent<TMP_InputField>().text = "";
+            
+
+            CloseFeedbackpanel();
         }, error => {
             Debug.LogError("Error sending feedback to developers: " + error.GenerateErrorReport());
         });
-        CloseFeedbackpanel();
+        
 
     }
 }
