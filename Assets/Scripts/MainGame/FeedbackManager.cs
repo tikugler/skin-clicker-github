@@ -12,6 +12,7 @@ public class FeedbackManager : MonoBehaviour
     public GameObject feedbackPanel;
     public GameObject feedbackTitle;
     public GameObject feedbackField;
+    public GameObject feedbackSentText;
 
     public void OpenFeedbackpanel()
     {
@@ -20,6 +21,7 @@ public class FeedbackManager : MonoBehaviour
     public void CloseFeedbackpanel()
     {
         feedbackPanel.SetActive(false);
+        feedbackSentText.SetActive(false);
     }
 
     public void SendFeedbackToDatabase() {
@@ -42,9 +44,7 @@ public class FeedbackManager : MonoBehaviour
             Debug.Log("Feedback sent to developers!");
             feedbackTitle.GetComponent<TMP_InputField>().text = "";
             feedbackField.GetComponent<TMP_InputField>().text = "";
-            
-
-            CloseFeedbackpanel();
+            feedbackSentText.SetActive(true);
         }, error => {
             Debug.LogError("Error sending feedback to developers: " + error.GenerateErrorReport());
         });
