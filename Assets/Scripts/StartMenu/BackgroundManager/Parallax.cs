@@ -6,7 +6,7 @@ public class Parallax : MonoBehaviour
     public float cameraMoveSpeed = 1.5f;
     [Header("Layer Settings")]
     public float[] layerSpeed = new float[5];
-    public static GameObject[] layerObjects = new GameObject[5];
+    public GameObject[] layerObjects = new GameObject[5];
 
     private Transform mainCamera;
     private float[] startPos = new float[5];
@@ -19,12 +19,12 @@ public class Parallax : MonoBehaviour
     void Start()
     {
         BackgroundArrays.Start();
-        SwitchBackground(BackgroundArrays.Desert);
-        //layerObjects[0].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Backgtounds/2_Desert/Layer_0");
+
         layerSize = layerSpeed.Length;
         mainCamera = Camera.main.transform;
         localScaleX = layerObjects[0].transform.localScale.x;
         boundsSizeX = layerObjects[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+
         for (int i = 0; i < layerSize; i++)
         {
             startPos[i] = mainCamera.position.x;
@@ -53,10 +53,12 @@ public class Parallax : MonoBehaviour
         }
     }
 
-    public static void SwitchBackground(string id) {
+    public void SwitchBackground(string id) {
         Sprite[] newBackground = BackgroundArrays.backgroundDictionary[id];
-        for (int i = 0; i < newBackground.Length; i++) {
+        for (int i = 1; i < newBackground.Length; i++) {
             layerObjects[i].GetComponent<SpriteRenderer>().sprite = newBackground[i];
+            FindObjectHelper.FindObjectInParent(layerObjects[i], "Layer_posX").GetComponent<SpriteRenderer>().sprite = newBackground[i];
+            FindObjectHelper.FindObjectInParent(layerObjects[i], "Layer_negX").GetComponent<SpriteRenderer>().sprite = newBackground[i];
         }
     }
 }

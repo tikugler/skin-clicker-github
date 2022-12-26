@@ -19,6 +19,7 @@ public class ContentDistributor : MonoBehaviour
     public ItemInventoryManager itemInventoryManager;
     public SkinInventoryManager skinInventoryManager;
     public DummyButton mainButton;
+    public Parallax parallax;
     public ItemTemplate[] scriptableObjectItems;
     public SkinTemplate[] scriptableObjectSkins;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();

@@ -36,5 +36,6 @@ public class TestSkin : SkinEffect
         Account.ActiveSkin = this;
         EffectOfSkin();
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
+        ContentDistributor.contentDistributor.parallax.SwitchBackground(BackgroundArrays.Graveyard);
     }
 }
