@@ -6,7 +6,7 @@ public class Parallax : MonoBehaviour
     public float cameraMoveSpeed = 1.5f;
     [Header("Layer Settings")]
     public float[] layerSpeed = new float[5];
-    public GameObject[] layerObjects = new GameObject[5];
+    public static GameObject[] layerObjects = new GameObject[5];
 
     private Transform mainCamera;
     private float[] startPos = new float[5];
@@ -53,7 +53,7 @@ public class Parallax : MonoBehaviour
         }
     }
 
-    public void SwitchBackground(string id) {
+    public static void SwitchBackground(string id) {
         Sprite[] newBackground = BackgroundArrays.backgroundDictionary[id];
         for (int i = 0; i < newBackground.Length; i++) {
             layerObjects[i].GetComponent<SpriteRenderer>().sprite = newBackground[i];

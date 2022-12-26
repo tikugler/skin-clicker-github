@@ -43,6 +43,7 @@ public class TestSkinTwo : SkinEffect
 
     public override void EquipSkin()
     {
+        Parallax.SwitchBackground(BackgroundArrays.Snow);
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
         Account.ActiveSkin = this;
         EffectOfSkin();
