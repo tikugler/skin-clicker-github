@@ -13,7 +13,7 @@ public class FeedbackManager : MonoBehaviour
     public GameObject feedbackField;
     public GameObject feedbackSentText;
     public GameObject feedbackPanel;
-    public Button feedbackButton = null;
+    public Button feedbackButton;
 
     void Awake()
     {
