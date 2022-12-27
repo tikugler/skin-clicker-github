@@ -9,19 +9,49 @@ using TMPro;
 public class FeedbackManager : MonoBehaviour
 
 {
-    public GameObject feedbackPanel;
     public GameObject feedbackTitle;
     public GameObject feedbackField;
     public GameObject feedbackSentText;
+    public GameObject feedbackPanel;
+    public GameObject feedbackHeader;
+    public GameObject sendButton;
+    public GameObject buttonX;
+    public Button feedbackButton;
+
+    void Awake()
+    {
+        if (!Account.LoggedIn || Account.accountName.Equals("Guest"))
+        {
+            feedbackButton.interactable = false;
+        }
+
+        else
+        {
+            feedbackButton.interactable = true;
+        }
+    }
+
+
 
     public void OpenFeedbackpanel()
     {
+        feedbackField.SetActive(true);
+        feedbackTitle.SetActive(true);
         feedbackPanel.SetActive(true);
+        feedbackHeader.SetActive(true);
+        sendButton.SetActive(true);
+        buttonX.SetActive(true);
     }
     public void CloseFeedbackpanel()
     {
+        feedbackField.SetActive(false);
+        feedbackTitle.SetActive(false);
         feedbackPanel.SetActive(false);
+        feedbackHeader.SetActive(false);
         feedbackSentText.SetActive(false);
+        sendButton.SetActive(false);
+        buttonX.SetActive(false);
+
     }
 
     public void SendFeedbackToDatabase() {
