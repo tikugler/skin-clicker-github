@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
-public class Test : MonoBehaviour
+public class TestCriticalHit : MonoBehaviour
 {
     private GameObject canvasGameObject;
     private ContentDistributor distributor;
     private Button mainButton;
-    public string doubleId = ItemNames.DoubleEffect;
+    public string critId = ItemNames.CriticalHitEffect;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
@@ -39,47 +39,51 @@ public class Test : MonoBehaviour
     public IEnumerator TestDoubleEffect()
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
-        button.multiplier = 1;
+        DummyButton.criticalChance = 0;
         yield return null;
 
-        DoubleEffect effect = new DoubleEffect();
+        CriticalHitEffect effect = new CriticalHitEffect();
         effect.EffectOfItem();
         yield return null;
 
-        Assert.AreEqual(button.multiplier, 2);
+        Assert.AreEqual(DummyButton.criticalChance, 0.05f);
         yield return null;
 
         effect.EffectOfItem();
-        Assert.AreEqual(button.multiplier, 4);
+        Assert.AreEqual(DummyButton.criticalChance, 0.1f);
 
     }
 
     [UnityTest]
     public IEnumerator TestDoubleEffectPurchaseButtonAction()
     {
-        DoubleEffect effect = new DoubleEffect();
+        CriticalHitEffect effect = new CriticalHitEffect();
         int startPrice = effect.price;
         int startAmount = 0;
         ItemTemplate item = new ItemTemplate();
         item.amount = startAmount;
         item.description = "Random Description";
-        item.id = doubleId;
+        item.id = critId;
         item.icon = null;
         item.price = startPrice;
-        item.title = doubleId;
+        item.title = critId;
 
         Assert.AreEqual(startAmount, item.amount);
-        Assert.AreEqual(startPrice, item.price);
+        Assert.AreEqual(startPrice, effect.price);
         yield return null;
 
-        startPrice *= 4;
+        Debug.Log("First");
+        startPrice *= 10;
+        Debug.Log("startPrice = " + startPrice);
         startAmount += 1;
         effect.PurchaseButtonAction(item);
+        Debug.Log("startPrice = " + startPrice);
         Assert.AreEqual(startAmount, item.amount);
         Assert.AreEqual(startPrice, item.price);
         yield return null;
 
-        startPrice *= 4;
+        Debug.Log("Sec");
+        startPrice *= 10;
         startAmount += 1;
         effect.PurchaseButtonAction(item);
         Assert.AreEqual(startAmount, item.amount);
