@@ -2462,6 +2462,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -900
       objectReference: {fileID: 0}
+    - target: {fileID: 4875058606804292530, guid: 878135846a9744b6597827d5bbef739e, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4875058607202798640, guid: 878135846a9744b6597827d5bbef739e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
