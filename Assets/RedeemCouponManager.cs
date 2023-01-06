@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -93,6 +94,8 @@ public class RedeemCouponManager : MonoBehaviour
         }
         else
         {
+            redeemButtonButton.interactable = false;
+
             redeemCouponInfoText.text = "";
             GetCatalogItem();
         }
@@ -108,7 +111,8 @@ public class RedeemCouponManager : MonoBehaviour
 
     private void GetCataLogItemError(PlayFabError error)
     {
-        Debug.Log(error.GenerateErrorReport());
+        redeemCouponInfoText.text = "Fehler";
+        redeemButtonButton.interactable = true;
     }
 
     private void GetCataLogItemSuccess(GetCatalogItemsResult result)
@@ -127,6 +131,8 @@ public class RedeemCouponManager : MonoBehaviour
 
         redeemCouponInfoText.color = Color.red;
         redeemCouponInfoText.text = "Dieses Coupon ist nicht gültig";
+        redeemButtonButton.interactable = true;
+
 
     }
 
@@ -178,6 +184,8 @@ public class RedeemCouponManager : MonoBehaviour
         request.Statistics.Add(new StatisticUpdate { StatisticName = "USED_"+usedCouponCode, Value = 1 });
         //statisticsDict.Add(usedCouponCode, 1);
 
+        redeemButtonButton.interactable = true;
+
         if (request.Statistics.Count > 1)
         {
             Account.UsedCoupons.Add(usedCouponCode);
@@ -186,7 +194,7 @@ public class RedeemCouponManager : MonoBehaviour
                 {
                     redeemCouponInfoText.color = Color.magenta;
                     redeemCouponInfoText.text = addedCurrenciesText + " wurden geladen :)";
-                    
+
 
                 },
 
@@ -195,8 +203,14 @@ public class RedeemCouponManager : MonoBehaviour
 
                     redeemCouponInfoText.text = error.GenerateErrorReport();
                 }
-                ); 
+                );
 
+        }
+        else
+        {
+            redeemCouponInfoText.color = Color.red;
+
+            redeemCouponInfoText.text = "Coupon ist ungültig";
         }
 
 
