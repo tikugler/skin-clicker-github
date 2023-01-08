@@ -56,6 +56,9 @@ public class ResetPasswordManager : MonoBehaviour
     }
     void CloseResetPasswordPanel()
     {
+        resetPasswordRequestButton.interactable = false;
+        requestedEmailInputField.text = "";
+        infoText.text = "";
         resetPasswordPanel.active = false;
     }
 
