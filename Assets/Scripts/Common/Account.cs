@@ -26,7 +26,8 @@ public static class Account
     }
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
-
+    private static List<string> usedCoupons  = new List<string>();
+    public static List<string> UsedCoupons { get { return usedCoupons; } }
 
     public static Action<int> ChangeProfilPicture = delegate { };
     public static Action<string> ChangeAccountNameText = delegate { };
@@ -98,6 +99,9 @@ public static class Account
                     break;
                 case string skin when skin.StartsWith("SKIN_"):
                     AddSkinId(skin, stat.Value);
+                    break;
+                case string coupon when coupon.StartsWith("USED_"):
+                    usedCoupons.Add(coupon.Substring(5));
                     break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
