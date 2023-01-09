@@ -4,36 +4,36 @@ using UnityEngine;
 
 public static class AchievementIdentifier
 {
-    public static readonly string Achieve10Points = "Earn 10 Points !";
-    public static readonly string Achieve10PointsDes = "You earned 10 Points !";
+    public static readonly string Achieve10Points = "Earn 10 Points";
+    public static readonly string Achieve10PointsDes = "You earned 10 Points!";
     public static readonly int Achieve10PointsBonus = 50;
 
-    public static readonly string Achieve500Points = "Earn 500 Points !";
-    public static readonly string Achieve500PointsDes = "You earned 500 Points !";
+    public static readonly string Achieve500Points = "Earn 500 Points";
+    public static readonly string Achieve500PointsDes = "You earned 500 Points!";
     public static readonly int Achieve500PointsBonus = 2000;
 
-    public static readonly string Achieve5000Points = "Earn 5000 Points !";
-    public static readonly string Achieve5000PointsDes = "You earned 5000 Points !";
+    public static readonly string Achieve5000Points = "Earn 5000 Points";
+    public static readonly string Achieve5000PointsDes = "You earned 5000 Points!";
     public static readonly int Achieve5000PointsBonus = 15000;
 
-    public static readonly string Achieve50000Points = "Earn 50000 Points !";
-    public static readonly string Achieve50000PointsDes = "You earned 50000 Points !";
+    public static readonly string Achieve50000Points = "Earn 50000 Points";
+    public static readonly string Achieve50000PointsDes = "You earned 50000 Points!";
     public static readonly int Achieve50000PointsBonus = 30000;
 
-    public static readonly string Achieve500000Points = "Earn 500000 Points !";
-    public static readonly string Achieve500000PointsDes = "You earned 500000 Points !";
+    public static readonly string Achieve500000Points = "Earn 500000 Points";
+    public static readonly string Achieve500000PointsDes = "You earned 500000 Points!";
     public static readonly int Achieve500000PointsBonus = 100000;
 
-    public static readonly string Achieve1000000Points = "Earn 1000000 Points !";
-    public static readonly string Achieve1000000PointsDes = "You earned 1000000 Points !";
+    public static readonly string Achieve1000000Points = "Earn 1000000 Points";
+    public static readonly string Achieve1000000PointsDes = "You earned 1000000 Points!";
     public static readonly int Achieve1000000PointsBonus = 250000;
 
-    public static readonly string Achieve5000000Points = "Earn 5000000 Points !";
-    public static readonly string Achieve5000000PointsDes = "You earned 5000000 Points !";
+    public static readonly string Achieve5000000Points = "Earn 5000000 Points";
+    public static readonly string Achieve5000000PointsDes = "You earned 5000000 Points!";
     public static readonly int Achieve5000000PointsBonus = 1500000;
 
-    public static readonly string Achieve10000000Points = "Earn 10000000 Points !";
-    public static readonly string Achieve10000000PointsDes = "You earned 10000000 Points !";
+    public static readonly string Achieve10000000Points = "Earn 10000000 Points";
+    public static readonly string Achieve10000000PointsDes = "You earned 10000000 Points!";
     public static readonly int Achieve10000000PointsBonus = 3500000;
 
     public static void GetAchievementBonus (string achievement)
