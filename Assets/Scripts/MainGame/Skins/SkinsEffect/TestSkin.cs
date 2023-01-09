@@ -15,7 +15,7 @@ public class TestSkin : SkinEffect
     public override int multiplicatorOfSkin { get; set; } = skinMulti;
     public override float criticalChance { get; set; } = critChance;
     public override float criticalMultiplicator { get; set; } = critMulti;
-    public override Sprite icon { get; set; } = Resources.Load<Sprite>("OurBoiii");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("ButtonSkins/cactus");
     public override SkinTemplate skinTemplate { get; set; }
 
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)
