@@ -35,14 +35,21 @@ public class Achievement
         get { return achievementRef; }
         set { achievementRef = value; }
     }
+    private string bonus;
+    public string Bonus
+    {
+        get { return bonus; }
+        set { bonus = value; }
+    }
 
-    public Achievement(string name, string description, int spriteIndex, GameObject achievementRef)
+    public Achievement(string name, string description, int spriteIndex, GameObject achievementRef, string bonus)
     {
         this.name = name;
         this.description = description;
         this.unlocked = false;
         this.spriteIndex = spriteIndex;
         this.achievementRef = achievementRef;
+        this.bonus = bonus;
     }
 
     public bool EarnAchievement()
