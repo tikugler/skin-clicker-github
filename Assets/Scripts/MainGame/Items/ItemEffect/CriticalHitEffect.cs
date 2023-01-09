@@ -10,7 +10,7 @@ public class CriticalHitEffect : ItemEffect
     public override string description { get; set; } = "Increase Critical Hit by " + (int)(critChance * 100) + "%.\n" +
                                                         "Item is stackable.";
     public override string rarity { get; set; } = Rarities.Common;
-    public override Sprite icon { get; set; } = Resources.Load<Sprite>("");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("crit");
     public override ItemTemplate shopItem { get; set; }
     private static float critChance = 0.05f;
 
