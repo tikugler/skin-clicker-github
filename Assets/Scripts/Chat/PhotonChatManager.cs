@@ -50,7 +50,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public void OnConnected()
     {
         //throw new System.NotImplementedException();
-        Debug.Log("Connected");
+        Debug.Log("Connected to Chat");
         chatClient.Subscribe(new string[] { "RegionChannel" });
         AddPhotonChatFriend(Account.friendsList.Select(f => f.TitleDisplayName).ToArray());
 
@@ -178,7 +178,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         int index = dropdown.value;
 
-        Debug.Log(dropdown.options[index].text);
+        //Debug.Log(dropdown.options[index].text);
         selectedReceiverToSendMessage = dropdown.options[index].text;
     }
 

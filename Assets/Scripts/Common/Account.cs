@@ -18,15 +18,16 @@ public static class Account
     public static List<SkinEffect> skinList = new List<SkinEffect>();
     public static List<string> skinIdList = new List<string>();
     public static Dictionary<string, int> upgradeList = new Dictionary<string, int>();  //Maybe enum instead of string soon
-    public static string activeSkinId;
+    public static string activeSkinId ="";
     private static SkinEffect activeSkin;
     public static SkinEffect ActiveSkin {
         get { return activeSkin; }
-        set { activeSkin = value; PlayfabUpdateUserData.UpdateSelectedSkinOnPlayFab(); }
+        set { activeSkin = value; activeSkinId = value.id;  PlayfabUpdateUserData.UpdateSelectedSkinOnPlayFab(); }
     }
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
-
+    private static List<string> usedCoupons  = new List<string>();
+    public static List<string> UsedCoupons { get { return usedCoupons; } }
 
     public static Action<int> ChangeProfilPicture = delegate { };
     public static Action<string> ChangeAccountNameText = delegate { };
@@ -99,6 +100,9 @@ public static class Account
                 case string skin when skin.StartsWith("SKIN_"):
                     AddSkinId(skin, stat.Value);
                     break;
+                case string coupon when coupon.StartsWith("USED_"):
+                    usedCoupons.Add(coupon.Substring(5));
+                    break;
                 default:
                     upgradeList.Add(stat.StatisticName, stat.Value);
                     break;
@@ -144,7 +148,7 @@ public static class Account
 
     public static bool GetIfThereIsSavedUserLoginInfoPlayerPrefs()
     {
-        Debug.Log("PlayerPrefs username: " + PlayerPrefs.GetString("username"));
+        //Debug.Log("PlayerPrefs username: " + PlayerPrefs.GetString("username"));
         return PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password");
     }
 
@@ -245,5 +249,20 @@ public static class Account
             }
         }
         return false;
+    }
+
+    public static void SetPurchasedItemCount(string upgradeName, int upgradeAmount)
+    {
+        upgradeList[upgradeName] = upgradeAmount;
+        PlayfabUpdateUserData.SetUpgradeAmountOnPlayFab(upgradeName, upgradeAmount);
+    }
+
+    public static void AddSkin(string skinId)
+    {
+        if (!skinIdList.Contains(skinId))
+        {
+            skinIdList.Add(skinId);
+            PlayfabUpdateUserData.AddSkinAsStatisticOnPlayFab(skinId);
+        }
     }
 }

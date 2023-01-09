@@ -107,8 +107,8 @@ public class ShopSkinManager : MonoBehaviour
                 contentDistributor.skinsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.skinsDictionary[item.id].skinTemplate = item;
 
-                // adds skin in PlayFab
-                PlayfabUpdateUserData.AddSkinAsStatisticOnPlayFab(item.id);
+                // adds skin in Account (added in Playfab automatically)
+                Account.AddSkin(item.id);
             }
         }
         RefreshPanels();

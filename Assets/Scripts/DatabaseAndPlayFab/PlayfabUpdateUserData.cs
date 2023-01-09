@@ -151,7 +151,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
     // is called when UpdatePlayerStatistics succeed
     private static void OnSetStatsSuccessful(UpdatePlayerStatisticsResult obj)
     {
-        Debug.Log("Stats are successfully updated");
+        //Debug.Log("Stats are successfully updated");
     }
 
     // is called when UpdatePlayerStatistics fails
