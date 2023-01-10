@@ -10,7 +10,7 @@ public class Worker : ItemEffect
     public override int price { get; set; } = 1;
     public override string description { get; set; } = "Automated button clicker.\n1 click per secound.";
     public override string rarity { get; set; } = Rarities.Common;
-    public override Sprite icon { get; set; }
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("worker");
     public override ItemTemplate shopItem { get; set; }
     public int creditsPerSec;
     public static int workerAmount = 0;

@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class DummyButton : MonoBehaviour
 {
-    public int multiplicator = 1;
+    public int multiplier = 1;
     public int basePoints = 1;
-    public int multiplicatorOfSkin = 1;
-    public static float criticalMultiplicator = 1;
+    public int multiplierOfSkin = 1;
+    public static float criticalMultiplier = 1.5f;
     public static float criticalChance = 0f;
 
     public GameObject visualClickObject;
@@ -23,10 +23,11 @@ public class DummyButton : MonoBehaviour
 
     public void MainButtonAction()
     {
+
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
-            int creditsWithCrit = (int)System.Math.Round(basePoints * multiplicator * multiplicatorOfSkin * criticalMultiplicator);
+            int creditsWithCrit = (int)System.Math.Round(basePoints * multiplier * multiplierOfSkin * criticalMultiplier);
             Account.credits += creditsWithCrit;
             VisualizeButtonClick();
             clicktext.color = Color.red;
@@ -34,24 +35,61 @@ public class DummyButton : MonoBehaviour
         }
         else
         {
-            int creditsWithoutCrit = basePoints * multiplicator * multiplicatorOfSkin;
+            int creditsWithoutCrit = basePoints * multiplier * multiplierOfSkin;
             Account.credits += creditsWithoutCrit;
             VisualizeButtonClick();
             clicktext.color = Color.black;
             clicktext.text = "+" + creditsWithoutCrit;
         }
+        AchievementManager.Instance.CheckForAchievements();
 
     }
 
     public void WorkerAction(int worker)
     {
-        Account.credits += basePoints * multiplicatorOfSkin * worker;
+        AchievementManager.Instance.CheckForAchievements();
+        Account.credits += basePoints * multiplierOfSkin * worker;
     }
 
 
-    public void SetMultiplicator(int multi)
+    public void MultiplyMultiplier(int multi)
     {
-        multiplicator = multi;
+        multiplier *= multi;
+    }
+
+    public void RemoveMultiplier(int multi)
+    {
+        multiplier /= multi;
+    }
+
+    public void AddCriticalChance(float chance)
+    {
+        criticalChance += chance;
+    }
+
+    public void RemoveCriticalChance(float chance)
+    {
+        criticalChance -= chance;
+    }
+
+    public void MultiplyCriticalMultiplier(float critMulti)
+    {
+        criticalMultiplier *= critMulti;
+    }
+
+    public void RemoveCriticalMultiplier(float critMulti)
+    {
+        criticalMultiplier /= critMulti;
+    }
+
+    public void SetSkinMultiplier(int multi)
+    {
+        multiplierOfSkin = multi;
+    }
+
+    public void RemoveSkinMultiplier()
+    {
+        multiplierOfSkin = 1;
     }
 
     public void SetSkin(Sprite skin)

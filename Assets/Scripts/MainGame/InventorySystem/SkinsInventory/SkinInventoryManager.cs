@@ -77,7 +77,7 @@ public class SkinInventoryManager : MonoBehaviour
     */
     public void UseButtonAction(int pos)
     {
-        //only woking, if there are no stacks!
+        if (Account.ActiveSkin != null) {Account.ActiveSkin.UnequipSkin();}
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();
         //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()
