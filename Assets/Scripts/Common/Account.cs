@@ -26,6 +26,7 @@ public static class Account
     }
     public static bool LoggedIn { get { return accountId != null; } }
     public static List<FriendInfo> friendsList = new List<FriendInfo>();
+    public static List<string> earnedAchievements = new List<string>();
     private static List<string> usedCoupons  = new List<string>();
     public static List<string> UsedCoupons { get { return usedCoupons; } }
 
@@ -90,6 +91,7 @@ public static class Account
             {
                 case "Credits":
                     Account.credits = stat.Value;
+                    LoadEarnedAchievements(); //temp methode für achievements kann geloscht werden spater
                     break;
                 case "LeavingGameTime":
                     Account.LeavingGameTimestamp = stat.Value;
@@ -119,6 +121,41 @@ public static class Account
 
     }
 
+    private static void LoadEarnedAchievements()
+    {
+        if (Account.credits >= 10)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve10Points);
+        }
+        if (Account.credits >= 500)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve500Points);
+        }
+        if (Account.credits >= 5000)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve5000Points);
+        }
+        if (Account.credits >= 50000)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve50000Points);
+        }
+        if (Account.credits >= 500000)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve500000Points);
+        }
+        if (Account.credits >= 1000000)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve1000000Points);
+        }
+        if (Account.credits >= 5000000)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve5000000Points);
+        }
+        if (Account.credits >= 10000000)
+        {
+            earnedAchievements.Add(AchievementIdentifier.Achieve10000000Points);
+        }
+    }
 
     public static void SetUserLoginPlayerPrefs(string username, string password)
     {
@@ -191,6 +228,7 @@ public static class Account
         accountName = null;
         upgradeList = new Dictionary<string, int>();
         friendsList = new List<FriendInfo>();
+        earnedAchievements = new List<string>();
         activeSkin = null;
         skinIdList = new List<string>();
         skinList = new List<SkinEffect>();

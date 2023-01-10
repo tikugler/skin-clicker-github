@@ -23,6 +23,7 @@ public class DummyButton : MonoBehaviour
 
     public void MainButtonAction()
     {
+
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
@@ -40,11 +41,13 @@ public class DummyButton : MonoBehaviour
             clicktext.color = Color.black;
             clicktext.text = "+" + creditsWithoutCrit;
         }
+        AchievementManager.Instance.CheckForAchievements();
 
     }
 
     public void WorkerAction(int worker)
     {
+        AchievementManager.Instance.CheckForAchievements();
         Account.credits += basePoints * multiplierOfSkin * worker;
     }
 
