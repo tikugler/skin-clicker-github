@@ -14,7 +14,7 @@ public class TestSkin : SkinEffect
     public override string rarity { get; set; } = Rarities.Legendary;
     public override int multiplierOfSkin { get; set; } = skinMulti;
     public override float criticalChance { get; set; } = critChance;
-    public override float criticalMultiplicator { get; set; } = critMulti;
+    public override float criticalMultiplier { get; set; } = critMulti;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("ButtonSkins/cactus");
     public override SkinTemplate skinTemplate { get; set; }
 

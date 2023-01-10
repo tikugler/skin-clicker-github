@@ -93,40 +93,33 @@ public class ContentDistributor : MonoBehaviour
     {
         var defaultSkin = new DefaultSkin();
         var defaultSkinTemplate = CreateSkinTemplate(defaultSkin);
-        skinsDictionary.Add(defaultSkin.id.ToString(), defaultSkin);
+
+        var snowmanSkin = new SnowmanSkin();
+        var snowmanSkinTemplate = CreateSkinTemplate(snowmanSkin);
+
+        var catSkin = new CatSkin();
+        var catSkinTemplate = CreateSkinTemplate(catSkin);
+
+        var cactusSkin = new CactusSkin();
+        var cactusSkinTemplate = CreateSkinTemplate(cactusSkin);
+
+        var owlSkin = new OwlSkin();
+        var owlSkinTemplate = CreateSkinTemplate(owlSkin);
 
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
-        skinsDictionary.Add(testSkin.id.ToString(), testSkin);
 
         var testSkinTwo = new TestSkinTwo();
         var testSkinTemplate2 = CreateSkinTemplate(testSkinTwo);
 
-        var snowmanSkin = new SnowmanSkin();
-        var snowmanSkinTemplate = CreateSkinTemplate(snowmanSkin);
-        skinsDictionary.Add(snowmanSkin.id.ToString(), snowmanSkin);
-
-        var catSkin = new CatSkin();
-        var catSkinTemplate = CreateSkinTemplate(catSkin);
-        skinsDictionary.Add(catSkin.id.ToString(), catSkin);
-
-        var cactusSkin = new CactusSkin();
-        var cactusSkinTemplate = CreateSkinTemplate(cactusSkin);
-        skinsDictionary.Add(cactusSkin.id.ToString(), cactusSkin);
-
-        var owlSkin = new OwlSkin();
-        var owlSkinTemplate = CreateSkinTemplate(owlSkin);
-        skinsDictionary.Add(owlSkin.id.ToString(), owlSkin);
-
-
         scriptableObjectSkins = new SkinTemplate[7];
         scriptableObjectSkins[0] = defaultSkinTemplate;
-        scriptableObjectSkins[1] = testSkinTemplate;
-        scriptableObjectSkins[2] = testSkinTemplate2;
-        scriptableObjectSkins[3] = snowmanSkinTemplate;
-        scriptableObjectSkins[4] = catSkinTemplate;
-        scriptableObjectSkins[5] = cactusSkinTemplate;
-        scriptableObjectSkins[6] = owlSkinTemplate;
+        scriptableObjectSkins[1] = snowmanSkinTemplate;
+        scriptableObjectSkins[2] = catSkinTemplate;
+        scriptableObjectSkins[3] = cactusSkinTemplate;
+        scriptableObjectSkins[4] = owlSkinTemplate;
+        scriptableObjectSkins[5] = testSkinTemplate;
+        scriptableObjectSkins[6] = testSkinTemplate2;
 
     }
 

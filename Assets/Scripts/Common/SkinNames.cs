@@ -13,7 +13,7 @@ public static class SkinNames
 {
     public static readonly string TestEffect = "TestSkin";
     public static readonly string TestEffectTwo = "TestSkinTwo";
-    public static readonly string Default = "Default";
+    public static readonly string Default = "Skin Clicker";
     public static readonly string Cactus = "Cactus";
     public static readonly string Cat = "Cat";
     public static readonly string Snowman = "Snowman";

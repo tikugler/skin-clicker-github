@@ -15,9 +15,9 @@ public class CatSkin : SkinEffect
                                                         "\nCritical Multiplicator: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Rare;
-    public override int multiplicatorOfSkin { get; set; } = skinMulti;
+    public override int multiplierOfSkin { get; set; } = skinMulti;
     public override float criticalChance { get; set; } = critChance;
-    public override float criticalMultiplicator { get; set; } = critMulti;
+    public override float criticalMultiplier { get; set; } = critMulti;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("ButtonSkins/cat");
     public override SkinTemplate skinTemplate { get; set; }
     private GameObject mainButton;
@@ -31,9 +31,9 @@ public class CatSkin : SkinEffect
 
     public override void EffectOfSkin()
     {
-        ContentDistributor.contentDistributor.mainButton.multiplicatorOfSkin = multiplicatorOfSkin;
+        ContentDistributor.contentDistributor.mainButton.multiplierOfSkin = multiplierOfSkin;
         DummyButton.criticalChance = criticalChance;
-        DummyButton.criticalMultiplicator = criticalMultiplicator;
+        DummyButton.criticalMultiplier = criticalMultiplier;
     }
 
     public override void EquipSkin()
@@ -42,5 +42,12 @@ public class CatSkin : SkinEffect
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
         Account.ActiveSkin = this;
         EffectOfSkin();
+    }
+
+    public override void UnequipSkin()
+    {
+        ContentDistributor.contentDistributor.mainButton.RemoveSkinMultiplier();
+        ContentDistributor.contentDistributor.mainButton.RemoveCriticalChance(criticalChance);
+        ContentDistributor.contentDistributor.mainButton.RemoveCriticalMultiplier(criticalMultiplier);
     }
 }
