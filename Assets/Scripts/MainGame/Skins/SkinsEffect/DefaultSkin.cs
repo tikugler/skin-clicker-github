@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DefaultSkin : SkinEffect
 {
-    public static int skinMulti = 3;
+    public static int skinMulti = 1;
     public static float critChance = 0.02f;
     public static int critMulti = 5;
     public override string id { get; set; } = SkinNames.Default;
