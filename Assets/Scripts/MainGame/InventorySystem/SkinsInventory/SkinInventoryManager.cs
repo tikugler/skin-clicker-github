@@ -53,12 +53,12 @@ public class SkinInventoryManager : MonoBehaviour
     {
         for (int i = 0; i < Account.skinList.Count; i++)
         {
-            if (Account.activeSkin == null)
+            if (Account.ActiveSkin == null)
             {
                 useButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
             }
-            else if (!Account.skinList[i].id.Equals(Account.activeSkin.id))
+            else if (!Account.skinList[i].id.Equals(Account.ActiveSkin.id))
             {
                 useButtons[i].interactable = true;
             }
@@ -75,7 +75,7 @@ public class SkinInventoryManager : MonoBehaviour
     */
     public void UseButtonAction(int pos)
     {
-        //only woking, if there are no stacks!
+        if (Account.ActiveSkin != null) {Account.ActiveSkin.UnequipSkin();}
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();
         //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()

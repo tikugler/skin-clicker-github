@@ -10,15 +10,14 @@ public class DoubleEffect : ItemEffect
     public override int price { get; set; } = 2;
     public override string description { get; set; } = "Doubles score and credits.\nItem is stackable.";
     public override string rarity { get; set; } = Rarities.Common;
-    public override Sprite icon { get; set; } = Resources.Load<Sprite>("2X");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("double");
     public override ItemTemplate shopItem { get; set; }
-    public int multiplicator = 1;
+    public int multiplier = 2;
 
 
 
     public void Start()
     {
-        ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
         shopItem.price = price;
     }
 
@@ -38,12 +37,16 @@ public class DoubleEffect : ItemEffect
 
     public override void EffectOfItem()
     {
-        multiplicator *= 2;
-        ContentDistributor.contentDistributor.mainButton.SetMultiplicator(multiplicator);
+        ContentDistributor.contentDistributor.mainButton.MultiplyMultiplier(multiplier);
     }
 
     public override int CalculateNewAmount()
     {
-        return shopItem.amount += 1;
+        shopItem.amount += 1;
+        int newAmount = shopItem.amount;
+        GameObject.Find("multipledouble")
+          .GetComponent<VisualFeedbackDouble>()
+          .ChangeCreditLabelAfterBuyingMultipleDoubles(newAmount);
+        return newAmount;
     }
 }

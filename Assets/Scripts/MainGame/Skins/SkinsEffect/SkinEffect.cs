@@ -13,9 +13,9 @@ public abstract class SkinEffect
     public abstract string description { get; set; }
     public abstract bool bought { get; set; }
     public abstract string rarity { get; set; }
-    public abstract int multiplicatorOfSkin { get; set; }
+    public abstract int multiplierOfSkin { get; set; }
     public abstract float criticalChance { get; set; }
-    public abstract float criticalMultiplicator { get; set; }
+    public abstract float criticalMultiplier { get; set; }
     public abstract Sprite icon { get; set; }
     public abstract SkinTemplate skinTemplate { get; set; }
 
@@ -28,4 +28,5 @@ public abstract class SkinEffect
 
     //Uses/Equips skin --> setter for current skin.
     public abstract void EquipSkin();
+    public abstract void UnequipSkin();
 }

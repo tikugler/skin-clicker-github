@@ -71,7 +71,7 @@ public class LoginManager : MonoBehaviour
         request.InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
         {
             //GetUserAccountInfo = true,
-            GetPlayerProfile = true
+            GetPlayerProfile = true,
         };
 
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailed);
@@ -98,16 +98,14 @@ public class LoginManager : MonoBehaviour
     /// <param name="obj"></param>
     private void OnLoginSuccess(LoginResult obj)
     {
-        Debug.Log(obj.ToJson());
-        Debug.Log("login is successful");
+        //Debug.Log("login is successful");
         
         Account.SetPlayFabIdAndUserName(obj.PlayFabId, obj.InfoResultPayload.PlayerProfile.DisplayName);
         if (!Account.GetIfThereIsSavedUserLoginInfoPlayerPrefs())
             Account.SetUserLoginPlayerPrefs(username.text, password.text);
         LoadUserStatistics();
-        var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
-        loggedInUser.text = username.text;
-        SceneManager.LoadScene("StartNewsMenu");
+        //var loggedInUser = GameObject.Find("UserName").GetComponent<TextMeshProUGUI>();
+        //loggedInUser.text = username.text;
     }
 
     /// <summary>
@@ -169,6 +167,5 @@ public class LoginManager : MonoBehaviour
         if (!Account.GetIfThereIsSavedGuestCustomIdPlayerPrefs())
             Account.SetGuestCustomIdPlayerPrefs(Account.guestCustomID);
         LoadUserStatistics();
-        SceneManager.LoadScene("StartNewsMenu");
     }
 }

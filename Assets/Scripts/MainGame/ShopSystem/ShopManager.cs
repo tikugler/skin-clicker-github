@@ -100,9 +100,8 @@ public class ShopManager : MonoBehaviour
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.itemsDictionary[item.id].shopItem = item;
-                // update amount of selected update in PlayFab
-                GameObject.FindGameObjectWithTag("PlayFabUpdate").GetComponent<PlayfabUpdateUserData>().SetUpgradeAmountOnPlayFab(
-                    item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
+                // update amount of selected item in Account (updated in PlayFab automatically)
+                Account.SetPurchasedItemCount(item.id, contentDistributor.itemsDictionary[item.id].shopItem.amount);
             }
             RefreshPanels();
         }

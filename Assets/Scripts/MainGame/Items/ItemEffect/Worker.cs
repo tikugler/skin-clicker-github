@@ -10,10 +10,10 @@ public class Worker : ItemEffect
     public override int price { get; set; } = 1;
     public override string description { get; set; } = "Automated button clicker.\n1 click per secound.";
     public override string rarity { get; set; } = Rarities.Common;
-    public override Sprite icon { get; set; }
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("worker");
     public override ItemTemplate shopItem { get; set; }
-    private int creditsPerSec;
-    private int workerAmount = 0;
+    public int creditsPerSec;
+    public static int workerAmount = 0;
     private int credits;
 
     public static int workerAmountWorkaround = 0;
@@ -44,15 +44,23 @@ public class Worker : ItemEffect
 
     public override int CalculateNewAmount()
     {
-        return shopItem.amount += 1;
+        shopItem.amount += 1;
+        int newAmount = shopItem.amount;
+        GameObject.Find("multipleworker").GetComponent<VisualFeedBackWorker>().MultipleWorker(newAmount);
+        return newAmount; 
     }
 
     //Hardcoded value, if changed --> tests have to change too
     public override int CalculateNewPrice()
     {
-        Debug.Log("Worker Price(Template): " + shopItem.price);
-        Debug.Log("Worker Price: " + price);
+        //Debug.Log("Worker Price(Template): " + shopItem.price);
+        //Debug.Log("Worker Price: " + price);
 
         return shopItem.price *= 2;
+    }
+
+    public int GetWorkerAmount() 
+    {
+        return workerAmount;
     }
 }

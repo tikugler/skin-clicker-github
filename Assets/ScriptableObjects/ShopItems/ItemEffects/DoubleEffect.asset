@@ -16,7 +16,7 @@ MonoBehaviour:
   title: 2X
   description: Double credits per click
   startPrice: 1
+  rarity: 
   price: 1
   amount: 0
-  multiplyPriceBy: 4
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e0128cbc1eb367a418732b3ffdedd7ee, type: 3}
