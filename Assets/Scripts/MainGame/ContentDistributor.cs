@@ -90,18 +90,38 @@ public class ContentDistributor : MonoBehaviour
     */
     private void CreateSkins()
     {
+        var defaultSkin = new DefaultSkin();
+        var defaultSkinTemplate = CreateSkinTemplate(defaultSkin);
+        skinsDictionary.Add(defaultSkin.id.ToString(), defaultSkin);
+
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
         skinsDictionary.Add(testSkin.id.ToString(), testSkin);
-
 
         var testSkinTwo = new TestSkinTwo();
         var testSkinTemplate2 = CreateSkinTemplate(testSkinTwo);
         skinsDictionary.Add(testSkinTwo.id.ToString(), testSkinTwo);
 
-        scriptableObjectSkins = new SkinTemplate[2];
-        scriptableObjectSkins[0] = testSkinTemplate;
-        scriptableObjectSkins[1] = testSkinTemplate2;
+        var snowmanSkin = new SnowmanSkin();
+        var snowmanSkinTemplate = CreateSkinTemplate(snowmanSkin);
+        skinsDictionary.Add(snowmanSkin.id.ToString(), snowmanSkin);
+
+        var catSkin = new CatSkin();
+        var catSkinTemplate = CreateSkinTemplate(catSkin);
+        skinsDictionary.Add(catSkin.id.ToString(), catSkin);
+
+        var cactusSkin = new CactusSkin();
+        var cactusSkinTemplate = CreateSkinTemplate(cactusSkin);
+        skinsDictionary.Add(cactusSkin.id.ToString(), cactusSkin);
+
+
+        scriptableObjectSkins = new SkinTemplate[6];
+        scriptableObjectSkins[0] = defaultSkinTemplate;
+        scriptableObjectSkins[1] = testSkinTemplate;
+        scriptableObjectSkins[2] = testSkinTemplate2;
+        scriptableObjectSkins[3] = snowmanSkinTemplate;
+        scriptableObjectSkins[4] = catSkinTemplate;
+        scriptableObjectSkins[5] = cactusSkinTemplate;
 
     }
 
@@ -172,7 +192,8 @@ public class ContentDistributor : MonoBehaviour
     {
         foreach (SkinTemplate skin in scriptableObjectSkins)
         {
-            if (Account.IsSkinIdInSkinIdList(skin.id)){
+            if (Account.IsSkinIdInSkinIdList(skin.id))
+            {
                 skinsDictionary[skin.id].PurchaseButtonAction(skin);
                 if (Account.activeSkinId.Equals(skin.id))
                 {
