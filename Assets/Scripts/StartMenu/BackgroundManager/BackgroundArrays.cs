@@ -9,10 +9,12 @@ public static class BackgroundArrays
     public static Sprite[] backgroundArrayDesert = new Sprite[5];
     public static Sprite[] backgroundArrayGraveyard = new Sprite[5];
     public static Sprite[] backgroundArraySnow = new Sprite[5];
+    public static Sprite[] backgroundArrayFoggyMountain = new Sprite[5];
     public static readonly string Default = "Default";
     public static readonly string Desert = "Desert";
     public static readonly string Graveyard = "Graveyard";
     public static readonly string Snow = "Snow";
+    public static readonly string FoggyMountain = "FoggyMountain";
     public static bool itemsCreated = false;
     //public static Sprite[] backgroundArrayGar = new Sprite[5];
 
@@ -48,6 +50,13 @@ public static class BackgroundArrays
             backgroundArraySnow[3] = Resources.Load<Sprite>("Backgtounds/4_Snow/Layer_3");
             backgroundArraySnow[4] = Resources.Load<Sprite>("Backgtounds/4_Snow/Layer_4");
             backgroundDictionary.Add(BackgroundArrays.Snow, backgroundArraySnow);
+
+            backgroundArrayFoggyMountain[0] = Resources.Load<Sprite>("Backgtounds/Foggy Mountains Background/Layer_0");
+            backgroundArrayFoggyMountain[1] = Resources.Load<Sprite>("Backgtounds/Foggy Mountains Background/Layer_1");
+            backgroundArrayFoggyMountain[2] = Resources.Load<Sprite>("Backgtounds/Foggy Mountains Background/Layer_2");
+            backgroundArrayFoggyMountain[3] = Resources.Load<Sprite>("Backgtounds/Foggy Mountains Background/Layer_3");
+            backgroundArrayFoggyMountain[4] = Resources.Load<Sprite>("Backgtounds/Foggy Mountains Background/Layer_4");
+            backgroundDictionary.Add(BackgroundArrays.FoggyMountain, backgroundArrayFoggyMountain);
 
             itemsCreated = true;
         }

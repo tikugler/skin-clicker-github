@@ -17,4 +17,5 @@ public static class SkinNames
     public static readonly string Cactus = "Cactus";
     public static readonly string Cat = "Cat";
     public static readonly string Snowman = "Snowman";
+    public static readonly string Owl = "Owl";
 }

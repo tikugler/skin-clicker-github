@@ -114,14 +114,19 @@ public class ContentDistributor : MonoBehaviour
         var cactusSkinTemplate = CreateSkinTemplate(cactusSkin);
         skinsDictionary.Add(cactusSkin.id.ToString(), cactusSkin);
 
+        var owlSkin = new OwlSkin();
+        var owlSkinTemplate = CreateSkinTemplate(owlSkin);
+        skinsDictionary.Add(owlSkin.id.ToString(), owlSkin);
 
-        scriptableObjectSkins = new SkinTemplate[6];
+
+        scriptableObjectSkins = new SkinTemplate[7];
         scriptableObjectSkins[0] = defaultSkinTemplate;
         scriptableObjectSkins[1] = testSkinTemplate;
         scriptableObjectSkins[2] = testSkinTemplate2;
         scriptableObjectSkins[3] = snowmanSkinTemplate;
         scriptableObjectSkins[4] = catSkinTemplate;
         scriptableObjectSkins[5] = cactusSkinTemplate;
+        scriptableObjectSkins[6] = owlSkinTemplate;
 
     }
 
