@@ -11,10 +11,25 @@ https://assetstore.unity.com/packages/2d/environments/free-2d-cartoon-parallax-b
 https://assetstore.unity.com/packages/2d/textures-materials/foggy-mountains-parallax-background-142516
 
 MainGameStuff:
+InUse:
 ShopIcon: https://www.freepik.com/free-vector/cartoon-style-cafe-front-shop-view_11929743.htm#query=shop&position=0&from_view=search&track=sph
 InventoryIcon: https://www.freepik.com/free-vector/sticker-empty-box-opened-white-background_18920973.htm#query=package&position=0&from_view=search&track=sph
-Achievments: https://www.freepik.com/free-vector/gold-cups-awards-flat-illustrations-set-collection-golden-trophies-medals-winners-isolated-white_20827758.htm#query=achievments&position=10&from_view=search&track=sph
-Podium: https://www.freepik.com/free-vector/winners-podium-with-cups_13555543.htm#query=podium&position=26&from_view=search&track=sph
-Redeem Code: https://www.flaticon.com/free-icon/gift_388306
-Settings: https://www.freepik.com/free-vector/illustration-gear-doodle-icon_2606116.htm#query=settings%20icon&position=1&from_view=keyword
-Chat: https://www.freepik.com/free-vector/speech-bubble-3d-icon-message-concept-realistic-speech-bubble-with-dots-chat-vector-message-box_33632377.htm#page=3&query=chat%20icon&position=14&from_view=search&track=sph
+AchievmentsIcon: https://www.freepik.com/free-vector/gold-cups-awards-flat-illustrations-set-collection-golden-trophies-medals-winners-isolated-white_20827758.htm#query=achievments&position=10&from_view=search&track=sph
+PodiumImage: https://www.freepik.com/free-vector/winners-podium-with-cups_13555543.htm#query=podium&position=26&from_view=search&track=sph
+RedeemCodeIcon: https://www.flaticon.com/free-icon/gift_388306
+SettingsIcon: https://www.freepik.com/free-vector/illustration-gear-doodle-icon_2606116.htm#query=settings%20icon&position=1&from_view=keyword
+ChatIcon: https://www.freepik.com/free-vector/speech-bubble-3d-icon-message-concept-realistic-speech-bubble-with-dots-chat-vector-message-box_33632377.htm#page=3&query=chat%20icon&position=14&from_view=search&track=sph
+InventoryBackgroundWareHouse: https://www.freepik.com/free-vector/warehouse-with-cardboard-boxes-metal-racks_32230553.htm#query=inventory&position=8&from_view=search&track=sph
+InventoryBannerMan: https://www.freepik.com/free-vector/move-new-house-relocation-man-with-boxes_21058314.htm#page=2&query=Anime%20warehouse&position=45&from_view=search&track=ais#position=45&page=2&query=Anime%20warehouse
+SkinShopBackground: https://www.freepik.com/free-vector/fashion-clothes-store-background_12321397.htm#page=2&query=shop&position=34&from_view=search&track=sph
+Item/Skin Backlighting: https://www.freepik.com/free-vector/elegant-white-zoom-rays-empty-background_5432146.htm#query=comic%20light%20whit&position=1&from_view=search&track=ais
+ItemShopBackground: https://www.freepik.com/free-vector/flower-shop-interior-empty-floristic-store-design_6362803.htm#query=items%20store&position=5&from_view=search&track=sph
+
+Backup Stuff/Unused
+BlockingPanelBlurEffect: https://www.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_16359095.htm#query=blur&position=2&from_view=search&track=sph
+BlockingPanelBlur2Effect: https://www.freepik.com/free-vector/gradient-grainy-gradient-texture-wallpaper_14236255.htm?query=blur?query=blur?query=blur&collectionId=755&&position=29&from_view=collections
+BackgroundInventory: https://www.freepik.com/free-vector/flat-comic-style-wallpaper_12066113.htm#query=comic%20style&position=3&from_view=search&track=sph
+InventoryRedRibbon: https://toppng.com/free-image/red-ribbon-banner-PNG-free-PNG-Images_90167
+ShopBanner: https://www.freepik.com/free-vector/flat-design-shopping-center-twitter-header_23988308.htm#query=shopping&position=11&from_view=search&track=sph
+
+

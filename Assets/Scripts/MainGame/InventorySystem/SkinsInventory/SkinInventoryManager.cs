@@ -45,6 +45,33 @@ public class SkinInventoryManager : MonoBehaviour
                 GameObject test = FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Image");
                 test.GetComponent<Image>().sprite = inventoryPanels[i].shopItemIcon;
             }
+
+            string rarity = item.rarity;
+            if (rarity.Equals(Rarities.Common))
+            {
+                inventoryPanels[i].rarity.color = Color.cyan;
+                FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Background").GetComponent<Image>().color = Color.cyan;
+            }
+            else if (rarity.Equals(Rarities.Uncommon))
+            {
+                inventoryPanels[i].rarity.color = Color.blue;
+                FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Background").GetComponent<Image>().color = Color.blue;
+            }
+            else if (rarity.Equals(Rarities.Rare))
+            {
+                inventoryPanels[i].rarity.color = Color.magenta;
+                FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Background").GetComponent<Image>().color = Color.magenta;
+            }
+            else if (rarity.Equals(Rarities.Mythical))
+            {
+                inventoryPanels[i].rarity.color = Color.red;
+                FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Background").GetComponent<Image>().color = Color.red;
+            }
+            else if (rarity.Equals(Rarities.Legendary))
+            {
+                inventoryPanels[i].rarity.color = Color.yellow;
+                FindObjectHelper.FindObjectInParent(inventoryPanelsGO[i], "Background").GetComponent<Image>().color = Color.yellow;
+            }
         }
         CheckSkinAlreadyInUse();
     }
@@ -77,7 +104,7 @@ public class SkinInventoryManager : MonoBehaviour
     */
     public void UseButtonAction(int pos)
     {
-        if (Account.ActiveSkin != null) {Account.ActiveSkin.UnequipSkin();}
+        if (Account.ActiveSkin != null) { Account.ActiveSkin.UnequipSkin(); }
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();
         //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()
