@@ -57,7 +57,8 @@ public class DummyButton : MonoBehaviour
         multiplier *= multi;
     }
 
-    public void RemoveMultiplier(int multi) {
+    public void RemoveMultiplier(int multi)
+    {
         multiplier /= multi;
     }
 
@@ -66,7 +67,8 @@ public class DummyButton : MonoBehaviour
         criticalChance += chance;
     }
 
-    public void RemoveCriticalChance(float chance) {
+    public void RemoveCriticalChance(float chance)
+    {
         criticalChance -= chance;
     }
 
@@ -80,7 +82,8 @@ public class DummyButton : MonoBehaviour
         criticalMultiplier /= critMulti;
     }
 
-    public void SetSkinMultiplier(int multi) {
+    public void SetSkinMultiplier(int multi)
+    {
         multiplierOfSkin = multi;
     }
 
@@ -93,9 +96,8 @@ public class DummyButton : MonoBehaviour
     {
         this.GetComponentInChildren<Text>().text = "";
         this.GetComponent<Image>().color = Color.white;
+        //this.GetComponent<RectTransform>().localScale = new Vector3(30, 60);
         this.GetComponent<Image>().sprite = skin;
-        //this.GetComponent<RectTransform>().localScale = new Vector3(1920 / (skin.rect.width / 16), 1080 / (skin.rect.height / 9), 0);
-        this.GetComponent<RectTransform>().localScale = new Vector3(1, 2.4f, 1);
     }
 
     public void VisualizeButtonClick()

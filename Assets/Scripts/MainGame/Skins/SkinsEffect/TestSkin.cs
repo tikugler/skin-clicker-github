@@ -15,7 +15,7 @@ public class TestSkin : SkinEffect
     public override int multiplierOfSkin { get; set; } = skinMulti;
     public override float criticalChance { get; set; } = critChance;
     public override float criticalMultiplier { get; set; } = critMulti;
-    public override Sprite icon { get; set; } = Resources.Load<Sprite>("OurBoiii");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("ButtonSkins/cactus");
     public override SkinTemplate skinTemplate { get; set; }
 
     public override void PurchaseButtonAction(SkinTemplate skinTemplate)
@@ -29,6 +29,7 @@ public class TestSkin : SkinEffect
         Account.ActiveSkin = this;
         EffectOfSkin();
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
+        ContentDistributor.contentDistributor.parallax.SwitchBackground(BackgroundArrays.FoggyMountain);
     }
 
     public override void EffectOfSkin()

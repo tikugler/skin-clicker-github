@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8567556669382734732}
   - component: {fileID: 8567556669382734735}
   m_Layer: 0
-  m_Name: Layer_2x
+  m_Name: Layer_posX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8567556669600901031}
   - component: {fileID: 8567556669600901030}
   m_Layer: 0
-  m_Name: Layer_2x
+  m_Name: Layer_negX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

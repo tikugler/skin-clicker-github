@@ -18,7 +18,7 @@ public class TestSkinTwo : SkinEffect
     public override int multiplierOfSkin { get; set; } = skinMulti;
     public override float criticalChance { get; set; } = critChance;
     public override float criticalMultiplier { get; set; } = critMulti;
-    public override Sprite icon { get; set; } = Resources.Load<Sprite>("BerkanF.Nur");
+    public override Sprite icon { get; set; } = Resources.Load<Sprite>("ButtonSkins/SnowmanSkin");
     public override SkinTemplate skinTemplate { get; set; }
     private GameObject mainButton;
 
@@ -43,6 +43,7 @@ public class TestSkinTwo : SkinEffect
 
     public override void EquipSkin()
     {
+        ContentDistributor.contentDistributor.parallax.SwitchBackground(BackgroundArrays.Snow);
         ContentDistributor.contentDistributor.mainButton.SetSkin(icon);
         Account.ActiveSkin = this;
         EffectOfSkin();
