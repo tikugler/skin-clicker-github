@@ -63,30 +63,33 @@ public class ShopManager : MonoBehaviour
             }
 
             string rarity = contentDistributor.scriptableObjectItems[i].rarity;
-            if (rarity.Equals(Rarities.Common))
+            if (rarity != null)
             {
-                shopPanels[i].rarity.color = Color.cyan;
-                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.cyan;
-            }
-            else if (rarity.Equals(Rarities.Uncommon))
-            {
-                shopPanels[i].rarity.color = Color.blue;
-                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.blue;
-            }
-            else if (rarity.Equals(Rarities.Rare))
-            {
-                shopPanels[i].rarity.color = Color.magenta;
-                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.magenta;
-            }
-            else if (rarity.Equals(Rarities.Mythical))
-            {
-                shopPanels[i].rarity.color = Color.red;
-                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.red;
-            }
-            else if (rarity.Equals(Rarities.Legendary))
-            {
-                shopPanels[i].rarity.color = Color.yellow;
-                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.yellow;
+                if (rarity.Equals(Rarities.Common))
+                {
+                    shopPanels[i].rarity.color = Color.cyan;
+                    FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.cyan;
+                }
+                else if (rarity.Equals(Rarities.Uncommon))
+                {
+                    shopPanels[i].rarity.color = Color.blue;
+                    FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.blue;
+                }
+                else if (rarity.Equals(Rarities.Rare))
+                {
+                    shopPanels[i].rarity.color = Color.magenta;
+                    FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.magenta;
+                }
+                else if (rarity.Equals(Rarities.Mythical))
+                {
+                    shopPanels[i].rarity.color = Color.red;
+                    FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.red;
+                }
+                else if (rarity.Equals(Rarities.Legendary))
+                {
+                    shopPanels[i].rarity.color = Color.yellow;
+                    FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.yellow;
+                }
             }
         }
         CheckPurchaseable();
