@@ -113,16 +113,16 @@ public class RedeemCouponManager : MonoBehaviour
 
     private void GetCataLogItemSuccess(GetCatalogItemsResult result)
     {
-        foreach(var item in result.Catalog)
+        foreach (var item in result.Catalog)
         {
 
             if (item.ItemId.Equals(usedCouponCode))
             {
-                UseCouponReward(JObject.Parse(item.CustomData));
+                UseCouponReward(JObject.Parse(item.CustomData), item.Description);
                 return;
             }
 
-            
+
         }
 
         redeemCouponInfoText.color = Color.red;
@@ -132,8 +132,9 @@ public class RedeemCouponManager : MonoBehaviour
 
     }
 
-    private void UseCouponReward(JObject keyValuePairs)
+    private void UseCouponReward(JObject keyValuePairs, string description)
     {
+
 
         //Dictionary<string, int> statisticsDict = new Dictionary<string, int>();
 
@@ -158,13 +159,13 @@ public class RedeemCouponManager : MonoBehaviour
                 if (isNumeric)
                 {
                     addedCurrenciesText += keyValuePairs[statName] + " " + statName + ", ";
-                    if(statName == "Credits")
+                    if (statName == "Credits")
                     {
                         Account.credits += value;
                         request.Statistics.Add(new StatisticUpdate { StatisticName = statName, Value = Account.credits });
 
                     }
-                    else if(statName == "RealMoney")
+                    else if (statName == "RealMoney")
                     {
                         Account.realMoney += value;
                         request.Statistics.Add(new StatisticUpdate { StatisticName = statName, Value = Account.realMoney });
@@ -177,7 +178,9 @@ public class RedeemCouponManager : MonoBehaviour
 
         addedCurrenciesText = addedCurrenciesText.TrimEnd(' ').TrimEnd(',');
 
-        request.Statistics.Add(new StatisticUpdate { StatisticName = "USED_"+usedCouponCode, Value = 1 });
+
+
+        request.Statistics.Add(new StatisticUpdate { StatisticName = "USED_" + usedCouponCode, Value = 1 });
         //statisticsDict.Add(usedCouponCode, 1);
 
         redeemButtonButton.interactable = true;
@@ -189,8 +192,14 @@ public class RedeemCouponManager : MonoBehaviour
                 success =>
                 {
                     redeemCouponInfoText.color = Color.magenta;
-                    redeemCouponInfoText.text = addedCurrenciesText + " wurden geladen :)";
 
+                    addedCurrenciesText += " wurden geladen.";
+
+                    if (!string.IsNullOrEmpty(description))
+                    {
+                        addedCurrenciesText += "\n" + description;
+                    }
+                    redeemCouponInfoText.text = addedCurrenciesText;
 
                 },
 
