@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4958429080290692560
@@ -611,7 +611,7 @@ MonoBehaviour:
   shopItemDescription: {fileID: 7760290790711728328}
   shopItemPrice: {fileID: 7766132732925476583}
   shopItemAmount: {fileID: 2123968041645720404}
-  rarity: {fileID: 0}
+  rarity: {fileID: 4544002284046816906}
   shopItemIcon: {fileID: 0}
   fullPicture: {fileID: 0}
 --- !u!1 &7760290790289584181
@@ -729,8 +729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.050633, y: -447.18628}
-  m_SizeDelta: {x: 300, y: 205}
+  m_AnchoredPosition: {x: 0, y: -438.08887}
+  m_SizeDelta: {x: 300, y: 186.8052}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7760290790711728329
 CanvasRenderer:
@@ -809,8 +809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.050633, y: -571.77966}
-  m_SizeDelta: {x: 300, y: 44.187}
+  m_AnchoredPosition: {x: 0, y: -555}
+  m_SizeDelta: {x: 300, y: 36.695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5083536039436545150
 CanvasRenderer:

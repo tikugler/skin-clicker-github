@@ -54,11 +54,39 @@ public class ShopManager : MonoBehaviour
             //Debug.Log("Item Name:" + contentDistributor.scriptableObjectItems[i].id + " || Item Price: " + contentDistributor.scriptableObjectItems[i].price.ToString());
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
+            shopPanels[i].rarity.text = contentDistributor.scriptableObjectItems[i].rarity;
 
             if (shopPanels[i].shopItemIcon != null)
             {
                 GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
                 test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
+            }
+
+            string rarity = contentDistributor.scriptableObjectItems[i].rarity;
+            if (rarity.Equals(Rarities.Common))
+            {
+                shopPanels[i].rarity.color = Color.cyan;
+                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.cyan;
+            }
+            else if (rarity.Equals(Rarities.Uncommon))
+            {
+                shopPanels[i].rarity.color = Color.blue;
+                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.blue;
+            }
+            else if (rarity.Equals(Rarities.Rare))
+            {
+                shopPanels[i].rarity.color = Color.magenta;
+                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.magenta;
+            }
+            else if (rarity.Equals(Rarities.Mythical))
+            {
+                shopPanels[i].rarity.color = Color.red;
+                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.red;
+            }
+            else if (rarity.Equals(Rarities.Legendary))
+            {
+                shopPanels[i].rarity.color = Color.yellow;
+                FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.yellow;
             }
         }
         CheckPurchaseable();
