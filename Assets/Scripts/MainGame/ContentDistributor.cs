@@ -19,6 +19,7 @@ public class ContentDistributor : MonoBehaviour
     public ItemInventoryManager itemInventoryManager;
     public SkinInventoryManager skinInventoryManager;
     public DummyButton mainButton;
+    public Parallax parallax;
     public ItemTemplate[] scriptableObjectItems;
     public SkinTemplate[] scriptableObjectSkins;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
@@ -90,15 +91,35 @@ public class ContentDistributor : MonoBehaviour
     */
     private void CreateSkins()
     {
+        var defaultSkin = new DefaultSkin();
+        var defaultSkinTemplate = CreateSkinTemplate(defaultSkin);
+
+        var snowmanSkin = new SnowmanSkin();
+        var snowmanSkinTemplate = CreateSkinTemplate(snowmanSkin);
+
+        var catSkin = new CatSkin();
+        var catSkinTemplate = CreateSkinTemplate(catSkin);
+
+        var cactusSkin = new CactusSkin();
+        var cactusSkinTemplate = CreateSkinTemplate(cactusSkin);
+
+        var owlSkin = new OwlSkin();
+        var owlSkinTemplate = CreateSkinTemplate(owlSkin);
+
         var testSkin = new TestSkin();
         var testSkinTemplate = CreateSkinTemplate(testSkin);
 
         var testSkinTwo = new TestSkinTwo();
         var testSkinTemplate2 = CreateSkinTemplate(testSkinTwo);
 
-        scriptableObjectSkins = new SkinTemplate[2];
-        scriptableObjectSkins[0] = testSkinTemplate;
-        scriptableObjectSkins[1] = testSkinTemplate2;
+        scriptableObjectSkins = new SkinTemplate[7];
+        scriptableObjectSkins[0] = defaultSkinTemplate;
+        scriptableObjectSkins[1] = snowmanSkinTemplate;
+        scriptableObjectSkins[2] = catSkinTemplate;
+        scriptableObjectSkins[3] = cactusSkinTemplate;
+        scriptableObjectSkins[4] = owlSkinTemplate;
+        scriptableObjectSkins[5] = testSkinTemplate;
+        scriptableObjectSkins[6] = testSkinTemplate2;
 
     }
 

@@ -56,9 +56,17 @@ public class ShopSkinManager : MonoBehaviour
             shopPanelsGO[i].SetActive(true);
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectSkins[i].title;
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectSkins[i].description;
-            shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectSkins[i].icon;
             shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
+
+            if (!Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
+            {
+                shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
+            }
+            else
+            {
+                shopPanels[i].shopItemPrice.text = "Out of stock!";
+            }
 
             if (shopPanels[i].shopItemIcon != null)
             {

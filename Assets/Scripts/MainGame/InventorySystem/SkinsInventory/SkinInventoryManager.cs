@@ -38,6 +38,7 @@ public class SkinInventoryManager : MonoBehaviour
             inventoryPanels[i].shopItemTitle.text = item.skinTemplate.title;
             inventoryPanels[i].rarity.text = item.skinTemplate.rarity;
             inventoryPanels[i].shopItemIcon = item.skinTemplate.icon;
+            useButtons[i].GetComponentInChildren<Text>().text = "Use";
 
             if (inventoryPanels[i].shopItemIcon != null)
             {
@@ -65,6 +66,7 @@ public class SkinInventoryManager : MonoBehaviour
             else
             {
                 useButtons[i].interactable = false;
+                useButtons[i].GetComponentInChildren<Text>().text = "In use";
             }
         }
     }
