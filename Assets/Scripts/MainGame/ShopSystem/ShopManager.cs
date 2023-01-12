@@ -7,6 +7,7 @@ public class ShopManager : MonoBehaviour
 {
     public static int credit;
     public Text creditUIText;
+    public Text creditRealMoneyUIText;
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
@@ -22,8 +23,8 @@ public class ShopManager : MonoBehaviour
     //If change "$ " + also change tests.
     private void RefreshCredits()
     {
-        credit = Account.credits;
-        creditUIText.text = "$ " + credit.ToString();
+        creditUIText.text = "$ " + Account.credits.ToString();
+        creditRealMoneyUIText.text = Account.realMoney.ToString();
     }
 
     /* 
