@@ -2881,6 +2881,10 @@ MonoBehaviour:
   MusicAudio: {fileID: 1343931718}
   EffectAudio: {fileID: 1343931717}
   CoinsDropSound: {fileID: 8300000, guid: 7b381f88705154736b3c685a44b5734b, type: 3}
+  HitSound: {fileID: 8300000, guid: c408333a41d41412aa6e8172b226ac38, type: 3}
+  CriticalSound: {fileID: 8300000, guid: ed22bf53e5d9f4892a07dc48997c024e, type: 3}
+  SelectSound: {fileID: 8300000, guid: eb569db225a5e4eec95d67bbce28759a, type: 3}
+  DrinkSound: {fileID: 8300000, guid: 5cee7e4623ad84f0eb8e55621deae253, type: 3}
 --- !u!82 &1343931717
 AudioSource:
   m_ObjectHideFlags: 0

@@ -10,6 +10,14 @@ public class SoundManager : MonoBehaviour
     public AudioSource EffectAudio;
 
     [SerializeField] AudioClip CoinsDropSound;
+    [SerializeField] AudioClip HitSound;
+    [SerializeField] AudioClip CriticalSound;
+    [SerializeField] AudioClip SelectSound;
+    [SerializeField] AudioClip DrinkSound;
+
+
+
+
 
     //  if effect sounds muted or unmuted
     public static bool isEffectSoundOn = false;
@@ -103,6 +111,27 @@ public class SoundManager : MonoBehaviour
     public void PlayPayWithCoinsSound()
     {
         EffectAudio.clip = CoinsDropSound;
+        EffectAudio.Play();
+    }
+
+    public void PlayHitSound()
+    {
+        EffectAudio.clip = HitSound;
+        EffectAudio.Play();
+    }
+    public void PlayCriticalHitSound()
+    {
+        EffectAudio.clip = CriticalSound;
+        EffectAudio.Play();
+    }
+    public void PlaySelectSound()
+    {
+        EffectAudio.clip = SelectSound;
+        EffectAudio.Play();
+    }
+    public void PlayDrinkSound()
+    {
+        EffectAudio.clip = DrinkSound;
         EffectAudio.Play();
     }
 

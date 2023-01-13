@@ -143,5 +143,28 @@ public class SoundSceneManager : MonoBehaviour
             soundManager.PlayPayWithCoinsSound();
     }
 
+    public void PlayHitSound()
+    {
+        if (isUseable)
+            soundManager.PlayHitSound();
+    }
+
+    public void PlayCriticalHitSound()
+    {
+        if (isUseable)
+            soundManager.PlayCriticalHitSound();
+    }
+
+    public void PlaySelectSound()
+    {
+        if (isUseable)
+            soundManager.PlaySelectSound();
+    }
+    public void PlayDrinkSound()
+    {
+        if (isUseable)
+            soundManager.PlayDrinkSound();
+    }
+
 }
 

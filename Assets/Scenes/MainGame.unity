@@ -9574,6 +9574,7 @@ MonoBehaviour:
   - {fileID: 883194374}
   - {fileID: 487766838}
   contentDistributor: {fileID: 0}
+  soundManager: {fileID: 1010012653}
 --- !u!224 &711094608 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1286528085559383651, guid: c7550f7a6052f8341ab907e81f74daaa, type: 3}
@@ -24735,6 +24736,7 @@ MonoBehaviour:
   multiplierOfSkin: 1
   visualClickObject: {fileID: 1317190606}
   clicktext: {fileID: 1317190608}
+  soundManager: {fileID: 1010012653}
 --- !u!114 &1788361379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26522,6 +26524,7 @@ MonoBehaviour:
   - {fileID: 72675608}
   - {fileID: 1928093926}
   contentDistributor: {fileID: 0}
+  soundManager: {fileID: 1010012653}
 --- !u!1 &1924824182
 GameObject:
   m_ObjectHideFlags: 0
