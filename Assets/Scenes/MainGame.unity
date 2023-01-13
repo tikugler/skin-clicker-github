@@ -21344,6 +21344,7 @@ MonoBehaviour:
   - {fileID: 1752012102}
   - {fileID: 1793483986}
   - {fileID: 1838091269}
+  soundManager: {fileID: 1010012653}
 --- !u!1001 &1477415590
 PrefabInstance:
   m_ObjectHideFlags: 0

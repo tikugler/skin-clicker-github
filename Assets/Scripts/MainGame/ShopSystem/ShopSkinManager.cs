@@ -11,6 +11,8 @@ public class ShopSkinManager : MonoBehaviour
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
     private ContentDistributor contentDistributor;
+    [SerializeField] SoundSceneManager soundManager;
+
 
     //Set as many panels active/visible as needed.
     //Copy scriptableObjectSkins Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
@@ -136,6 +138,7 @@ public class ShopSkinManager : MonoBehaviour
             if (contentDistributor.skinsDictionary.ContainsKey(item.id))
             {
                 credit -= item.price;
+                soundManager.PlayPayWithCoinsSound();
                 Account.credits = credit;
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.skinsDictionary[item.id].PurchaseButtonAction(item);

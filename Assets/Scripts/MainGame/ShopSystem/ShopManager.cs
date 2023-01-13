@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public static int credit;
     public Text creditUIText;
     public Text creditRealMoneyUIText;
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
@@ -102,7 +101,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
         {
-            if (credit >= contentDistributor.scriptableObjectItems[i].price)
+            if (Account.credits >= contentDistributor.scriptableObjectItems[i].price)
             {
                 purchaseButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
@@ -122,15 +121,14 @@ public class ShopManager : MonoBehaviour
     public void PurchaseButtonAction(int pos)
     {
         //If credit >= as price of shopItem on position pos in array.
-        if (credit >= contentDistributor.scriptableObjectItems[pos].price)
+        if (Account.credits >= contentDistributor.scriptableObjectItems[pos].price)
         {
             //Check, if key (Effect) is in the list.
             ItemTemplate item = contentDistributor.scriptableObjectItems[pos];
             if (contentDistributor.itemsDictionary.ContainsKey(item.id))
             {
                 soundManager.PlayPayWithCoinsSound();
-                credit -= item.price;
-                Account.credits = credit;
+                Account.credits -= item.price;         
                 //Search for effect id in array with effects that has same id as id of ShopItem.
                 contentDistributor.itemsDictionary[item.id].PurchaseButtonAction(item);
                 contentDistributor.itemsDictionary[item.id].shopItem = item;
