@@ -18577,7 +18577,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317190606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18616,7 +18616,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 50
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -24856,6 +24856,7 @@ MonoBehaviour:
   multiplierOfSkin: 1
   visualClickObject: {fileID: 1317190606}
   clicktext: {fileID: 1317190608}
+  UICamera: {fileID: 857462045}
   soundManager: {fileID: 1010012653}
   visualEffectManager: {fileID: 1788361381}
 --- !u!114 &1788361379
