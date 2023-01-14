@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 358147259}
   - component: {fileID: 358147258}
   - component: {fileID: 358147262}
+  - component: {fileID: 358147263}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -774,6 +775,22 @@ MonoBehaviour:
   EffectSoundSlider: {fileID: 467234045392751187}
   MusicSoundToggle: {fileID: 6788712134226396294}
   EffectSoundToggle: {fileID: 6788712135052419068}
+--- !u!114 &358147263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358147257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66346f0167e4446f2b75ac14c67276d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: {fileID: 0}
+  criticalHit: {fileID: 0}
+  UICamera: {fileID: 0}
+  VisualEffecToggle: {fileID: 2064814947}
 --- !u!1 &412841178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,6 +3880,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041726074}
   m_CullTransparentMesh: 0
+--- !u!114 &2064814947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+  m_PrefabInstance: {fileID: 5105957063248198378}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2086146857 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8543438291494507564, guid: 761a355feb8883c4f83c6241b4ff6f32, type: 3}
@@ -5544,89 +5572,85 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 358147261}
     m_Modifications:
-    - target: {fileID: 1795345611453431404, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+    - target: {fileID: 1438498467, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_Name
+      value: VisualEffectToggle
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345611453431404, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345611453431404, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 358147262}
-    - target: {fileID: 1795345611453431404, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      objectReference: {fileID: 358147263}
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateMusicSoundPlay
+      value: ToggleShowVisualEffects
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345611453431404, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SoundUIManager, NewAssembly
+      value: VisualEffectManager, NewAssembly
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345612286256406, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+    - target: {fileID: 1438498469, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345612286256406, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+    - target: {fileID: 4658958447468646802, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345612286256406, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 358147262}
-    - target: {fileID: 1795345612286256406, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateEffectSoundPlay
+    - target: {fileID: 4658958447468646802, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1795345612286256406, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SoundUIManager, NewAssembly
+    - target: {fileID: 4658958447468646802, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4606258449172434332, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 901853883}
-    - target: {fileID: 4658958447253172409, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+    - target: {fileID: 4658958448030985851, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4658958447253172409, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+    - target: {fileID: 4658958448030985851, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4658958447253172409, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 358147262}
-    - target: {fileID: 4658958447253172409, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateEffectSoundVolume
+    - target: {fileID: 4658958448030985851, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4658958447253172409, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SoundUIManager, NewAssembly
+    - target: {fileID: 4658958448431595018, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4658958447747338064, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+    - target: {fileID: 4658958448431595018, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4658958447747338064, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 358147262}
-    - target: {fileID: 4658958447747338064, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateMusicSoundVolume
+    - target: {fileID: 4658958448942924259, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4658958447747338064, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SoundUIManager, NewAssembly
+    - target: {fileID: 4658958448942924259, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5105957065117160742, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
       propertyPath: m_Name
       value: SettingsPopUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5105957065117160742, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5105957065117160743, guid: 805f84c7e8d2e47ed96a0a7898b6eb6d, type: 3}
       propertyPath: m_Pivot.x

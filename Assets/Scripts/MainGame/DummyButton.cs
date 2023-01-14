@@ -16,6 +16,8 @@ public class DummyButton : MonoBehaviour
     public Text clicktext;
 
     [SerializeField] SoundSceneManager soundManager;
+    [SerializeField] VisualEffectManager visualEffectManager;
+    
 
 
     private void Start()
@@ -30,6 +32,7 @@ public class DummyButton : MonoBehaviour
         if (randValue > (1.0f - criticalChance))
         {
             soundManager.PlayCriticalHitSound();
+            visualEffectManager.CriticalHitVisualEffect();
             int creditsWithCrit = (int)System.Math.Round(basePoints * multiplier * multiplierOfSkin * criticalMultiplier);
             Account.credits += creditsWithCrit;
             VisualizeButtonClick();
@@ -40,6 +43,7 @@ public class DummyButton : MonoBehaviour
         else
         {
             soundManager.PlayHitSound();
+            visualEffectManager.HitVisualEffect();
             int creditsWithoutCrit = basePoints * multiplier * multiplierOfSkin;
             Account.credits += creditsWithoutCrit;
             VisualizeButtonClick();

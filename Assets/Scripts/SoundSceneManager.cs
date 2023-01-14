@@ -18,10 +18,12 @@ public class SoundSceneManager : MonoBehaviour
     [SerializeField] Toggle EffectSoundToggle;
 
 
-    private SoundManager soundManager;
-    private bool isUseable;
+    private static SoundManager soundManager;
+    private static bool isUseable;
 
-    private void OnEnable()
+    private static bool isFirstRun = true;
+
+    private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
@@ -37,6 +39,14 @@ public class SoundSceneManager : MonoBehaviour
             }
         }
 
+        if (!isFirstRun)
+        {
+            MusicSoundSlider.value = SettingValues.musicSoundVolume;
+            EffectSoundSlider.value = SettingValues.effectSoundVolume;
+            MusicSoundToggle.isOn = SettingValues.isMusicSoundOn;
+            EffectSoundToggle.isOn = SettingValues.isEffectSoundOn;
+        }
+
         OpenSoundSettingsButton.onClick.AddListener(OpenSoundSettingsPopUp);
         CloseSoundSettingsButton.onClick.AddListener(CloseSoundSettingsPopUp);
 
@@ -46,23 +56,25 @@ public class SoundSceneManager : MonoBehaviour
         MusicSoundToggle.onValueChanged.AddListener(UpdateMusicSoundPlay);
         EffectSoundToggle.onValueChanged.AddListener(UpdateEffectSoundPlay);
 
+        
 
         soundManager = GameObject.Find("UserInfoCanvas").GetComponent<SoundManager>();
-
-        
-        MusicSoundSlider.value = SoundManager.musicSoundVolume;
-        EffectSoundSlider.value = SoundManager.effectSoundVolume;
-        MusicSoundToggle.isOn = SoundManager.isMusicSoundOn;
-        EffectSoundToggle.isOn = SoundManager.isEffectSoundOn;
+        if (isFirstRun)
+        {
+            MusicSoundSlider.onValueChanged.Invoke(SettingValues.musicSoundVolume);
+            EffectSoundSlider.onValueChanged.Invoke(SettingValues.effectSoundVolume);
+            MusicSoundToggle.onValueChanged.Invoke(SettingValues.isMusicSoundOn);
+            EffectSoundToggle.onValueChanged.Invoke(SettingValues.isEffectSoundOn);
+        }
 
         isUseable = true;
 
 
-
+        isFirstRun = false;
 
     }
 
-    private void OnDisable()
+    private void Destroy()
     {
         OpenSoundSettingsButton.onClick.RemoveListener(OpenSoundSettingsPopUp);
         CloseSoundSettingsButton.onClick.RemoveListener(CloseSoundSettingsPopUp);
@@ -75,11 +87,7 @@ public class SoundSceneManager : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()
@@ -117,6 +125,7 @@ public class SoundSceneManager : MonoBehaviour
     /// </summary>
     public void UpdateEffectSoundPlay(bool isChecked)
     {
+
         soundManager.UpdateEffectSoundPlay(isChecked);
 
     }
