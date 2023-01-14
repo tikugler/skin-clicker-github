@@ -19,16 +19,16 @@ public class SoundManager : MonoBehaviour
 
 
 
-    //  if effect sounds muted or unmuted
-    public static bool isEffectSoundOn = false;
-    //  the volume of effect sounds
-    public static float effectSoundVolume = 0.5f;
+    ////  if effect sounds muted or unmuted
+    //public static bool isEffectSoundOn = false;
+    ////  the volume of effect sounds
+    //public static float effectSoundVolume = 0.5f;
 
 
-    //  if effect sounds muted or unmuted
-    public static bool isMusicSoundOn = false;
-    //  the volume of effect sounds
-    public static float musicSoundVolume = 0.5f;
+    ////  if effect sounds muted or unmuted
+    //public static bool isMusicSoundOn = false;
+    ////  the volume of effect sounds
+    //public static float musicSoundVolume = 0.5f;
 
 
     // Start is called before the first frame update
@@ -51,8 +51,8 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void UpdateMusicSoundPlay(bool isChecked)
     {
-        isMusicSoundOn = isChecked;
-        if (isMusicSoundOn)
+        SettingValues.isMusicSoundOn = isChecked;
+        if (SettingValues.isMusicSoundOn)
         {
             MusicAudio.Play();
         }
@@ -75,18 +75,8 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void UpdateEffectSoundPlay(bool isChecked)
     {
-        isEffectSoundOn = isChecked;
-        if (isEffectSoundOn)
-        {
-            EffectAudio.Play();
-        }
-        else
-        {
-            if (EffectAudio.isPlaying)
-            {
-                EffectAudio.Stop();
-            }
-        }
+        SettingValues.isEffectSoundOn = isChecked;
+       
     }
 
     /// <summary>
@@ -94,8 +84,8 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void UpdateMusicSoundVolume(float newVolume)
     {
-        musicSoundVolume = newVolume;
-        MusicAudio.volume = musicSoundVolume;
+        SettingValues.musicSoundVolume = newVolume;
+        MusicAudio.volume = SettingValues.musicSoundVolume;
     }
 
     /// <summary>
@@ -103,36 +93,57 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void UpdateEffectSoundVolume(float newVolume)
     {
-        effectSoundVolume = newVolume;
-        EffectAudio.volume = effectSoundVolume;
+        SettingValues.effectSoundVolume = newVolume;
+        EffectAudio.volume = SettingValues.effectSoundVolume;
 
     }
 
     public void PlayPayWithCoinsSound()
     {
-        EffectAudio.clip = CoinsDropSound;
-        EffectAudio.Play();
+
+        if (SettingValues.isEffectSoundOn)
+        {
+            EffectAudio.clip = CoinsDropSound;
+            EffectAudio.Play();
+        }
+        
     }
 
     public void PlayHitSound()
     {
-        EffectAudio.clip = HitSound;
-        EffectAudio.Play();
+        if (SettingValues.isEffectSoundOn)
+        {
+            EffectAudio.clip = HitSound;
+            EffectAudio.Play();
+        }
+        
     }
     public void PlayCriticalHitSound()
     {
-        EffectAudio.clip = CriticalSound;
-        EffectAudio.Play();
+        if (SettingValues.isEffectSoundOn)
+        {
+            EffectAudio.clip = CriticalSound;
+            EffectAudio.Play();
+        }
+        
     }
     public void PlaySelectSound()
     {
-        EffectAudio.clip = SelectSound;
-        EffectAudio.Play();
+        if (SettingValues.isEffectSoundOn)
+        {
+            EffectAudio.clip = SelectSound;
+            EffectAudio.Play();
+        }
+       
     }
     public void PlayDrinkSound()
     {
-        EffectAudio.clip = DrinkSound;
-        EffectAudio.Play();
+        if (SettingValues.isEffectSoundOn)
+        {
+            EffectAudio.clip = DrinkSound;
+            EffectAudio.Play();
+        }
+        
     }
 
 }
