@@ -114,6 +114,34 @@ public class PlayfabUpdateUserData : MonoBehaviour
         
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
+    public static void SetLastRewardDate()
+    {
+        if (!Account.LoggedIn)
+            return;
+
+        var time = DateTimeConverter.ToUnixTimeSeconds(Account.lastReward);
+
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+        var statLoggedInDays = new StatisticUpdate { StatisticName = "LoggedInDaysInARow", Value = Account.daysLoggedInARow };
+        var statLastReward = new StatisticUpdate { StatisticName = "LastRewardDate", Value = time };
+        request.Statistics.Add(statLoggedInDays);
+        request.Statistics.Add(statLastReward);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
+    public static void SetMoneyAmount()
+    {
+        if (!Account.LoggedIn)
+            return;
+
+        var request = new UpdatePlayerStatisticsRequest();
+        request.Statistics = new List<StatisticUpdate>();
+        var statIngameMoney = new StatisticUpdate { StatisticName = "Credits", Value = Account.credits };
+        var statRealMoney = new StatisticUpdate { StatisticName = "RealMoney", Value = Account.realMoney };
+        request.Statistics.Add(statIngameMoney);
+        request.Statistics.Add(statRealMoney);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
+    }
 
     public static void UpdateStatisticOnPlayFab(string statisticName, int statisticValue)
     {
