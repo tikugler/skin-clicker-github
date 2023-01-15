@@ -12,6 +12,7 @@ public class ItemInventoryManager : MonoBehaviour
     public GameObject[] inventoryPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] inventoryPanels; //Reference to scripts
     public ContentDistributor contentDistributor;
+    [SerializeField] SoundSceneManager soundManager;
     public ArrayList itemsInInventory = new ArrayList();
 
     void Start()
@@ -85,6 +86,8 @@ public class ItemInventoryManager : MonoBehaviour
     /// </summary>
     public void UseButtonAction(int pos)
     {
+        soundManager.PlayDrinkSound();
+
         //only woking, if there are no stacks!
         ItemEffect item = (ItemEffect)itemsInInventory[pos];
         item.EffectOfItem();

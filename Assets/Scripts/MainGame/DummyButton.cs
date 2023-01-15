@@ -15,10 +15,18 @@ public class DummyButton : MonoBehaviour
     public GameObject visualClickObject;
     public Text clicktext;
 
+    [SerializeField] Camera UICamera;
+
+
+    [SerializeField] SoundSceneManager soundManager;
+    [SerializeField] VisualEffectManager visualEffectManager;
+
+
 
     private void Start()
     {
         visualClickObject.SetActive(false);
+
     }
 
     /// <summary>
@@ -30,14 +38,19 @@ public class DummyButton : MonoBehaviour
         float randValue = Random.value;
         if (randValue > (1.0f - criticalChance))
         {
+            soundManager.PlayCriticalHitSound();
+            visualEffectManager.CriticalHitVisualEffect();
             int creditsWithCrit = (int)System.Math.Round(basePoints * multiplier * multiplierOfSkin * criticalMultiplier);
             Account.credits += creditsWithCrit;
             VisualizeButtonClick();
             clicktext.color = Color.red;
             clicktext.text = "+" + creditsWithCrit;
+
         }
         else
         {
+            soundManager.PlayHitSound();
+            visualEffectManager.HitVisualEffect();
             int creditsWithoutCrit = basePoints * multiplier * multiplierOfSkin;
             Account.credits += creditsWithoutCrit;
             VisualizeButtonClick();
@@ -140,9 +153,23 @@ public class DummyButton : MonoBehaviour
 
     public void VisualizeButtonClick()
     {
+        
+
+
         visualClickObject.SetActive(false);
-        visualClickObject.transform.position =
-            new Vector3(Random.Range(Screen.width / 2 * 0.95f, Screen.width / 2 * 1.3f), Random.Range(Screen.height / 2 * 0.8f, Screen.height / 2 * 1.18f), 0);
+        
+        // adapted to new camera for UI
+        float randomSlipXRange = Screen.width / 8;
+        float randomSlipYRange = Screen.width / 10;
+        Vector3 worldPosition = UICamera.ScreenToWorldPoint(Input.mousePosition);
+        visualClickObject.transform.localPosition = new Vector3(worldPosition.x + Random.Range(-1* randomSlipXRange, randomSlipXRange), worldPosition.y + Random.Range(-1 * randomSlipYRange, randomSlipYRange), 1);
+
+        //visualClickObject.transform.position =
+        //    new Vector3(Random.Range(Screen.width / 2 * 0.95f, Screen.width / 2 * 1.3f), Random.Range(Screen.height / 2 * 0.8f, Screen.height / 2 * 1.18f), 0);
+
+
+
+
         visualClickObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(Fly());
@@ -154,7 +181,10 @@ public class DummyButton : MonoBehaviour
         for (int i = 0; i <= 19; i++)
         {
             yield return new WaitForSeconds(0.01f);
-            visualClickObject.transform.position = new Vector3(visualClickObject.transform.position.x, visualClickObject.transform.position.y + 2, 0);
+            visualClickObject.transform.localPosition = new Vector3(visualClickObject.transform.localPosition.x, visualClickObject.transform.localPosition.y + 2, 1);
+            //visualClickObject.transform.Position = new Vector3(visualClickObject.transform.localPosition.x, visualClickObject.transform.localPosition.y + 2, 0);
+
+
         }
         visualClickObject.SetActive(false);
     }

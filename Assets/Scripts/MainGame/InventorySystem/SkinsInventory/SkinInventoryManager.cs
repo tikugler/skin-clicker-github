@@ -13,6 +13,9 @@ public class SkinInventoryManager : MonoBehaviour
     public ShopTemplate[] inventoryPanels; //Reference to scripts
     public ContentDistributor contentDistributor;
 
+    [SerializeField] SoundSceneManager soundManager;
+
+
 
     void Start()
     {
@@ -111,6 +114,7 @@ public class SkinInventoryManager : MonoBehaviour
     public void UseButtonAction(int pos)
     {
         if (Account.ActiveSkin != null) { Account.ActiveSkin.UnequipSkin(); }
+        soundManager.PlaySelectSound();
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();
         //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()
