@@ -29,6 +29,9 @@ public class DummyButton : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Calculates new value for credits/score and increases score, credits per click.
+    /// </summary>
     public void MainButtonAction()
     {
 
@@ -65,46 +68,81 @@ public class DummyButton : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Multiplies the current multiplier by int multi.
+    /// </summary>
+    /// <param name="multi"></param>
     public void MultiplyMultiplier(int multi)
     {
         multiplier *= multi;
     }
 
+    /// <summary>
+    /// Divides the multiplier by multi.
+    /// </summary>
+    /// <param name="multi"></param>
     public void RemoveMultiplier(int multi)
     {
         multiplier /= multi;
     }
 
+    /// <summary>
+    /// Adds critical chance --> increase of critical hit chance.
+    /// </summary>
+    /// <param name="chance"></param>
     public void AddCriticalChance(float chance)
     {
         criticalChance += chance;
     }
 
+    /// <summary>
+    /// Removes critial chance by chance.
+    /// </summary>
+    /// <param name="chance"></param>
     public void RemoveCriticalChance(float chance)
     {
         criticalChance -= chance;
     }
 
+    /// <summary>
+    /// Multiplies the current criticalMultiplier by critMulti.
+    /// </summary>
+    /// <param name="critMulti"></param>
     public void MultiplyCriticalMultiplier(float critMulti)
     {
         criticalMultiplier *= critMulti;
     }
 
+    /// <summary>
+    /// Divides the criticalMultiplier by critMulti.
+    /// </summary>
+    /// <param name="critMulti"></param>
     public void RemoveCriticalMultiplier(float critMulti)
     {
         criticalMultiplier /= critMulti;
     }
 
+    /// <summary>
+    /// Sets multiplierOfSkin to multi.
+    /// </summary>
+    /// <param name="multi"></param>
     public void SetSkinMultiplier(int multi)
     {
         multiplierOfSkin = multi;
     }
 
+    /// <summary>
+    /// Removes multiplierOfSkin to default value 1.
+    /// </summary>
     public void RemoveSkinMultiplier()
     {
         multiplierOfSkin = 1;
     }
 
+    /// <summary>
+    /// Setter for skin.
+    /// </summary>
+    /// <param name="skin"></param>
     public void SetSkin(Sprite skin)
     {
         this.GetComponentInChildren<Text>().text = "";

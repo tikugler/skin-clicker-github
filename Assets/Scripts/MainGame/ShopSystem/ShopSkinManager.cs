@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ShopManager of skins.
+/// Shows every Skin that has been added to ContentDistributor's scriptableObjectSkins.
+/// </summary>
 public class ShopSkinManager : MonoBehaviour
 {
     public static int credit;
@@ -14,8 +18,6 @@ public class ShopSkinManager : MonoBehaviour
     [SerializeField] SoundSceneManager soundManager;
 
 
-    //Set as many panels active/visible as needed.
-    //Copy scriptableObjectSkins Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
         contentDistributor = ContentDistributor.contentDistributor;
@@ -27,16 +29,19 @@ public class ShopSkinManager : MonoBehaviour
         RefreshPanels();
     }
 
-    //If change "$ " + also change tests.
+    /// <summary>
+    /// If change "$ " + also change tests.
+    /// </summary>
     private void RefreshCredits()
     {
         credit = Account.credits;
         creditUIText.text = "$ " + credit.ToString();
     }
 
-    /* 
-    *  Refreshes panels --> new values are displayed.
-    */
+    /// <summary>
+    /// Set just as many panels active/visible as needed.
+    /// Refreshs credits and also checks if skin is buyable.
+    /// </summary>
     public void RefreshPanels()
     {
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
@@ -61,6 +66,7 @@ public class ShopSkinManager : MonoBehaviour
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectSkins[i].icon;
             shopPanels[i].rarity.text = contentDistributor.scriptableObjectSkins[i].rarity;
 
+            //Shows price of skin, if already bought --> "Out of Stock"
             if (!Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
                 shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
@@ -70,11 +76,13 @@ public class ShopSkinManager : MonoBehaviour
                 shopPanels[i].shopItemPrice.text = "Out of stock!";
             }
 
+            //If icon != null, show icon of skin
             if (shopPanels[i].shopItemIcon != null)
             {
                 FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image").GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
             }
 
+            //Show rarity of skin and also change backgound of PreFab
             string rarity = contentDistributor.scriptableObjectSkins[i].rarity;
             if (rarity.Equals(Rarities.Common))
             {
@@ -105,7 +113,9 @@ public class ShopSkinManager : MonoBehaviour
         CheckPurchaseable();
     }
 
-    //Checks for credits >= price of item, if true --> button is clickable.
+    /// <summary>
+    /// Checks for credits >= price of skin, if true --> button is clickable.
+    /// </summary>
     private void CheckPurchaseable()
     {
         for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
@@ -122,12 +132,13 @@ public class ShopSkinManager : MonoBehaviour
         }
     }
 
-    /*
-    *   Action of purchase button of the UI.
-    *   Calculates new balance/credits and applys effect of the skin.
-    *   int pos is position of the button, which is hardcoded in the UI:   
-    *           Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->skins-->ShopSkinTemplate-->PurchaseButton
-    */
+    /// <summary>
+    /// Action of purchase button of the UI.
+    /// Calculates new balance/credits and applys effect of the item.
+    /// int pos is position of the button, which is hardcoded in the UI:  
+    ///         Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->Items-->ShopItemTemplate-->PurchaseButton
+    /// </summary>
+    /// <param name="pos"></param>
     public void PurchaseButtonAction(int pos)
     {
         //If credit >= as price of shopItem on position pos in array.

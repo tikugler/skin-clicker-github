@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ItemInventoryManager, shows every item that is in ContentDistributor.contentDistributor.boughtItemsOfPlayer.
+/// </summary>
 public class ItemInventoryManager : MonoBehaviour
 {
     public Button[] useButtons;
     public GameObject[] inventoryPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] inventoryPanels; //Reference to scripts
     public ContentDistributor contentDistributor;
-
     [SerializeField] SoundSceneManager soundManager;
-
-
-    //Dummy
     public ArrayList itemsInInventory = new ArrayList();
 
     void Start()
@@ -21,7 +20,9 @@ public class ItemInventoryManager : MonoBehaviour
         RefreshPanels();
     }
 
-    //Refreshes panels --> new values are displayed.
+    /// <summary>
+    /// Set just as many panels active/visible as needed.
+    /// </summary>
     public void RefreshPanels()
     {
         contentDistributor = ContentDistributor.contentDistributor;
@@ -50,6 +51,7 @@ public class ItemInventoryManager : MonoBehaviour
                 test.GetComponentInChildren<Image>().sprite = inventoryPanels[i].shopItemIcon;
             }
 
+            //Change backgound of PreFab
             string rarity = item.rarity;
             if (rarity.Equals(Rarities.Common))
             {
@@ -79,10 +81,9 @@ public class ItemInventoryManager : MonoBehaviour
         }
     }
 
-    /*
-    *   Action for the use button in the inventory.
-    *   pos is a hardcoded param in unity --> InventoryPanel --> Items --> (...) --> InventoryItem --> (...) --> UseButton
-    */
+    /// <summary>
+    /// Activates effect of item and sets panel inactive.
+    /// </summary>
     public void UseButtonAction(int pos)
     {
         soundManager.PlayDrinkSound();

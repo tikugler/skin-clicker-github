@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Item increases critical hit chance.
+/// </summary>
 public class CriticalHitEffect : ItemEffect
 {
-
     public override string id { get; set; } = ItemNames.CriticalHitEffect;
     public override int price { get; set; } = 2;
     public override string description { get; set; } = "Increase Critical Hit by " + (int)(critChance * 100) + "%.\n" +

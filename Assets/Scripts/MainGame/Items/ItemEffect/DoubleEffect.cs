@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Item doubles amount of credits and points per click.
+/// </summary>
 public class DoubleEffect : ItemEffect
 {
-    //Amount of Double/2X Item in player inventory. 
     public override string id { get; set; } = ItemNames.DoubleEffect;
     public override int price { get; set; } = 2;
     public override string description { get; set; } = "Doubles score and credits.\nItem is stackable.";
