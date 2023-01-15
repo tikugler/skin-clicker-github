@@ -89,17 +89,21 @@ public class TestSettingsPopUp
     [UnityTest]
     public IEnumerator MusicCToggleMutesAndUnmutesMusic()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        SoundManager soundManager = GameObject.Find("UserInfoCanvas").GetComponent<SoundManager>();
         Toggle musicToggle = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "MusicToggle").GetComponent<Toggle>();
 
         musicToggle.isOn = false;
         yield return null;
-        Assert.AreEqual(false, gameManager.MusicAudio.isPlaying);
+        Assert.AreEqual(false, soundManager.MusicAudio.isPlaying);
 
         musicToggle.isOn = true;
         yield return null;
-        Assert.AreEqual(true, gameManager.MusicAudio.isPlaying);
+        Assert.AreEqual(true, soundManager.MusicAudio.isPlaying);
+
+        musicToggle.isOn = false;
+        yield return null;
+        Assert.AreEqual(false, soundManager.MusicAudio.isPlaying);
     }
 
 
@@ -111,17 +115,16 @@ public class TestSettingsPopUp
     [UnityTest]
     public IEnumerator EffectToggleMutesAndUnmutesMusic()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Toggle effectToggle = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "EffectToggle").GetComponent<Toggle>();
 
-        effectToggle.isOn = false;
-        yield return null;
-        Assert.AreEqual(false, gameManager.EffectAudio.isPlaying);
-
         effectToggle.isOn = true;
         yield return null;
-        Assert.AreEqual(true, gameManager.EffectAudio.isPlaying);
+        Assert.AreEqual(true, SettingValues.isEffectSoundOn);
+
+        effectToggle.isOn = false;
+        yield return null;
+        Assert.AreEqual(false, SettingValues.isEffectSoundOn);
     }
 
 
@@ -131,7 +134,7 @@ public class TestSettingsPopUp
     [UnityTest]
     public IEnumerator MusicSliderUpdatesMusicVolume()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        SoundManager soundManager = GameObject.Find("UserInfoCanvas").GetComponent<SoundManager>();
         Slider musicSlider = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "MusicSlider").GetComponent<Slider>();
 
@@ -140,17 +143,22 @@ public class TestSettingsPopUp
         sliderNewValue = 0.25f;
         musicSlider.value = sliderNewValue;
         yield return null;
-        Assert.AreEqual(sliderNewValue, gameManager.MusicAudio.volume, 0.001);
+        Assert.AreEqual(sliderNewValue, soundManager.MusicAudio.volume, 0.001);
 
         sliderNewValue = 0.99f;
         musicSlider.value = sliderNewValue;
         yield return null;
-        Assert.AreEqual(sliderNewValue, gameManager.MusicAudio.volume, 0.001);
+        Assert.AreEqual(sliderNewValue, soundManager.MusicAudio.volume, 0.001);
 
         sliderNewValue = 0f;
         musicSlider.value = sliderNewValue;
         yield return null;
-        Assert.AreEqual(sliderNewValue, gameManager.MusicAudio.volume, 0.001);
+        Assert.AreEqual(sliderNewValue, soundManager.MusicAudio.volume, 0.001);
+
+        sliderNewValue = 0.5f;
+        musicSlider.value = sliderNewValue;
+        yield return null;
+        Assert.AreEqual(sliderNewValue, soundManager.MusicAudio.volume, 0.001);
 
 
     }
@@ -162,7 +170,7 @@ public class TestSettingsPopUp
     [UnityTest]
     public IEnumerator EffectSliderUpdatesMusicVolume()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        SoundManager soundManager = GameObject.Find("UserInfoCanvas").GetComponent<SoundManager>();
         Slider effectSlider = FindObjectHelper.
             FindObjectInParent(canvasGameObject, "EffectSlider").GetComponent<Slider>();
 
@@ -171,17 +179,17 @@ public class TestSettingsPopUp
         sliderNewValue = 0.25f;
         effectSlider.value = sliderNewValue;
         yield return null;
-        Assert.AreEqual(sliderNewValue, gameManager.EffectAudio.volume, 0.001);
+        Assert.AreEqual(sliderNewValue, soundManager.EffectAudio.volume, 0.001);
 
         sliderNewValue = 0.99f;
         effectSlider.value = sliderNewValue;
         yield return null;
-        Assert.AreEqual(sliderNewValue, gameManager.EffectAudio.volume, 0.001);
+        Assert.AreEqual(sliderNewValue, soundManager.EffectAudio.volume, 0.001);
 
         sliderNewValue = 0f;
         effectSlider.value = sliderNewValue;
         yield return null;
-        Assert.AreEqual(sliderNewValue, gameManager.EffectAudio.volume, 0.001);
+        Assert.AreEqual(sliderNewValue, soundManager.EffectAudio.volume, 0.001);
     }
 
 
