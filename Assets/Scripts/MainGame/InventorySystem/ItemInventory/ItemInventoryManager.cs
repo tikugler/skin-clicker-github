@@ -10,6 +10,9 @@ public class ItemInventoryManager : MonoBehaviour
     public ShopTemplate[] inventoryPanels; //Reference to scripts
     public ContentDistributor contentDistributor;
 
+    [SerializeField] SoundSceneManager soundManager;
+
+
     //Dummy
     public ArrayList itemsInInventory = new ArrayList();
 
@@ -82,6 +85,8 @@ public class ItemInventoryManager : MonoBehaviour
     */
     public void UseButtonAction(int pos)
     {
+        soundManager.PlayDrinkSound();
+
         //only woking, if there are no stacks!
         ItemEffect item = (ItemEffect)itemsInInventory[pos];
         item.EffectOfItem();

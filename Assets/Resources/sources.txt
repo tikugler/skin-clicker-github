@@ -56,3 +56,11 @@ All profile pictures are under Assets/Resources/ProfilePicture and has an id
 21: https://pixabay.com/vectors/santa-claus-st-nicholas-x-mas-153309/
 22: https://pixabay.com/vectors/snow-snowman-cold-winter-frozen-160956/
 23: https://pixabay.com/vectors/dolphin-mammal-animal-marine-mammal-41436/
+
+
+Sounds:
+Coins-medium-sound: https://freesound.org/people/BeezleFM/sounds/512132/
+Critical-hit-sound: https://freesound.org/people/derplayer/sounds/587196/
+Hit-sound: https://freesound.org/people/carlmartin/sounds/158927/
+Select-sound: https://freesound.org/people/Rickplayer/sounds/530776/
+Drink-sound: https://freesound.org/people/SilverIllusionist/sounds/411172/
