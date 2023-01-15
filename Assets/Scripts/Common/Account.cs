@@ -13,6 +13,8 @@ public static class Account
     public static string accountId;
     public static string accountName;
     public static int selectedPictureId = 0;
+    public static DateTime lastReward = DateTime.MinValue;
+    public static int daysLoggedInARow = 1;
     public static int points;
     public static int realMoney;
     public static int credits;
@@ -98,6 +100,12 @@ public static class Account
                     break;
                 case "LeavingGameTime":
                     Account.LeavingGameTimestamp = stat.Value;
+                    break;
+                case "LoggedInDaysInARow":
+                    Account.daysLoggedInARow = stat.Value;
+                    break;
+                case "LastRewardDate":
+                    Account.lastReward = DateTimeConverter.UnixTimeStampToDateTime(stat.Value);
                     break;
                 case "SelectedPictureId":
                     Account.selectedPictureId = stat.Value;
