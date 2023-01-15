@@ -6,10 +6,10 @@ using PlayFab.MultiplayerModels;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
-*  This class is used to share important objects with other classes.
-*  There is only one (static) contentDistributor.
-*/
+/// <summary>
+/// This class is used to share important objects with other classes.
+/// There is only one (static) contentDistributor.
+/// </summary>
 public class ContentDistributor : MonoBehaviour
 {
     public static ContentDistributor contentDistributor;
@@ -32,9 +32,10 @@ public class ContentDistributor : MonoBehaviour
     public static Action<ItemTemplate[]> AddItemsToProfilInfo = delegate { };
     public static Action<SkinTemplate[]> AddSkinsToProfilInfo = delegate { };
 
-
-    // make sure that SetUpgrade and LoadPurchasedSkins is called before ShopManager.RefreshPanels
-    // Awake is called before the application starts.
+    /// <summary>
+    /// make sure that SetUpgrade and LoadPurchasedSkins is called before ShopManager.RefreshPanels
+    /// Awake is called before the application starts.
+    /// </summary>
     private void Awake()
     {
         if (contentDistributor == null)
@@ -59,10 +60,10 @@ public class ContentDistributor : MonoBehaviour
     }
 
 
-    /* 
-    *  Creats and adds ItemEffects to key-value-pair.
-    *  Adds ItemEffect to template.
-    */
+    /// <summary>
+    /// Adds new items to scriptableObjectItems.
+    /// Creates templates for shop/inventory.
+    /// </summary>
     private void CreateItems()
     {
         var doubleEffect = new DoubleEffect();
@@ -85,10 +86,10 @@ public class ContentDistributor : MonoBehaviour
 
     }
 
-    /* 
-    *  Creats and adds SkinEffects to key-value-pair.
-    *  Adds SkinEffect to template.
-    */
+    /// <summary>
+    /// Adds new items to scriptableObjectItems.
+    /// Creates templates for shop/inventory.
+    /// </summary>
     private void CreateSkins()
     {
         var defaultSkin = new DefaultSkin();
@@ -123,9 +124,11 @@ public class ContentDistributor : MonoBehaviour
 
     }
 
-    /* 
-    *  Creates new SkinTemplate and fills fields with item values.
-    */
+    /// <summary>
+    /// Creates new SkinTemplate and fills fields with item values.
+    /// </summary>
+    /// <param name="skin"></param>
+    /// <returns>SkinTemplate with values of the skin</returns>
     private SkinTemplate CreateSkinTemplate(SkinEffect skin)
     {
         SkinTemplate skinTemplate = SkinTemplate.CreateInstance<SkinTemplate>();
@@ -144,9 +147,11 @@ public class ContentDistributor : MonoBehaviour
         return skinTemplate;
     }
 
-    /* 
-    *  Creates new ItemTemplate and fills fields with item values.
-    */
+    /// <summary>
+    /// Creates new ItemTemplate and fills fields with item values.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns>ItemTemplate with values of the item</returns>
     private ItemTemplate CreateItemTemplate(ItemEffect item)
     {
         ItemTemplate itemTemplate = ItemTemplate.CreateInstance<ItemTemplate>();

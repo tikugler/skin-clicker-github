@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ItemTemplate is connected to the PreFabs and allows to display values.
+/// </summary>
 [CreateAssetMenu(fileName = "shopItem", menuName = "ScriptableObjects/New Shop Item", order = 1)]
 public class ItemTemplate : ScriptableObject
 {
@@ -15,7 +18,7 @@ public class ItemTemplate : ScriptableObject
     // (DoubleEffect) For example amount=3, startPrice=1, multiplier=4
     // price = 1 * (4 ^ 3) = 64 (this is the price of 4 times upgraded DoubleEffect)
     [HideInInspector]
-    public int price; 
+    public int price;
     public int amount;
     public Sprite icon;
 }

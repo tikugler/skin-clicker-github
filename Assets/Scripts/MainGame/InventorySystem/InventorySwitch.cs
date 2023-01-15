@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controller of inventory, switch between skins and items.
+/// </summary>
 public class InventorySwitch : MonoBehaviour
 {
     public GameObject skinsInventory;
@@ -15,6 +18,9 @@ public class InventorySwitch : MonoBehaviour
         ItemsButtonAction();
     }
 
+    /// <summary>
+    /// Show skins in inventory.
+    /// </summary>
     public void SkinsButtonAction()
     {
         itemsIntentory.SetActive(false);
@@ -23,6 +29,9 @@ public class InventorySwitch : MonoBehaviour
         skinsButton.GetComponent<Image>().color = Color.red;
     }
 
+    /// <summary>
+    /// Show items in inventory
+    /// </summary>
     public void ItemsButtonAction()
     {
         skinsInventory.SetActive(false);

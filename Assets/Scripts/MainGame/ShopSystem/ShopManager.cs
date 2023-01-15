@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ShopManager of items.
+/// Shows every item that has been added to ContentDistributor's scriptableObjectItems.
+/// </summary>
 public class ShopManager : MonoBehaviour
 {
     public static int credit;
@@ -13,23 +17,24 @@ public class ShopManager : MonoBehaviour
     public Button[] purchaseButtons;
     private ContentDistributor contentDistributor;
 
-    //Set as many panels active/visible as needed.
-    //Copy scriptableObjectItems Inhalte in neue ItemTemplates? --> Abkoppelung der erstellten SO-Items und neue Items kann man ebenfalls, wie gewünscht bearbeiten.
     void Start()
     {
         RefreshPanels();
     }
 
-    //If change "$ " + also change tests.
+    /// <summary>
+    /// If change "$ " + also change tests.
+    /// </summary>
     private void RefreshCredits()
     {
         creditUIText.text = "$ " + Account.credits.ToString();
         creditRealMoneyUIText.text = Account.realMoney.ToString();
     }
 
-    /* 
-    *  New items in the shop can't be added after Start()
-    */
+    /// <summary>
+    /// Set just as many panels active/visible as needed.
+    /// Refreshs credits and also checks if item is buyable.
+    /// </summary>
     public void RefreshPanels()
     {
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
@@ -52,17 +57,18 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectItems[i].title;
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectItems[i].description;
             shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectItems[i].price.ToString();
-            //Debug.Log("Item Name:" + contentDistributor.scriptableObjectItems[i].id + " || Item Price: " + contentDistributor.scriptableObjectItems[i].price.ToString());
             shopPanels[i].shopItemAmount.text = contentDistributor.scriptableObjectItems[i].amount.ToString();
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectItems[i].icon;
             shopPanels[i].rarity.text = contentDistributor.scriptableObjectItems[i].rarity;
 
+            //If icon != null, show icon of item
             if (shopPanels[i].shopItemIcon != null)
             {
                 GameObject test = FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Image");
                 test.GetComponent<Image>().sprite = shopPanels[i].shopItemIcon;
             }
 
+            //Show rarity of item and also change backgound of PreFab
             string rarity = contentDistributor.scriptableObjectItems[i].rarity;
             if (rarity != null)
             {
@@ -96,7 +102,9 @@ public class ShopManager : MonoBehaviour
         CheckPurchaseable();
     }
 
-    //Checks for credits >= price of item, if true --> button is clickable.
+    /// <summary>
+    /// Checks for credits >= price of item, if true --> button is clickable.
+    /// </summary>
     private void CheckPurchaseable()
     {
         for (int i = 0; i < contentDistributor.scriptableObjectItems.Length; i++)
@@ -112,12 +120,14 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-    /*
-    *   Action of purchase button of the UI.
-    *   Calculates new balance/credits and applys effect of the item.
-    *   int pos is position of the button, which is hardcoded in the UI:   
-    *           Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->Items-->ShopItemTemplate-->PurchaseButton
-    */
+
+    /// <summary>
+    /// Action of purchase button of the UI.
+    /// Calculates new balance/credits and applys effect of the item.
+    /// int pos is position of the button, which is hardcoded in the UI:  
+    ///         Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->Items-->ShopItemTemplate-->PurchaseButton
+    /// </summary>
+    /// <param name="pos"></param>
     public void PurchaseButtonAction(int pos)
     {
         //If credit >= as price of shopItem on position pos in array.

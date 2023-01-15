@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controller of shop, switch between skins and items.
+/// </summary>
 public class ShopSwitch : MonoBehaviour
 {
     public GameObject skinsShop;
@@ -15,6 +18,9 @@ public class ShopSwitch : MonoBehaviour
         ItemsButtonAction();
     }
 
+    /// <summary>
+    /// Show skins in inventory.
+    /// </summary>
     public void SkinsButtonAction()
     {
         ContentDistributor.contentDistributor.shopSkinManager.RefreshPanels();
@@ -24,6 +30,9 @@ public class ShopSwitch : MonoBehaviour
         skinsButton.GetComponent<Image>().color = Color.red;
     }
 
+    /// <summary>
+    /// Show items in inventory
+    /// </summary>
     public void ItemsButtonAction()
     {
         ContentDistributor.contentDistributor.shopManager.RefreshPanels();

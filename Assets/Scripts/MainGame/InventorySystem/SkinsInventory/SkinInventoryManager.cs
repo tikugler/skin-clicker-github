@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// SkinInventoryManager, shows every skin that is in Account.skinList.
+/// </summary>
 public class SkinInventoryManager : MonoBehaviour
 {
     public Button[] useButtons;
@@ -16,7 +19,9 @@ public class SkinInventoryManager : MonoBehaviour
         RefreshPanels();
     }
 
-    //Refreshes panels --> new values are displayed.
+    /// <summary>
+    /// Set just as many panels active/visible as needed.
+    /// </summary>
     public void RefreshPanels()
     {
         contentDistributor = ContentDistributor.contentDistributor;
@@ -76,7 +81,9 @@ public class SkinInventoryManager : MonoBehaviour
         CheckSkinAlreadyInUse();
     }
 
-    //Checks for credits >= price of item, if true --> button is clickable.
+    /// <summary>
+    /// Checks for credits >= price of item, if true --> button is clickable.
+    /// </summary>
     private void CheckSkinAlreadyInUse()
     {
         for (int i = 0; i < Account.skinList.Count; i++)
@@ -98,10 +105,9 @@ public class SkinInventoryManager : MonoBehaviour
         }
     }
 
-    /*
-    *   Action for the use button in the skin inventory.
-    *   pos is a hardcoded param in unity --> InventoryPanel --> Skins --> (...) --> ShopSkinTemplate --> stats --> PurchaseButton
-    */
+    /// <summary>
+    /// Activates effect of item and sets panel inactive.
+    /// </summary>
     public void UseButtonAction(int pos)
     {
         if (Account.ActiveSkin != null) { Account.ActiveSkin.UnequipSkin(); }

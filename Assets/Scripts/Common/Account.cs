@@ -4,6 +4,9 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Account class - contains important informations about player.
+/// </summary>
 public static class Account
 {
     public static string guestCustomID; // only for guests
@@ -34,17 +37,17 @@ public static class Account
     public static Action<string> ChangeAccountNameText = delegate { };
 
 
-
-    // Skin objekt? hat id, wert, image, boolean ausgew�hlt 
-    // account objekt serializable?
-
-    //If the Player logs in, the saved data gets dragged frrom the database.
+    /// <summary>
+    /// If the Player logs in, the saved data gets dragged frrom the database.
+    /// </summary>
     public static void OnClickGetAccountData()
     {
 
     }
 
-    //If the player exits the game the data gets saved to the database.
+    /// <summary>
+    /// If the player exits the game the data gets saved to the database.
+    /// </summary>
     public static void OnClickSaveAccountData()
     {
 
@@ -264,7 +267,11 @@ public static class Account
         }
     }
 
-    // checks if the given id in the skinIdList which consists saved skinId of related player on PlayFab
+    /// <summary>
+    /// Checks if the given skin/id of skin exists in current account.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Return true, if given id matches id in Account.skinIdList.</returns>
     public static bool IsSkinIdInSkinIdList(string id)
     {
         foreach (string skin in Account.skinIdList)
@@ -277,6 +284,11 @@ public static class Account
         return false;
     }
 
+    /// <summary>
+    /// Checks if the given skin/id of skin exists in current account.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Return true, if given id matches id in Account.skinList.</returns>
     public static bool IsSkinInInventory(string id)
     {
         foreach (SkinEffect skin in Account.skinList)
@@ -295,6 +307,10 @@ public static class Account
         PlayfabUpdateUserData.SetUpgradeAmountOnPlayFab(upgradeName, upgradeAmount);
     }
 
+    /// <summary>
+    /// Adds skinsId to skinIdList, if id is unknown to list.
+    /// </summary>
+    /// <param name="skinId"></param>
     public static void AddSkin(string skinId)
     {
         if (!skinIdList.Contains(skinId))
