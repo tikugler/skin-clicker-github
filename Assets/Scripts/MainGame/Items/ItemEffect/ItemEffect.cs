@@ -23,6 +23,8 @@ public abstract class ItemEffect
     ///     CalculateNewPrice();
     ///     CalculateNewAmount();
     ///     EffectOfItem();
+    /// If item should be added to inventory:
+    ///     ContentDistributor.contentDistributor.boughtItemsOfPlayer.Add(this);
     /// </summary>
     /// <param name="shopItem"></param>
     public abstract void PurchaseButtonAction(ItemTemplate shopItem);
