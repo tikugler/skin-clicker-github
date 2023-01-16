@@ -181,7 +181,6 @@ public class RedeemCouponManager : MonoBehaviour
 
 
         request.Statistics.Add(new StatisticUpdate { StatisticName = "USED_" + usedCouponCode, Value = 1 });
-        //statisticsDict.Add(usedCouponCode, 1);
 
         redeemButtonButton.interactable = true;
 

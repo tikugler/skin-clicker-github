@@ -21,8 +21,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     [SerializeField] TMP_Dropdown messageReceiverDropDown;
 
     
-    //public static Action <FriendInfo, int> OnFriendStatusUpdate = delegate { };
-
     public static Action<string, int> OnFriendStatusUpdate = delegate { };
 
 
@@ -31,7 +29,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         isConnected = true;
         chatClient = new ChatClient(this);
-        //chatClient.Connect("2156777f-aabb-4176-a2a2-e55b553b8289", "1.0.0", new AuthenticationValues(Account.accountName));
         chatClient.ConnectAndSetStatus("2156777f-aabb-4176-a2a2-e55b553b8289", "1.0.0", new AuthenticationValues(Account.accountName));
 
     }
@@ -49,7 +46,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnConnected()
     {
-        //throw new System.NotImplementedException();
         Debug.Log("Connected to Chat");
         chatClient.Subscribe(new string[] { "RegionChannel" });
         AddPhotonChatFriend(Account.friendsList.Select(f => f.TitleDisplayName).ToArray());
@@ -64,26 +60,16 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnGetMessages(string channelName, string[] senders, object[] messages)
     {
-        //throw new System.NotImplementedException();
         string msgs = "";
         for (int i = 0; i < senders.Length; i++)
         {
             msgs = string.Format("{0}: {1}", senders[i], messages[i]);
-
             chatDisplay.text += "\n " + msgs;
-
-            //chatDisplay.text.
-
-            Debug.Log("Yeni chat display: " + chatDisplay.text);
-
-            Debug.Log(msgs);
         }
     }
 
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
-        //throw new System.NotImplementedException();
-
         string msgs = "";
         msgs = string.Format("(Private) {0}: {1}", sender, message);
         chatDisplay.text += "\n " + msgs;
@@ -92,9 +78,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
-        //throw new System.NotImplementedException();
-
-        //Debug.Log("----OnStatusUpdate calisiyor");
         FriendInfo friendInfo = findFriendInfoByUsername(user);
         OnFriendStatusUpdate?.Invoke(user, status);
 
@@ -106,13 +89,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void OnSubscribed(string[] channels, bool[] results)
     {
-        //Debug.Log(chatClient.UserId);
-
-
-        //FindPhotonFriends();
-
-
-        //throw new System.NotImplementedException();
     }
 
     
@@ -177,8 +153,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     void DropdownItemSelected(TMP_Dropdown dropdown)
     {
         int index = dropdown.value;
-
-        //Debug.Log(dropdown.options[index].text);
         selectedReceiverToSendMessage = dropdown.options[index].text;
     }
 
@@ -192,13 +166,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     private void Start()
     {
         username = Account.accountName;
-   
-
         messageReceiverDropDown.onValueChanged.Invoke(messageReceiverDropDown.value);
-
-
-
-
     }
 
 
@@ -278,8 +246,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public IEnumerator FindPhotonFriends()
     {
-        //while (true)
-        //{
             yield return new WaitForSeconds(5f);
 
 
@@ -287,40 +253,14 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             {
                 string[] friendDisplayNames = Account.friendsList.Select(f => f.TitleDisplayName).ToArray();
                 chatClient.AddFriends(friendDisplayNames);
-
-                //Debug.Log("----> " + Account.friendsList.Count);
-                //string[] friendDisplayNames = Account.friendsList.Select(f => f.TitleDisplayName).ToArray();
-
-                //string[] friendDisplayNames = new string[Account.friendsList.Count];
-                //for (int i = 0; i < Account.friendsList.Count; i++)
-                //{
-                //    //Account.friendsList[i].
-                //    friendDisplayNames[i] = Account.friendsList[i].TitleDisplayName;
-                //    //Debug.Log("=>" + friendDisplayNames[i]);
-                //}
-                ////Debug.Log("----Friendlist: " + friendDisplayNames);
-                //chatClient.AddFriends(friendDisplayNames);
-            }
-        //}
-
-        
+            }      
     }
 
     public void AddPhotonChatFriend(string[] friendsToAdd)
     {
         if (friendsToAdd.Length != 0)
         {
-            //string[] friendDisplayNames = Account.friendsList.Select(f => f.TitleDisplayName).ToArray();
-            //chatClient.AddFriends(friendDisplayNames);
-            //Debug.Log("Friend count: " + Account.friendsList.Count);
             chatClient.AddFriends(friendsToAdd);
-
-            //foreach (string friendDisplayName in friendsToAdd)
-            //{
-            //    Debug.Log("added friend name: " + friendDisplayName);
-            //    AddItemToChatDropDown(friendDisplayName);
-            //}
-
         }
     }
 
@@ -328,9 +268,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         if (friendsToRemove.Length != 0)
         {
-            //string[] friendDisplayNames = Account.friendsList.Select(f => f.TitleDisplayName).ToArray();
-            //chatClient.AddFriends(friendDisplayNames);
-            //Debug.Log("Friend count: " + Account.friendsList.Count);
             chatClient.RemoveFriends(friendsToRemove);
 
             foreach (string friendDisplayName in friendsToRemove)
@@ -360,7 +297,5 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             }
         }
         
-    }
-
-    
+    }  
 }
