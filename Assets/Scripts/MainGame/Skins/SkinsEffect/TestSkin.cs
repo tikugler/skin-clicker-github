@@ -9,7 +9,10 @@ public class TestSkin : SkinEffect
     public static int critMulti = 10;
     public override string id { get; set; } = SkinNames.TestEffect;
     public override int price { get; set; } = 10;
-    public override string description { get; set; } = "TestSkin with good buffs!\nSkin Multiplier: " + skinMulti + "\nCritical Chance: " + critChance + "\nCritical Multiplier: " + critMulti;
+    public override string description { get; set; } = "TestSkin mit guten Attributen\n" +
+                                                        "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Legendary;
     public override int multiplierOfSkin { get; set; } = skinMulti;

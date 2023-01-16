@@ -9,10 +9,10 @@ public class OwlSkin : SkinEffect
     public static int critMulti = 90;
     public override string id { get; set; } = SkinNames.Owl;
     public override int price { get; set; } = 20000;
-    public override string description { get; set; } = "Cute owl in dark forest\n" +
-                                                        "Skin Multiplicator: " + skinMulti +
-                                                        "\nCritical Chance: " + critChance +
-                                                        "\nCritical Multiplicator: " + critMulti;
+    public override string description { get; set; } = "Süße Eule im dunklen Wald\n" +
+                                                        "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Mythical;
     public override int multiplierOfSkin { get; set; } = skinMulti;

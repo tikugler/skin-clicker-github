@@ -9,11 +9,11 @@ public class SnowmanSkin : SkinEffect
     public static int critMulti = 5;
     public override string id { get; set; } = SkinNames.Snowman;
     public override int price { get; set; } = 200;
-    public override string description { get; set; } = "Christmas special\n" +
-                                                        "Cold snowman in warm weather - safe him now or it will be too late" +
-                                                        "Skin Multiplicator: " + skinMulti +
-                                                        "\nCritical Chance: " + critChance +
-                                                        "\nCritical Multiplicator: " + critMulti;
+    public override string description { get; set; } = "Weihnachtsspecial\n" +
+                                                        "Kalter Schneeman im warmen Wetter - Rette ihn bevor er schmilzt!" +
+                                                        "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Legendary;
     public override int multiplierOfSkin { get; set; } = skinMulti;

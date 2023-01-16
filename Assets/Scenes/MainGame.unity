@@ -5186,8 +5186,8 @@ MonoBehaviour:
     - Hallo und willkommen bei Skin Clicker! Ich bin der Skinmeister.
     - Ich werde dir beibringen wie man in diesem Spiel vorankommt!
     - "Versuch doch mal am besten auf diesen Button hier zu dr\xFCcken."
-    - "Dieser Button generiert dir W\xE4hrung womit du dir Skins und Upgrades kaufen
-      kannst!"
+    - "Dieser 'SMASH' Knopf generiert dir W\xE4hrung womit du dir Skins und Upgrades
+      kaufen kannst!"
 --- !u!4 &317861226
 Transform:
   m_ObjectHideFlags: 0
@@ -7536,7 +7536,7 @@ MonoBehaviour:
     sentences:
     - Siehst du unten rechts den Shop?
     - Wenn du auf diesen Shop klickst, kannst du mehrere Upgrades kaufen.
-    - "Kauf dir einen Worker. Dieser wird dann f\xFCr dich Geld \xFCber die Zeit
+    - "Kauf dir einen Arbeiter. Dieser wird dann f\xFCr dich Geld \xFCber die Zeit
       generieren."
 --- !u!4 &508754366
 Transform:
@@ -23169,7 +23169,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ranking
+  m_Text: Rangliste
 --- !u!222 &1531983192
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25191,7 +25191,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your Daily Login Reward Day 1
+  m_Text: 'Anmeldebonus: Tag 1'
 --- !u!222 &1740741775
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29147,7 +29147,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Inventory
+  m_Text: Inventar
 --- !u!222 &2012704764
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37524,7 +37524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: Text eingeben...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -12,7 +12,10 @@ public class TestSkinTwo : SkinEffect
     public static int critMulti = 90;
     public override string id { get; set; } = SkinNames.TestEffectTwo;
     public override int price { get; set; } = 4;
-    public override string description { get; set; } = "Low Crit-Chance, high reward, random color, much wow\nSkin Multiplier: " + skinMulti + "\nCritical Chance: " + critChance + "\nCritical Multiplier: " + critMulti;
+    public override string description { get; set; } = "Wenig Krit. Treffer Chance, aber viel als Belohnung! Much wow\n" +
+                                                         "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Rare;
     public override int multiplierOfSkin { get; set; } = skinMulti;

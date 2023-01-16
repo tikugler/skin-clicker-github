@@ -8,7 +8,7 @@ public class Worker : ItemEffect
 {
     public override string id { get; set; } = ItemNames.Worker;
     public override int price { get; set; } = 1;
-    public override string description { get; set; } = "Automated button clicker.\n1 click per secound.";
+    public override string description { get; set; } = "Drückt automatisiert auf den Knopf.\nEin klick pro Sekunde.";
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("worker");
     public override ItemTemplate shopItem { get; set; }

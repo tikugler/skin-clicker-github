@@ -9,10 +9,10 @@ public class DefaultSkin : SkinEffect
     public static int critMulti = 5;
     public override string id { get; set; } = SkinNames.Default;
     public override int price { get; set; } = 0;
-    public override string description { get; set; } = "Old but gold - our gift for beginners\n" +
-                                                        "Skin Multiplicator: " + skinMulti +
-                                                        "\nCritical Chance: " + critChance +
-                                                        "\nCritical Multiplicator: " + critMulti;
+    public override string description { get; set; } = "Unser Geschenk für Anfänger\n" +
+                                                        "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi: " + critMulti;
     public override bool bought { get; set; } = true;
     public override string rarity { get; set; } = Rarities.Common;
     public override int multiplierOfSkin { get; set; } = skinMulti;
