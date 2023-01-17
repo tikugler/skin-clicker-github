@@ -11,6 +11,7 @@ public class ShopPackageManager : MonoBehaviour
 {
     public static int credit;
     public Text creditUIText;
+    public Text realMoneyUIText;
     public GameObject[] shopPanelsGO; //GO means GameObject, has reference to GameObjects
     public ShopTemplate[] shopPanels; //Reference to scripts
     public Button[] purchaseButtons;
@@ -32,9 +33,10 @@ public class ShopPackageManager : MonoBehaviour
     /// <summary>
     /// If change "$ " + also change tests.
     /// </summary>
-    private void RefreshCredits()
+    private void RefreshCreditsAndRealMoney()
     {
         credit = Account.credits;
+        realMoneyUIText.text = Account.realMoney.ToString();
         creditUIText.text = "$ " + credit.ToString();
     }
 
@@ -47,7 +49,7 @@ public class ShopPackageManager : MonoBehaviour
         //contentDistributor has to be here otherwise nullpointer becaus Start() isn't working before this methode call.
         contentDistributor = ContentDistributor.contentDistributor;
 
-        RefreshCredits();
+        RefreshCreditsAndRealMoney();
 
         //Sets panels unused panels inactive and starts with the last panel in the list.
         int indexShopPanels = shopPanelsGO.Length - 1;
@@ -62,10 +64,11 @@ public class ShopPackageManager : MonoBehaviour
         {
             shopPanelsGO[i].SetActive(true);
             shopPanels[i].shopItemTitle.text = contentDistributor.scriptableObjectPackages[i].title;
+
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectPackages[i].description;
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectPackages[i].icon;
 
-          
+            shopPanels[i].shopItemPrice.text = contentDistributor.scriptableObjectPackages[i].price.ToString() + "Euro";
 
             //If icon != null, show icon of package
             if (shopPanels[i].shopItemIcon != null)
