@@ -48,7 +48,9 @@ public class DialogueSelector : MonoBehaviour
         }
     }
 
-    //Disable all other Buttons here
+    /// <summary>
+    /// Hier wird nachgeschaut, ob der Main Button mehrmals gedrückt worden ist.
+    /// </summary>
     public void CheckMainButtonClickMultipleTimes()
     {
         if (Account.credits >= 5 && firstTriggerTriggered && !secondTriggerTriggered)
@@ -58,6 +60,9 @@ public class DialogueSelector : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hier wird nachgeschaut, ob ein Worker gekauft worden ist.
+    /// </summary>
     public void CheckWorkerBought()
     {
         if(Worker.workerAmountWorkaround >= 1 && secondTriggerTriggered && !thirdTriggerTriggered)

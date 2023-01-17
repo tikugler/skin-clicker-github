@@ -4,6 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Diese Klasse ist dafür zuständig, Nutzerbilder hinzuzufügen, 
+/// zu ändern und deren Popups zu verwalten.
+/// </summary>
 public class UserImageManager : MonoBehaviour
 {
     public GameObject profilePicturePopup;
@@ -127,7 +131,7 @@ public class UserImageManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Wenn ein Button im Panel gedrückt wird, dann wrid ein Invoke ausgelöst,
+    /// Wenn ein Button im Panel gedrückt wird, dann wird ein Invoke ausgelöst,
     /// der den Profilbild vom Spieler abändert.
     /// </summary>
     /// <param name="button">Welcher Button gedrückt wurde</param>

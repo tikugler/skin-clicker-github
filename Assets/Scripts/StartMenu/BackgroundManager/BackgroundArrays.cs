@@ -1,7 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Hier werden alle Hintergründe von Skins abgespeichert mit bestimmten Namen.
+/// </summary>
 public static class BackgroundArrays
 {
     public static Dictionary<string, Sprite[]> backgroundDictionary = new Dictionary<string, Sprite[]>();

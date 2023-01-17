@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Diese Klasse speichert, welche Attribute (Text) ein Dialog haben sollte.
+/// </summary>
 [System.Serializable]
 public class Dialogue
 {
