@@ -9,10 +9,10 @@ public class CactusSkin : SkinEffect
     public static int critMulti = 40;
     public override string id { get; set; } = SkinNames.Cactus;
     public override int price { get; set; } = 400;
-    public override string description { get; set; } = "In Germany we say: Mein kleiner grüner Kaktus\n" +
-                                                        "Skin Multiplicator: " + skinMulti +
-                                                        "\nCritical Chance: " + critChance +
-                                                        "\nCritical Multiplicator: " + critMulti;
+    public override string description { get; set; } = "Mein kleiner grüner Kaktus\n" +
+                                                        "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi.: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Legendary;
     public override int multiplierOfSkin { get; set; } = skinMulti;

@@ -11,8 +11,6 @@ public class PlayFabFriendManager : MonoBehaviour
 
     enum FriendIdType { PlayFabId, Username, Email, DisplayName };
 
-    //List<FriendInfo> _friends = null;
-
     [SerializeField] Transform friendScrollView;
     public GameObject uiFriendPrefab;
 
@@ -54,12 +52,6 @@ public class PlayFabFriendManager : MonoBehaviour
         UIFriend.OnRemoveFriend -= RemoveFriend;
     }
 
-    private void Start()
-    {
-        
-        //if(friendToggleButton.interactable)
-            //GetFriends();
-    }
     void DisplayFriends()
     {
         foreach (FriendInfo f in Account.friendsList)
@@ -74,15 +66,6 @@ public class PlayFabFriendManager : MonoBehaviour
                     break;
                 }
             }
-
-
-            //I'm working on making it possible to see if your friend is online now.
-            //    If he is online you can send a private message to this person
-
-
-            //Ich arbeite daran, es möglich zu machen, zu sehen, ob Ihr Freund jetzt online ist.
-            //    Wenn er online ist, können Sie dieser Person eine private Nachricht senden
-
 
             if (!isFound)
             {
@@ -100,7 +83,6 @@ public class PlayFabFriendManager : MonoBehaviour
 
 
         }
-        //myFriendsInScrollView = Account.friendsList;
         isFirstRun = false;
     }
 
@@ -179,10 +161,7 @@ public class PlayFabFriendManager : MonoBehaviour
         PlayFabClientAPI.RemoveFriend(new RemoveFriendRequest
         {
             FriendPlayFabId = friendInfo.FriendPlayFabId
-        }, result => {
-            //_friends.Remove(friendInfo);
-            //Account.friendsList.Remove(friendInfo);
-            //myFriendsInScrollView.Remove(friendInfo);
+        }, result => {        
             Debug.Log("Account.friendsList.Remove(friendInfo): " + Account.friendsList.Remove(friendInfo));
             Debug.Log("myFriendsInScrollView.Remove(friendInfo): " + myFriendsInScrollView.Remove(friendInfo));
             
@@ -209,10 +188,7 @@ public class PlayFabFriendManager : MonoBehaviour
 
     public void ToggleFriendPanel()
     {
-        //if (!friendPanel.activeSelf)
-        //    GetFriends();
         friendPanel.SetActive(!friendPanel.activeSelf);
-        //friendPanel.SetActive(!friendPanel.activeInHierarchy);
 
     }
 

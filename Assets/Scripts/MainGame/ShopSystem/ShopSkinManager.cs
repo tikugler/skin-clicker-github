@@ -73,7 +73,7 @@ public class ShopSkinManager : MonoBehaviour
             }
             else
             {
-                shopPanels[i].shopItemPrice.text = "Out of stock!";
+                shopPanels[i].shopItemPrice.text = "Nicht vorrätig!";
             }
 
             //If icon != null, show icon of skin

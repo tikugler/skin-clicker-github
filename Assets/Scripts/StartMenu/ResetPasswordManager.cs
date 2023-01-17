@@ -92,9 +92,9 @@ public class ResetPasswordManager : MonoBehaviour
         infoText.text = obj.GenerateErrorReport();
     }
 
-    private void MakeInteractableResetPasswordButton(string newPasswordText)
+    private void MakeInteractableResetPasswordButton(string newEmailText)
     {
-        if(newPasswordText != "")
+        if(newEmailText != "")
         {
             resetPasswordRequestButton.interactable = true;
 

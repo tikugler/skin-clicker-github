@@ -12,8 +12,8 @@ using UnityEngine.UI;
 /// </summary>
 public static class ItemNames
 {
-    public static readonly string DoubleEffect = "Double Effect";
-    public static readonly string Worker = "Worker";
-    public static readonly string TestEffect = "Test Effect";
-    public static readonly string CriticalHitEffect = "Critical Hit";
+    public static readonly string DoubleEffect = "Doppelter Ertrag";
+    public static readonly string Worker = "Arbeiter";
+    public static readonly string TestEffect = "Test Effekt";
+    public static readonly string CriticalHitEffect = "Kritischer Treffer";
 }

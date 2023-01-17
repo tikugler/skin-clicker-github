@@ -34,7 +34,6 @@ public class UIFriend : MonoBehaviour
     }
     private void OnDestroy()
     {
-        //Debug.Log($"{friendName} is destroyed");
         gameObject.GetComponent<Button>().onClick.RemoveListener(FriendEntryClicked);
 
     }
@@ -42,37 +41,22 @@ public class UIFriend : MonoBehaviour
     private void OnEnable()
     {
         if (string.IsNullOrEmpty(friendName)) return;
-        //OnGetCurrentStatus?.Invoke(friendName);
     }
 
-    //public void Initialize(FriendInfo friend)
-    //{
-    //    Debug.Log($"{friend.UserId} is online: {friend.IsOnline} ; in room: {friend.IsInRoom} ; room name: {friend.Room}");
-
-    //    SetupUI();
-    //}
-    //public void Initialize(string friendName)
+    
     public void Initialize(FriendInfo f)
     {
         PhotonChatManager.OnFriendStatusUpdate += HandleStatusUpdated;
         this.friendName = f.TitleDisplayName;
         this.friendInfo = f;
-        //friendManager = playFabFriendManager;
-        //Debug.Log($"{friendName} is added");
-        //this.friendName = friendName;
-        
-
         SetupUI();
-        //OnGetCurrentStatus?.Invoke(friendName);
     }
 
 
     private void HandleStatusUpdated(string playerName, int status)
     {
-        Debug.Log($"---- friendName: {friendName}, playerName: {playerName}");
         if (string.Compare(friendName, playerName) == 0)
         {
-            Debug.Log($"Updating status in UI for {playerName} to status {status}");
             SetStatus(status);
         }
     }
@@ -98,15 +82,12 @@ public class UIFriend : MonoBehaviour
 
     public void RemoveFriend()
     {
-        Debug.Log($"Clicked to remove friend {friendName}");
         OnRemoveFriend?.Invoke(friendInfo, gameObject);
     }
 
 
     private  void FriendEntryClicked()
     {
-        Debug.Log($"You clicked on {friendName}");
-
         var request = new GetPlayerProfileRequest();
         request.PlayFabId = friendInfo.FriendPlayFabId;
         request.ProfileConstraints = new PlayerProfileViewConstraints()
@@ -118,9 +99,6 @@ public class UIFriend : MonoBehaviour
 
     private void GetProfileSuccess(GetPlayerProfileResult result)
     {
-        //Debug.Log(result);
-        //Debug.Log(result.ToJson());
-        //Debug.Log(result.ToString());
         string userDisplayName = friendName;
         List<string> skinIdList = new List<string>();
         Dictionary<string, int> upgradeList = new Dictionary<string, int>();  

@@ -9,10 +9,10 @@ public class CatSkin : SkinEffect
     public static int critMulti = 20;
     public override string id { get; set; } = SkinNames.Cat;
     public override int price { get; set; } = 1500;
-    public override string description { get; set; } = "Black cats mean luck, don't they?\n" +
-                                                        "Skin Multiplicator: " + skinMulti +
-                                                        "\nCritical Chance: " + critChance +
-                                                        "\nCritical Multiplicator: " + critMulti;
+    public override string description { get; set; } = "Schwarze Katzen bedeuten glück, oder?\n" +
+                                                        "Skin Multiplikator: " + skinMulti +
+                                                        "\nKrit. Treffer Chance: " + critChance +
+                                                        "\nKrit. Treffer Multi: " + critMulti;
     public override bool bought { get; set; } = false;
     public override string rarity { get; set; } = Rarities.Rare;
     public override int multiplierOfSkin { get; set; } = skinMulti;

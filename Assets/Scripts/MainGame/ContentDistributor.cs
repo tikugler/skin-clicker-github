@@ -22,8 +22,11 @@ public class ContentDistributor : MonoBehaviour
     public Parallax parallax;
     public ItemTemplate[] scriptableObjectItems;
     public SkinTemplate[] scriptableObjectSkins;
+    public PackageTemplate[] scriptableObjectPackages;
     public Dictionary<string, ItemEffect> itemsDictionary = new Dictionary<string, ItemEffect>();
     public Dictionary<string, SkinEffect> skinsDictionary = new Dictionary<string, SkinEffect>();
+    public Dictionary<string, PackageEffect> packagesDictionary = new Dictionary<string, PackageEffect>();
+
 
     //Player stuff for demo
     public ArrayList boughtItemsOfPlayer = new ArrayList();
@@ -43,6 +46,8 @@ public class ContentDistributor : MonoBehaviour
             contentDistributor = this;
             CreateItems();
             CreateSkins();
+            CreatePackages();
+
             AddItemsAndSkinsToProfileInfoPanel();
             SetUpgrades(); // sets number of performed upgrade / bought item previously
             LoadPurchasedSkins();
@@ -122,6 +127,53 @@ public class ContentDistributor : MonoBehaviour
         scriptableObjectSkins[5] = testSkinTemplate;
         scriptableObjectSkins[6] = testSkinTemplate2;
 
+    }
+
+    /// <summary>
+    /// Adds new items to scriptableObjectPackages.
+    /// Creates templates for shop/inventory.
+    /// </summary>
+    private void CreatePackages()
+    {
+        var smallPackage = new SmallPackage();
+        var packageSmallTemplate = CreatePackageTemplate(smallPackage);
+
+        var mediumPackage = new MediumPackage();
+        var packageMediumTemplate = CreatePackageTemplate(mediumPackage);
+
+        var bigPackage = new BigPackage();
+        var packageBigTemplate = CreatePackageTemplate(bigPackage);
+
+        scriptableObjectPackages = new PackageTemplate[3];
+        scriptableObjectPackages[0] = packageSmallTemplate;
+        scriptableObjectPackages[1] = packageMediumTemplate;
+        scriptableObjectPackages[2] = packageBigTemplate;
+
+
+
+
+    }
+
+    /// <summary>
+    /// Creates new SkinTemplate and fills fields with item values.
+    /// </summary>
+    /// <param name="package"></param>
+    /// <returns>SkinTemplate with values of the skin</returns>
+    private PackageTemplate CreatePackageTemplate(PackageEffect package)
+    {
+        PackageTemplate packageTemplate = PackageTemplate.CreateInstance<PackageTemplate>();
+        packageTemplate.id = package.id;
+        packageTemplate.title = package.id;
+        packageTemplate.description = package.GetDescription();
+        packageTemplate.price = package.price;
+        packageTemplate.startPrice = package.price;
+        packageTemplate.icon = package.icon;
+        packageTemplate.fullPicture = null;
+        package.packageTemplate = packageTemplate;
+
+        packagesDictionary.Add(package.id.ToString(), package);
+
+        return packageTemplate;
     }
 
     /// <summary>

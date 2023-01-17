@@ -36,7 +36,7 @@ public class DailyRewards : MonoBehaviour
             //Give out reward
             var rewards = GiveoutReward();
             OpenPopUp(rewards);
-            dailyText.text = "Your Daily Login Reward Day " + daysLoggedIn;
+            dailyText.text = "Anmeldebonus: Tag " + daysLoggedIn;
             daysLoggedIn++;
             // Update Account last Reward time
             // Update Account logged in days in a row

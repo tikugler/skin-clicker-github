@@ -180,6 +180,8 @@ public class UserInfoManager : MonoBehaviour
 
     private void AdjustAndOpenProfilInfo(int selectedPictureId, string profilName, int lastOnlineSecAgo, int credits, Dictionary<string, int> items, List<string> skins, string activeSinId)
     {
+        if (!Account.LoggedIn)
+            return;
         if (Account.accountName.Equals(profilName)){
             profilInfoUserImageObject.GetComponent<Button>().interactable = true;
         }
