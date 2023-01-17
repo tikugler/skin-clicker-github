@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +18,9 @@ public class ShopSkinManager : MonoBehaviour
     public Button[] purchaseButtons;
     private ContentDistributor contentDistributor;
     [SerializeField] SoundSceneManager soundManager;
+    public Text realMoneyUIText;
+
+    bool PayWithRealMoney = false;
 
 
     void Start()
@@ -69,11 +74,14 @@ public class ShopSkinManager : MonoBehaviour
             //Shows price of skin, if already bought --> "Out of Stock"
             if (!Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
-                shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
+                if (!PayWithRealMoney)
+                    shopPanels[i].shopItemPrice.text = "$ " + contentDistributor.scriptableObjectSkins[i].price.ToString();
+                else
+                    shopPanels[i].shopItemPrice.text = contentDistributor.scriptableObjectSkins[i].PriceAsRealMoney.ToString() + " RM";
             }
             else
             {
-                shopPanels[i].shopItemPrice.text = "Nicht vorrätig!";
+                shopPanels[i].shopItemPrice.text = "Nicht vorrï¿½tig!";
             }
 
             //If icon != null, show icon of skin
@@ -120,7 +128,12 @@ public class ShopSkinManager : MonoBehaviour
     {
         for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
         {
-            if ((Account.credits >= contentDistributor.scriptableObjectSkins[i].price) && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
+            if ((!PayWithRealMoney && Account.credits >= contentDistributor.scriptableObjectSkins[i].price) && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
+            {
+                purchaseButtons[i].interactable = true;
+                //mb some effects like backlighting for an active button
+            }
+            else if ((PayWithRealMoney && Account.realMoney >= contentDistributor.scriptableObjectSkins[i].PriceAsRealMoney) && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
                 purchaseButtons[i].interactable = true;
                 //mb some effects like backlighting for an active button
@@ -142,7 +155,7 @@ public class ShopSkinManager : MonoBehaviour
     public void PurchaseButtonAction(int pos)
     {
         //If credit >= as price of shopItem on position pos in array.
-        if (credit >= contentDistributor.scriptableObjectSkins[pos].price)
+        if (!PayWithRealMoney && credit >= contentDistributor.scriptableObjectSkins[pos].price)
         {
             //Check, if key (Effect) is in the list.
             SkinTemplate item = contentDistributor.scriptableObjectSkins[pos];
@@ -159,6 +172,32 @@ public class ShopSkinManager : MonoBehaviour
                 Account.AddSkin(item.id);
             }
         }
+
+        // If credit >= as price of shopItem on position pos in array.
+        else if (PayWithRealMoney && Account.realMoney >= contentDistributor.scriptableObjectSkins[pos].PriceAsRealMoney)
+        {
+            //Check, if key (Effect) is in the list.
+            SkinTemplate item = contentDistributor.scriptableObjectSkins[pos];
+            if (contentDistributor.skinsDictionary.ContainsKey(item.id))
+            {
+                Account.realMoney -= item.PriceAsRealMoney;
+                soundManager.PlayPayWithCoinsSound();
+                //Search for effect id in array with effects that has same id as id of ShopItem.
+                contentDistributor.skinsDictionary[item.id].PurchaseButtonAction(item);
+                contentDistributor.skinsDictionary[item.id].skinTemplate = item;
+
+                // adds skin in Account (added in Playfab automatically)
+                Account.AddSkin(item.id);
+                realMoneyUIText.text = Account.realMoney.ToString();
+            }
+        }
+        RefreshPanels();
+    }
+
+
+    public void SetPayWithRealMoney(bool isSelected)
+    {
+        PayWithRealMoney = isSelected;
         RefreshPanels();
     }
 }
