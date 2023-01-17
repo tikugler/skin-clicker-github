@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditUIText: {fileID: 261335975}
+  realMoneyUIText: {fileID: 1884120032}
   shopPanelsGO:
   - {fileID: 1397100894}
   - {fileID: 1762403013}
