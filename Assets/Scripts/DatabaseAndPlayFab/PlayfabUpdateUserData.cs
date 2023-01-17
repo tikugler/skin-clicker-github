@@ -123,6 +123,9 @@ public class PlayfabUpdateUserData : MonoBehaviour
         
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
+    /// <summary>
+    /// Speichert in der Datenbank ab, wann die letzte Belohnung war.
+    /// </summary>
     public static void SetLastRewardDate()
     {
         if (!Account.LoggedIn)
@@ -138,6 +141,10 @@ public class PlayfabUpdateUserData : MonoBehaviour
         request.Statistics.Add(statLastReward);
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
+
+    /// <summary>
+    /// Das Geld und Echtgeld wird in der Datenbankstatistik aktualisiert.
+    /// </summary>
     public static void SetMoneyAmount()
     {
         if (!Account.LoggedIn)

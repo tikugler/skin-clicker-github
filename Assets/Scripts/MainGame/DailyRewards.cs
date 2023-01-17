@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Hier wird geschaut, ob der angemeldete Account eine Belohnung kriegen kann.
+/// </summary>
 public class DailyRewards : MonoBehaviour
 {
     private int daysLoggedIn;
@@ -44,9 +47,11 @@ public class DailyRewards : MonoBehaviour
             Account.lastReward = DateTime.Now;
             PlayfabUpdateUserData.SetLastRewardDate();
         }
-
     }
 
+    /// <summary>
+    /// Schliesst den Popup und fügt dem Account Geld hinzu
+    /// </summary>
     public void ClosePopup()
     {
         //Update rewards after closing reward window
@@ -61,6 +66,10 @@ public class DailyRewards : MonoBehaviour
         PopulateRewards(rewards);
     }
 
+    /// <summary>
+    /// Zeigt an, wie viel Geld auf den Account gespeichert werden muss
+    /// </summary>
+    /// <param name="rewards">Moneytype, Amount</param>
     private void PopulateRewards(Dictionary<string, int> rewards)
     {
         if (rewards["realMoney"] == 0)

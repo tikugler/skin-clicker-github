@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Diese Klasse ist dafür zuständig,
+/// die Kamera zu bewegen und die Parallaxschichten ebenso zu bewegen.
+/// </summary>
 public class Parallax : MonoBehaviour
 {
     [Header("Camera Settings")]
@@ -53,6 +57,10 @@ public class Parallax : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wechselt die Schichten vom Parallax ab, indem es die ID des Parallaxobjektes nimmt.
+    /// </summary>
+    /// <param name="id">ID der Schichten</param>
     public void SwitchBackground(string id) {
         Sprite[] newBackground = BackgroundArrays.backgroundDictionary[id];
         for (int i = 1; i < newBackground.Length; i++) {

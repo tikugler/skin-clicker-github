@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Der DialogueManager verwaltet, dass ein Dialog richtig abgespielt wird
+/// und danach der Dialog auch richtig beendet wird.
+/// </summary>
 public class DialogueManager : MonoBehaviour
 {
 	public TextMeshProUGUI nameText;
@@ -24,6 +28,10 @@ public class DialogueManager : MonoBehaviour
 		dialogueSelector.enabled = true;
 	}
 
+	/// <summary>
+	/// Diese Methode startet den Dialog, der gegeben ist.
+	/// </summary>
+	/// <param name="dialogue">Dialog, der abgespielt werden soll</param>
 	public void StartDialogue(Dialogue dialogue)
 	{
 		dialogueEnded = false;
@@ -40,7 +48,9 @@ public class DialogueManager : MonoBehaviour
 		}
 		DisplayNextSentence();
 	}
-
+	/// <summary>
+	/// Zeigt den nächsten Satz an, wenn es einen nächsten Satz gibt.
+	/// </summary>
 	public void DisplayNextSentence()
 	{
 		if (sentences.Count == 0)
@@ -54,7 +64,11 @@ public class DialogueManager : MonoBehaviour
 		StopAllCoroutines();
 		StartCoroutine(TypeSentence(sentence));
 	}
-
+	/// <summary>
+	/// Schreibt den Satz Buchstabe für Buchstabe langsam.
+	/// </summary>
+	/// <param name="sentence">Satz zum anzeigen</param>
+	/// <returns>null</returns>
 	IEnumerator TypeSentence(string sentence)
 	{
 		dialogueText.text = "";
@@ -71,6 +85,10 @@ public class DialogueManager : MonoBehaviour
 		dialogueEnded = true;
 	}
 
+	/// <summary>
+	/// Schaut, ob der Dialog zu ende ist.
+	/// </summary>
+	/// <returns>true, falls dialog zu ende ist.</returns>
 	public bool HasDialogueEnded()
     {
 		return dialogueEnded;
