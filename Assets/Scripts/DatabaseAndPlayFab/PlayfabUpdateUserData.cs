@@ -27,11 +27,15 @@ public class PlayfabUpdateUserData : MonoBehaviour
     private void SetScoreOnPlayFab()
     {
         int credits = Account.credits;
+        int realMoney = Account.realMoney;
+
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
         var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
+        var statRealMoney = new StatisticUpdate { StatisticName = "RealMoney", Value = realMoney };
         int leavingGameTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         var statLeavingTime = new StatisticUpdate { StatisticName = "LeavingGameTime", Value = leavingGameTime };
+        request.Statistics.Add(statRealMoney);
         request.Statistics.Add(statCredits);
         request.Statistics.Add(statLeavingTime);
 
@@ -51,6 +55,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
             return;
 
         int credits = Account.credits;
+        int realMoney = Account.realMoney;
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
         var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
@@ -72,10 +77,14 @@ public class PlayfabUpdateUserData : MonoBehaviour
             return;
 
         int credits = Account.credits;
+        int realMoney = Account.realMoney;
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
         var statCredits = new StatisticUpdate { StatisticName = "Credits", Value = credits };
+        var statRealMoney = new StatisticUpdate { StatisticName = "RealMoney", Value = realMoney };
         var statSkin = new StatisticUpdate { StatisticName = "SKIN_" + skinName, Value = 1 };
+        request.Statistics.Add(statCredits);
+        request.Statistics.Add(statRealMoney);
         request.Statistics.Add(statSkin);
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
