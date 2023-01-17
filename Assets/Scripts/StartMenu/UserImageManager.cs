@@ -18,7 +18,6 @@ public class UserImageManager : MonoBehaviour
     public static Action<int, string, int, int, Dictionary<string, int>, List<string>, string> OpenPlayerInfoPanelAction = delegate { };
     public static Action<int> ChangeImageInUserInfoManagerAction = delegate { };
 
-
     private void Awake()
     {
         if(instance == null)
@@ -59,23 +58,15 @@ public class UserImageManager : MonoBehaviour
         }
     }
 
-    //private void OnEnable()
-    //{
-        
-
-    //}
-
-    //private void OnDisable()
-    //{
-        
-
-
-    //}
     void Start()
     {
         createdGameObjects = new List<GameObject>();
         userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + Account.selectedPictureId);
     }
+
+    /// <summary>
+    /// Öffnet den Profilbild Panel
+    /// </summary>
     public void OpenImagePopup()
     {
         if (!Account.LoggedIn)
@@ -83,7 +74,9 @@ public class UserImageManager : MonoBehaviour
         AddImages();
         profilePicturePopup.SetActive(true);
     }
-
+    /// <summary>
+    /// Schließt den Profilbild Panel
+    /// </summary>
     public void CloseProfile()
     {
         profilePicturePopup.SetActive(false);
@@ -133,9 +126,13 @@ public class UserImageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wenn ein Button im Panel gedrückt wird, dann wrid ein Invoke ausgelöst,
+    /// der den Profilbild vom Spieler abändert.
+    /// </summary>
+    /// <param name="button">Welcher Button gedrückt wurde</param>
     public void OnButtonClicked(Button button)
     {
-
         var id = button.transform.name;
         Debug.Log("Selected Id = " + id);
         userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
@@ -144,13 +141,19 @@ public class UserImageManager : MonoBehaviour
         //TODO: Update Database here to save the selected picture ID?
         PlayfabUpdateUserData.UpdateStatisticOnPlayFab("SelectedPictureId", Account.selectedPictureId);
     }
-
+    /// <summary>
+    /// Wechselt die Sprite über eine gegebene ID im Profilbild
+    /// </summary>
+    /// <param name="id">ID der Sprite</param>
     public void ChangeProfilImageById(int id)
     {
         Account.selectedPictureId = Convert.ToInt32(id);
         userImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("ProfilePicture/" + id);
     }
-
+    /// <summary>
+    /// Nutzername Anzeige wird geändert.
+    /// </summary>
+    /// <param name="newUserName">Neuer Nutzer</param>
     public void ChangeUserNameText(string newUserName)
     {
         userNameText.text = newUserName;
