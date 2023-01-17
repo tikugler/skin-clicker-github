@@ -68,7 +68,7 @@ public class ShopPackageManager : MonoBehaviour
             shopPanels[i].shopItemDescription.text = contentDistributor.scriptableObjectPackages[i].description;
             shopPanels[i].shopItemIcon = contentDistributor.scriptableObjectPackages[i].icon;
 
-            shopPanels[i].shopItemPrice.text = contentDistributor.scriptableObjectPackages[i].price.ToString() + "Euro";
+            shopPanels[i].shopItemPrice.text = contentDistributor.scriptableObjectPackages[i].price.ToString() + " Euro";
 
             //If icon != null, show icon of package
             if (shopPanels[i].shopItemIcon != null)
@@ -77,8 +77,8 @@ public class ShopPackageManager : MonoBehaviour
             }
 
             
-            shopPanels[i].rarity.color = Color.cyan;
-            FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.cyan;
+            //shopPanels[i].rarity.color = Color.cyan;
+            //FindObjectHelper.FindObjectInParent(shopPanelsGO[i], "Background").GetComponent<Image>().color = Color.cyan;
             
             
 

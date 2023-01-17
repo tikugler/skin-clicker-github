@@ -12,6 +12,12 @@ public class SkinTemplate : ScriptableObject
 
     [HideInInspector]
     public int price;
+    public int PriceAsRealMoney { get
+        {
+            return price / 100;
+        }
+    }
+
     //public int amount;
     public int startPrice;
     public Sprite icon; //mb like a thumbnail

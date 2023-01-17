@@ -29,4 +29,9 @@ public abstract class SkinEffect
     //Uses/Equips skin --> setter for current skin.
     public abstract void EquipSkin();
     public abstract void UnequipSkin();
+
+    public int GetPriceAsRealMoney()
+    {
+        return price / 100;
+    }
 }
