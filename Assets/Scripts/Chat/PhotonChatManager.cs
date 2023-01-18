@@ -264,7 +264,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     }
 
-
+    /// <summary>
+    /// adds friend to Photon Chat to get changes in their status
+    /// </summary>
+    /// <param name="friendsToAdd">Username of friends as a list of strings</param>
     private void AddPhotonChatFriend(string[] friendsToAdd)
     {
         if (friendsToAdd.Length != 0)
@@ -273,6 +276,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         }
     }
 
+    /// <summary>
+    /// removes friend from Photon Chat and DropDown Menu
+    /// </summary>
+    /// <param name="friendsToRemove">Username of friends as a list of strings to remove</param>
     public void RemovePhotonChatFriend(string[] friendsToRemove)
     {
         if (friendsToRemove.Length != 0)
@@ -290,7 +297,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         messageReceiverDropDown.options.Add(new TMP_Dropdown.OptionData() { text = receiver });
     }
-
+    /// <summary>
+    /// removes menu item from dropdown according to given receiver string
+    /// </summary>
+    /// <param name="receiver">username of the player to remove from dropdown menu</param>
     private void RemoveItemFromChatDropDown(string receiver)
     {
         messageReceiverDropDown.options.Remove(new TMP_Dropdown.OptionData() { text = receiver });

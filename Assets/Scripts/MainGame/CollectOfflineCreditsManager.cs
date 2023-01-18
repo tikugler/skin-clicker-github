@@ -33,17 +33,17 @@ public class CollectOfflineCreditsManager : MonoBehaviour
         collectOfflinePanel.SetActive(true);
     }
 
-
+    /// <summary>
+    /// calculates the elapsed time in seconds since you last exited the game
+    /// </summary>
     public void CalculatePassedSeconds()
     {
-
         passedSeconds = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds - Account.LeavingGameTimestamp;
         passedSecondsText.text = passedSeconds.ToString() + " Sekunden";
     }
 
     public void CalculateCollectedCredits()
     {
-
         collectedCredits = passedSeconds * Worker.workerAmount;
         collectedCreditsText.text = collectedCredits.ToString() + " Berkan Coin";
     }
