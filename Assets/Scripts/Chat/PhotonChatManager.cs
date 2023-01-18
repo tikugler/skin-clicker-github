@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using PlayFab.ClientModels;
 using static System.Net.Mime.MediaTypeNames;
+using UnityEditor.Experimental.GraphView;
 
 public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
@@ -24,6 +25,9 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public static Action<string, int> OnFriendStatusUpdate = delegate { };
 
 
+    /// <summary>
+    /// establish a connection with photon chat server using Photon Chat App ID
+    /// </summary>
     public void ChatConnectOnClick()
     {
         isConnected = true;
@@ -31,28 +35,37 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         chatClient.ConnectAndSetStatus("2156777f-aabb-4176-a2a2-e55b553b8289", "1.0.0", new AuthenticationValues(Account.accountName));
     }
 
+    // All debug output of the library will be reported through this method.Print it or put it in a
+    // A method from  IChatClientListener Interface
     public void DebugReturn(DebugLevel level, string message)
     {
-        //throw new System.NotImplementedException();
-
+        Debug.Log(message);
     }
 
+    //The ChatClient's state changed. Usually, OnConnected and OnDisconnected are the callbacks to react to.
+    // A method from  IChatClientListener Interface
     public void OnChatStateChange(ChatState state)
     {
-        //throw new System.NotImplementedException();
+        Debug.Log(state.ToString());
     }
 
+    // called when client is connected
+    // adds friends from Account.friendsList to PhotonChatFriend
     public void OnConnected()
     {
         chatClient.Subscribe(new string[] { "RegionChannel" });
         AddPhotonChatFriend(Account.friendsList.Select(f => f.TitleDisplayName).ToArray());
     }
 
+    // called when user disconnected
+    // A method from IChatClientListener Interface
     public void OnDisconnected()
     {
-        throw new System.NotImplementedException();
     }
 
+    // Notifies app that client got new messages from server
+    // updates the chat text by adding the received new global message
+    // A method from  IChatClientListener Interface
     public void OnGetMessages(string channelName, string[] senders, object[] messages)
     {
         string msgs = "";
@@ -63,6 +76,9 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         }
     }
 
+    // Notifies client about private message
+    // updates the chat text by adding the received new private message
+    // A method from  IChatClientListener Interface
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
         string msgs = "";
@@ -70,6 +86,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         chatDisplay.text += "\n " + msgs;
     }
 
+    // called when friend changed status
+    // this methods add or removed friend from the dropdown menu in chat according to his/her new status
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
         FriendInfo friendInfo = findFriendInfoByUsername(user);
@@ -81,25 +99,30 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             AddItemToChatDropDown(user);
     }
 
+    // A method from  IChatClientListener Interface
     public void OnSubscribed(string[] channels, bool[] results)
     {
+        Debug.Log("subribed");
     }
 
-    
-    
+    // A method from  IChatClientListener Interface
     public void OnUnsubscribed(string[] channels)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("unsubribed");
     }
 
+    // A method from  IChatClientListener Interface
+    // called when the user is unsubscribed to the channel
     public void OnUserSubscribed(string channel, string user)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("user subribed");
     }
 
+    // A method from  IChatClientListener Interface
+    // called when the user is subscribed to the channel
     public void OnUserUnsubscribed(string channel, string user)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("user unsubribed");
     }
 
 
@@ -139,17 +162,17 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         messageReceiverDropDown.onValueChanged.AddListener(delegate {
             DropdownItemSelected(messageReceiverDropDown);});
 
-
-
-
     }
 
+    // called when new receiver in dropdown menu is selected
+    // assign the name of selected menuitem to selectedReceiverToSendMessage
     void DropdownItemSelected(TMP_Dropdown dropdown)
     {
         int index = dropdown.value;
         selectedReceiverToSendMessage = dropdown.options[index].text;
     }
 
+    // removes delegates and a listener
     private void OnDestroy()
     {
         PlayFabFriendManager.OnFriendsAddToPhoton -= AddPhotonChatFriend;
@@ -164,7 +187,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
 
 
-
+    /// <summary>
+    /// this method is called in each frame
+    /// It sends the message when the user has typed something in the chat and pressed enter
+    /// </summary>
     void Update()
     {
         if (isConnected)
@@ -180,8 +206,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
 
 
-    
-
+    // sends public message if Global in DropDrown Menu is selected 
     private void SubmitPublicChatOnClick()
     {
         if(selectedReceiverToSendMessage.Equals("Global"))
@@ -191,25 +216,24 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             currentChat = "";
         }
     }
-
+    // assign the given value to currentChat,
+    // which is sent when user press enter oder send button in UI
     public void TypeChatOnValueChange(string valueIn)
     {
         currentChat = valueIn;
     }
 
 
-
-
-
-
-
+    // assign valueIn to privateReceiver
     public void ReceiverOnValueChange(string valueIn)
     {
         privateReceiver = valueIn;
     }
 
 
-
+    /// <summary>
+    /// sends a private message if something else than Global in Dropdown Menu is selected
+    /// </summary>
     private void SubmitPrivateChatOnClick()
     {
         if (!selectedReceiverToSendMessage.Equals("Global"))
@@ -220,15 +244,18 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         }
     }
 
-
-
-
+    /// <summary>
+    /// opens chat
+    /// </summary>
     public void CallOpenChat()
     {
         chatOpenerButton.gameObject.SetActive(false);
         chatPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// closes chat panel and make visible the button to open chat again
+    /// </summary>
     public void CloseChatPanel()
     {
 
@@ -237,7 +264,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     }
 
-
+    /// <summary>
+    /// adds friend to Photon Chat to get changes in their status
+    /// </summary>
+    /// <param name="friendsToAdd">Username of friends as a list of strings</param>
     private void AddPhotonChatFriend(string[] friendsToAdd)
     {
         if (friendsToAdd.Length != 0)
@@ -246,6 +276,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         }
     }
 
+    /// <summary>
+    /// removes friend from Photon Chat and DropDown Menu
+    /// </summary>
+    /// <param name="friendsToRemove">Username of friends as a list of strings to remove</param>
     public void RemovePhotonChatFriend(string[] friendsToRemove)
     {
         if (friendsToRemove.Length != 0)
@@ -263,7 +297,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         messageReceiverDropDown.options.Add(new TMP_Dropdown.OptionData() { text = receiver });
     }
-
+    /// <summary>
+    /// removes menu item from dropdown according to given receiver string
+    /// </summary>
+    /// <param name="receiver">username of the player to remove from dropdown menu</param>
     private void RemoveItemFromChatDropDown(string receiver)
     {
         messageReceiverDropDown.options.Remove(new TMP_Dropdown.OptionData() { text = receiver });

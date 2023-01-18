@@ -102,7 +102,7 @@ public class RegistrationManager : MonoBehaviour
         }
         else
         {
-            InfoText.text = "Benutzername muss zwischen 3-20 Zeichen lang sein";
+            InfoText.text = "Benutzername muss zwischen 3-12 Zeichen lang sein";
             SubmitButton.interactable = false;
         }
     }

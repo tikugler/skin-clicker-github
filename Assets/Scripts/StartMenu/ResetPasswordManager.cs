@@ -18,7 +18,9 @@ public class ResetPasswordManager : MonoBehaviour
     [SerializeField] Text infoText;
 
 
-
+    /// <summary>
+    /// adds listeners to GameObjects
+    /// </summary>
     private void OnEnable()
     {
         openResetPasswordPanelButton.onClick.AddListener(OpenResetPasswordPanel);
@@ -28,6 +30,9 @@ public class ResetPasswordManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// removes listeners from GameObjects
+    /// </summary>
     private void OnDisable()
     {
         openResetPasswordPanelButton.onClick.RemoveListener(OpenResetPasswordPanel);
@@ -36,22 +41,18 @@ public class ResetPasswordManager : MonoBehaviour
         requestedEmailInputField.onValueChanged.RemoveListener(MakeInteractableResetPasswordButton);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+  
+    /// <summary>
+    /// opens Panel to reset password
+    /// </summary>
     void OpenResetPasswordPanel()
     {
         resetPasswordPanel.active = true;
     }
+
+    /// <summary>
+    /// cleans input fiends in panel and closes it
+    /// </summary>
     void CloseResetPasswordPanel()
     {
         resetPasswordRequestButton.interactable = false;
@@ -60,7 +61,11 @@ public class ResetPasswordManager : MonoBehaviour
         resetPasswordPanel.active = false;
     }
 
-
+    /// <summary>
+    /// If infoText contains any string than blank,
+    /// then it send and SendAccountRecoveryEmail request to Playfab
+    /// to get a link per email to reset the password
+    /// </summary>
     void RequestPassword()
     {
         string emailText = requestedEmailInputField.text;
@@ -76,15 +81,21 @@ public class ResetPasswordManager : MonoBehaviour
         else
         {
             infoText.text = "Geben Sie bitte Ihre E-Mail-Adresse ein";
-
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj">contains success result</param>
     private void OnRecoveryEmailSuccess(SendAccountRecoveryEmailResult obj)
     {
         infoText.text = "Ein Link zum Zurücksetzen Ihres Passworts wurde an Ihre E-Mail-Adresse gesendet";
     }
-
+    /// <summary>
+    /// print the error in the infoText in panel
+    /// </summary>
+    /// <param name="obj">contains error details</param>
     private void OnRecoveryEmailError(PlayFabError obj)
     {
         infoText.text = obj.GenerateErrorReport();

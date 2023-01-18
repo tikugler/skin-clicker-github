@@ -21,22 +21,22 @@ public class RedeemCouponManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-
+    // adds listeners
     private void OnEnable()
     {
         redeemCouponToggleButton.onClick.AddListener(ToggleRedeemPanel);
         redeemButtonButton.onClick.AddListener(CallRedeemCatalogItem);
     }
 
+    // removes listeners
     private void OnDisable()
     {
         redeemCouponToggleButton.onClick.RemoveListener(ToggleRedeemPanel);
         redeemButtonButton.onClick.RemoveListener(CallRedeemCatalogItem);
-
-
     }
 
-
+    // toggles redeem coupon panel
+    // cleans user inputs, if it is closed
     public void ToggleRedeemPanel()
     {
         redeemCouponPanel.SetActive(!redeemCouponPanel.activeSelf);
@@ -48,30 +48,12 @@ public class RedeemCouponManager : MonoBehaviour
     }
 
 
-    public void UseCoupon(string couponCode)
-    {
-        var primaryCatalogName = "CouponCatalog"; // In your game, this should just be a constant matching your primary catalog
-        var request = new RedeemCouponRequest
-        {
-            CatalogVersion = primaryCatalogName,
-            CouponCode = couponCode // This comes from player input, in this case, one of the coupon codes generated above
-        };
-        PlayFabClientAPI.RedeemCoupon(request, LogSuccess, LogFailure);
-    }
-
-    private void LogFailure(PlayFabError obj)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void LogSuccess(RedeemCouponResult obj)
-    {
-        //throw new NotImplementedException();
-        Debug.Log("Successful");
-    }
-
-
-
+    /// <summary>
+    /// uses to redeem a coupon
+    /// if the given coupon is already used or user typed nothing,
+    /// then user will be informed with info text
+    /// Otherwise, coupon is gonna be looked at Catalog
+    /// </summary>
     public void CallRedeemCatalogItem()
     {
         usedCouponCode = redeemCouponInputField.text;
@@ -95,20 +77,33 @@ public class RedeemCouponManager : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// all coupons are in CouponCatalog.
+    /// And each item in the catalog is consider to be an coupon
+    /// All items are called in CouponCatalog
+    /// </summary>
     private void GetCatalogItem()
     {
         var request = new GetCatalogItemsRequest();
         request.CatalogVersion = "CouponCatalog";
         PlayFabClientAPI.GetCatalogItems(request, GetCataLogItemSuccess, GetCataLogItemError);
-
     }
 
+    /// <summary>
+    /// called is Catalog cannot be accessed.
+    /// This can happen because of internet problems or the catalog might not exist
+    /// </summary>
+    /// <param name="error">contains error details</param>
     private void GetCataLogItemError(PlayFabError error)
     {
         redeemCouponInfoText.text = "Fehler";
         redeemButtonButton.interactable = true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="result">containes items in the catalog and other information</param>
     private void GetCataLogItemSuccess(GetCatalogItemsResult result)
     {
         foreach (var item in result.Catalog)
