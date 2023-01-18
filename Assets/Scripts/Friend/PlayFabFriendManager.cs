@@ -26,16 +26,11 @@ public class PlayFabFriendManager : MonoBehaviour
 
     private void Awake()
     {
-
-        
-
         UIFriend.OnRemoveFriend += RemoveFriend;
-
         if (!Account.LoggedIn || Account.accountName.Equals("Guest"))
         {
             friendToggleButton.interactable = false;
             friendPanel.SetActive(false);
-      
             return;
         }
         else
@@ -43,9 +38,8 @@ public class PlayFabFriendManager : MonoBehaviour
             isFirstRun = true;
             GetFriends();
         }
-
-
     }
+
 
     private void OnDestroy()
     {
@@ -148,7 +142,6 @@ public class PlayFabFriendManager : MonoBehaviour
         }
         
         PlayFabClientAPI.AddFriend(request, result => {
-            Debug.Log("Friend added successfully!");
             GetFriends();
         }, DisplayPlayFabError);
     }
@@ -189,7 +182,6 @@ public class PlayFabFriendManager : MonoBehaviour
     public void ToggleFriendPanel()
     {
         friendPanel.SetActive(!friendPanel.activeSelf);
-
     }
 
 
