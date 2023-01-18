@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine.SceneManagement;
 using System;
 
 /// <summary>
@@ -12,7 +10,6 @@ using System;
 /// </summary>
 public class PlayfabUpdateUserData : MonoBehaviour
 {
-
     /// <summary>
     /// This method calls SetScoreOnPlayFab every 15 Seconds
     /// </summary>
@@ -23,7 +20,6 @@ public class PlayfabUpdateUserData : MonoBehaviour
             InvokeRepeating("SetScoreOnPlayFab", 0, 15);
         }
     }
-
 
     /// <summary>
     /// This method updates a few statistics on PlayFab.
@@ -45,7 +41,6 @@ public class PlayfabUpdateUserData : MonoBehaviour
 
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
-
 
     /// <summary>
     /// this method is called when user performs upgrade in shop.
@@ -93,7 +88,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
-    // <summary>
+    /// <summary>
     /// in Playfab, statistics consist of key and value
     /// key is the SKIN_ + SKIN_ID (SKIN_ is the prefix to distinguish the skin from items)
     /// State 1 => skin is bought
@@ -127,6 +122,7 @@ public class PlayfabUpdateUserData : MonoBehaviour
         
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
+
     /// <summary>
     /// Speichert in der Datenbank ab, wann die letzte Belohnung war.
     /// </summary>
