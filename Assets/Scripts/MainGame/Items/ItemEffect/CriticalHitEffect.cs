@@ -9,7 +9,7 @@ public class CriticalHitEffect : ItemEffect
 {
     public override string id { get; set; } = ItemNames.CriticalHitEffect;
     public override int price { get; set; } = 2;
-    public override string description { get; set; } = "Erhöhe kritische Treffer um " + (int)(critChance * 100) + "%.\n" +
+    public override string description { get; set; } = "ErhÃ¶he kritische Treffer um " + (int)(critChance * 100) + "%.\n" +
                                                         "Gegenstand ist mehrfach kaufbar.";
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("crit");
