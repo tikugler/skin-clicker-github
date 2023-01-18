@@ -26,22 +26,27 @@ public class UIFriend : MonoBehaviour
 
     public static Action<int, string, int, int, Dictionary<string, int>, List<string>, string> OpenPlayerInfoPanelForFriendAction = delegate { };
 
+    /// <summary>
+    /// this method is called first and adds a listener
+    /// </summary>
     private void Awake()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(FriendEntryClicked);
     }
 
+    /// <summary>
+    /// removes listener
+    /// </summary>
     private void OnDestroy()
     {
         gameObject.GetComponent<Button>().onClick.RemoveListener(FriendEntryClicked);
     }
 
-    private void OnEnable()
-    {
-        if (string.IsNullOrEmpty(friendName)) return;
-    }
 
-    
+    /// <summary>
+    /// assigns a delegate to PhotonChatManager.OnFriendStatusUpdate
+    /// </summary>
+    /// <param name="f">FriendInfo from PlayFab</param>
     public void Initialize(FriendInfo f)
     {
         PhotonChatManager.OnFriendStatusUpdate += HandleStatusUpdated;
@@ -50,7 +55,15 @@ public class UIFriend : MonoBehaviour
         SetupUI();
     }
 
-
+    /// <summary>
+    /// the arguments are given by PhotonChatManager.OnFriendStatusUpdate
+    /// this method is called for each UIFriend class in the scene
+    /// only one UIFriend,friendName is equal to playerName
+    /// this method changes the status of a friend in the friendlist,
+    /// whose playername is same 
+    /// </summary>
+    /// <param name="playerName">Displayname of player whose status is changed </param>
+    /// <param name="status"status 0 means offline, 2 means online></param>
     private void HandleStatusUpdated(string playerName, int status)
     {
         if (string.Compare(friendName, playerName) == 0)
@@ -59,11 +72,19 @@ public class UIFriend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// changes the text of friend in the UI
+    /// </summary>
     private void SetupUI()
     {
         friendNameText.SetText(friendName);
     }
 
+    /// <summary>
+    /// changes the color to green to point out that friens is online if status equal to ChatUserStatus.Online (2)
+    /// otherwise red
+    /// </summary>
+    /// <param name="status">status 0 means offline, 2 means online</param>
     private void SetStatus(int status)
     {
         if (status == ChatUserStatus.Online)
@@ -78,12 +99,19 @@ public class UIFriend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calls the action to remove the friend from friendlist and db,
+    /// which is done by PlayFabFriendManager
+    /// </summary>
     public void RemoveFriend()
     {
         OnRemoveFriend?.Invoke(friendInfo, gameObject);
     }
 
-
+    /// <summary>
+    /// called when UI item for friend is clicked
+    /// sends an PlayFab Client API request to get friends statistics ans player profile
+    /// </summary>
     private  void FriendEntryClicked()
     {
         var request = new GetPlayerProfileRequest();
@@ -95,6 +123,12 @@ public class UIFriend : MonoBehaviour
         PlayFabClientAPI.GetPlayerProfile(request, GetProfileSuccess, error=>Debug.Log(error.GenerateErrorReport()));
     }
 
+    /// <summary>
+    /// in this function, statistics are transformed into the right format
+    /// for player statistics panel
+    /// and an action is triggered to fill the panel and open it
+    /// </summary>
+    /// <param name="result"></param>
     private void GetProfileSuccess(GetPlayerProfileResult result)
     {
         string userDisplayName = friendName;
