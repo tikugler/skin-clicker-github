@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class PackageNames
 {
-    public static readonly string Package1 = "SmallPackage";
-    public static readonly string Package2 = "MediumPackage";
-    public static readonly string Package3 = "BigPackage";
+    public static readonly string Package1 = "Kleines Paket";
+    public static readonly string Package2 = "Mittleres Paket";
+    public static readonly string Package3 = "Großes Paket";
 
 }
 

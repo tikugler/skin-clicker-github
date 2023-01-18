@@ -45,7 +45,6 @@ public class RedeemCouponManager : MonoBehaviour
             redeemCouponInfoText.text = "";
             redeemCouponInputField.text = "";
         }
-
     }
 
 
@@ -91,10 +90,9 @@ public class RedeemCouponManager : MonoBehaviour
         else
         {
             redeemButtonButton.interactable = false;
-
             redeemCouponInfoText.text = "";
             GetCatalogItem();
-        }
+        } 
     }
 
     private void GetCatalogItem()
@@ -115,41 +113,23 @@ public class RedeemCouponManager : MonoBehaviour
     {
         foreach (var item in result.Catalog)
         {
-
             if (item.ItemId.Equals(usedCouponCode))
             {
                 UseCouponReward(JObject.Parse(item.CustomData), item.Description);
                 return;
             }
-
-
         }
-
         redeemCouponInfoText.color = Color.red;
         redeemCouponInfoText.text = "Dieses Coupon ist nicht gültig";
         redeemButtonButton.interactable = true;
-
-
     }
 
     private void UseCouponReward(JObject keyValuePairs, string description)
     {
-
-
-        //Dictionary<string, int> statisticsDict = new Dictionary<string, int>();
-
         var request = new UpdatePlayerStatisticsRequest();
         request.Statistics = new List<StatisticUpdate>();
-
         string addedCurrenciesText = "";
-
-
-
-
         List<string> statisticsToSearch = new List<string> { "Credits", "RealMoney" };
-
-
-
         foreach (string statName in statisticsToSearch)
         {
             if (keyValuePairs.ContainsKey(statName))
@@ -172,16 +152,11 @@ public class RedeemCouponManager : MonoBehaviour
 
                     }
                 }
-
             }
         }
 
         addedCurrenciesText = addedCurrenciesText.TrimEnd(' ').TrimEnd(',');
-
-
-
         request.Statistics.Add(new StatisticUpdate { StatisticName = "USED_" + usedCouponCode, Value = 1 });
-
         redeemButtonButton.interactable = true;
 
         if (request.Statistics.Count > 1)
@@ -208,56 +183,12 @@ public class RedeemCouponManager : MonoBehaviour
                     redeemCouponInfoText.text = error.GenerateErrorReport();
                 }
                 );
-
         }
         else
         {
             redeemCouponInfoText.color = Color.red;
-
             redeemCouponInfoText.text = "Coupon ist ungültig";
         }
-
-
-
-
-
-
-
-
     }
-
-
-
-    private void RedeemCatalogItem(string couponCode)
-    {
-        PlayFabClientAPI.PurchaseItem(new PurchaseItemRequest
-        {
-            ItemId = couponCode,
-            VirtualCurrency = "CN",
-            Price = 00,
-        }, OnPurchaseItemSuccess, OnPurchaseItemError);
-    }
-
-    private void OnPurchaseItemSuccess(PurchaseItemResult result)
-    {
-        Debug.Log(result.Items[0].DisplayName);
-
-
-        Debug.Log(result.Items.Count);
-
-        Debug.Log(result.Request);
-        Debug.Log(result.CustomData);
-
-
-
-    }
-
-
-    private void OnPurchaseItemError(PlayFabError error)
-    {
-
-        Debug.Log(error.GenerateErrorReport());
-    }
-
 
 }

@@ -27,7 +27,7 @@ public abstract class PackageEffect
     //Action for the purchase button in the shop ui of an item.
     public string GetDescription()
     {
-        return $"enthält {realMoneyAmount} Berkan Diamanten und {creditsAmount} Berkan Coins";
+        return $"enthält {realMoneyAmount} Realmoney und {creditsAmount} Credits";
     }
 
     //Applies effect of skin to game.

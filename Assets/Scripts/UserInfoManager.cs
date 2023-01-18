@@ -56,9 +56,6 @@ public class UserInfoManager : MonoBehaviour
         AddUpperProfilInfoPanel();
         AddCreditsEntry();
 
-        
-
-
     }
 
     private void OnDestroy()

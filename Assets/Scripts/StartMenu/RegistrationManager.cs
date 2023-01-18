@@ -186,7 +186,6 @@ public class RegistrationManager : MonoBehaviour
     // makes submit button interactable until user gets a response from Playfab
     public void CallSubmitInRegistration()
     {
-        Debug.Log("Submit...");
         SubmitButton.interactable = false;
         if (isRegisteringTutorial)
         {
@@ -208,7 +207,6 @@ public class RegistrationManager : MonoBehaviour
         if (tutorial)
         {
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccessTutorial, OnRegisterFailed);
-            
             return;
         }
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailed);
