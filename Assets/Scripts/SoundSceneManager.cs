@@ -7,29 +7,33 @@ using UnityEngine.UI;
 public class SoundSceneManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject SoundSettingsPopUp;
-    [SerializeField] Button OpenSoundSettingsButton;
-    [SerializeField] Button CloseSoundSettingsButton;
+    [SerializeField] GameObject SoundSettingsPopUp; // Settings PopUp
+    [SerializeField] Button OpenSoundSettingsButton; // button to open settings PopUp
+    [SerializeField] Button CloseSoundSettingsButton; // button to close settings PopUp
 
-    [SerializeField] Slider MusicSoundSlider;
-    [SerializeField] Slider EffectSoundSlider;
+    [SerializeField] Slider MusicSoundSlider; // slider to set up the volume of background music
+    [SerializeField] Slider EffectSoundSlider; // slider to set up the volume of effect music
 
-    [SerializeField] Toggle MusicSoundToggle;
-    [SerializeField] Toggle EffectSoundToggle;
+    [SerializeField] Toggle MusicSoundToggle; // toggle for background music
+    [SerializeField] Toggle EffectSoundToggle; // toggle for effect sounds
 
 
     private static SoundManager soundManager;
-    private static bool isUseable;
+    // this variable will be false if game started from GameScene, which is only in unity Edifor for development possible
+    private static bool isUseable; 
 
     private static bool isFirstRun = true;
 
+
+    /// <summary>
+    /// adds multiple listeners
+    /// sets up the Settings panel
+    /// if user changed the scene, then all settings from older scene is loaded by saving values in the static class SettingValues 
+    /// </summary>
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 1)
+      
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (!Account.LoggedIn)
             {
@@ -38,7 +42,6 @@ public class SoundSceneManager : MonoBehaviour
                 return;
             }
         }
-
         if (!isFirstRun)
         {
             MusicSoundSlider.value = SettingValues.musicSoundVolume;
@@ -56,8 +59,6 @@ public class SoundSceneManager : MonoBehaviour
         MusicSoundToggle.onValueChanged.AddListener(UpdateMusicSoundPlay);
         EffectSoundToggle.onValueChanged.AddListener(UpdateEffectSoundPlay);
 
-        
-
         soundManager = GameObject.Find("UserInfoCanvas").GetComponent<SoundManager>();
         if (isFirstRun)
         {
@@ -68,12 +69,12 @@ public class SoundSceneManager : MonoBehaviour
         }
 
         isUseable = true;
-
-
         isFirstRun = false;
-
     }
 
+    /// <summary>
+    /// removes all listener
+    /// </summary>
     private void Destroy()
     {
         OpenSoundSettingsButton.onClick.RemoveListener(OpenSoundSettingsPopUp);
@@ -89,17 +90,13 @@ public class SoundSceneManager : MonoBehaviour
 
    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // opens Settings PopUp
     public void OpenSoundSettingsPopUp()
     {
         SoundSettingsPopUp.SetActive(true);
     }
 
+    // closes Settings PopUp
     public void CloseSoundSettingsPopUp()
     {
         SoundSettingsPopUp.SetActive(false);
@@ -142,29 +139,37 @@ public class SoundSceneManager : MonoBehaviour
         soundManager.UpdateEffectSoundVolume(newVolume);
     }
 
+
+    // plays coin sound if isUsable is true
     public void PlayPayWithCoinsSound()
     {
         if(isUseable)
             soundManager.PlayPayWithCoinsSound();
     }
 
+    // plays hit sound if isUsable is true
     public void PlayHitSound()
     {
         if (isUseable)
             soundManager.PlayHitSound();
     }
 
+
+    // plays critical hit sound if isUsable is true
     public void PlayCriticalHitSound()
     {
         if (isUseable)
             soundManager.PlayCriticalHitSound();
     }
 
+    // plays selection sound if isUsable is true
     public void PlaySelectSound()
     {
         if (isUseable)
             soundManager.PlaySelectSound();
     }
+
+    // plays drinking sound if isUsable is true
     public void PlayDrinkSound()
     {
         if (isUseable)

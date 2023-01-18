@@ -21,6 +21,8 @@ public class PlayFabFriendManager : MonoBehaviour
     public static Action<string[]> OnFriendsRemoveFromPhoton = delegate { };
 
     bool isFirstRun = true;
+    private string friendSearch;
+    [SerializeField] GameObject friendPanel;
 
 
 
@@ -41,12 +43,15 @@ public class PlayFabFriendManager : MonoBehaviour
         }
     }
 
-
+    // removes event
     private void OnDestroy()
     {
         UIFriend.OnRemoveFriend -= RemoveFriend;
     }
 
+    /// <summary>
+    /// updates the friendlist panel
+    /// </summary>
     void DisplayFriends()
     {
         foreach (FriendInfo f in Account.friendsList)
@@ -73,9 +78,7 @@ public class PlayFabFriendManager : MonoBehaviour
                 if(!isFirstRun)
                     OnFriendsAddToPhoton?.Invoke(new string[] { f.TitleDisplayName });
 
-
             }
-
 
         }
         isFirstRun = false;
@@ -83,16 +86,6 @@ public class PlayFabFriendManager : MonoBehaviour
 
 
 
-    IEnumerator WaitForFriend()
-    {
-        yield return new WaitForSeconds(2);
-        GetFriends();
-    }
-
-    public void RunWaitFunction()
-    {
-        StartCoroutine(WaitForFriend());
-    }
 
     void DisplayPlayFabError(PlayFabError error)
     {
@@ -100,13 +93,9 @@ public class PlayFabFriendManager : MonoBehaviour
     }
 
 
-    void DisplayError(string error)
-    {
-        Debug.LogError(error);
-    }
-
-
-
+    /// <summary>
+    /// send an PlayFab-Client-API request to get the lsit of friends
+    /// </summary>
     public void GetFriends()
     {
         PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest
@@ -122,7 +111,12 @@ public class PlayFabFriendManager : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// adds friend in PlazFab according to given Type.
+    /// we add by using DisplayName
+    /// </summary>
+    /// <param name="idType">type of given friendId</param>
+    /// <param name="friendId">id to add</param>
     void AddFriend(FriendIdType idType, string friendId)
     {
         var request = new AddFriendRequest();
@@ -165,21 +159,27 @@ public class PlayFabFriendManager : MonoBehaviour
     }
 
 
-
-
-    private string friendSearch;
-    [SerializeField] GameObject friendPanel;
-
+    /// <summary>
+    /// this method is called when user input anything in the inputfield in Friend Panel
+    /// friendSearch is assigned to given value
+    /// </summary>
+    /// <param name="friendDisplayName"></param>
     public void InputFriendUserName(string friendDisplayName)
     {
         friendSearch = friendDisplayName;
     }
 
+    /// <summary>
+    /// tries to add friend usinf DispLayName
+    /// </summary>
     public void SubmitFriendRequest()
     {
         AddFriend(FriendIdType.DisplayName, friendSearch);
     }
 
+    /// <summary>
+    /// toggles friend panel
+    /// </summary>
     public void ToggleFriendPanel()
     {
         friendPanel.SetActive(!friendPanel.activeSelf);
