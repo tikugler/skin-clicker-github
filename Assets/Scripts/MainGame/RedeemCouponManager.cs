@@ -101,7 +101,9 @@ public class RedeemCouponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// searches if item exits in catalog,
+    /// if it does, then it is tried to redeem the coupon,
+    /// otherwise prints an error message in the info textfeld
     /// </summary>
     /// <param name="result">containes items in the catalog and other information</param>
     private void GetCataLogItemSuccess(GetCatalogItemsResult result)
@@ -119,6 +121,14 @@ public class RedeemCouponManager : MonoBehaviour
         redeemButtonButton.interactable = true;
     }
 
+    /// <summary>
+    /// this method converts keyValuePairs into credits and
+    /// RealMoney and load them to the account.
+    /// keyValuePairs might not have credits or RealMoneyö
+    /// in thıs case it prints error in the info text.
+    /// </summary>
+    /// <param name="keyValuePairs">Json object, which consists keys and values from Custom Data of redeemed coupon</param>
+    /// <param name="description">description of the coupon, it might be empty string</param>
     private void UseCouponReward(JObject keyValuePairs, string description)
     {
         var request = new UpdatePlayerStatisticsRequest();

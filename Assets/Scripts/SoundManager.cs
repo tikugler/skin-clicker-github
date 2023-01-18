@@ -6,8 +6,8 @@ public class SoundManager : MonoBehaviour
 {
 
     [Header("Sounds")]
-    public AudioSource MusicAudio;
-    public AudioSource EffectAudio;
+    public AudioSource MusicAudio; // audio source to play background sounds
+    public AudioSource EffectAudio; // audio source to play effect sounds
 
     [Header("AudioClips")]
     [SerializeField] AudioClip CoinsDropSound;
@@ -67,6 +67,7 @@ public class SoundManager : MonoBehaviour
         EffectAudio.volume = SettingValues.effectSoundVolume;
     }
 
+    // plays coin sound if effects sounds are on 
     public void PlayPayWithCoinsSound()
     {
         if (SettingValues.isEffectSoundOn)
@@ -76,6 +77,7 @@ public class SoundManager : MonoBehaviour
         }  
     }
 
+    // plays hit sound if effects sounds are on 
     public void PlayHitSound()
     {
         if (SettingValues.isEffectSoundOn)
@@ -85,6 +87,7 @@ public class SoundManager : MonoBehaviour
         }   
     }
 
+    // plays critical hit sound if effects sounds are on 
     public void PlayCriticalHitSound()
     {
         if (SettingValues.isEffectSoundOn)
@@ -94,6 +97,7 @@ public class SoundManager : MonoBehaviour
         }       
     }
 
+    // plays selection sound if effects sounds are on 
     public void PlaySelectSound()
     {
         if (SettingValues.isEffectSoundOn)
@@ -103,6 +107,7 @@ public class SoundManager : MonoBehaviour
         } 
     }
 
+    // plays drinking sound if effects sounds are on 
     public void PlayDrinkSound()
     {
         if (SettingValues.isEffectSoundOn)

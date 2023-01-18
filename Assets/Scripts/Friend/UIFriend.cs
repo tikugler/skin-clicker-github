@@ -80,6 +80,11 @@ public class UIFriend : MonoBehaviour
         friendNameText.SetText(friendName);
     }
 
+    /// <summary>
+    /// changes the color to green to point out that friens is online if status equal to ChatUserStatus.Online (2)
+    /// otherwise red
+    /// </summary>
+    /// <param name="status">status 0 means offline, 2 means online</param>
     private void SetStatus(int status)
     {
         if (status == ChatUserStatus.Online)
@@ -94,12 +99,19 @@ public class UIFriend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calls the action to remove the friend from friendlist and db,
+    /// which is done by PlayFabFriendManager
+    /// </summary>
     public void RemoveFriend()
     {
         OnRemoveFriend?.Invoke(friendInfo, gameObject);
     }
 
-
+    /// <summary>
+    /// called when UI item for friend is clicked
+    /// sends an PlayFab Client API request to get friends statistics ans player profile
+    /// </summary>
     private  void FriendEntryClicked()
     {
         var request = new GetPlayerProfileRequest();
@@ -111,6 +123,12 @@ public class UIFriend : MonoBehaviour
         PlayFabClientAPI.GetPlayerProfile(request, GetProfileSuccess, error=>Debug.Log(error.GenerateErrorReport()));
     }
 
+    /// <summary>
+    /// in this function, statistics are transformed into the right format
+    /// for player statistics panel
+    /// and an action is triggered to fill the panel and open it
+    /// </summary>
+    /// <param name="result"></param>
     private void GetProfileSuccess(GetPlayerProfileResult result)
     {
         string userDisplayName = friendName;
