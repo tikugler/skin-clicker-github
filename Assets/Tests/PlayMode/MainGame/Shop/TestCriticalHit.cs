@@ -36,7 +36,7 @@ public class TestCriticalHit : MonoBehaviour
     }
 
     [UnityTest]
-    public IEnumerator TestDoubleEffect()
+    public IEnumerator TestCriticalEffect()
     {
         DummyButton button = mainButton.GetComponent<DummyButton>();
         DummyButton.criticalChance = 0;
@@ -55,7 +55,7 @@ public class TestCriticalHit : MonoBehaviour
     }
 
     [UnityTest]
-    public IEnumerator TestDoubleEffectPurchaseButtonAction()
+    public IEnumerator TestCriticalEffectPurchaseButtonAction()
     {
         CriticalHitEffect effect = new CriticalHitEffect();
         int startPrice = effect.price;
