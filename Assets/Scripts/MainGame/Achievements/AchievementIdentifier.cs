@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class is an alternative to enum, since enum didnt work properly in unity.
+/// Every Achievement has 3 Identifiers.
+/// </summary>
 public static class AchievementIdentifier
 {
     public static readonly string Achieve10Points = "Sammle 10 Punkte";
@@ -36,6 +40,10 @@ public static class AchievementIdentifier
     public static readonly string Achieve10000000PointsDes = "Du hast 10000000 Punkte gesammelt!";
     public static readonly int Achieve10000000PointsBonus = 3500000;
 
+    /// <summary>
+    /// This Method applies the Bonus of the Achievement.
+    /// </summary>
+    /// <param name="achievement"></param>
     public static void GetAchievementBonus (string achievement)
     {
         if (achievement.Equals(Achieve10Points))
@@ -77,6 +85,11 @@ public static class AchievementIdentifier
         return;
     }
 
+    /// <summary>
+    /// This Method declares the Bonus Text of every Achievement.
+    /// </summary>
+    /// <param name="achievement"></param>
+    /// <returns></returns>
     public static string GetAchievementBonusText (string achievement)
     {
         if (achievement.Equals(Achieve10Points))

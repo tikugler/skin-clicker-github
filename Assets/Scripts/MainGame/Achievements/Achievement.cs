@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Achievement class with fields
+/// </summary>
 public class Achievement
 {
     private string name;
@@ -42,6 +45,14 @@ public class Achievement
         set { bonus = value; }
     }
 
+    /// <summary>
+    /// Constructor of Achievements with name, description, index of the used sprite, a reference to the Gameobject and the bonus.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="description"></param>
+    /// <param name="spriteIndex"></param>
+    /// <param name="achievementRef"></param>
+    /// <param name="bonus"></param>
     public Achievement(string name, string description, int spriteIndex, GameObject achievementRef, string bonus)
     {
         this.name = name;
@@ -52,6 +63,10 @@ public class Achievement
         this.bonus = bonus;
     }
 
+    /// <summary>
+    /// When earning an achievement, the color changes to gold and the achievement gets saved.
+    /// </summary>
+    /// <returns></returns>
     public bool EarnAchievement()
     {
         if (!unlocked)
@@ -63,6 +78,9 @@ public class Achievement
         return false;
     }
 
+    /// <summary>
+    /// Save the Earned Achievement in the Accounnt-class.
+    /// </summary>
     public void SaveAchievement()
     {
         unlocked = true;
