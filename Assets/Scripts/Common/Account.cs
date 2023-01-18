@@ -168,32 +168,57 @@ public static class Account
         }
     }
 
+    /// <summary>
+    /// Sets the Username and Password of an Account in the Preferences
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
     public static void SetUserLoginPlayerPrefs(string username, string password)
     {
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("password", password);
         CleanGuestCustomIdPlayerPrefs();
-
     }
+    /// <summary>
+    /// Check, if player is new.
+    /// </summary>
+    /// <returns>True, if player is new</returns>
     public static bool IsNewPlayer()
     {
         return PlayerPrefs.GetInt("newPlayer", 1) == 0 ? false : true;
     }
 
+    /// <summary>
+    /// Sets the value, whether a player is new or not.
+    /// </summary>
+    /// <param name="value">1 if player is new, 0 if not</param>
     public static void SetNewPlayer(int value)
     {
         PlayerPrefs.SetInt("newPlayer", value);
     }
+
+    /// <summary>
+    /// Gest Username of an Account.
+    /// </summary>
+    /// <returns>Username of Account</returns>
     public static string GetUsernamePlayerPrefs()
     {
         return PlayerPrefs.GetString("username");
     }
 
+    /// <summary>
+    /// Gets the Password of an Account.
+    /// </summary>
+    /// <returns>Password of Account</returns>
     public static string GetPasswordPlayerPrefs()
     {
         return PlayerPrefs.GetString("password");
     }
 
+    /// <summary>
+    /// Check, if an Account exists.
+    /// </summary>
+    /// <returns>True, if Account exists</returns>
     public static bool GetIfThereIsSavedUserLoginInfoPlayerPrefs()
     {
         //Debug.Log("PlayerPrefs username: " + PlayerPrefs.GetString("username"));
@@ -206,6 +231,10 @@ public static class Account
         PlayerPrefs.DeleteKey("password");
     }
 
+    /// <summary>
+    /// Saves ID of a Guest Account.
+    /// </summary>
+    /// <param name="guestCustomID">ID of the Guest Account</param>
     public static void SetGuestCustomIdPlayerPrefs(string guestCustomID)
     {
         PlayerPrefs.SetString("guestCustomID", guestCustomID);
@@ -213,11 +242,19 @@ public static class Account
 
     }
 
+    /// <summary>
+    /// Get the Guest ID.
+    /// </summary>
+    /// <returns>Guest ID</returns>
     public static string GetGuestCustomIdPlayerPrefs()
     {
         return PlayerPrefs.GetString("guestCustomID");
     }
 
+    /// <summary>
+    /// Check, if a Guest ID exists.
+    /// </summary>
+    /// <returns>True, if guest ID exists</returns>
     public static bool GetIfThereIsSavedGuestCustomIdPlayerPrefs()
     {
         return PlayerPrefs.HasKey("guestCustomID");
@@ -228,6 +265,11 @@ public static class Account
         PlayerPrefs.DeleteKey("guestCustomID");
     }
 
+    /// <summary>
+    /// This Method makes sure, that all Account data is reset,
+    /// so that a new Account or new Guest Account doesn't have
+    /// Credits or Skins etc.
+    /// </summary>
     public static void LogOutUser()
     {
         CleanGuestCustomIdPlayerPrefs();
@@ -309,6 +351,11 @@ public static class Account
         return false;
     }
 
+    /// <summary>
+    /// Updates an Upgrade by a specific Upgrade Amount.
+    /// </summary>
+    /// <param name="upgradeName">Name of the upgrade</param>
+    /// <param name="upgradeAmount">Amount of the upgrade</param>
     public static void SetPurchasedItemCount(string upgradeName, int upgradeAmount)
     {
         upgradeList[upgradeName] = upgradeAmount;
