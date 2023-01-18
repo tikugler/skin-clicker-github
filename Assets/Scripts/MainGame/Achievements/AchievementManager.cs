@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// If you want to create a new Achievement, first define the achievement with "CreateAchievement" in the Start Method.
-// Then define the Achievement Condition in the Update-Method
+/// <summary>
+/// The AchievementManager manages the creation of Achievements and includes most of the logic.
+/// </summary>
 public class AchievementManager : MonoBehaviour
 {
     public GameObject achievementPanel;
@@ -25,7 +26,9 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Creating Achievements
+    /// </summary>
     void Start()
     {
         achievementPanel.SetActive(true);
@@ -41,7 +44,9 @@ public class AchievementManager : MonoBehaviour
         RefreshEarnedAchievements();
     }
 
-    // Is called once per Click and once per Autoclick
+    /// <summary>
+    /// Checks if new Achievements got earned
+    /// </summary>
     public void CheckForAchievements()
     {
         if (Account.credits >= 10)
@@ -77,6 +82,10 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When earning the Achievement the bonus gets applied, the color changes and a visual Popup appears.
+    /// </summary>
+    /// <param name="title"></param>
     public void EarnAchievement(string title)
     {
         //if (Account.earnedAchievements.Contains(title))
@@ -93,12 +102,25 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deletes the given Gameobject after the defined time.
+    /// </summary>
+    /// <param name="achievement"></param>
+    /// <returns></returns>
     public IEnumerator HideAchievement(GameObject achievement)
     {
         yield return new WaitForSeconds(4);
         Destroy(achievement);
     }
 
+    /// <summary>
+    /// Creates an Achievement.
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    /// <param name="spriteIndex"></param>
+    /// <param name="bonus"></param>
     public void CreateAchievement(string parent, string title, string description, int spriteIndex, string bonus)
     {
         GameObject achievementGO = (GameObject)Instantiate(achievementPrefab);
@@ -106,11 +128,17 @@ public class AchievementManager : MonoBehaviour
         //{
         //    achievementGO.GetComponent<Image>().color = new Color32(255, 225, 64, 255);
         //}
-        Achievement newAchievement = new Achievement(title, description, spriteIndex, achievementGO, bonus); //oder name?
+        Achievement newAchievement = new Achievement(title, description, spriteIndex, achievementGO, bonus);
         achievements.Add(title, newAchievement);
         SetAchievementInfo(parent, achievementGO, title);
     }
 
+    /// <summary>
+    /// Sets the Fields of the Gameobject-fields.
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="achievement"></param>
+    /// <param name="title"></param>
     public void SetAchievementInfo(string parent, GameObject achievement, string title)
     {
         achievement.transform.SetParent(GameObject.Find(parent).transform);
@@ -121,6 +149,9 @@ public class AchievementManager : MonoBehaviour
         achievement.transform.GetChild(4).GetComponent<Text>().text = achievements[title].Bonus;
     }
 
+    /// <summary>
+    /// Refreshes the earned achievements.
+    /// </summary>
     public void RefreshEarnedAchievements()
     {
         foreach (string achievement in achievements.Keys)
