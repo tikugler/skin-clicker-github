@@ -34,8 +34,6 @@ public class ResetPasswordManager : MonoBehaviour
         closeResetPasswordButton.onClick.RemoveListener(CloseResetPasswordPanel);
         resetPasswordRequestButton.onClick.AddListener(RequestPassword);
         requestedEmailInputField.onValueChanged.RemoveListener(MakeInteractableResetPasswordButton);
-
-
     }
 
     // Start is called before the first frame update
@@ -102,7 +100,6 @@ public class ResetPasswordManager : MonoBehaviour
         else
         {
             resetPasswordRequestButton.interactable = false;
-
         }
     }
 }

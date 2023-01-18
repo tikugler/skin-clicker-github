@@ -27,6 +27,7 @@ public class PlayFabFriendManager : MonoBehaviour
     private void Awake()
     {
         UIFriend.OnRemoveFriend += RemoveFriend;
+
         if (!Account.LoggedIn || Account.accountName.Equals("Guest"))
         {
             friendToggleButton.interactable = false;

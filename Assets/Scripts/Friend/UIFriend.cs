@@ -29,13 +29,11 @@ public class UIFriend : MonoBehaviour
     private void Awake()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(FriendEntryClicked);
-
-
     }
+
     private void OnDestroy()
     {
         gameObject.GetComponent<Button>().onClick.RemoveListener(FriendEntryClicked);
-
     }
 
     private void OnEnable()
@@ -142,6 +140,4 @@ public class UIFriend : MonoBehaviour
         OpenPlayerInfoPanelForFriendAction?.Invoke(selectedPictureId, userDisplayName, passedSeconds, credits, upgradeList, skinIdList, activeSkinId);
 
     }
-
-
 }
