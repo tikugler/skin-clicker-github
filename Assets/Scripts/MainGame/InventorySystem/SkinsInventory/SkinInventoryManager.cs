@@ -85,7 +85,7 @@ public class SkinInventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks for credits >= price of item, if true --> button is clickable.
+    /// Checks if skin is already in use, if false --> button is clickable.
     /// </summary>
     private void CheckSkinAlreadyInUse()
     {
@@ -109,7 +109,7 @@ public class SkinInventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates effect of item and sets panel inactive.
+    /// Activates effect of skin.
     /// </summary>
     public void UseButtonAction(int pos)
     {
@@ -117,7 +117,6 @@ public class SkinInventoryManager : MonoBehaviour
         soundManager.PlaySelectSound();
         SkinEffect item = (SkinEffect)Account.skinList[pos];
         item.EquipSkin();
-        //inventoryPanelsGO[ContentDistributor.contentDistributor.boughtSkinsOfPlayer.Count - 1].   SetFancyEffectToSeeThatSkinIsActive()
         RefreshPanels();
     }
 }

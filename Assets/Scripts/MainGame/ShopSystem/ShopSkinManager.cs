@@ -25,12 +25,6 @@ public class ShopSkinManager : MonoBehaviour
 
     void Start()
     {
-        contentDistributor = ContentDistributor.contentDistributor;
-        for (int i = 0; i < contentDistributor.scriptableObjectSkins.Length; i++)
-        {
-            shopPanelsGO[i].SetActive(true);
-        }
-
         RefreshPanels();
     }
 
@@ -131,12 +125,10 @@ public class ShopSkinManager : MonoBehaviour
             if ((!PayWithRealMoney && Account.credits >= contentDistributor.scriptableObjectSkins[i].price) && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
                 purchaseButtons[i].interactable = true;
-                //mb some effects like backlighting for an active button
             }
             else if ((PayWithRealMoney && Account.realMoney >= contentDistributor.scriptableObjectSkins[i].PriceAsRealMoney) && !Account.IsSkinInInventory(contentDistributor.scriptableObjectSkins[i].id))
             {
                 purchaseButtons[i].interactable = true;
-                //mb some effects like backlighting for an active button
             }
             else
             {
@@ -147,29 +139,29 @@ public class ShopSkinManager : MonoBehaviour
 
     /// <summary>
     /// Action of purchase button of the UI.
-    /// Calculates new balance/credits and applys effect of the item.
+    /// Calculates new balance/credits and adds skin to inventory.
     /// int pos is position of the button, which is hardcoded in the UI:  
-    ///         Scene: MainGame-->Canvas-->ShopPanel-->ScrollArea-->Items-->ShopItemTemplate-->PurchaseButton
+    ///         Scene: MainGame-->Canvas-->ShopPanel-->Skins-->ScrollArea-->ShopItemTemplate-->PurchaseButton
     /// </summary>
     /// <param name="pos"></param>
     public void PurchaseButtonAction(int pos)
     {
-        //If credit >= as price of shopItem on position pos in array.
-        if (!PayWithRealMoney && credit >= contentDistributor.scriptableObjectSkins[pos].price)
+        //If credit >= as price of skin on position pos in array.
+        if (credit >= contentDistributor.scriptableObjectSkins[pos].price)
         {
-            //Check, if key (Effect) is in the list.
-            SkinTemplate item = contentDistributor.scriptableObjectSkins[pos];
-            if (contentDistributor.skinsDictionary.ContainsKey(item.id))
+            //Check, if key (skin) is in the list.
+            SkinTemplate skin = contentDistributor.scriptableObjectSkins[pos];
+            if (contentDistributor.skinsDictionary.ContainsKey(skin.id))
             {
-                credit -= item.price;
+                credit -= skin.price;
                 soundManager.PlayPayWithCoinsSound();
                 Account.credits = credit;
-                //Search for effect id in array with effects that has same id as id of ShopItem.
-                contentDistributor.skinsDictionary[item.id].PurchaseButtonAction(item);
-                contentDistributor.skinsDictionary[item.id].skinTemplate = item;
+                //Search for skin in array with skins that has same id as id of skin.
+                contentDistributor.skinsDictionary[skin.id].PurchaseButtonAction(skin);
+                contentDistributor.skinsDictionary[skin.id].skinTemplate = skin;
 
-                // adds skin in Account (added in Playfab automatically)
-                Account.AddSkin(item.id);
+                //Adds skin in Account (added in Playfab automatically)
+                Account.AddSkin(skin.id);
             }
         }
 
