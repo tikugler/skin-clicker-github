@@ -26,22 +26,27 @@ public class UIFriend : MonoBehaviour
 
     public static Action<int, string, int, int, Dictionary<string, int>, List<string>, string> OpenPlayerInfoPanelForFriendAction = delegate { };
 
+    /// <summary>
+    /// this method is called first and adds a listener
+    /// </summary>
     private void Awake()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(FriendEntryClicked);
     }
 
+    /// <summary>
+    /// removes listener
+    /// </summary>
     private void OnDestroy()
     {
         gameObject.GetComponent<Button>().onClick.RemoveListener(FriendEntryClicked);
     }
 
-    private void OnEnable()
-    {
-        if (string.IsNullOrEmpty(friendName)) return;
-    }
 
-    
+    /// <summary>
+    /// assigns a delegate to PhotonChatManager.OnFriendStatusUpdate
+    /// </summary>
+    /// <param name="f">FriendInfo from PlayFab</param>
     public void Initialize(FriendInfo f)
     {
         PhotonChatManager.OnFriendStatusUpdate += HandleStatusUpdated;
@@ -50,7 +55,15 @@ public class UIFriend : MonoBehaviour
         SetupUI();
     }
 
-
+    /// <summary>
+    /// the arguments are given by PhotonChatManager.OnFriendStatusUpdate
+    /// this method is called for each UIFriend class in the scene
+    /// only one UIFriend,friendName is equal to playerName
+    /// this method changes the status of a friend in the friendlist,
+    /// whose playername is same 
+    /// </summary>
+    /// <param name="playerName">Displayname of player whose status is changed </param>
+    /// <param name="status"status 0 means offline, 2 means online></param>
     private void HandleStatusUpdated(string playerName, int status)
     {
         if (string.Compare(friendName, playerName) == 0)
@@ -59,6 +72,9 @@ public class UIFriend : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// changes the text of friend in the UI
+    /// </summary>
     private void SetupUI()
     {
         friendNameText.SetText(friendName);

@@ -11,7 +11,6 @@ public class UserInfoManager : MonoBehaviour
 {
 
     public static bool isUserInfoPanelFilled = false;
-    //public static Action<int> CreateUserInfo = delegate { };
     [SerializeField] GameObject userInfoPanel;
 
     [SerializeField] Transform userScrollView;
@@ -36,12 +35,12 @@ public class UserInfoManager : MonoBehaviour
     private TextMeshProUGUI activeSkinValue;
     private TextMeshProUGUI itemCountValue;
     private TextMeshProUGUI skinsCountValue;
-    //private TextMeshProUGUI creditsPerSecValue;
-
     public static Action OpenPlayerImagesPanelForSelectionAction = delegate { };
 
-    // Start is called before the first frame update
 
+    /// <summary>
+    /// adds a listener and assign multiple delegates
+    /// </summary>
     private void Awake()
     {
 
@@ -58,6 +57,9 @@ public class UserInfoManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// removes all delegates and a listener
+    /// </summary>
     private void OnDestroy()
     {
         ContentDistributor.AddItemsToProfilInfo -= AddItemsToItemIdList;
@@ -72,7 +74,10 @@ public class UserInfoManager : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// instantiate the skin header and entries for each item
+    /// </summary>
+    /// <param name="items"an array which contains item informations</param>
     private void AddItemsToItemIdList(ItemTemplate[] items)
     {
         AddItemsHeader();
@@ -87,6 +92,10 @@ public class UserInfoManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// instantiate the skin header and entries for each skin
+    /// </summary>
+    /// <param name="skins">an array which contains skin informations</param>
     private void AddSkinsToSkinIdList(SkinTemplate[] skins)
     {
         AddSkinsHeader();
@@ -104,34 +113,36 @@ public class UserInfoManager : MonoBehaviour
 
     }
 
-
-
-    void Start()
-    {
-        //CreateUserInfo?.Invoke(3);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// instantiate profile info header by using profilInfoHeaderPrefab
+    /// </summary>
     private void AddProfilInfoHeader()
     {
         GameObject profilInfoHeader = Instantiate(profilInfoHeaderPrefab, userScrollView);
         profilInfoHeader.GetComponent<TextMeshProUGUI>().text = "Profil Info";
     }
+
+    /// <summary>
+    /// instantiate items header by using profilInfoHeaderPrefab
+    /// </summary>
     private void AddItemsHeader()
     {
         GameObject itemsInfoHeader = Instantiate(profilInfoHeaderPrefab, userScrollView);
         itemsInfoHeader.GetComponent<TextMeshProUGUI>().text = "Items";
     }
+
+    /// <summary>
+    /// instantiate skin header by using profilInfoHeaderPrefab
+    /// </summary>
     private void AddSkinsHeader()
     {
         GameObject skinsInfoHeader = Instantiate(profilInfoHeaderPrefab, userScrollView);
         skinsInfoHeader.GetComponent<TextMeshProUGUI>().text = "Skins";
     }
+
+    /// <summary>
+    /// instantiate others header by using profilInfoHeaderPrefab
+    /// </summary>
     private void AddOthersHeader()
     {
         GameObject othersInfoHeader = Instantiate(profilInfoHeaderPrefab, userScrollView);
@@ -139,6 +150,9 @@ public class UserInfoManager : MonoBehaviour
         AddEntriesForOthers();
     }
 
+    /// <summary>
+    /// instantiate an object to show the remained credits by using profilInfoKeyValuePanelPrefab
+    /// </summary>
     private void AddCreditsEntry()
     {
         GameObject creditInfo = Instantiate(profilInfoKeyValuePanelPrefab, userScrollView);
@@ -163,6 +177,9 @@ public class UserInfoManager : MonoBehaviour
         isUserInfoPanelFilled = true;
     }
 
+    /// <summary>
+    /// instantiate GameObjects for upper panel, which contains profil foto, username and info about last seen
+    /// </summary>
     private void AddUpperProfilInfoPanel()
     {
         upperProfilInfoPanel = Instantiate(profilInfoUpperPanelPrefab, userScrollView);
@@ -175,6 +192,16 @@ public class UserInfoManager : MonoBehaviour
             FindObjectInParent(upperProfilInfoPanel, "ProfilInfoUserLastLogin").GetComponent<TextMeshProUGUI>();
     }
 
+    /// <summary>
+    /// set up the whole panel
+    /// </summary>
+    /// <param name="selectedPictureId">is of selected profile picture</param>
+    /// <param name="profilName">username</param>
+    /// <param name="lastOnlineSecAgo">elapsed time since last seen online</param>
+    /// <param name="credits">credits</param>
+    /// <param name="items">contains item names and cound of upgrades for each item as a dictionary</param>
+    /// <param name="skins">names of purchased skins</param>
+    /// <param name="activeSinId">id of active skin</param>
     private void AdjustAndOpenProfilInfo(int selectedPictureId, string profilName, int lastOnlineSecAgo, int credits, Dictionary<string, int> items, List<string> skins, string activeSinId)
     {
         if (!Account.LoggedIn)

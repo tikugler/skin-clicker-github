@@ -8,8 +8,7 @@ using TMPro;
 using System.Linq;
 using System;
 using PlayFab.ClientModels;
-using static System.Net.Mime.MediaTypeNames;
-using UnityEditor.Experimental.GraphView;
+
 
 public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
