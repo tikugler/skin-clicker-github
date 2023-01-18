@@ -13,7 +13,9 @@ using System;
 public class PlayfabUpdateUserData : MonoBehaviour
 {
 
-    // the method SetScoreOnPlayFab is called every 15 seconds
+    /// <summary>
+    /// This method calls SetScoreOnPlayFab every 15 Seconds
+    /// </summary>
     public void StartSetScoreOnPlayFabRepeating()
     {
         if (Account.LoggedIn)
@@ -23,7 +25,9 @@ public class PlayfabUpdateUserData : MonoBehaviour
     }
 
 
-    // updates credits in DB
+    /// <summary>
+    /// This method updates a few statistics on PlayFab.
+    /// </summary>
     private void SetScoreOnPlayFab()
     {
         int credits = Account.credits;
@@ -159,6 +163,11 @@ public class PlayfabUpdateUserData : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
+    /// <summary>
+    /// This method Updates a specific statistic on PlayFab.
+    /// </summary>
+    /// <param name="statisticName">Name of statistic</param>
+    /// <param name="statisticValue">Value of statistic</param>
     public static void UpdateStatisticOnPlayFab(string statisticName, int statisticValue)
     {
         if (!Account.LoggedIn)
@@ -171,9 +180,10 @@ public class PlayfabUpdateUserData : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
 
-
-
-
+    /// <summary>
+    /// This Method updates multiple statistics on PlayFab.
+    /// </summary>
+    /// <param name="statistics">Dictionary of statisticname and its value</param>
     public static void UpdateStatisticOnPlayFab(Dictionary<string, int> statistics)
     {
         if (!Account.LoggedIn)
@@ -189,8 +199,6 @@ public class PlayfabUpdateUserData : MonoBehaviour
         }
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSetStatsSuccessful, OnSetStatsFailed);
     }
-
-
 
     // is called when UpdatePlayerStatistics succeed
     private static void OnSetStatsSuccessful(UpdatePlayerStatisticsResult obj)
