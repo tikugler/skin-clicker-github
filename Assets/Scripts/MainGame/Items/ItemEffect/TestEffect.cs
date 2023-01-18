@@ -10,7 +10,7 @@ public class TestEffect : ItemEffect
 {
     public override string id { get; set; } = ItemNames.TestEffect;
     public override int price { get; set; } = 0;
-    public override string description { get; set; } = "Berkans Hoffnungen und Träume.\nLeise und Leer, existiert aber <3";
+    public override string description { get; set; } = "Berkans Hoffnungen und TrÃ¤ume.\nLeise und Leer, existiert aber <3";
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("berkancoin");
     public override ItemTemplate shopItem { get; set; }

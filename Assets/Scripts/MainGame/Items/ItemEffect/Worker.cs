@@ -8,7 +8,7 @@ public class Worker : ItemEffect
 {
     public override string id { get; set; } = ItemNames.Worker;
     public override int price { get; set; } = 1;
-    public override string description { get; set; } = "Drückt automatisiert auf den Knopf.\nEin klick pro Sekunde.";
+    public override string description { get; set; } = "DrÃ¼ckt automatisiert auf den Knopf.\nEin klick pro Sekunde.";
     public override string rarity { get; set; } = Rarities.Common;
     public override Sprite icon { get; set; } = Resources.Load<Sprite>("worker");
     public override ItemTemplate shopItem { get; set; }
@@ -47,7 +47,7 @@ public class Worker : ItemEffect
         shopItem.amount += 1;
         int newAmount = shopItem.amount;
         GameObject.Find("multipleworker").GetComponent<VisualFeedBackWorker>().MultipleWorker(newAmount);
-        return newAmount; 
+        return newAmount;
     }
 
     //Hardcoded value, if changed --> tests have to change too
@@ -59,7 +59,7 @@ public class Worker : ItemEffect
         return shopItem.price *= 2;
     }
 
-    public int GetWorkerAmount() 
+    public int GetWorkerAmount()
     {
         return workerAmount;
     }
