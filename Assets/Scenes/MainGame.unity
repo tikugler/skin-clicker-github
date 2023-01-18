@@ -11891,7 +11891,7 @@ MonoBehaviour:
   firstTrigger: {fileID: 317861225}
   secondTrigger: {fileID: 508754365}
   thirdTrigger: {fileID: 437910206}
-  userRegistrationPanel: {fileID: 0}
+  userRegistrationPanel: {fileID: 100678045}
 --- !u!114 &741272932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19477,6 +19477,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1136283108}
     m_Modifications:
+    - target: {fileID: 1086837724776687891, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741272932}
+    - target: {fileID: 1086837724776687891, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VerifyPasswordOnValueChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086837726193295637, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741272932}
+    - target: {fileID: 1086837726193295637, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VerifyUsernameOnValueChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696280137871415254, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741272932}
+    - target: {fileID: 1696280137871415254, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CallSubmitInRegistration
+      objectReference: {fileID: 0}
     - target: {fileID: 2795295626486869849, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -19593,6 +19617,14 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: VerifyPasswordOnValueChanged
       objectReference: {fileID: 0}
+    - target: {fileID: 6525820976046597227, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741272932}
+    - target: {fileID: 6525820976046597227, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseRegistrationPanel
+      objectReference: {fileID: 0}
     - target: {fileID: 6601191754587993546, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -19600,6 +19632,22 @@ PrefabInstance:
     - target: {fileID: 6601191754587993549, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
       propertyPath: m_RootOrder
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6601191755004473676, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741272932}
+    - target: {fileID: 6601191755004473676, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckPasswordsAreSameAfterTypingOnFirstPassField
+      objectReference: {fileID: 0}
+    - target: {fileID: 6601191755876670426, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 741272932}
+    - target: {fileID: 6601191755876670426, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VerifyEmailOnValueChanged
       objectReference: {fileID: 0}
     - target: {fileID: 7768947785925090532, guid: 8adee8441601c9e48978ec95d9ac246a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
