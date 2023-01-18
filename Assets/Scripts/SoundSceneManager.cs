@@ -118,10 +118,6 @@ public class SoundSceneManager : MonoBehaviour
     // <summary>
     /// if toggle for effect in settings pop-up is selected, play effect sounds
     /// otherwise stop the effect sounds
-    /// 
-    /// Note: it plays an audio for testing
-    /// in the future, it will be used isEffectSoundOn and effectSoundVolume,
-    /// if user causes some effects by interacting with game 
     /// </summary>
     public void UpdateEffectSoundPlay(bool isChecked)
     {

@@ -69,7 +69,6 @@ public class VisualEffectManager : MonoBehaviour
         {
             Vector3 worldPosition = UICamera.ScreenToWorldPoint(Input.mousePosition);
             Instantiate(criticalHit, worldPosition, Quaternion.identity);
-
         }
     }
 
